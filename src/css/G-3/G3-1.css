@@ -12,3 +12,9 @@ body{
     padding: 0.5em 1em;
     margin: 2em 0;
 }
+.command{
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+}
