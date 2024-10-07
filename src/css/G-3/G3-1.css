@@ -1,0 +1,14 @@
+body{
+    background-image:url(/img/map.png);
+    background-size: cover;
+}
+
+.text{
+    color: #ffffff;
+}
+.userinfo{
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+}
