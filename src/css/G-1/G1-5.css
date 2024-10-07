@@ -3,3 +3,10 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.kuro{
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    padding: 140px 100px;
+    margin: 30px;
+}

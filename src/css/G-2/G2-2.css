@@ -1,0 +1,10 @@
+.room_list {
+    margin: 0px auto;
+}
+
+.opration {
+    display: flex;
+    justify-content: space-between;
+    width: 50vw;
+    margin: 0px auto;
+}
