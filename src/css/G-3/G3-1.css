@@ -37,6 +37,13 @@ body{
     text-align: center;
     color: #ffffff;
 }
+.text3{
+    color: #ffffff;
+    font-size: 30px;
+}
+.time{
+    text-align: left;
+}
 .command{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
