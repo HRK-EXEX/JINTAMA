@@ -7,6 +7,9 @@ body{
 .kuro{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
-    padding: 140px 100px;
+    padding: 100px 100px;
     margin: 30px;
+    margin-top:80px;
+    margin-left:120px;
+    margin-right:120px;
 }
