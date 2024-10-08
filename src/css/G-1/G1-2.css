@@ -53,8 +53,13 @@ body{
 }
 
 
-.ok{
+
+
+.ok {
     position: absolute;
-            right: 260px;
-            bottom: 350px;
+    right: 260px;
+    bottom: 350px;
+    margin: 0px;
+    padding: 2px 6px;
+    height: 32px;
 }

@@ -2,23 +2,24 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet"  href="/src/css/base/black_window.css" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"  href="/src/css/G-1/G1-2.css" />
     <title>アカウント作成</title>
 </head>
 <body>
-    <div class="kuro">
+<div class="kuro">
     <form action="confirm.html" method="GET"></form>
-    <div class="button">
-    <a href="G1-1.html">back</a>
-    </div>
+    
+        <button class="op_btn" onclick="location.href='G1-1.html'">back</button>
+
     
     <h2 class="h2name">name <input type="text" name="name" class="textbox"><br></h2>
     <h2 class="h2password">password <input type="text" name="pass" class="textbox"><br></h2>
     
     
-    <input type="submit" value="create">
-    </div>
+    <input type="submit" value="create" class="op_btn">
+</div>
 </form>
 </body>
 </html>
