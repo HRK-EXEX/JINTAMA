@@ -1,4 +1,4 @@
-.textbox{
+/* .textbox{ 
     background-color: transparent;
     border: none;
     outline: none;
@@ -24,5 +24,58 @@
     position:relative;
     margin: 0px;
                   /* min <= x <= max */
-    font-size: clamp(30px, 4vw, 60px);
+    /* font-size: clamp(30px, 4vw, 60px);
+} */ 
+
+
+@media (min-width: 1280px){
+    .textbox{ 
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border-bottom: 0.2vw solid #999;
+        padding: 0.5vw 1vw;
+    }
+    
+    .textbox:focus{
+        border-bottom-color: #e20000;
+    }
+    
+    .all{
+        text-align: center;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+    
+    .log,.h2name,.h2password{
+        position:relative;
+        margin: 0px;
+                      /* min <= x <= max */
+        font-size: clamp(30px, 4vw, 60px);
+    }
+
+    body{
+        background-image: url(/img/login.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        color:white;
+        margin: 0px;
+    }
+    
+    .kuro{
+        background-color: rgba(0, 0, 0, 0.650);
+        border: solid 0.3vw #ffffff;
+        padding: 10vh 7vw;
+        margin: auto 12vw;
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
 }
