@@ -2,7 +2,10 @@ body{
     background-image: url(/img/login.png);
     background-repeat: no-repeat;
     background-size: cover;
+    color:white;
+    margin: 0px;
 }
+
 
 .kuro{
     background-color: rgba(0, 0, 0, 0.650);
@@ -47,4 +50,11 @@ body{
     margin: 0px;
                   /* min <= x <= max */
     font-size: clamp(30px, 4vw, 60px);
+}
+
+
+.ok{
+    position: absolute;
+            right: 260px;
+            bottom: 350px;
 }
