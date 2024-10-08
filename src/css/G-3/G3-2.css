@@ -1,0 +1,34 @@
+body{
+    background-image: url("/img/resault.png");
+    background-size: cover;
+}
+.ranktext{
+    color: #ffffff;
+   font-size: 80px;
+   -webkit-text-stroke: 3px #030303;
+}
+.rank{
+    text-align: center;
+}
+.rankmain{
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    width: 80vw;
+    height: 70vh;
+}
+.ranksabu2{
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    color: #ffffff;
+    text-align: center;
+    width: 30vw;
+    height:35;
+}
+.next{
+    color: #ffffff;
+}
+.icon{
+    width: 20vw;
+    height: 30vh;
+}
