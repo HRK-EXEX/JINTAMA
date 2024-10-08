@@ -4,6 +4,7 @@
     outline: none;
     border-bottom: 0.2vw solid #999;
     padding: 0.5vw 1vw;
+    
 }
 
 .textbox:focus{
@@ -20,9 +21,39 @@
     justify-content: center;
 }
 
-.log,.h2name,.h2password{
+
+.log{
     position:relative;
-    margin: 0px;
+    top: 6vh;
                   /* min <= x <= max */
-    font-size: clamp(30px, 4vw, 60px);
+    font-size: clamp(15px, 4vw, 35px);
+}
+
+.h2name{
+    position:relative;
+    top: 2vh;
+                  /* min <= x <= max */
+    font-size: clamp(15px, 4vw, 35px);
+}
+
+.h2password{
+    position:relative;
+    bottom:4vh;
+                  /* min <= x <= max */
+    font-size: clamp(15px, 4vw, 35px);
+}
+
+.op_btn{
+    position:relative;
+    bottom:8vh;
+}
+
+.btn1{
+    width: 10em;
+    height:3em;
+}
+
+.btn2{
+    position:relative;
+    left:70vh;
 }
