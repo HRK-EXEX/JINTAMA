@@ -6,20 +6,20 @@ body{
 
 .kuro{
     background-color: rgba(0, 0, 0, 0.650);
-    border: solid 3px #ffffff;
-    padding: 100px 100px;
-    margin: 30px;
-    margin-top:80px;
-    margin-left:120px;
-    margin-right:120px;
+    border: solid 0.3vw #ffffff;
+    padding: 10vw 10vw;
+    margin: 3vw;
+    margin-top: 8vw;
+    margin-left: 12vw;
+    margin-right: 12vw;
 }
 
 .textbox{
-    background-color:transparent;
+    background-color: transparent;
     border: none;
     outline: none;
-    border-bottom: 2px solid #999;
-    padding: 5px 10px;
+    border-bottom: 0.2vw solid #999;
+    padding: 0.5vw 1vw;
 }
 
 .textbox:focus{
@@ -32,10 +32,10 @@ body{
 
 .log{
     position: relative;
-    bottom:70px;
+    bottom: 7vw;
 }
 
 .h2name{
     position: relative;
-    bottom:30px;
+    bottom: 3vw;
 }
