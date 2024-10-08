@@ -1,6 +1,10 @@
 body{
-    background-image: url(/img/title2.png);
+    background-image: url(/img/title.jpg);
     background-repeat: no-repeat; 
     background-size: cover;
+    background-position:center top;   
+    }
 
+img{
+    align-items: center;
 }
