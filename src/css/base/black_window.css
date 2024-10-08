@@ -10,6 +10,16 @@ body{
     margin: 0px;
 }
 
+.all{
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
 .kuro{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 0.3vw #ffffff;
@@ -22,3 +32,18 @@ body{
     flex-direction: column;
 }
 
+.op_btn {
+    margin: 0px;
+    padding: 2px 6px;
+    height: 32px;
+}
+
+.all{
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
