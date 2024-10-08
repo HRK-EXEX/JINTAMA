@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/src/css/base/black_window.css" />
     <link rel="stylesheet"  href="/src/css/G-1/G1-5.css" />
     <title>G1-5</title>
 </head>
 <body>
-    <div class="kuro">
-    <form action="G2-1.html" method="post">
     <div class="all">
-    <h1 class="log">~Login~</h1>
-    <h2 class="h2name">name<input type="text" name="name" class="textbox"></h2><br>
-    <h2 class="h2password">password<input type="text" name="password" class="textbox"></h2>
-    <input type="submit" value="OK"><br>
-    </form>
-    <a href="G1-2.html">新規登録</a>
-    </div>
+        <div class="kuro">
+            <form action="G2-1.html" method="post">
+            <h1 class="log">~Login~</h1><br>
+            <h2 class="h2name">name<input type="text" name="name" class="textbox"></h2><br>
+            <h2 class="h2password">password<input type="text" name="password" class="textbox"></h2><br>
+            <div class="op_btn">
+                <button class="op_btn" type="submit">OK</button>
+                <button class="op_btn" onclick="location.href='G1-2.html'">新規登録</button>
+            </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

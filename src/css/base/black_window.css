@@ -1,0 +1,29 @@
+html {
+    height: 100vh;
+}
+
+body{
+    background-image: url(/img/login.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:white;
+    margin: 0px;
+}
+
+.kuro{
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 0.3vw #ffffff;
+    padding: 10vh 7vw;
+    margin: auto 12vw;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.op_btn {
+    margin: 0px;
+    padding: 2px 6px;
+    height: 32px;
+}

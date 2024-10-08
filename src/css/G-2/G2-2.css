@@ -1,5 +1,19 @@
+/* stolen from G1-5 lmao */
+body{
+    background-image: url(/img/login.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.kuro{
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    padding: 3vh 0;
+    margin: 12vh 120px 12vh 120px;
+}
+
 .room_list {
-    margin: 0px auto;
+    margin: 0px auto 50px auto;;
 }
 
 .opration {
@@ -7,4 +21,23 @@
     justify-content: space-between;
     width: 50vw;
     margin: 0px auto;
+}
+
+button {
+    border-color: #fff;
+    border-style: solid;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 6px 18px;
+    text-align: center;
+    transition: 0.1s;
+}
+
+.team_name {
+    padding: auto 80px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #00000080;
 }
