@@ -2,6 +2,7 @@ body{
     background-image: url(/img/login.png);
     background-repeat: no-repeat;
     background-size: cover;
+    color:white;
 }
 
 .kuro{
@@ -34,10 +35,15 @@ body{
 
 .log{
     position: relative;
-    bottom: 7vw;
+    bottom: 5vw;
 }
 
 .h2name{
     position: relative;
     bottom: 3vw;
+}
+
+.h2password{
+    position:relative;
+    bottom:2vw;
 }
