@@ -3,18 +3,56 @@ body{
     background-size: cover;
 }
 
-.text{
-    color: #ffffff;
-}
+
 .userinfo{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
-    padding: 0.5em 1em;
     margin: 2em 0;
+    width: 1000px;
+    height: 150px;
+    display: flex; 
+}
+
+.userinfo .usericon{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    border: solid 3px #ffffff;
+   
+}
+
+.userinfo.text{
+    margin: 0 0 30px 20px;
+    padding: 0;
+    
+
+}
+.text{
+    font-size: 40px;
+    color: #ffffff;
+}
+
+.text2{
+    text-align: center;
+    color: #ffffff;
 }
 .command{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
     padding: 0.5em 1em;
-    margin: 2em 0;
+    margin:40px;
+    position: absolute;
+    width: 300px;
+    height: 340px;
+    bottom: 0;
+    left: 0;
 }
+
+
+    /*
+    デモ部分は、ここに位置プロパティを入れています
+    position: absolute;
+    top: 0;
+    left: 0;
+    
