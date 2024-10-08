@@ -10,6 +10,7 @@ body{
 .rank{
     text-align: center;
 }
+
 .rankmain{
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.650);
@@ -17,18 +18,33 @@ body{
     width: 80vw;
     height: 70vh;
 }
-.ranksabu2{
+/* .ranksabu{
+    text-align: center;
+} */
+.ranksabu{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
     color: #ffffff;
     text-align: center;
     width: 30vw;
-    height:35;
+    height:55vh;
+    margin:  10vh auto; 
+  
+    display: inline-block;
 }
-.next{
+.nexttext{
+    font-size: 22px;
     color: #ffffff;
+   
+    margin-top: 20px;
+    display: inline-block;
+    padding-left: 90vw;
+    
 }
+
 .icon{
     width: 20vw;
-    height: 30vh;
+    padding: 0 4vw;
+    height: 45vh;
 }
+
