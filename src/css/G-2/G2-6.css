@@ -1,0 +1,10 @@
+body{
+    background-image: url(/img/rank.png);
+    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position:center top;   
+    background-attachment: fixed;
+    overflow:hidden;
+    position:relative;
+    color:white;
+}
