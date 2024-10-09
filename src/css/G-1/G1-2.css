@@ -40,3 +40,21 @@
     padding: 2px 6px;
     height: 32px;
 } 
+
+.back {
+    position: absolute;
+    top: 20px; 
+    left: 20px;
+    padding: 10px 20px; 
+    background-color: #ffffff; 
+    color: #000000; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 25px;
+}
+.op_btn{
+    font-size: 25px;
+    position: relative;
+    top: 160px; 
+}
