@@ -51,4 +51,10 @@
     border: none; 
     border-radius: 5px; 
     cursor: pointer; 
+    font-size: 25px;
+}
+.op_btn{
+    font-size: 25px;
+    position: relative;
+    top: 160px; 
 }

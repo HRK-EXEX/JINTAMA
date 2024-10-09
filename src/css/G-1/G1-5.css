@@ -15,9 +15,15 @@ body{
     outline: none;
     border-bottom: 0.2vw solid #999;
     padding: 0.5vw 1vw;
-    
+    color:white;
+    font-size: 60%;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     
 }
+
+
 
 .textbox:focus{
     border-bottom-color: #e20000;
@@ -56,6 +62,7 @@ body{
     bottom:4vh;
                   /* min <= x <= max */
     font-size: clamp(15px, 4vw, 35px);
+    padding-right: 6vw;
 }
 
 .op_btn{
