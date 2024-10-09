@@ -16,11 +16,9 @@ body{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
     width: 80vw;
-    height: 70vh;
+    height: 67vh;
 }
-/* .ranksabu{
-    text-align: center;
-} */
+
 .ranksabu{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
@@ -28,15 +26,12 @@ body{
     text-align: center;
     width: 30vw;
     height:55vh;
-    margin:  10vh auto; 
+    margin:  8vh auto; 
   
     display: inline-block;
 }
 .nexttext{
-    font-size: 22px;
     color: #ffffff;
-   
-    margin-top: 20px;
     display: inline-block;
     padding-left: 90vw;
     
