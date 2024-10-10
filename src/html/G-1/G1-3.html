@@ -15,8 +15,8 @@
     <div class="all">
 <div class="kuro">
         <button class="back dotgothic16-regular" onclick="location.href='G1-2.html'">back</button>
-    <h2 class="h2name">name <br></h2>
-    <h2 class="h2password">password <br></h2>
+    <h2 class="h2name">name <span id="name"></span></h2>
+    <h2 class="h2password">password <span id="pass"></span></h2>
     
     
     <form action="G1-4.php" method="POST">
@@ -27,5 +27,23 @@
 </div>
 </div>
 </div>
+<script>
+    // URLからクエリパラメータを取得する関数
+    function getQueryParams() {
+        const params = {};
+        const queryString = window.location.search.substring(1);
+        const queryArray = queryString.split("&");
+        for (let i = 0; i < queryArray.length; i++) {
+            const pair = queryArray[i].split("=");
+            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+        }
+        return params;
+    }
+
+    // 入力されたデータを表示する
+    const params = getQueryParams();
+    document.getElementById("displayName").innerText = params.name || "未入力";
+    document.getElementById("displayPass").innerText = params.pass ? "●●●●●●" : "未入力"; // パスワードは伏せて表示
+</script>
 </body>
 </html>
