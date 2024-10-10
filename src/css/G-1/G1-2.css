@@ -1,6 +1,15 @@
+body {
+    background-image: url(/img/login.png);
+    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: center top;   
+    background-attachment: fixed;
+    overflow: hidden;
+    position: relative;
+    color: white;
+}
 
-
-.textbox{
+.textbox {
     background-color: transparent;
     border: none;
     outline: none;
@@ -8,11 +17,11 @@
     padding: 0.5vw 1vw;
 }
 
-.textbox:focus{
+.textbox:focus {
     border-bottom-color: #e20000;
 }
 
-.all{
+.all {
     text-align: center;
     height: 100vh;
     display: flex;
@@ -20,26 +29,45 @@
     align-items: stretch;
     flex-wrap: nowrap;
     justify-content: center;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
-.h2name,.h2password{
-    position:relative;
-    margin: 0px;
-                 
-    font-size: clamp(30px, 4vw, 60px);
+.log {
+    position: relative;
+    top: 6vh;
+    font-size: clamp(15px, 4vw, 35px);
 }
 
+.h2name, .h2password {
+    position: relative;
+    font-size: clamp(15px, 4vw, 35px); 
+    width: 100%;
+    display: inline-block; 
+}
 
+.h2name {
+    position: relative;
+    top: 2vh;
+    font-size: clamp(15px, 4vw, 35px);
+    line-height: 5; 
+}
 
+.h2password {
+    position: relative;
+    bottom: 4vh;
+    font-size: clamp(15px, 4vw, 35px);
+    line-height: 1.5; 
+}
 
-.ok {
-    position: absolute;
-    right: 260px;
-    bottom: 350px;
-    margin: 0px;
-    padding: 2px 6px;
-    height: 32px;
-} 
+.op_btn {
+    font-size: 25px; 
+    position: relative;
+    top: 8vh;
+    width: 5em;
+    height: 2em; 
+}
 
 .back {
     position: absolute;
@@ -52,9 +80,4 @@
     border-radius: 5px; 
     cursor: pointer; 
     font-size: 25px;
-}
-.op_btn{
-    font-size: 25px;
-    position: relative;
-    top: 160px; 
 }
