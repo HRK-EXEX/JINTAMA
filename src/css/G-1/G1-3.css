@@ -1,15 +1,92 @@
-body{
+body {
     background-image: url(/img/login.png);
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
     background-size: cover;
+    background-position: center top;   
+    background-attachment: fixed;
+    overflow: hidden;
+    position: relative;
+    color: white;
 }
 
-.kuro{
-    background-color: rgba(0, 0, 0, 0.650);
-    border: solid 3px #ffffff;
-    padding: 100px 100px;
-    margin: 30px;
-    margin-top:80px;
-    margin-left:120px;
-    margin-right:120px;
+.textbox {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 0.2vw solid #999;
+    padding: 0.5vw 1vw;
+}
+
+.textbox:focus {
+    border-bottom-color: #e20000;
+}
+
+.all {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    justify-content: center;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.log {
+    position: relative;
+    top: 6vh;
+    font-size: clamp(15px, 4vw, 35px);
+}
+
+.h2name, .h2password {
+    position: relative;
+    font-size: clamp(15px, 4vw, 35px); 
+    width: 100%;
+    display: inline-block;
+    top: 0; 
+    margin-top: 20px; /* 上の余白を調整 */
+}
+.h2name {
+    line-height: 3; 
+    margin-top: 2vh; /* G1-2.cssのように */
+}
+
+.h2password {
+    line-height: 1.5; 
+    margin-bottom: 4vh; /* G1-2.cssのように */
+}
+
+
+.op_btn {
+    position: absolute;
+    top: 650px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+.op_btn input[type="submit"] {
+    font-size: 25px; 
+    width: 5em;
+    height: 2em;
+    padding: 10px 20px;
+    background-color: #ffffff; 
+    color: #000000; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+.back {
+    position: absolute;
+    top: 20px; 
+    left: 20px;
+    padding: 10px 20px; 
+    background-color: #ffffff; 
+    color: #000000; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 25px;
 }

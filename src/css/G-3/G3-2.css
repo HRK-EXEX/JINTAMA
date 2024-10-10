@@ -1,11 +1,14 @@
 body{
     background-image: url("/img/resault.png");
     background-size: cover;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 .ranktext{
     color: #ffffff;
    font-size: 80px;
-   -webkit-text-stroke: 3px #030303;
+   -webkit-text-stroke: 1.5px #030303;
 }
 .rank{
     text-align: center;
