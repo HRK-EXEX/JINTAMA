@@ -23,3 +23,17 @@ th {
  /* ヘッダーの背景色を設定 */
     color: white; /* ヘッダーの文字色を設定 */
 }
+
+.Rankmodoru{
+    position:relative;
+    right:33vw;
+    top:4vh;
+    color:white;
+    
+}
+
+.rankh1{
+    position:relative;
+    bottom:3vh;
+    
+}
