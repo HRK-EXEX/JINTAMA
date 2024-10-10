@@ -1,3 +1,8 @@
+.dotgothic16-regular {
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
 body {
     background-image: url(/img/login.png);
     background-repeat: no-repeat; 
@@ -64,29 +69,30 @@ body {
     top: 650px; 
     left: 50%; 
     transform: translateX(-50%); 
+    cursor: pointer; 
 }
 
 .op_btn input[type="submit"] {
-    font-size: 25px; 
-    width: 5em;
-    height: 2em;
-    padding: 10px 20px;
-    background-color: #ffffff; 
-    color: #000000; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer;
+    border-color: #fff;
+    border-style: solid;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 4px 30px; 
+    transition: 0.1s;
+    font-size: clamp(12px, 1.5vw, 24px); 
 }
+
 
 .back {
     position: absolute;
     top: 20px; 
     left: 20px;
-    padding: 10px 20px; 
-    background-color: #ffffff; 
-    color: #000000; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 25px;
+    border-color: #fff;
+    border-style: solid;
+    background-color: rgba(0, 0, 0, 0.650);
+    color: #FFF;
+    padding: 4px 30px;
+    text-align: center;
+    transition: 0.1s;
+    font-size: clamp(12px, 1.5vw, 24px);
 }
