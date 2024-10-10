@@ -2,13 +2,43 @@ body{
     background-image: url(/img/mainmenu.png);
     background-repeat: no-repeat;
     background-size: cover;
+    overflow:hidden;
 }
 
 .kuro{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
     padding: 100px 100px;
+    height: 20vw;
+    margin:  12% auto;
+    width:65vw;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+   
     
-    margin: 30px;
+}
+
+
+a{
+    text-decoration: none;
+    color:#ffffff;
+    
+    margin:auto;
+  }
+
+h1{
+    width:20vw;
+    margin: 5vw auto;
+
+}
+h1:hover{
+    color: yellow;
+    width:20vw;
+    
+    
+}
+
+.start{
     
 }
