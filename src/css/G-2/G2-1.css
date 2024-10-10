@@ -26,19 +26,24 @@ a{
     
     margin:auto;
   }
-
-h1{
-    width:20vw;
-    margin: 5vw auto;
-
-}
-h1:hover{
+  
+a:hover{
     color: yellow;
-    width:20vw;
     
     
 }
+
+.mini{
+    width:45vw;
+    margin: 2vw auto;
+    font-size: 3vw;
+
+}
+
 
 .start{
+    font-size: 5vw;
+    margin: auto;
+    width:45vw;
     
 }
