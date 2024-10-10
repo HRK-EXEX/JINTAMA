@@ -1,0 +1,27 @@
+body{
+    background-image:url(/img/kanrimap.png);
+    background-size: cover;
+}
+
+.title{
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    text-align: center;
+    width: 30vw;
+}
+.main{
+    color:#fff;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    text-align: center;
+    width: 50vw;
+    height: 60vh;
+    margin: 10vh 24vw;
+}
+.text{
+    color: #fff;
+    display: inline-block;
+    margin: 22vh;
+}
