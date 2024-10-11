@@ -73,6 +73,15 @@ body {
     margin-bottom:20px;
 }
 
+.input-name{
+    margin-left:100px;
+    margin-top:10px;
+}
+
+.input-pass{
+    margin-left:100px;
+    margin-bottom:35px;
+}
 .op_btn {
     position: absolute;
     top: 650px; 
