@@ -16,9 +16,9 @@
 <div class="kuro">
         <button class="back dotgothic16-regular" onclick="location.href='G1-2.html'">back</button>
         <div class="input-container">
-    <h2 class="h2name">name </h2><span id="name" class="input"></span></div>
+    <h2 class="h2name">name </h2><span id="name" class="input-name"></span></div>
     <div class="input-container">
-    <h2 class="h2password">password </h2><span id="pass" class="input"></span></div>
+    <h2 class="h2password">password </h2><span id="pass" class="input-pass"></span></div>
     
     
     <form action="G1-4.php" method="POST">
@@ -31,8 +31,8 @@
 </div>
 <script>
      const params = new URLSearchParams(location.search);
-       document.getElementById('name').textContent = params.get('name') || "未入力";
-        document.getElementById('pass').textContent = params.get('pass') || "未入力"; 
+       document.getElementById('name').textContent = params.get('name') 
+        document.getElementById('pass').textContent = params.get('pass')  
 </script>
 </body>
 </html>
