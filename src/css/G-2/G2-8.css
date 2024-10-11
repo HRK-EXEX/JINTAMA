@@ -1,9 +1,6 @@
 body{
     background-image:url(/img/setteikuro.png);
     background-size: cover;
-    font-family: "DotGothic16", sans-serif;
-    font-weight: 400;
-    font-style: normal;
 }
 .main{
     color:#fff;
@@ -22,9 +19,6 @@ body{
     font-size: 40px;
 }
 button{
-    font-family: "DotGothic16", sans-serif;
-    font-weight: 400;
-    font-style: normal;
     border-color: #fff;
     border-style: solid;
     background-color: #00000000;
@@ -34,9 +28,6 @@ button{
     font-size: clamp(20px, 3vw, 40px);
 }
 .delete{
-    font-family: "DotGothic16", sans-serif;
-    font-weight: 400;
-    font-style: normal;
     border-color: #ff0000;
     border-style: solid;
     background-color: #00000000;
