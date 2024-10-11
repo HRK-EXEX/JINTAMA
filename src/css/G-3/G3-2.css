@@ -1,9 +1,6 @@
 body{
     background-image: url("/img/resault.png");
     background-size: cover;
-    font-family: "DotGothic16", sans-serif;
-    font-weight: 400;
-    font-style: normal;
 }
 .ranktext{
     color: #ffffff;
