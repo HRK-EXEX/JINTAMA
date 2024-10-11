@@ -29,7 +29,13 @@ body{
 }
 
 .room_list {
-    margin: 0px auto 50px auto;;
+    margin: 0px auto 50px auto;
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
 }
 
 .opration {
@@ -44,10 +50,10 @@ button {
     border-style: solid;
     background-color: #00000000;
     color: #FFF;
-    padding: 1vw 3vw;
+    padding: 6px 18px;
     text-align: center;
     transition: 0.1s;
-    font-size: clamp(12px, 1.5vw, 24px);
+    font-size: min(1.5vw, 24px);
 }
 
 span {
@@ -65,21 +71,62 @@ span {
     padding: auto 80px;
     margin: 4px 0;
     width: 50vw;
+    font-size: larger;
+    background-color: #00000000;
+    color: #FFF;
+    border: 2px solid #FFF;
+    transition: 0.5s;
 }
 
-.team_user {
-    padding: auto 80px;
-    margin: 4px 0;
-    width: 25vw;
+.team_name:hover {
+    border: 2px #8f8 solid;
+    border-radius: 0%;
 }
 
-button:hover {
+.team_name:focus {
+    background-color: #00000080;
+    border: 10px #4c4 solid;
+    border-radius: 4px;
+    outline: 0;
+}
+
+.radios {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%); 
+    margin: -1px;
+}
+
+.nums{
+    padding: 0.5vw 1vw;
+    font-size: 6vh;
+    margin: 0;
+    width: auto;
+    transition: 0.1s;
+
+    border: 2px solid #FFF;
+}
+
+button:hover, .nums:hover {
     cursor: pointer;
     background-color: #00000080;
 }
 
-button:active {
+button:active, .nums:active {
     cursor: pointer;
     background-color: #ffffff80;
     color: #000;
+}
+
+.radios:checked + .nums{
+    cursor: pointer;
+    background-color: #88ff8880;
+    border: 2px solid #8f8;
+    color: #FFF;
 }
