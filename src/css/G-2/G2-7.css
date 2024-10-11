@@ -24,6 +24,7 @@ a{
     text-decoration: none;
     color:#ffffff;
     margin:auto;
+    
   }
 
 a:hover{
@@ -46,3 +47,123 @@ a:hover{
     width:45vw;
     
 }
+
+.delete{
+    color: red;
+    font-size: 2vw;
+    position:relative;
+    left:52vw;
+    bottom: 6vw;
+}
+
+.delete:hover{
+    color:yellow;
+}
+
+.kuro{
+    color:white;
+    font-size: 3vw;
+}
+
+button {
+    border-color: #fff;
+    border-style: solid;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 6px 18px;
+    text-align: center;
+    transition: 0.1s;
+    font-size: clamp(12px, 1.5vw, 24px);
+    float:left;
+    position: relative;
+    left:15vw;
+    bottom: 4vw;
+    width: 8vw;
+    margin:1vw 0vw 0vw 7vw;
+    height:5vw;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+        
+}
+
+button:hover ,.do:hover{
+    cursor: pointer;
+    background-color: #00000080;
+}
+
+button:active ,.do:hover{
+    cursor: pointer;
+    background-color: #ffffff80;
+    color: #000;
+}
+
+.username{
+    position:relative;
+    bottom: 5vw;
+    left:10vw;
+
+}
+
+.username input{
+    padding: auto 80px;
+    margin: 4px 0;
+    width: 30vw;
+    font-size: larger;
+    background-color: #00000000;
+    color: #FFF;
+    border: 2px solid #FFF;
+    transition: 0.5s;
+    
+}   
+.username input:hover {
+    border: 2px #8f8 solid;
+    border-radius: 0%;
+}
+
+.username input:focus{
+    background-color: #00000080;
+    border: 10px #4c4 solid;
+    border-radius: 4px;
+    outline: 0;
+}
+
+.ranking{
+    position:relative;
+    bottom: 4vw;
+    left:10vw;
+}
+
+.ranking input{
+   margin:2vw 4vw;
+}
+
+.radi{
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%); 
+    margin: -1px;
+}
+
+.do{
+    padding: 0.5vw 1vw;
+    font-size: 6vh;
+    margin: 0;
+    width: auto;
+    transition: 0.1s;
+    border: 2px solid #FFF;
+}
+
+
+
+
+
+
+
+
