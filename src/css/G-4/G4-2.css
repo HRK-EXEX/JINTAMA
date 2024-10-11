@@ -1,0 +1,12 @@
+body{
+    background-image:url(/img/kanrimap.png);
+    background-size: cover;
+}
+
+.title{
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    text-align: center;
+    width: 30vw;
+}
