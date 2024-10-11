@@ -1,0 +1,68 @@
+body {
+    background-image: url(/img/kanrimap.png);
+    background-size: cover;
+    margin: 0; /* 余白を削除 */
+    padding: 0; /* 余白を削除 */
+    height: 100vh; /* ビューポート全体に合わせる */
+    overflow: hidden; /* スクロールを防ぐ */
+}
+
+.all {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* 中央揃え */
+    font-family: "DotGothic16", sans-serif;
+    color: white;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.kuro {
+    background-color: rgba(0, 0, 0, 0.65);
+    border: solid 3px #ffffff;
+    padding: 5vw; /* パディングを縮小 */
+    width: 60vw; /* 幅を調整 */
+    height: auto; /* 高さを自動調整 */
+    box-sizing: border-box; /* パディングを含めたサイズ調整 */
+}
+
+table {
+    width: 100%; /* テーブル幅を全体に広げる */
+    margin: 0; /* 余白を削除 */
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px; /* セル内の余白 */
+    text-align: center;
+    font-size: 1.8em;
+}
+
+th {
+    color: white;
+}
+
+.text {
+    color: #fff;
+    display: inline-block;
+    margin: 0; /* 余白を削除 */
+}
+
+.adminh1 {
+    margin-bottom: 2vh; /* 余白を調整 */
+}
+
+.delete{
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.f{
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}

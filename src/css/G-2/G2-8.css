@@ -1,0 +1,57 @@
+body{
+    background-image:url(/img/setteikuro.png);
+    background-size: cover;
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.main{
+    color:#fff;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.650);
+    border: solid 3px #ffffff;
+    text-align: center;
+    width: 50vw;
+    height: 60vh;
+    margin: 15vh 24vw;
+}
+.text{
+    color: #ff0000;
+    display: inline-block;
+    margin-top: 20vh;
+    font-size: 40px;
+}
+button{
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-color: #fff;
+    border-style: solid;
+    background-color: #00000000;
+    color: #FFF;
+    margin: 3vw 2vw;
+    text-align: center;
+    font-size: clamp(20px, 3vw, 40px);
+}
+.delete{
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-color: #ff0000;
+    border-style: solid;
+    background-color: #00000000;
+    color: #ff0000;
+    margin: 3vw 2vw;
+    text-align: center;
+    font-size: clamp(20px, 3vw, 40px);
+}
+button:hover {
+    cursor: pointer;
+    background-color: #00000080;
+}
+
+button:active {
+    cursor: pointer;
+    background-color: #ffffff80;
+    color: #000;
+}
