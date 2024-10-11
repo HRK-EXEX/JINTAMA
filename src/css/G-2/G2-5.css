@@ -1,22 +1,6 @@
-@font-face {
-    font-family: "dot-regular";
-    src: url("/src/font/JF-Dot-MPlus12.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "dot-bold";
-    src: url("/src/font/JF-Dot-MPlus12B.ttf") format("truetype");
-}
-
-* {
-    font-family: "dot-regular", sans-serif;
-    font-weight: normal;
-    font-style: normal;
-}
-
-h1, h2, h3 {
-    font-family: "dot-bold", sans-serif;
-    font-weight: bold;
+.dotgothic16-regular, button, a, span {
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -50,8 +34,12 @@ body{
 
 tr {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 40vw;
+}
+
+td {
+
 }
 
 .opration {
@@ -70,6 +58,18 @@ button {
     text-align: center;
     transition: 0.1s;
     font-size: min(1.5vw, 24px);
+}
+
+span {
+    display: block;
+    width: 25vw;
+    border: 2px solid #fff;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 6px 18px;
+    text-align: center;
+    transition: 0.1s;
+    font-size: clamp(12px, 1.5vw, 24px);
 }
 
 .team_name {
@@ -109,7 +109,7 @@ button {
 }
 
 .nums{
-    padding: 0.75vw 0.5vw 0.25vw 1vw;
+    padding: 0.5vw 1vw;
     font-size: 6vh;
     margin: 0;
     width: auto;
