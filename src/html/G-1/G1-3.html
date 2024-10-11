@@ -15,8 +15,10 @@
     <div class="all">
 <div class="kuro">
         <button class="back dotgothic16-regular" onclick="location.href='G1-2.html'">back</button>
-    <h2 class="h2name">name <span id="name"></span></h2>
-    <h2 class="h2password">password <span id="pass"></span></h2>
+        <div class="input-container">
+    <h2 class="h2name">name </h2><span id="name" class="input"></span></div>
+    <div class="input-container">
+    <h2 class="h2password">password </h2><span id="pass" class="input"></span></div>
     
     
     <form action="G1-4.php" method="POST">
@@ -24,26 +26,13 @@
         <input type="hidden" name="pass" >
         <div class="op_btn "><input class="dotgothic16-regular" type="submit" value="ok"></div>
     </form>
-</div>
+</div>  
 </div>
 </div>
 <script>
-    // URLからクエリパラメータを取得する関数
-    function getQueryParams() {
-        const params = {};
-        const queryString = window.location.search.substring(1);
-        const queryArray = queryString.split("&");
-        for (let i = 0; i < queryArray.length; i++) {
-            const pair = queryArray[i].split("=");
-            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
-        }
-        return params;
-    }
-
-    // 入力されたデータを表示する
-    const params = getQueryParams();
-    document.getElementById("displayName").innerText = params.name || "未入力";
-    document.getElementById("displayPass").innerText = params.pass ? "●●●●●●" : "未入力"; // パスワードは伏せて表示
+     const params = new URLSearchParams(location.search);
+       document.getElementById('name').textContent = params.get('name') || "未入力";
+        document.getElementById('pass').textContent = params.get('pass') || "未入力"; 
 </script>
 </body>
 </html>

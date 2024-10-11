@@ -20,6 +20,8 @@ body {
     outline: none;
     border-bottom: 0.2vw solid #999;
     padding: 0.5vw 1vw;
+    margin-left:10px;
+    height:35px;
 }
 
 .textbox:focus {
@@ -51,18 +53,25 @@ body {
     width: 100%;
     display: inline-block;
     top: 0; 
-    margin-top: 20px; /* 上の余白を調整 */
+    margin-top: 20px; 
+    margin:0;
 }
 .h2name {
     line-height: 3; 
-    margin-top: 2vh; /* G1-2.cssのように */
+    margin-top: 2vh;
 }
 
 .h2password {
     line-height: 1.5; 
-    margin-bottom: 4vh; /* G1-2.cssのように */
+    margin-bottom: 4vh; 
 }
 
+.input-container {
+    display: flex; 
+    align-items: center;  
+    font-size: clamp(15px, 4vw, 35px); 
+    margin-bottom:20px;
+}
 
 .op_btn {
     position: absolute;
