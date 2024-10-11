@@ -28,8 +28,12 @@ body{
 
 tr {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 40vw;
+}
+
+td {
+
 }
 
 .opration {
@@ -48,6 +52,18 @@ button {
     text-align: center;
     transition: 0.1s;
     font-size: min(1.5vw, 24px);
+}
+
+span {
+    display: block;
+    width: 25vw;
+    border: 2px solid #fff;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 6px 18px;
+    text-align: center;
+    transition: 0.1s;
+    font-size: clamp(12px, 1.5vw, 24px);
 }
 
 .team_name {
@@ -87,7 +103,7 @@ button {
 }
 
 .nums{
-    padding: 0.75vw 0.5vw 0.25vw 1vw;
+    padding: 0.5vw 1vw;
     font-size: 6vh;
     margin: 0;
     width: auto;
