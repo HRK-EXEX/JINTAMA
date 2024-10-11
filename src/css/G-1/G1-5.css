@@ -76,6 +76,7 @@ body{
 
 .btn2{
     position:relative;
-    left:70vh;
+    left:50vh;
+    top:5vh;
     color:white;
 }
