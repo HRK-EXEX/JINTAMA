@@ -1,8 +1,4 @@
-.dotgothic16-regular {
-    font-family: "DotGothic16", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
+
 body {
     background-image: url(/img/login.png);
     background-repeat: no-repeat; 
@@ -94,8 +90,8 @@ body {
 
 .back {
     position: absolute;
-    top: 20px; 
-    left: 20px;
+    top: 170px; 
+    left: 220px;
     border-color: #fff;
     border-style: solid;
     background-color: rgba(0, 0, 0, 0.650);
