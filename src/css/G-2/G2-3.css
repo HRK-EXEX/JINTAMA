@@ -56,14 +56,14 @@ span {
 }
 
 .team_name {
-    padding: auto 80px;
-    margin: 4px 0;
+    padding: 12px;
+    margin: 6px;
     width: 50vw;
 }
 
 .team_user {
-    padding: auto 80px;
-    margin: 4px 0;
+    padding: 12px;
+    margin: 6px;
     width: 25vw;
 }
 

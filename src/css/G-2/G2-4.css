@@ -44,17 +44,17 @@ button {
     border-style: solid;
     background-color: #00000000;
     color: #FFF;
-    padding: 6px 18px;
+    padding: 1vw 3vw;
     text-align: center;
     transition: 0.1s;
     font-size: min(1.5vw, 24px);
 }
 
 .team_name {
-    padding: auto 80px;
-    margin: 4px 0;
+    padding: 8px;
+    margin: 4px;
     width: 50vw;
-    font-size: larger;
+    font-size: x-large;
     background-color: #00000000;
     color: #FFF;
     border: 2px solid #FFF;

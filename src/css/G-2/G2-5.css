@@ -32,10 +32,6 @@ tr {
     width: 40vw;
 }
 
-td {
-
-}
-
 .opration {
     display: flex;
     justify-content: space-between;
@@ -48,7 +44,7 @@ button {
     border-style: solid;
     background-color: #00000000;
     color: #FFF;
-    padding: 6px 18px;
+    padding: 1vw 3vw;
     text-align: center;
     transition: 0.1s;
     font-size: min(1.5vw, 24px);
@@ -66,50 +62,15 @@ span {
     font-size: clamp(12px, 1.5vw, 24px);
 }
 
-.team_name {
-    padding: auto 80px;
-    margin: 4px 0;
-    width: 50vw;
-    font-size: larger;
+.member_name {
+    padding: 8px;
+    margin: 4px;
+    width: 25vw;
+    font-size: x-large;
     background-color: #00000000;
     color: #FFF;
     border: 2px solid #FFF;
     transition: 0.5s;
-}
-
-.team_name:hover {
-    border: 2px #8f8 solid;
-    border-radius: 0%;
-}
-
-.team_name:focus {
-    background-color: #00000080;
-    border: 10px #4c4 solid;
-    border-radius: 4px;
-    outline: 0;
-}
-
-.radios {
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    border: 0;
-    padding: 0;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%); 
-    margin: -1px;
-}
-
-.nums{
-    padding: 0.5vw 1vw;
-    font-size: 6vh;
-    margin: 0;
-    width: auto;
-    transition: 0.1s;
-
-    border: 2px solid #FFF;
 }
 
 button:hover, .nums:hover {
