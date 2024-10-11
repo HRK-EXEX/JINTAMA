@@ -138,7 +138,7 @@ button:active ,.do:hover{
    margin:2vw 4vw;
 }
 
-.radi{
+/* .radi{
     position: absolute;
     white-space: nowrap;
     width: 1px;
@@ -158,12 +158,55 @@ button:active ,.do:hover{
     width: auto;
     transition: 0.1s;
     border: 2px solid #FFF;
-}
+} */
+.radi {
+    appearance: none;
+    position: absolute;
+    display:inline-block;
+    margin-left: 20px;
+  }
 
-
-
-
-
+  label {
+    margin-left: 100px;
+    cursor: pointer;
+    padding-left: 30px;
+    position: relative;
+  }
+  
+  
+  label::before,
+  label::after {
+    content: "";
+    display: block; 
+    position: absolute;
+  }
+  
+  label::before {
+    background-color: #000000;
+    border-radius: 0%;
+    border: 1px solid #ffffff;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 5px;
+  }
+  
+  label::after {
+    border-bottom: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-color: #ffffff;
+    opacity: 0;
+    height: 5px;
+    width: 10px;
+    transform: rotate(-45deg);
+    top: 30px;
+    left: 10px;
+  }
+  
+  input:checked + label::after {
+    opacity: 1;
+  }
 
 
 
