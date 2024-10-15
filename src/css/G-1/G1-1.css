@@ -28,7 +28,7 @@ img{
     border: solid 0.3vw #ffffff;
     width:25vw;
     height: 10vw;
-    display: flex;
+    display:none;
     position:absolute;
     margin-top:28vW;
     margin-left:37vw;

@@ -14,12 +14,13 @@
     <div class="title">
         <img src="/img/JINTAMA.png" alt="タイトル画像" id="title">
     </div>
-    <div class="kuro">
+    <div class="kuro" id="show-later">
         <a href="G1-5.html"><h1>ログインへ</h1></a>
     </div>
     <script>
     window.onload = function() {
         const image = document.getElementById('title'); // ロゴ画像の要素を取得
+        
       
         image.animate(
           [
@@ -31,7 +32,16 @@
             duration: 3000     // アニメーションの実行時間（1秒）
           }
         );
+        const showLater = document.getElementById("show-later");
+        function switchDisplay() {
+          showLater.style.display = 'block';
+        }
+        setTimeout(() => {
+          switchDisplay();
+        }, 3000);
+
       };
+
     </script>
       
 
