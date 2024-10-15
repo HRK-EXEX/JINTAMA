@@ -15,7 +15,7 @@ body{
 }
 
 img{
-    top:7vw;
+    bottom: 0vw;
     left:15svw;
     height:20vw;
     position:absolute;
@@ -26,8 +26,6 @@ img{
 .kuro{
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 0.3vw #ffffff;
-    /* padding: 10vh 7vw;
-    margin: auto 12vw; */
     width:25vw;
     height: 10vw;
     display: flex;
