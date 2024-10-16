@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/css/G-4/G4-2.css">
+    <link rel="stylesheet" href="../../src/css/G-4/G4-2.css">
     <link rel="stylesheet"  href="/src/css/base/dot_font.css" /> 
     <title>管理者画面</title>
 </head>
@@ -28,8 +28,8 @@
         </tr>
         <?php
         $pdo = new PDO($connect, USER, PASS);
-        $pdo->query("select * from User");
-        // $db->execute([]);
+        $pdo->prepare("select * from User");
+        $pdo->execute([]);
         foreach($pdo as $user){
             echo'<tr>';
             echo'<td>'.$user['user_id'].'</td>';
