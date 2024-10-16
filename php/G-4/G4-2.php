@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/css/G-4/G4-2.css">
+    <link rel="stylesheet" href=".././src/css/G-4/G4-2.css">
     <link rel="stylesheet"  href="/src/css/base/dot_font.css" /> 
     <title>管理者画面</title>
 </head>
@@ -29,8 +29,8 @@
         </tr>
         <?php
         $kanri_id = 1;
-        $db->prepare("select * from User where user_id != ?");
-        $db->execute([$kanri_id]);
+        $db->prepare("select * from User?");
+        $db->execute([]);
         foreach($db as $user){
             echo'<tr>';
             echo'<td>'.$user['user_id'].'</td>';
