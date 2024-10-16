@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../src/css/G-4/G4-2.css">
-    <link rel="stylesheet"  href="/src/css/base/dot_font.css" /> 
+    <link rel="stylesheet"  href="../../src/css/base/dot_font.css" /> 
     <title>管理者画面</title>
 </head>
 <body>

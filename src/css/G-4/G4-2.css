@@ -1,5 +1,5 @@
 body {
-    background-image: url(/img/kanrimap.png);
+    background-image: url(../../img/kanrimap.png);
     background-size: cover;
     margin: 0; /* 余白を削除 */
     padding: 0; /* 余白を削除 */
