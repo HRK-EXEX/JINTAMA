@@ -12,7 +12,7 @@
         <h1>管理者画面</h1>
     </div>
         <div class="main">
-            <a href="/src/html/G-4/G4-2.html"  class="text"><h1>▶　ユーザーを削除</h1></a>
+            <a href="/src/html/G-4/G4-2.php"  class="text"><h1>▶　ユーザーを削除</h1></a>
         </div>
 </body>
 
