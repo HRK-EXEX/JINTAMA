@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <title>タイトル画面</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.85.2/dist/phaser.min.js"></script>
+    <script src="/src/js/G-1/G1-1.js"></script>
     
 </head>
 <body>
@@ -17,33 +19,7 @@
     <div class="kuro" id="show-later">
         <a href="G1-5.html"><h1>ログインへ</h1></a>
     </div>
-    <script>
-    window.onload = function() {
-        const image = document.getElementById('title'); // ロゴ画像の要素を取得
-        
-      
-        image.animate(
-          [
-            { transform: 'translateY(0)' },       // 開始位置（元の位置）
-            { transform: 'translateY(28vw)' }    // 終了位置（200px下）
-          ],
-          {
-            fill: 'forwards',  // アニメーションが終わった後の状態を保持
-            duration: 3000     // アニメーションの実行時間（1秒）
-          }
-        );
-        const showLater = document.getElementById("show-later");
-        function switchDisplay() {
-          showLater.style.display = 'block';
-        }
-        setTimeout(() => {
-          switchDisplay();
-        }, 3000);
-
-      };
-
-    </script>
-      
+   
 
     
 </body>
