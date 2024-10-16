@@ -1,4 +1,12 @@
-<?php require "/php/db.php"; ?>
+<?php
+    const SERVER = "mysql309.phy.lolipop.lan";
+    const DBNAME = "LAA1517439-kansho";
+    const USER = "LAA1517439";
+    const PASS = "Pass1234";
+    $connect = 'mysql:host='.SERVER.';dbname='.DBNAME.';charset=utf8';             
+    $db = new PDO($connect, USER, PASS);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
