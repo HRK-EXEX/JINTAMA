@@ -30,7 +30,7 @@
         $pdo = new PDO($connect, USER, PASS);
         $pdo->query("select * from User");
         // $db->execute([]);
-        foreach($db as $user){
+        foreach($pdo as $user){
             echo'<tr>';
             echo'<td>'.$user['user_id'].'</td>';
             echo'<td>'.$user['user_name'].'</td>';
