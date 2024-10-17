@@ -17,6 +17,7 @@ try{
 }catch(Exseption $e){
    echo 'エラー:'. $e->getMessage();
 }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
