@@ -4,7 +4,7 @@ session_start(); // セッションを開始
 unset($_SESSION['User']); // 既存のセッションデータを解除
 session_regenerate_id(true); // セッションIDを再生成してセキュリティ強化
 
-require __DIR__ . '/../php/db.php'; // 正しい相対パスを指定
+require '../db.php'; // 正しい相対パスを指定
 
 try {
     // ユーザーアカウント情報を取得するためのSQL文を準備して実行
@@ -27,7 +27,7 @@ try {
     if (isset($_SESSION['User'])) {
         // ユーザー権限に応じてリダイレクト
         if ($_SESSION['User']['user_name'] == 'kanri' && $_POST['password'] == '1234') {
-            header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
+            header('Location:/kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
             echo '最強！';
         } else {
             header('Location: /src/html/G-2/G2-1_mainmenu.html');
