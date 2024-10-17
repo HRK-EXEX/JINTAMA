@@ -15,7 +15,7 @@
     <div class="all">
         <div class="kuro">
             <form action="G1-3.php" method="post">
-                <button class="back dotgothic16-regular" type="button" onclick="location.href='G1-1.html'">back</button>
+                <button class="back dotgothic16-regular" type="button" onclick="location.href='G1-1.php'">back</button>
                 <h2 class="h2name">
                     name <input type="text" name="user_name" class="textbox" required><br>
                 </h2>
