@@ -7,7 +7,7 @@ try{
 
     $hashed_pass=password_hash($pass,PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare('INSERT INTO users (name, password) VALUES (:name, :pass)');
+    $stmt = $db->prepare('INSERT INTO user (name, password) VALUES (:name, :pass)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':pass', $hashed_pass, PDO::PARAM_STR);
     $stmt->execute();
