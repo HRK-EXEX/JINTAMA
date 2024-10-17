@@ -8,7 +8,7 @@ require '../db.php'; // 正しい相対パスを指定
 
 try {
     // ユーザーアカウント情報を取得するためのSQL文を準備して実行
-    $sql = $pdo->prepare('SELECT * FROM User WHERE user_id = ?');
+    $sql = $db->prepare('SELECT * FROM User WHERE user_id = ?');
     $sql->execute([$_POST['user_id']]);
 
     // 結果をループで処理
