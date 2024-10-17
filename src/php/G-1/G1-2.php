@@ -2,12 +2,12 @@
 require_once '../db.php';
 
 try{
-    $name=$_POST['name'] ?? '';
-    $pass=$_POST['pass'] ?? '';
+    $name=$_POST['user_name'] ?? '';
+    $pass=$_POST['password'] ?? '';
 
     $hashed_pass=password_hash($pass,PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare('INSERT INTO User (name, password) VALUES (:name, :pass)');
+    $stmt = $db->prepare('INSERT INTO User (user_name, password) VALUES (:name, :pass)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':pass', $hashed_pass, PDO::PARAM_STR);
     $stmt->execute();
