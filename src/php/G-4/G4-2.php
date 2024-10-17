@@ -17,7 +17,7 @@
             <th>ID</th>
             <th>ユーザー名</th>
             <th>削除</th>
-            <th>復旧</th>
+            <!-- <th>復旧</th> -->
         </tr>
         <?php
         $stm = $db->prepare("select * from User");
@@ -27,7 +27,7 @@
             echo'<td>'.$user['user_id'].'</td>';
             echo'<td>'.$user['user_name'].'</td>';
             echo'<td><button type="submit" class="delete">削除</button></td>';
-            echo'<td><button type="submit" class="f">復旧</button></td>';
+            // echo'<td><button type="submit" class="f">復旧</button></td>';
             echo'</tr>';
         }
         // <tr>
