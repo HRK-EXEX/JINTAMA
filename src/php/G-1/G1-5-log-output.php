@@ -7,9 +7,6 @@ session_regenerate_id(true); // Regenerate the session ID for security
 require '/kansho/JINTAMA/src/php/db.php';
 
 try {
-    $pdo = new PDO($connect, USER, PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     // Prepare and execute the SQL statement to fetch account details
     $sql = $pdo->prepare('SELECT * FROM User WHERE user_id = ?');
     $sql->execute([$_POST['user_id']]);
