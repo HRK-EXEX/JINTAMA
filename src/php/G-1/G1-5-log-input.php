@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="kansho/JINTAMA/src/css/base/black_window.css" /> 
-    <link rel="stylesheet"  href="kansho/JINTAMA/src/css/G-1/G1-5.css" />
-    <link rel="stylesheet"  href="kansho/JINTAMA/src/css/base/dot_font.css" /> 
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/black_window.css" /> 
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/G-1/G1-5.css" />
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" /> 
    
     <title>G1-5</title>
 </head>
