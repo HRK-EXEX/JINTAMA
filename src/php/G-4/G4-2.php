@@ -20,9 +20,9 @@
             <th>復旧</th>
         </tr>
         <?php
-        $db->prepare("select * from User");
-        $db->execute();
-        foreach($pdo as $user){
+        $stm = $db->prepare("select * from User");
+        $stm->execute();
+        foreach($stm as $user){
             echo'<tr>';
             echo'<td>'.$user['user_id'].'</td>';
             echo'<td>'.$user['user_name'].'</td>';
