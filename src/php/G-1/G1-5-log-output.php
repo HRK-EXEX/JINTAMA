@@ -4,7 +4,7 @@ session_start(); // Start the session
 unset($_SESSION['User']); // Unset any existing session data
 session_regenerate_id(true); // Regenerate the session ID for security
 
-require 'php/db.php';
+require '/kansho/JINTAMA/src/php/db.php';
 
 try {
     $pdo = new PDO($connect, USER, PASS);
@@ -32,6 +32,7 @@ try {
         // Redirect based on user authority
         if ($_SESSION['User']['user_name'] == 'kanri' && $_POST['password'] == '1234') {
             header('Location:/src/html/G-4/G4-1.html');
+            echo '最強！';
         } else {
             header('Location:/src/html/G-2/G2-1_mainmenu.html');
         }

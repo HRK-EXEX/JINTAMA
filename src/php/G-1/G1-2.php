@@ -2,12 +2,12 @@
 require_once '../db.php';
 
 try{
-    $name=$_POST['name'] ?? '';
-    $pass=$_POST['pass'] ?? '';
+    $name=$_POST['user_name'] ?? '';
+    $pass=$_POST['password'] ?? '';
 
     $hashed_pass=password_hash($pass,PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare('INSERT INTO User (name, password) VALUES (:name, :pass)');
+    $stmt = $db->prepare('INSERT INTO User (user_name, password) VALUES (:name, :pass)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':pass', $hashed_pass, PDO::PARAM_STR);
     $stmt->execute();
@@ -25,7 +25,7 @@ try{
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/src/css/base/black_window.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/css/G-1/G1-2.css" />
+    <link rel="stylesheet" href="/Kansho/JINTAMA/src/css/G-1/G1-2.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">

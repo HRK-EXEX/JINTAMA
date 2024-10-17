@@ -12,7 +12,7 @@
 <body>
     <div class="all">
         <div class="kuro">
-            <form action="/src/php/G-1/G1-5-log-output.php" method="post">
+            <form action="/kansho/JINTAMA/src/php/G-1/G1-5-log-output.php" method="post">
             <h1 class="log">Login</h1><br>
             <h2 class="h2name">name<input type="text" name="name" id="name" class="textbox"></h2><br>
             <h2 class="h2password">password<input type="password" name="password" id="password" class="textbox"></h2><br>
@@ -21,7 +21,7 @@
                 <?php if(isset($_GET['hogeA'])): ?>
                 <p class="error"><?php echo $_GET['hogeA']; ?></p>
                 <?php endif; ?>
-                <a href="G1-2.html" class="btn2">新規登録</button>
+                <a href="/kansho/JINTAMA/src/php/G-1/G1-2.php" class="btn2">新規登録</button>
             </div>
             </form>
         </div>
