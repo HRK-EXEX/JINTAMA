@@ -1,45 +1,45 @@
 <?php
-session_start(); // Start the session
+session_start(); // セッションを開始
 
-unset($_SESSION['User']); // Unset any existing session data
-session_regenerate_id(true); // Regenerate the session ID for security
+unset($_SESSION['User']); // 既存のセッションデータを解除
+session_regenerate_id(true); // セッションIDを再生成してセキュリティ強化
 
-require '/../php/db.php';
+require __DIR__ . '/../php/db.php'; // 正しい相対パスを指定
 
 try {
-    // Prepare and execute the SQL statement to fetch account details
+    // ユーザーアカウント情報を取得するためのSQL文を準備して実行
     $sql = $pdo->prepare('SELECT * FROM User WHERE user_id = ?');
     $sql->execute([$_POST['user_id']]);
 
-    // Loop through the results
+    // 結果をループで処理
     foreach ($sql as $row) {
-        // Verify the password
+        // パスワードを検証
         if (password_verify($_POST['password'], $row['password'])) {
-            // Set the session variables (excluding the password)
+            // セッションにユーザー情報を設定（パスワードは除外）
             $_SESSION['User'] = [
                 'user_id' => $row['user_id'],
                 'user_name' => $row['user_name'],
-                // No need to store the password hash in the session
             ];
         }
     }
 
-    // Check if the account session is set
+    // ユーザー情報がセッションに設定されているか確認
     if (isset($_SESSION['User'])) {
-        // Redirect based on user authority
+        // ユーザー権限に応じてリダイレクト
         if ($_SESSION['User']['user_name'] == 'kanri' && $_POST['password'] == '1234') {
-            header('/kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
+            header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
             echo '最強！';
         } else {
-            header('Location:/src/html/G-2/G2-1_mainmenu.html');
+            header('Location: /src/html/G-2/G2-1_mainmenu.html');
         }
         exit();
     } else {
-        // Redirect to the login page with an error message
-        header('Location:login-input.php?hogeA=※ログイン名またはパスワードが違います');
+        // ログインページにエラーメッセージ付きでリダイレクト
+        header('Location: login-input.php?hogeA=※ログイン名またはパスワードが違います');
         exit();
     }
 } catch (PDOException $e) {
+    // データベースエラー時の処理
     echo "Database error: " . $e->getMessage();
 }
 ?>
