@@ -4,7 +4,7 @@ session_start(); // Start the session
 unset($_SESSION['User']); // Unset any existing session data
 session_regenerate_id(true); // Regenerate the session ID for security
 
-require '/kansho/JINTAMA/src/php/db.php';
+require '/../php/db.php';
 
 try {
     // Prepare and execute the SQL statement to fetch account details
