@@ -1,4 +1,4 @@
-<?php require "/kansho/JINTAMA/src/php/db.php" ?>
+<?php require '../db.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
