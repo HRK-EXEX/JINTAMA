@@ -1,0 +1,1 @@
+header('Location:../pages/G-4-1.php');
