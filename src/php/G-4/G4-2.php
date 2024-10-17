@@ -1,11 +1,4 @@
-<?php
-    const SERVER = "mysql309.phy.lolipop.lan";
-    const DBNAME = "LAA1517439-kansho";
-    const USER = "LAA1517439";
-    const PASS = "Pass1234";
-    $connect = 'mysql:host='.SERVER.';dbname='.DBNAME.';charset=utf8';             
-
-?>
+<?php require "/kansho/JINTAMA/src/php/db.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +20,8 @@
             <th>復旧</th>
         </tr>
         <?php
-        $pdo = new PDO($connect, USER, PASS);
-        $pdo->prepare("select * from User");
-        $pdo->execute([]);
+        $db->prepare("select * from User");
+        $db->execute([]);
         foreach($pdo as $user){
             echo'<tr>';
             echo'<td>'.$user['user_id'].'</td>';
