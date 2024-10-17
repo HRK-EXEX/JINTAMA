@@ -21,7 +21,7 @@
         </tr>
         <?php
         $db->prepare("select * from User");
-        $db->execute([]);
+        $db->execute();
         foreach($pdo as $user){
             echo'<tr>';
             echo'<td>'.$user['user_id'].'</td>';
