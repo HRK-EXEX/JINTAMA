@@ -28,7 +28,7 @@ try {
     if (isset($_SESSION['User'])) {
         // Redirect based on user authority
         if ($_SESSION['User']['user_name'] == 'kanri' && $_POST['password'] == '1234') {
-            header('Location:/src/html/G-4/G4-1.html');
+            header('/kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
             echo '最強！';
         } else {
             header('Location:/src/html/G-2/G2-1_mainmenu.html');
