@@ -1,12 +1,7 @@
 <?php
 session_start(); // セッションを開始
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    var_dump($_POST);
-}
-
 unset($_SESSION['User']); // 既存のセッションデータを解除
-session_regenerate_id(true); // セッションIDを再生成してセキュリティ強化
 
 require '../db.php'; // データベース接続
 
