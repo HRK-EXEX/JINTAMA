@@ -8,6 +8,14 @@ require '../db.php'; // データベース接続
 
 try {
     // POSTデータが存在するか確認
+    echo "<hr>";
+    echo "u_name / ";
+    echo empty($_POST['user_name']);
+    echo "<hr>";
+    echo "pass / ";
+    echo empty($_POST['password']);
+    echo "<hr>";
+    
     if (!empty($_POST['user_name']) && !empty($_POST['password'])) {
         // SQL文をプリペアドステートメントで準備
         $sql = $db->prepare('SELECT * FROM User WHERE user_name = ?');
