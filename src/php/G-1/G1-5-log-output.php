@@ -7,8 +7,8 @@ require '../db.php'; // データベース接続
 // var_dump($_POST)
 
 try {
-    var $user = $_POST['user_name'];
-    var $pass = $_POST['password'];
+    $user = $_POST['user_name'];
+    $pass = $_POST['password'];
 
     // POSTデータが存在するか確認
 
