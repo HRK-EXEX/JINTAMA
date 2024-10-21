@@ -7,33 +7,36 @@ require '../db.php'; // データベース接続
 // var_dump($_POST)
 
 try {
+    $user = $_POST['user_name'];
+    $pass = $_POST['password'];
+
     // POSTデータが存在するか確認
 
     // echo "<hr>";
     // var_dump($_POST);
     // echo "<hr>";
     // echo "u_name / ";
-    // echo $_POST['user_name'];
+    // echo $user;
     // echo "<hr>";
     // echo "u_name(empty) / ";
-    // echo $_POST['user_name'];
+    // echo $user;
     // echo "<hr>";
     // echo "pass / ";
-    // echo $_POST['password'];
+    // echo $pass;
     // echo "<hr>";
     // echo "pass(empty) / ";
-    // echo empty($_POST['password']);
+    // echo empty($pass);
     // echo "<hr>";
     
-    if (strlen($_POST['user_name']) > 0 && strlen($_POST['password']) > 0) {
+    if (strlen($user) > 0 && strlen($pass) > 0) {
         // SQL文をプリペアドステートメントで準備
         $sql = $db->prepare('SELECT * FROM User WHERE user_name = ?');
-        $sql->execute([$_POST['user_name']]);
+        $sql->execute([$user]);
         
         // ユーザー情報が見つかる場合の処理
         if ($row = $sql->fetch()) {
             // パスワードの検証（ハッシュ化されていない場合）
-            if ($_POST['password'] === $row['password']) {
+            if ($pass === $row['password']) {
                 // セッションにユーザー情報を格納（パスワードは除外）
                 $_SESSION['User'] = [
                     'user_id' => $row['user_id'],
