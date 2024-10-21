@@ -19,11 +19,12 @@
             <th>削除</th>
             <!-- <th>復旧</th> -->
         </tr>
-        <form action="/kansho/JINTAMA/src/php/G-4/G4-2-delete.php" method="post">
+        
         <?php
         $stm = $db->prepare("select * from User");
         $stm->execute();
         foreach($stm as $user){
+            echo'<form action="/kansho/JINTAMA/src/php/G-4/G4-2-delete.php" method="post">';
             echo'<tr>';
             echo'<input type="hidden" name="userid" value="'.$user['user_id'].'">';
             echo'<td>'.$user['user_id'].'</td>';
@@ -31,6 +32,7 @@
             echo'<td><button type="submit" class="delete">削除</button></td>';
             // echo'<td><button type="submit" class="f">復旧</button></td>';
             echo'</tr>';
+            echo'</form>';
         }
         // <tr>
         //     <td>#11111</td>
@@ -51,7 +53,7 @@
         //     <td><button type="submit" class="f">復旧</button></td>
         // </tr>
         ?>
-        </form>
+        
     </table>
     </div>
     </div>
