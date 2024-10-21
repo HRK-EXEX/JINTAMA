@@ -4,7 +4,7 @@ session_start(); // セッションを開始
 unset($_SESSION['User']); // 既存のセッションデータを解除
 session_regenerate_id(true); // セッションIDを再生成してセキュリティ強化
 
-require '../db.php'; // データベース接続を読み込み
+require '../db.php'; // データベース接続
 
 try {
     // POSTデータが存在するか確認
@@ -31,12 +31,16 @@ try {
                     header('Location: /src/html/G-2/G2-1_mainmenu.html');
                     exit();
                 }
+            } else {
+                // パスワードが違う場合
+                header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードが違います');
+                exit();
             }
+        } else {
+            // ユーザー名が見つからない場合
+            header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードが違います');
+            exit();
         }
-        
-        // ログイン失敗時の処理
-        header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードが違います');
-        exit();
     } else {
         // POSTデータが不足している場合の処理
         header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードが違います');
@@ -46,4 +50,3 @@ try {
     // データベースエラーの処理
     echo "Database error: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
 }
-?>
