@@ -1,55 +1,58 @@
-body{
+body {
     background-image: url(/img/title.jpg);
     background-repeat: no-repeat; 
     background-size: cover;
-    background-position:center top;   
+    background-position: center top;   
     background-attachment: fixed;
-    overflow:hidden;
-    position:relative;
-    }
-
-.title{
-    position:relative;
-    height: 100%;;
-    
+    overflow: hidden;
+    position: relative;
 }
 
-img{
+.title {
+    position: relative;
+    height: 100%;
+}
+
+img {
     bottom: 0vw;
-    left:15svw;
-    height:20vw;
-    position:absolute;
-    
-    
+    left: 15vw;
+    height: 20vw;
+    position: absolute;
 }
 
-.kuro{
-    background-color: rgba(0, 0, 0, 0.650);
+.kuro {
+    background-color: rgba(0, 0, 0, 0.65);
     border: solid 0.3vw #ffffff;
-    width:25vw;
+    width: 25vw;
     height: 10vw;
-    display:none;
-    position:absolute;
-    margin-top:28vW;
-    margin-left:37vw;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* 初期状態は透明 */
+    visibility: hidden; /* 初期状態は見えない */
+    position: absolute;
+    margin-top: 28vw;
+    margin-left: 37vw;
 }
 
-.dotgothic16-regular,h1 {
+.kuro.visible {
+    opacity: 1; /* 透明度を一気に表示 */
+    visibility: visible; /* 見えるようにする */
+}
+
+.dotgothic16-regular, h1 {
     font-family: "DotGothic16", sans-serif;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
-  a{
+a {
     text-decoration: none;
-    color:#ffffff;
-    width:165px;
-    margin:auto;
-  }
+    color: #ffffff;
+    width: 165px;
+    margin: auto;
+}
 
-  a:hover{
+a:hover {
     color: yellow;
-    
-    
 }
