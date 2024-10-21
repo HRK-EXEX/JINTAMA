@@ -9,23 +9,23 @@ require '../db.php'; // データベース接続
 try {
     // POSTデータが存在するか確認
 
-    echo "<hr>";
-    var_dump($_POST);
-    echo "<hr>";
-    echo "u_name / ";
-    echo $_POST['user_name'];
-    echo "<hr>";
-    echo "u_name(empty) / ";
-    echo empty($_POST['user_name']);
-    echo "<hr>";
-    echo "pass / ";
-    echo $_POST['password'];
-    echo "<hr>";
-    echo "pass(empty) / ";
-    echo empty($_POST['password']);
-    echo "<hr>";
+    // echo "<hr>";
+    // var_dump($_POST);
+    // echo "<hr>";
+    // echo "u_name / ";
+    // echo $_POST['user_name'];
+    // echo "<hr>";
+    // echo "u_name(empty) / ";
+    // echo empty($_POST['user_name']);
+    // echo "<hr>";
+    // echo "pass / ";
+    // echo $_POST['password'];
+    // echo "<hr>";
+    // echo "pass(empty) / ";
+    // echo empty($_POST['password']);
+    // echo "<hr>";
     
-    if (!empty($_POST['user_name']) && !empty($_POST['password'])) {
+    if (isset($_POST['user_name']) && isset($_POST['password'])) {
         // SQL文をプリペアドステートメントで準備
         $sql = $db->prepare('SELECT * FROM User WHERE user_name = ?');
         $sql->execute([$_POST['user_name']]);
