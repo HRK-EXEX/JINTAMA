@@ -9,21 +9,21 @@ require '../db.php'; // データベース接続
 try {
     // POSTデータが存在するか確認
 
-    echo "<hr>";
-    var_dump($_POST);
-    echo "<hr>";
-    echo "u_name / ";
-    echo $_POST['user_name'];
-    echo "<hr>";
-    echo "u_name(empty) / ";
-    echo $_POST['user_name'];
-    echo "<hr>";
-    echo "pass / ";
-    echo $_POST['password'];
-    echo "<hr>";
-    echo "pass(empty) / ";
-    echo empty($_POST['password']);
-    echo "<hr>";
+    // echo "<hr>";
+    // var_dump($_POST);
+    // echo "<hr>";
+    // echo "u_name / ";
+    // echo $_POST['user_name'];
+    // echo "<hr>";
+    // echo "u_name(empty) / ";
+    // echo $_POST['user_name'];
+    // echo "<hr>";
+    // echo "pass / ";
+    // echo $_POST['password'];
+    // echo "<hr>";
+    // echo "pass(empty) / ";
+    // echo empty($_POST['password']);
+    // echo "<hr>";
     
     if (strlen($_POST['user_name']) > 0 && strlen($_POST['password']) > 0) {
         // SQL文をプリペアドステートメントで準備
