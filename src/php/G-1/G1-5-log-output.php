@@ -11,7 +11,8 @@ try {
     $pass = $_POST['password'];
 
     var_dump($_POST);
-    exit;
+    var_dump($_POST['user_name']);
+    var_dump($_POST['password']);
 
     // POSTデータが存在するか確認
 
