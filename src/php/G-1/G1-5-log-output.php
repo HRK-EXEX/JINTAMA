@@ -10,9 +10,9 @@ try {
     $user = $_POST['user_name'];
     $pass = $_POST['password'];
 
-    var_dump($_POST);
-    var_dump($_POST['user_name']);
-    var_dump($_POST['password']);
+    // var_dump($_POST);
+    // var_dump($_POST['user_name']);
+    // var_dump($_POST['password']);
 
     // POSTデータが存在するか確認
 
