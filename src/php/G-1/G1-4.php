@@ -11,8 +11,9 @@
     <title>G1-4</title>
 </head>
 <?php
+    $hashed_pass=password_hash($_POST['pass'],PASSWORD_DEFAULT);
      $stm = $db->prepare("INSERT INTO `User`(`user_id`, `user_name`, `password`) VALUES (null,?,?)");
-     $stm->execute([$_POST['name'],$_POST['pass']]);
+     $stm->execute([$_POST['name'],$hashed_pass]);
 
 ?>
 <body>
