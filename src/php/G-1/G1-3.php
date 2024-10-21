@@ -22,8 +22,8 @@
     
     
     <form action="/src/html/G-1/G1-4.html" method="post">
-        <input type="hidden" name="name" >
-        <input type="hidden" name="pass" >
+        <input type="hidden" name="name" <?php echo 'value="'.$_POST['user_name'].'"'?>>
+        <input type="hidden" name="pass" <?php echo 'value="'.$_POST['password'].'"'?>>
         <div class="op_btn "><input type="submit" value="ok"></div>
     </form>
 </div>  

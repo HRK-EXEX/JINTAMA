@@ -1,3 +1,4 @@
+<?php require '../db.php';?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,6 +10,11 @@
     
     <title>G1-4</title>
 </head>
+<?php
+     $stm = $db->prepare("INSERT INTO `User`(`user_id`, `user_name`, `password`) VALUES (null,?,?)");
+     $stm->execute([$_POST['user_name'],$_POST['password']]);
+
+?>
 <body>
     <div class="all">
         <div class="kuro">
