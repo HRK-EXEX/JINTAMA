@@ -26,7 +26,6 @@ try {
                 // 管理者の場合の処理
                 if ($row['user_name'] === 'kanri') {
                     header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
-                    echo '最強！';
                     exit();
                 } else {
                     header('Location: /src/html/G-2/G2-1_mainmenu.html');
@@ -42,8 +41,13 @@ try {
             header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードが違います');
             exit();
         }
-    } 
+    } else {
+        // POSTデータが不足している場合の処理
+        header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードを入力してください1');
+        exit();
+    }
 } catch (PDOException $e) {
     // データベースエラーの処理
     echo "Database error: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
 }
+?>
