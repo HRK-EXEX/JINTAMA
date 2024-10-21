@@ -12,7 +12,7 @@
 </head>
 <?php
      $stm = $db->prepare("INSERT INTO `User`(`user_id`, `user_name`, `password`) VALUES (null,?,?)");
-     $stm->execute([$_POST['user_name'],$_POST['password']]);
+     $stm->execute([$_POST['name'],$_POST['pass']]);
 
 ?>
 <body>
