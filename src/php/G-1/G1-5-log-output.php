@@ -42,11 +42,7 @@ try {
             header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードが違います');
             exit();
         }
-    } else {
-        // POSTデータが不足している場合の処理
-        header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-input.php?hogeA=※ログイン名またはパスワードが違います');
-        exit();
-    }
+    } 
 } catch (PDOException $e) {
     // データベースエラーの処理
     echo "Database error: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
