@@ -15,8 +15,8 @@ try {
         
         // ユーザー情報が見つかる場合の処理
         if ($row = $sql->fetch()) {
-            // パスワードの検証
-            if (password_verify($_POST['password'], $row['password'])) {
+            // パスワードの検証（ハッシュ化されていない場合）
+            if ($_POST['password'] === $row['password']) {
                 // セッションにユーザー情報を格納（パスワードは除外）
                 $_SESSION['User'] = [
                     'user_id' => $row['user_id'],
@@ -26,6 +26,7 @@ try {
                 // 管理者の場合の処理
                 if ($row['user_name'] === 'kanri') {
                     header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
+                    echo '最強！';
                     exit();
                 } else {
                     header('Location: /src/html/G-2/G2-1_mainmenu.html');
