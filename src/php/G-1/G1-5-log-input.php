@@ -21,7 +21,7 @@
                 <?php if(isset($_GET['hogeA'])): ?>
                 <p class="error"><?php echo $_GET['hogeA']; ?></p>
                 <?php endif; ?>
-                <a href="/kansho/JINTAMA/src/php/G-1/G1-2.php" class="btn2">新規登録</button>
+                <a href="/kansho/JINTAMA/src/php/G-1/G1-2.php" class="btn2">新規登録</a>
             </div>
             </form>
         </div>

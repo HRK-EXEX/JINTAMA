@@ -8,10 +8,10 @@ require '../db.php'; // 正しい相対パスを指定
 
 try {
     // POSTデータが送信されているか確認
-    if (isset($_POST['user_id']) && isset($_POST['password'])) {
+    if (isset($_POST['user_name']) && isset($_POST['password'])) {
         // ユーザーアカウント情報を取得するためのSQL文を準備して実行
-        $sql = $db->prepare('SELECT * FROM User WHERE user_id = ?');
-        $sql->execute([$_POST['user_id']]);
+        $sql = $db->prepare('SELECT * FROM User WHERE user_name = ?');
+        $sql->execute([$_POST['user_name']]);
 
         // 結果をループで処理
         foreach ($sql as $row) {
@@ -21,6 +21,7 @@ try {
                 $_SESSION['User'] = [
                     'user_id' => $row['user_id'],
                     'user_name' => $row['user_name'],
+                    'password' => $row['password']
                 ];
             }
         }
@@ -37,12 +38,12 @@ try {
             }
         } else {
             // ログインページにエラーメッセージ付きでリダイレクト
-            header('Location: login-input.php?hogeA=※ログイン名またはパスワードが違います');
+            header('Location:/kansho/JINTAMA/src/php/G-1/G1-5-log-input.php:hogeA=※ログイン名またはパスワードが違います');
             exit();
         }
     } else {
         // POSTデータが不足している場合の処理
-        header('Location: login-input.php?hogeA=※ログイン名またはパスワードが送信されていません');
+        header('Location:/kansho/JINTAMA/src/php/G-1/G1-5-log-input.php:hogeA=※ログイン名またはパスワードが違います');
         exit();
     }
 } catch (PDOException $e) {
