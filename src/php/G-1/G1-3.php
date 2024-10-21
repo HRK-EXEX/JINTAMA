@@ -12,9 +12,9 @@ try{
     $stmt->bindParam(':pass', $hashed_pass, PDO::PARAM_STR);
     $stmt->execute();
 
-    header('Location: G1-3.php?name=' .urlencode($name));
+    header('Location: G1-3.php?name=' .urlencode($name) . '&pass=' . urlencode($hashed_pass));
     exit;
-}catch(Exseption $e){
+}catch(Exception $e){
    echo 'エラー:'. $e->getMessage();
 }
 ?>
