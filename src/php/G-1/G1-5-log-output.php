@@ -10,6 +10,9 @@ try {
     $user = $_POST['user_name'];
     $pass = $_POST['password'];
 
+    var_dump($_POST);
+    exit;
+
     // POSTデータが存在するか確認
 
     // echo "<hr>";
