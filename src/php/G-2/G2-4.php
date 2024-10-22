@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="all">
+        <form action="" method="post">
         <div class="kuro">
             <h2 dotgothic16-regular>チーム名を入力してください。</h2>
             <input class="team_name" name="teamname">
@@ -24,9 +25,10 @@
             </table>
             <div class="opration">
                 <button onclick="location.href='G2-2.php'">戻る</button>
-                <button onclick="location.href='G2-5.html?id=1'">ルームを作成する</button>
+                <input type="submit" value="ルームを作成する" class="submitbtn">
             </div>
         </div>
     </div>
+    </form>
 </body>
 </html>
