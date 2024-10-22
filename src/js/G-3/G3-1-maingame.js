@@ -1,6 +1,10 @@
 let title;
 let info;
 
+var toRadian = function(degrees) {
+    return degrees * Math.PI / 180;
+};
+
 class MainScene extends Phaser.Scene {
     preload() {
         this.load.image('title', '/assets/phaser-logo.png');
@@ -14,14 +18,22 @@ class MainScene extends Phaser.Scene {
             height / 2,
             'title'
         );
+        title.setScale(0.5);
 
-        info = this.add.text(0, 0, 'hello', {fontSize: '64px', fill: '#fff'});
+        info = this.add.text(0, 0, 'hello',
+            {
+                font: '64px',
+                fill: '#fff',
+            }
+        );
+        info.setFontFamily('dot-regular')
     }
 
     update(time, delta) {
+        let realTime = time / 1000;
         // ゲームロジックの更新
-        title.setScale(Math.cos(time * Math.PI / 1000));
-        info.setText(time);
+        title.rotation = toRadian(realTime * 30);
+        info.setText(realTime.toFixed(3));
     }
 }
 
