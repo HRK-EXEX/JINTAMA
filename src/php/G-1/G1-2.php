@@ -1,3 +1,26 @@
+<?php
+require '../db.php';
+
+$err = ''; 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['user_name'] ?? '';
+    $pass = $_POST['password'] ?? '';
+
+
+    $sql = 'SELECT COUNT(*) FROM User WHERE user_name = :name';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+
+    if ($count > 0) {
+        $exist = 'このユーザー名は既に使用されています';
+    } else {
+        header('Location: G1-3.php?name=' . urlencode($name) . '&pass=' . urlencode($pass));
+        exit;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,8 +34,13 @@
 <body>
     <div class="all">
         <div class="kuro">
-            <form action="G1-3.php" method="post">
+            <form action="G1-2.php" method="post">
                 <button class="back dotgothic16-regular" type="button" onclick="location.href='G1-1.php'">back</button>
+
+                <?php if (!empty($exist)): ?>
+                    <p style="color: red;"><?php echo htmlspecialchars($exist, ENT_QUOTES, 'UTF-8'); ?></p>
+                <?php endif; ?>
+                
                 <h2 class="h2name">
                     name <input type="text" name="user_name" class="textbox" required><br>
                 </h2>
