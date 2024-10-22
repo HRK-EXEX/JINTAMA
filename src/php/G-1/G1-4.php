@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="/src/css/base/black_window.css" /> 
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/black_window.css" /> 
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css"/> 
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/G-1/G1-4.css" />
     
