@@ -1,3 +1,26 @@
+<?php
+require '../db.php';
+
+$err = ''; 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['user_name'] ?? '';
+    $pass = $_POST['password'] ?? '';
+
+
+    $sql = 'SELECT COUNT(*) FROM User WHERE user_name = :name';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+
+    if ($count > 0) {
+        $exist = 'このユーザー名は既に使用されています';
+    } else {
+        header('Location: G1-3.php?name=' . urlencode($name) . '&pass=' . urlencode($pass));
+        exit;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
