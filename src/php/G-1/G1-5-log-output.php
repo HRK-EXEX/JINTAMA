@@ -33,6 +33,8 @@ try {
     // echo "<hr>";
     
     if (strlen($user) > 0 && strlen($pass) > 0) {
+        // パスワードをハッシュ化して保存
+
         // SQL文をプリペアドステートメントで準備
         $sql = $db->prepare('SELECT * FROM User WHERE user_name = ?');
         $sql->execute([$user]);
@@ -40,15 +42,15 @@ try {
         // ユーザー情報が見つかる場合の処理
         if ($row = $sql->fetch()) {
             // パスワードの検証（ハッシュ化されていない場合）
-            if ($pass === $row['password']) {
+            if (password_verify($pass,$row['password'])) {
                 // セッションにユーザー情報を格納（パスワードは除外）
                 $_SESSION['User'] = [
                     'user_id' => $row['user_id'],
                     'user_name' => $row['user_name']
                 ];
 
-                // 管理者の場合の処理
-                if ($row['user_name'] === 'kanri') {
+                
+                if ($row['user_name'] === $user) {
                     header('Location: /kansho/JINTAMA/src/php/G-4/G4-1.php');
                     exit();
                 } else {

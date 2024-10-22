@@ -97,3 +97,8 @@ button:active {
     top:5vh;
     color:white;
 }
+
+p.error{
+    position:relative;
+    top:3vh;
+}
