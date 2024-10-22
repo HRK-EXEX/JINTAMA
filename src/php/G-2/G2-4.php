@@ -12,14 +12,14 @@
     <div class="all">
         <div class="kuro">
             <h2 dotgothic16-regular>チーム名を入力してください。</h2>
-            <input class="team_name">
+            <input class="team_name" name="teamname">
             <h2>参加人数の上限を入力してください。（４人まで）</h2><br>
             <table class="room_list">
                 <tr>
-                    <td><input id="1" name="humen" type="radio" class="radios"><label class="nums" for="1">１</label></td>
-                    <td><input id="2" name="humen" type="radio" class="radios"><label class="nums" for="2">２</label></td>
-                    <td><input id="3" name="humen" type="radio" class="radios"><label class="nums" for="3">３</label></td>
-                    <td><input id="4" name="humen" type="radio" class="radios"><label class="nums" for="4">４</label></td>
+                    <!-- <td><input id="1" name="humen" type="radio" class="radios"><label class="nums" for="1">１</label></td> -->
+                    <td><input id="2" name="humen" type="radio" class="radios" value=2><label class="nums" for="2">２</label></td>
+                    <td><input id="3" name="humen" type="radio" class="radios" value=3><label class="nums" for="3">３</label></td>
+                    <td><input id="4" name="humen" type="radio" class="radios" value=4><label class="nums" for="4">４</label></td>
                 </tr>
             </table>
             <div class="opration">
