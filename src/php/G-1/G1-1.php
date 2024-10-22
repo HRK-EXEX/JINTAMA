@@ -17,7 +17,7 @@
         <img src="/kansho/JINTAMA/img/JINTAMA.png" alt="タイトル画像" id="title">
     </div>
     <div class="kuro" id="show-later">
-        <a href="G1-5.php"><h1>ログインへ</h1></a>
+        <a href="G1-5-log-input.php"><h1>ログインへ</h1></a>
     </div>
    
 
