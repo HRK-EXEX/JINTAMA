@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($count > 0) {
         $exist = 'このユーザー名は既に使用されています';
     } else {
-        session_start();
          $_SESSION['user_name'] = $name; 
          $_SESSION['password'] = $pass;  
     header('Location: G1-3.php');
