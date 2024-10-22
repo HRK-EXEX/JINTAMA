@@ -14,7 +14,7 @@
 
     <div class="all">
 <div class="kuro">
-        <button class="back" onclick="location.href='G1-2.html'">back</button>
+        <button class="back" onclick="location.href='G1-2.php'">back</button>
         <div class="input-container">
     <h2 class="h2name">name </h2><span id="name" class="input-name"><?php echo $_POST['user_name']?></span></div>
     <div class="input-container">

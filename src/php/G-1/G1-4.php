@@ -22,7 +22,7 @@
             
             <h1 class="complete">作成完了</h1><br>
             <div class="op_btn">
-                <form action="/src/html/G-3/G2-1.html" method="get">
+                <form action="/kansho/JINTAMA/src/html/G-3/G2-1.php" method="get">
                 <button type="submit" class="btn1">メニュー画面へ</button><br>
             </div>
             </form>
