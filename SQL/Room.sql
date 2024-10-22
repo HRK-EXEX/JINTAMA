@@ -10,4 +10,4 @@ CREATE TABLE Room(
     foreign key(room_user2)  references User(user_id),
     foreign key(room_user3)  references User(user_id),
     foreign key(room_user4)  references User(user_id)
-    )
+);
