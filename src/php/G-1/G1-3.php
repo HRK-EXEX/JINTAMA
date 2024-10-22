@@ -1,3 +1,8 @@
+<?php
+session_start(); 
+$name = $_SESSION['user_name'] ?? '';
+$pass = $_SESSION['password'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
