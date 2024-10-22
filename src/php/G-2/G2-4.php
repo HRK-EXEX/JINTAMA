@@ -1,3 +1,7 @@
+<?php session_start();
+    // $userid= $_SESSION['User']['user_id'];
+    $userid = 1;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +14,8 @@
 </head>
 <body>
     <div class="all">
-        <form action="" method="post">
+        <form action="G2-4-teaminsert.php" method="post">
+            <?php echo'<input type="hidden" name="userid" value="'.$userid.'">';?>
         <div class="kuro">
             <h2 dotgothic16-regular>チーム名を入力してください。</h2>
             <input class="team_name" name="teamname">
@@ -24,8 +29,8 @@
                 </tr>
             </table>
             <div class="opration">
-                <button onclick="location.href='G2-2.php'">戻る</button>
-                <input type="submit" value="ルームを作成する" class="submitbtn">
+                <button formaction="G2-2.php">戻る</button>
+                <input type="submit" class="submitbtn" vlaue="ルーム作成">
             </div>
         </div>
     </div>
