@@ -1,4 +1,8 @@
-
+<?php
+session_start(); 
+$name = $_SESSION['user_name'] ?? '';
+$pass = $_SESSION['password'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,23 +16,19 @@
 </head>
 <body>
 
-    <div class="all">
-<div class="kuro">
-        <button class="back" onclick="location.href='G1-2.php'">back</button>
-        <div class="input-container">
-    <h2 class="h2name">name </h2><span id="name" class="input-name"><?php echo $_POST['user_name']?></span></div>
-    <div class="input-container">
-    <h2 class="h2password">password </h2><span id="pass" class="input-pass"><?php echo $_POST['password']?></span></div>
-    
-    
-    <form action="/kansho/JINTAMA/src/php/G-1/G1-4.php" method="post">
-        <input type="hidden" name="name" <?php echo 'value="'.$_POST['user_name'].'"'?>>
-        <input type="hidden" name="pass" <?php echo 'value="'.$_POST['password'].'"'?>>
-        <div class="op_btn "><input type="submit" value="ok"></div>
-    </form>
-</div>  
-</div>
-</div>
+<div class="all">
+        <div class="kuro">
+            <button class="back" onclick="location.href='G1-2.php'">back</button>
+            <div class="input-container">
+                <h2 class="h2name">name: <span id="name"><?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></span></h2>
+            </div>
+            <div class="input-container">
+                <h2 class="h2password">password: <span id="pass"><?php echo htmlspecialchars($pass, ENT_QUOTES, 'UTF-8'); ?></span></h2>
+            </div>
+            <div class="op_btn "><input type="submit" value="ok">
+        </div>  
+    </div>
+
 
 </body>
 </html>
