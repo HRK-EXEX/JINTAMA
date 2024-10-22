@@ -16,7 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($count > 0) {
         $exist = 'このユーザー名は既に使用されています';
     } else {
-        header('Location: G1-3.php?name=' . urlencode($name) . '&pass=' . urlencode($pass));
+        session_start();
+         $_SESSION['user_name'] = $name; 
+         $_SESSION['password'] = $pass;  
+    header('Location: G1-3.php');
         exit;
     }
 }
@@ -40,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php if (!empty($exist)): ?>
                     <p style="color: red;"><?php echo htmlspecialchars($exist, ENT_QUOTES, 'UTF-8'); ?></p>
                 <?php endif; ?>
-                
+
                 <h2 class="h2name">
                     name <input type="text" name="user_name" class="textbox" required><br>
                 </h2>
