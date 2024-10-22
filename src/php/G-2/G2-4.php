@@ -29,7 +29,7 @@
                 </tr>
             </table>
             <div class="opration">
-                <button formaction="G2-2.php">戻る</button>
+                <button formaction="G2-2-input.php">戻る</button>
                 <input type="submit" class="submitbtn" vlaue="ルーム作成">
             </div>
         </div>
