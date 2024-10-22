@@ -30,7 +30,7 @@
             </table>
             <div class="opration">
                 <button formaction="G2-2-input.php">戻る</button>
-                <input type="submit" class="submitbtn" vlaue="ルーム作成">
+                <input type="submit" class="submitbtn" value="ルーム作成">
             </div>
         </div>
     </div>
