@@ -1,7 +1,7 @@
 let title;
 let info;
 
-var toRadian = function(degrees) {
+var toRadian = (degrees) => {
     return degrees * Math.PI / 180;
 };
 
