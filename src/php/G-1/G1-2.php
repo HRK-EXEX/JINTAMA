@@ -36,6 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="kuro">
             <form action="G1-2.php" method="post">
                 <button class="back dotgothic16-regular" type="button" onclick="location.href='G1-1.php'">back</button>
+
+                <?php if (!empty($exist)): ?>
+                    <p style="color: red;"><?php echo htmlspecialchars($exist, ENT_QUOTES, 'UTF-8'); ?></p>
+                <?php endif; ?>
+                
                 <h2 class="h2name">
                     name <input type="text" name="user_name" class="textbox" required><br>
                 </h2>
