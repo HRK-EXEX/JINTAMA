@@ -3,7 +3,7 @@ session_start(); // セッションを開始
 
 //unset($_SESSION['User']); // 既存のセッションデータを解除
 
-require '../db-local.php'; // データベース接続
+require '../db.php'; // データベース接続
 // var_dump($_POST)
 
 try {
