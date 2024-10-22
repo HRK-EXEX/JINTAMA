@@ -25,6 +25,7 @@ $pass = $_SESSION['password'] ?? '';
             <div class="input-container">
                 <h2 class="h2password">password: <span id="pass"><?php echo htmlspecialchars($pass, ENT_QUOTES, 'UTF-8'); ?></span></h2>
             </div>
+            <div class="op_btn "><input type="submit" value="ok">
         </div>  
     </div>
 
