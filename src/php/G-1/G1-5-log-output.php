@@ -7,9 +7,9 @@ require '../db.php'; // データベース接続
 // var_dump($_POST)
 
 try {
-    var_dump($_POST);
-    var_dump($_POST['user_name_form']);
-    var_dump($_POST['password_form']);
+    // var_dump($_POST);
+    // var_dump($_POST['user_name_form']);
+    // var_dump($_POST['password_form']);
 
     $user = $_POST['user_name_form'];
     $pass = $_POST['password_form'];
