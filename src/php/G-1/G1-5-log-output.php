@@ -16,21 +16,21 @@ try {
 
     // POSTデータが存在するか確認
 
-    echo "<hr>";
-    var_dump($_POST);
-    echo "<hr>";
-    echo "u_name / ";
-    echo $user;
-    echo "<hr>";
-    echo "u_name(empty) / ";
-    echo $user;
-    echo "<hr>";
-    echo "pass / ";
-    echo $pass;
-    echo "<hr>";
-    echo "pass(empty) / ";
-    echo empty($pass);
-    echo "<hr>";
+    // echo "<hr>";
+    // var_dump($_POST);
+    // echo "<hr>";
+    // echo "u_name / ";
+    // echo $user;
+    // echo "<hr>";
+    // echo "u_name(empty) / ";
+    // echo $user;
+    // echo "<hr>";
+    // echo "pass / ";
+    // echo $pass;
+    // echo "<hr>";
+    // echo "pass(empty) / ";
+    // echo empty($pass);
+    // echo "<hr>";
     
     if (strlen($user) > 0 && strlen($pass) > 0) {
         // SQL文をプリペアドステートメントで準備
