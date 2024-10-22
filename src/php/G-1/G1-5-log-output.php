@@ -49,7 +49,7 @@ try {
 
                 // 管理者の場合の処理
                 if ($row['user_name'] === 'kanri') {
-                    header('Location: /kansho/JINTAMA/src/php/G-1/G1-5-log-output.php');
+                    header('Location: /kansho/JINTAMA/src/php/G-4/G4-1.php');
                     exit();
                 } else {
                     header('Location: /src/html/G-2/G2-1_mainmenu.html');
