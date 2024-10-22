@@ -7,6 +7,7 @@ require '../db.php'; // データベース接続
 // var_dump($_POST)
 
 try {
+    
     $user = $_POST['user_name'];
     $pass = $_POST['password'];
 
