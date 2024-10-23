@@ -25,6 +25,14 @@ $pass = $_SESSION['password'] ?? '';
             <div class="input-container">
                 <h2 class="h2password">password: <span id="pass"><?php echo htmlspecialchars($pass, ENT_QUOTES, 'UTF-8'); ?></span></h2>
             </div>
+
+            <form action="G1-4.php" method="post">
+            <input type="hidden" name="user_name" value="<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>">
+            <input type="hidden" name="password" value="<?php echo htmlspecialchars($pass, ENT_QUOTES, 'UTF-8'); ?>">
+            <div class="op_btn">
+                <input type="submit" value="ok">
+            </div>
+        </form>
             <div class="op_btn "><input type="submit" value="ok">
         </div>  
     </div>
