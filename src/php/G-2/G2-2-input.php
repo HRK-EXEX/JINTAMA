@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
         $update_stm->execute();
 
         // 部屋に入った後、リダイレクトする
-        header('Location: G2-5.php?room_id=' . $room['room_id']);
+        header('Location: G2-5.php?roomid='.$room['room_id']);
         exit;
     } else {
         // 空いている部屋がない場合
