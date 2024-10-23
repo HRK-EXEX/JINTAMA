@@ -1,8 +1,51 @@
 <?php
 session_start();
+ob_start();
 $userid = $_SESSION['User']['user_id'];
 $username = $_SESSION['User']['user_name'];
-require '../db.php';?>
+require '../db.php';
+
+// ランダム入室処理：POSTリクエストで「random_enter」が送られたときのみ実行する
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
+    // まず空いている部屋をランダムで選ぶ
+    $stm = $db->prepare("
+        SELECT * FROM Room
+        WHERE room_user1 IS NULL 
+        OR room_user2 IS NULL 
+        OR room_user3 IS NULL 
+        OR room_user4 IS NULL
+        ORDER BY RAND() LIMIT 1
+    ");
+    $stm->execute();
+    $room = $stm->fetch(PDO::FETCH_ASSOC);
+
+    if ($room) {
+        // 選ばれた部屋にユーザーを割り当てる処理
+        if (is_null($room['room_user1'])) {
+            $update_stm = $db->prepare("UPDATE Room SET room_user1 = :userid WHERE room_id = :room_id");
+        } elseif (is_null($room['room_user2'])) {
+            $update_stm = $db->prepare("UPDATE Room SET room_user2 = :userid WHERE room_id = :room_id");
+        } elseif (is_null($room['room_user3'])) {
+            $update_stm = $db->prepare("UPDATE Room SET room_user3 = :userid WHERE room_id = :room_id");
+        } elseif (is_null($room['room_user4'])) {
+            $update_stm = $db->prepare("UPDATE Room SET room_user4 = :userid WHERE room_id = :room_id");
+        }
+
+        $update_stm->bindParam(':userid', $userid, PDO::PARAM_INT);
+        $update_stm->bindParam(':room_id', $room['room_id'], PDO::PARAM_INT);
+        $update_stm->execute();
+
+        // 部屋に入った後、リダイレクトする
+        header('Location: G2-5.php?room_id=' . $room['room_id']);
+        exit;
+    } else {
+        // 空いている部屋がない場合
+        $no_room_error = "空いている部屋がありません。";
+    }
+}
+
+ob_end_flush();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,45 +61,59 @@ require '../db.php';?>
         <div class="kuro">
             <table class="room_list dotgothic16-regular">
                 <?php
-        $stm = $db->prepare("select * from Room");
-        $stm->execute();
+                $stm = $db->prepare("SELECT * FROM Room");
+                $stm->execute();
 
-        foreach($stm as $room){
-            echo'<form action="/kansho/JINTAMA/src/php/G-2/G2-3.php" method="post">';
-            echo'<tr>';
-            echo'<input type="hidden" name="room_id" value="'.$room['room_id'].'">';
+                foreach($stm as $room){
+                    echo'<form action="/kansho/JINTAMA/src/php/G-2/G2-5.php" method="post">';
+                    echo'<tr>';
+                    echo'<input type="hidden" name="room_id" value="'.$room['room_id'].'">';
 
-            $room_count = 0;
+                    $room_count = 0;
 
-            // room_user1がNULLでない場合
-            if (is_null($room['room_user1'])) {
-          $room_count++;
-        }
+                    // room_user1がNULLでない場合
+                    if (is_null($room['room_user1'])) {
+                        $room_count++;
+                    }
 
-            // room_user2がNULLでない場合
-            if (is_null($room['room_user2'])) {
-            $room_count++;
-        }
-        // room_user3がNULLでない場合
-        if (is_null($room['room_user3'])) {
-            $room_count++;
-        }
-        // room_user4がNULLでない場合
-        if (is_null($room['room_user4'])) {
-            $room_count++;
-        }
+                    // room_user2がNULLでない場合
+                    if (is_null($room['room_user2'])) {
+                        $room_count++;
+                    }
 
-            echo '<td><button class="team_name" onclick="location.href=\'G2-3.html?id=1\'">'.$room['room_name'].'(あと'.$room_count.'人)</button></td>';
-            echo'</tr>';
-            echo'</form>';
-        }
-        ?>
+                    // room_user3がNULLでない場合
+                    if (is_null($room['room_user3'])) {
+                        $room_count++;
+                    }
+
+                    // room_user4がNULLでない場合
+                    if (is_null($room['room_user4'])) {
+                        $room_count++;
+                    }
+
+                    echo '<td><button class="team_name" type="submit">'.$room['room_name'].'(あと'.$room_count.'人)</button></td>';
+                    echo'</tr>';
+                    echo'</form>';
+                }
+                ?>
             </table>
             <div class="opration">
-                <button onclick="location.href='G2-1_mainmenu.html'">戻る</button>
-                <button onclick="location.href='G2-3.html?rnd=1'">ランダム入室</button>
+                <button onclick="location.href='G2-1.php'">戻る</button>
+
+                <!-- ランダム入室処理用のフォーム -->
+                <form method="POST">
+                    <button type="submit" name="random_enter">ランダム入室</button>
+                </form>
+
                 <button onclick="location.href='G2-4.php'">ルームを作成</button>
             </div>
+
+            <?php
+            // 空いている部屋がない場合のエラーメッセージを表示
+            if (isset($no_room_error)) {
+                echo "<p>$no_room_error</p>";
+            }
+            ?>
         </div>
     </div>
 </body>
