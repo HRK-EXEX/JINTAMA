@@ -33,8 +33,7 @@ $pass = $_SESSION['password'] ?? '';
                 <input type="submit" value="ok">
             </div>
         </form>
-            <div class="op_btn "><input type="submit" value="ok">
-        </div>  
+             </div>  
     </div>
 
 
