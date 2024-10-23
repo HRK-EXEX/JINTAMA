@@ -4,7 +4,7 @@ $roomid = $_GET['roomid'];
 echo $roomid;
 // $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4` FROM `Room` WHERE 1");
 //      $stm->execute([$teamname,$userid]);
-?>
+// ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

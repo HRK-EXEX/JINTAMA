@@ -20,5 +20,5 @@ $stm2->execute([$teamname]);
 foreach( $stm2 as $rm){
      $roomid = $rm['room_id'];
 }
-     header("Location:/kansho/JINTAMA/src/php/G-2/G2-5.php?roomid =".$roomid."");
+     header("Location:/kansho/JINTAMA/src/php/G-2/G2-5.php?roomid=".$roomid."");
 ?>
