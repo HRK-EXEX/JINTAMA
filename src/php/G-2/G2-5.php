@@ -2,9 +2,12 @@
 require '../db.php';
 $roomid = $_GET['roomid'];
 echo $roomid;
-// $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4` FROM `Room` WHERE 1");
-//      $stm->execute([$teamname,$userid]);
-// ?>
+$stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4` FROM `Room` WHERE room_id = ?");
+     $stm->execute([$roomid]);
+     foreach($rm as $stm){
+        $roomname = $rm['room_name'];
+     }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,7 @@ echo $roomid;
 <body>
     <div class="all">
         <div class="kuro">
-            <h2 dotgothic16-regular>チームA - メンバーを募集しています… (3/4)</h2>
+            <h2 dotgothic16-regular><?php echo$roomname ?> - メンバーを募集しています… (3/4)</h2>
             <table class="room_list dotgothic16-regular">
                 <tr><td><span class="member_name">メンバーα</span></td></tr>
                 <tr><td><span class="member_name">メンバーβ</span></td></tr>
