@@ -31,9 +31,8 @@ $pass = $_SESSION['password'] ?? '未入力';
             <form action="/kansho/JINTAMA/src/php/G-1/G1-4.php" method="post">
                 <input type="hidden" name="name" value="<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>">
                 <input type="hidden" name="pass" value="<?php echo htmlspecialchars($pass, ENT_QUOTES, 'UTF-8'); ?>">
-                <div class="op_btn">
-                    <input type="submit" value="ok">
-                </div>
+                
+                <input class="op_btn" type="submit" value="ok">
             </form>
         </div>  
     </div>
