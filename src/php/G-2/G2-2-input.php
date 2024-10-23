@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
     $room = $stm->fetch(PDO::FETCH_ASSOC);
 
     if ($room) {
+        $roomname = $room['room_name'];
         // 選ばれた部屋にユーザーを割り当てる処理
         if (is_null($room['room_user1'])) {
             $update_stm = $db->prepare("UPDATE Room SET room_user1 = :userid WHERE room_id = :room_id");
@@ -37,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
             $update_stm->execute();
 
             // 部屋に入った後、リダイレクトする
-            header('Location: G2-5.php?roomid=' . $room_id);
+            header('Location: G2-5.php?room_id=' . $room_id);
             exit;
         }
     } else {
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
         $update_stm->execute();
 
         // 部屋に入った後、リダイレクトする
-        header('Location: G2-5.php?roomid='.$room['room_id']);
+        header('Location: G2-5.php?room_id='.$room['room_id']);
         exit;
     } else {
         // 空いている部屋がない場合
