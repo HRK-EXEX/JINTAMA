@@ -22,7 +22,7 @@ require '../db.php';?>
         $stm->execute();
 
         foreach($stm as $room){
-            echo'<form action="/kansho/JINTAMA/src/php/G-4/G4-3.php" method="post">';
+            echo'<form action="/kansho/JINTAMA/src/php/G-2/G2-3.php" method="post">';
             echo'<tr>';
             echo'<input type="hidden" name="room_id" value="'.$room['room_id'].'">';
 
