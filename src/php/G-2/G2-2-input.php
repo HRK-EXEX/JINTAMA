@@ -18,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
 
     if ($room) {
         $roomname = $room['room_name'];
+        if (in_array($userid, [$room['room_user1'], $room['room_user2'], $room['room_user3'], $room['room_user4']])) {
+            $duplicate_error = "この部屋には既にあなたが参加しています。";
+        } else {
         // 選ばれた部屋にユーザーを割り当てる処理
         if (is_null($room['room_user1'])) {
             $update_stm = $db->prepare("UPDATE Room SET room_user1 = :userid WHERE room_id = :room_id");
@@ -40,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
             // 部屋に入った後、リダイレクトする
             header('Location: G2-5.php?room_id=' . $room_id);
             exit;
+        }
         }
     } else {
         // 部屋が見つからない場合のエラー処理
@@ -159,6 +163,13 @@ ob_end_flush();
             // 空いている部屋がない場合のエラーメッセージを表示
             if (isset($no_room_error)) {
                 echo "<p>$no_room_error</p>";
+            }
+            
+            if (isset($room_full_error)) {
+                echo "<p>$room_full_error</p>";
+            }
+            if (isset($duplicate_error)) {
+                echo "<p>$duplicate_error</p>";
             }
             ?>
         </div>
