@@ -78,7 +78,7 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
                     ?>
             </table>
             <div class="opration">
-                <button onclick="location.href='G2-4.php'">戻る</button>
+                <button onclick="location.href='G2-2-input.php'">戻る</button>
                 <button onclick="location.href='/src/html/G-3/G3-1.html?id=2'">スタート！</button>
             </div>
         </div>
