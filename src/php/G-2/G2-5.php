@@ -2,6 +2,7 @@
 require '../db.php';
 $room_id = $_GET['room_id'];
 $memcount = 0;
+$maxcount = 4;
 $username =[];
 echo $room_id;
 $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4` FROM `Room` WHERE room_id = ?");
@@ -9,40 +10,47 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
      foreach($stm as $rm){
         $roomname = $rm['room_name'];
         $user1 = $rm['room_user1'];
-        echo $user1;
-        // $memcount = 1;
-        // $ucheck =$db->prepare("SELECT `user_id`, `user_name`, FROM `User` WHERE user_id=?");
-        //     $ucheck->execute([$user1]);
-        //         foreach($ucheck as $un){
-        //             $username[1] = $un['user_name'];
-        //         }
-        // if(!is_null($rm['room_user2'])){
-        //     $user2 = $rm['room_user2'];
-        //     $memcount = 2;
-        //     $ucheck =$db->prepare("SELECT `user_id`, `user_name`, FROM `User` WHERE user_id=?");
-        //     $ucheck->execute([$user2]);
-        //         foreach($ucheck as $un){
-        //             $username[2] = $un['user_name'];
-        //         }
-        // }
-        // if(!is_null($rm['room_user3'])){
-        //     $user3 = $rm['room_user3'];
-        //     $memcount = 3;
-        //     $ucheck =$db->prepare("SELECT `user_id`, `user_name`, FROM `User` WHERE user_id=?");
-        //     $ucheck->execute([$user3]);
-        //         foreach($ucheck as $un){
-        //             $username[3] = $un['user_name'];
-        //         }
-        // }
-        // if(!is_null($rm['room_user4'])){
-        //     $user4 = $rm['room_user4'];
-        //     $memcount = 4;
-        //     $ucheck =$db->prepare("SELECT `user_id`, `user_name`, FROM `User` WHERE user_id=?");
-        //     $ucheck->execute([$user4]);
-        //         foreach($ucheck as $un){
-        //             $username[4] = $un['user_name'];
-        //         }
-        // }
+        $memcount = 1;
+        $ucheck = $db->prepare("SELECT * FROM `User` WHERE user_id = ?");
+            $ucheck->execute([$user1]);
+                foreach($ucheck as $un){
+                    $username[1] = $un['user_name'];
+                }
+        if(!is_null($rm['room_user2'])){
+            $user2 = $rm['room_user2'];
+            $memcount = 2;
+            $ucheck =$db->prepare("SELECT * FROM `User` WHERE user_id = ?");
+            $ucheck->execute([$user2]);
+                foreach($ucheck as $un){
+                    $username[2] = $un['user_name'];
+                }
+        }
+        if(!is_null($rm['room_user3'])){
+            $user3 = $rm['room_user3'];
+            if($user3 == 9999){
+                $maxcount = 2;
+            }else{
+                $memcount = 3;
+                $ucheck =$db->prepare("SELECT * FROM `User` WHERE user_id = ?");
+                $ucheck->execute([$user3]);
+                    foreach($ucheck as $un){
+                        $username[3] = $un['user_name'];
+                    }
+            }
+        }
+        if(!is_null($rm['room_user4'])){
+            $user4 = $rm['room_user4'];
+            if($user4 == 9999){
+                $maxcount = 3;
+            }else{
+                $memcount = 4;
+                $ucheck =$db->prepare("SELECT * FROM `User` WHERE user_id = ?");
+                $ucheck->execute([$user4]);
+                    foreach($ucheck as $un){
+                        $username[4] = $un['user_name'];
+                }
+            }
+        }
      }
 
 ?>
@@ -63,11 +71,10 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
 <body>
     <div class="all">
         <div class="kuro">
-            <h2 dotgothic16-regular><?php echo$roomname ?> - メンバーを募集しています… (3/4)</h2>
+            <h2 dotgothic16-regular><?php echo$roomname ?> - メンバーを募集しています… (<?php echo $memcount?>/<?php echo $maxcount?>)</h2>
             <table class="room_list dotgothic16-regular">
-                <?php for ($i=1; $i < $memcount; $i++) { 
-                    echo'<tr><td><span class="member_name">'.$username[i].'</span></td></tr>';
-                    
+                <?php for ($i=0; $i < $memcount; $i++) { 
+                    echo'<tr><td><span class="member_name">'.$username[$i+1].'</span></td></tr>';
                 }
                     ?>
             </table>
