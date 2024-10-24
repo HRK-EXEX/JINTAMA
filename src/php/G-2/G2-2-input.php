@@ -112,7 +112,7 @@ ob_end_flush();
                 $stm->execute();
 
                 foreach($stm as $room){
-                    echo'<form action="/kansho/JINTAMA/src/php/G-2/G2-5.php" method="post">';
+                    echo'<form action="/kansho/JINTAMA/src/php/G-2/G2-5.php" method="get">';
                     echo'<tr>';
                     echo'<input type="hidden" name="room_id" value="'.$room['room_id'].'">';
 
