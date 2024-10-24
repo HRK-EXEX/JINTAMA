@@ -62,7 +62,7 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
 <body>
     <div class="all">
         <div class="kuro">
-            <h2 dotgothic16-regular><?php echo$roomname ?> - メンバーを募集しています… (3/4)</h2>
+            <h2 dotgothic16-regular><?php echo$roomname ?> - メンバーを募集しています… (<?php echo $memcount?>/4)</h2>
             <table class="room_list dotgothic16-regular">
                 <?php for ($i=0; $i < $memcount; $i++) { 
                     echo'<tr><td><span class="member_name">'.$username[$i+1].'</span></td></tr>';
