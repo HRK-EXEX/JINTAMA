@@ -62,7 +62,6 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/black_window.css" />
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" /> 
     <link rel="stylesheet" href="/kansho/JINTAMA/src/css/G-2/G2-5.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
