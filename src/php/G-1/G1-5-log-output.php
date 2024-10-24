@@ -50,11 +50,11 @@ try {
                 ];
 
                 
-                if ($row['user_name'] === $user) {
-                    header('Location: /kansho/JINTAMA/src/php/G-4/G4-1.php');
+                if ($row['user_name'] === $user && $row['user_name'] != 'kanri') {
+                    header('Location: /kansho/JINTAMA/src/php/G-2/G2-2-input.php');
                     exit();
-                } else {
-                    header('Location: /src/html/G-2/G2-1_mainmenu.html');
+                } else if($row['user_name'] === $user && $row['user_name'] === 'kanri'){
+                    header('Location: /kansho/JINTAMA/src/php/G-4/G4-1.php');
                     exit();
                 }
             } else {
