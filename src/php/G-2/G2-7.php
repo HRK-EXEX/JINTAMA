@@ -3,11 +3,30 @@
 session_start(); 
 
 
-$newname = $_SESSION['user_name'] ?? '未入力';
+try {
 
-     $sql = "UPDATE user SET user_name =:new_name "
-     $stm->execute([$_POST['name'],$hashed_pass]);
+    $current_username = $_SESSION['user_name'];
 
+    
+    $new_username = $_POST['new_username'];
+
+    $sql = "UPDATE users SET user_name = :new_username WHERE user_name = :current_username";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':new_username', $new_username, PDO::PARAM_STR);
+    $stmt->bindParam(':current_username', $current_username, PDO::PARAM_STR);
+
+    
+    $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+        $_SESSION['user_name'] = $new_username;
+        echo "ユーザー名が更新されました。";
+    } else {
+        echo "更新に失敗しました。";
+    }
+} catch (PDOException $e) {
+    echo "エラー: " . $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
