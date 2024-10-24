@@ -2,7 +2,7 @@
 require '../db.php';
 $room_id = $_GET['room_id'];
 $memcount = 0;
-$maxcount = 0;
+$maxcount = 4;
 $username =[];
 echo $room_id;
 $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4` FROM `Room` WHERE room_id = ?");
