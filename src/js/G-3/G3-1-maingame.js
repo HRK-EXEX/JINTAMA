@@ -18,7 +18,7 @@ const tilemapNames = [
 
 var cursors
 
-var mapX = 0, mapY = 0, spd = 10;
+var mapX = 0, mapY = 0, scale = 4, spd = 10;
 
 var toRadian = (degrees) => {
     return degrees * Math.PI / 180;
@@ -79,10 +79,15 @@ class MainScene extends Phaser.Scene {
 
         fieldMap = this.add.group()
 
+        // 位置の初期化
+        scale = 4;
+        mapX = -8 * 30 * scale;
+        mapY = -8 * 72 * scale;
+
         // レイヤーを追加
         for(let i=0; i<layerNames.length; i++) {
             let tmpLayer = map.createLayer(i, relatedTileSet[i], mapX, mapY)
-            tmpLayer.setScale(4, 4)
+            tmpLayer.setScale(scale, scale)
             fieldMap.add(tmpLayer)
         }
 
@@ -91,8 +96,9 @@ class MainScene extends Phaser.Scene {
     }
 
     moveMapGroup(x, y) {
-        mapX += x
-        mapY += y
+        var sprint = cursors.shift.isDown ? 4 : 1
+        mapX += x * sprint
+        mapY += y * sprint
         fieldMap.setXY(mapX, mapY)
     }
 
