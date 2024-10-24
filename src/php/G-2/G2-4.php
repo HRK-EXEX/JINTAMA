@@ -18,7 +18,7 @@
             <?php echo'<input type="hidden" name="userid" value="'.$userid.'">';?>
         <div class="kuro">
             <h2 dotgothic16-regular>チーム名を入力してください。</h2>
-            <input class="team_name" name="teamname">
+            <input class="team_name" name="teamname"  required>
             <h2>参加人数の上限を入力してください。（４人まで）</h2><br>
             <table class="room_list">
                 <tr>

@@ -3,6 +3,7 @@ require '../db.php';
 
 $userid = $_POST['userid'];
 $teamname = $_POST['teamname'];
+$human = 4;
 $human = $_POST['humen'];
 
 if($human==4){
