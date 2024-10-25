@@ -1,5 +1,6 @@
 <?php session_start();
 require '../db.php';
+$error_id = 0;
 $userid = $_SESSION['User']['user_id'];
 $username = $_SESSION['User']['user_name'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
@@ -28,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
         } else {
             // 全員埋まっている場合
             $room_full_error = "この部屋は満員です。";
+            $error_id = 1;
+            header('Location: G2-5-error.php?error_id=' . $error_id);
+            exit;
         }
 
         if (isset($update_stm)) {
@@ -44,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
     } else {
         // 部屋が見つからない場合のエラー処理
         $room_error = "指定された部屋が見つかりません。";
+        $error_id = 2;
+            header('Location: G2-5-error.php?error_id=' . $error_id);
+            exit;
     }
 }
 
@@ -88,6 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
     } else {
         // 空いている部屋がない場合
         $no_room_error = "空いている部屋がありません。";
+        $error_id = 3;
+            header('Location: G2-5-error.php?error_id=' . $error_id);
+            exit;
     }
 }
 ?>
