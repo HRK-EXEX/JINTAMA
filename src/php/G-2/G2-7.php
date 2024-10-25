@@ -8,10 +8,10 @@ try {
     $current_username = $_SESSION['user_name'];
 
     
-    $new_username = $_POST['new_username'];
+    $new_username = $_POST['user_name'];
 
     $sql = "UPDATE User SET user_name = :new_username WHERE user_name = :current_username";
-    $stmt = $pdo->prepare($sql);
+    $stmt = $->dbrepare($sql);
     $stmt->bindParam(':new_username', $new_username, PDO::PARAM_STR);
     $stmt->bindParam(':current_username', $current_username, PDO::PARAM_STR);
 
