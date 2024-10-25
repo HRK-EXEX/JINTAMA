@@ -16,6 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
         $roomname = $room['room_name'];
         if (in_array($userid, [$room['room_user1'], $room['room_user2'], $room['room_user3'], $room['room_user4']])) {
             $duplicate_error = "この部屋には既にあなたが参加しています。";
+            $error_id = 4;
+            header('Location: G2-5-error.php?error_id=' . $error_id);
+            exit;
         } else {
         // 選ばれた部屋にユーザーを割り当てる処理
         if (is_null($room['room_user1'])) {
@@ -74,6 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
     $room = $stm->fetch(PDO::FETCH_ASSOC);
 
     if ($room) {
+        if (in_array($userid, [$room['room_user1'], $room['room_user2'], $room['room_user3'], $room['room_user4']])) {
+            $duplicate_error = "この部屋には既にあなたが参加しています。";
+            $error_id = 4;
+            header('Location: G2-5-error.php?error_id=' . $error_id);
+            exit;
+        } else {
         // 選ばれた部屋にユーザーを割り当てる処理
         if (is_null($room['room_user1'])) {
             $update_stm = $db->prepare("UPDATE Room SET room_user1 = :userid WHERE room_id = :room_id");
@@ -92,6 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
         // 部屋に入った後、リダイレクトする
         header('Location: G2-5.php?room_id='.$room['room_id']);
         exit;
+    }
     } else {
         // 空いている部屋がない場合
         $no_room_error = "空いている部屋がありません。";
@@ -99,5 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
             header('Location: G2-5-error.php?error_id=' . $error_id);
             exit;
     }
+
 }
 ?>
