@@ -151,8 +151,9 @@ echo $userid;
                 <button onclick="location.href='G2-1.php'">戻る</button>
 
                 <!-- ランダム入室処理用のフォーム -->
-                <form method="POST">
-                    <button type="submit" name="random_enter">ランダム入室</button>
+                <form method="POST" action="/kansho/JINTAMA/src/php/G-2/G2-5-insert.php">
+                    <input type="hidden" name="random_enter" value=1>
+                    <button type="submit" >ランダム入室</button>
                 </form>
 
                 <button onclick="location.href='G2-4.php'">ルームを作成</button>

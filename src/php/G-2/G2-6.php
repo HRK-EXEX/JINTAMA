@@ -1,0 +1,50 @@
+<?php session_start();
+require '../db.php';
+
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/black_window.css" /> 
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/G-2/G2-6.css" />
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" />  
+
+    <title>ランキング</title>
+</head>
+<body>
+    <div class="all">
+        <div class="kuro">
+            <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="Rankmodoru">戻る</a></button>
+            <h1 class="rankh1"><img src="/kansho/JINTAMA/img/crown.png" width="40" height="40">　High Score　<img src="/kansho/JINTAMA/img/crown.png" width="40" height="40"></h1>
+            <table boder="1">
+                <tr>
+                    <th>順位</th>
+                    <th></th>
+                    <th>名前</th>
+                    <th>ポイント</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="/kansho/JINTAMA/img/icon2.png" width="40" height="40"></td>
+                    <td>たくろうくん</td>
+                    <td>○○○○pt</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><img src="/kansho/JINTAMA/img/icon2.png" width="40" height="40"></td>
+                    <td>たくろうくん</td>
+                    <td>○○○○pt</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><img src="/kansho/JINTAMA/img/icon2.png" width="40" height="40"></td>
+                    <td>たくろうくん</td>
+                    <td>○○○○pt</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
