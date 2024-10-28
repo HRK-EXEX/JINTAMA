@@ -1,39 +1,10 @@
-<?php require '../db.php';?>
-<?php
-session_start(); 
 
-
-try {
-
-    $current_username = $_SESSION['user_name'];
-
-    
-    $new_username = $_POST['user_name'];
-
-    $sql = "UPDATE User SET user_name = :new_username WHERE user_name = :current_username";
-    $stmt = $->dbrepare($sql);
-    $stmt->bindParam(':new_username', $new_username, PDO::PARAM_STR);
-    $stmt->bindParam(':current_username', $current_username, PDO::PARAM_STR);
-
-    
-    $stmt->execute();
-
-    if ($stmt->rowCount() > 0) {
-        $_SESSION['user_name'] = $new_username;
-        echo "ユーザー名が更新されました。";
-    } else {
-        echo "更新に失敗しました。";
-    }
-} catch (PDOException $e) {
-    echo "エラー: " . $e->getMessage();
-}
-?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/kansho/JINTAMA/src/css/base/black_window.css" />
+    <link rel="stylesheet" href="/base/black_window.css" />
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/G-2/G2-7.css" />
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" /> 
     <title>設定画面</title>
@@ -53,7 +24,7 @@ try {
         </div>
         </form>
         
-    <form action="#">
+    <form action="G2-7_update.php">
         <button type="submit">
             保存
         </button>

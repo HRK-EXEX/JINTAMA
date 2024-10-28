@@ -78,8 +78,10 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
                     ?>
             </table>
             <div class="opration">
-                <button onclick="location.href='G2-5-update.php'">戻る</button>
-                <button onclick="location.href='/src/html/G-3/G3-1.html?id=2'">スタート！</button>
+            <form action="G2-5-update.php?room_id=<?php echo $room_id; ?>" method="post">
+                <button type="submit" name="back_button">戻る</button>
+            </form>
+            <button onclick="location.href='/src/html/G-3/G3-1.html?id=2'">スタート！</button>
             </div>
         </div>
     </div>
