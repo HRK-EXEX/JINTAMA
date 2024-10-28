@@ -1,9 +1,18 @@
 <?php
 session_start();
+ob_start();
 require '../db.php';
+
+if (!isset($_GET['room_id'])) {
+    // room_idがセットされていない場合、エラーメッセージを表示して終了
+    echo "エラー: room_idが指定されていません。";
+    exit;
+}
 
 $userid = $_SESSION['User']['user_id'];  // ユーザーIDをセッションから取得
 $room_id = $_GET['room_id'];             // GETパラメータからroom_idを取得
+
+
 
 try {
     // トランザクション開始
@@ -24,10 +33,12 @@ try {
 
     // コミットして変更を確定
     $db->commit();
-    echo "ルームユーザーが正常に更新されました";
+    header("Location: /kansho/JINTAMA/src/php/G-2/G2-2-input.php");
+    exit;
 } catch (Exception $e) {
     // エラー発生時はロールバック
     $db->rollBack();
     echo "エラー: " . $e->getMessage();
 }
+ob_end_flush();
 ?>
