@@ -1,8 +1,14 @@
 <?php
 session_start();
 $error_message = $_SESSION['error_message'] ?? '';
-unset($_SESSION['error_message']); // メッセージを表示したら消去
+unset($_SESSION['error_message']); 
 ?>
+<?php if (!empty($error_message)): ?>
+    <div class="error">
+        <?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?>
+    </div>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>

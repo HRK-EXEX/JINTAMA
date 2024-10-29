@@ -109,6 +109,7 @@ echo $userid;
 <body>
     <div class="all">
         <div class="kuro">
+            <div class="scroll">
             <table class="room_list dotgothic16-regular">
                 <?php
                 $stm = $db->prepare("SELECT * FROM Room");
@@ -147,6 +148,7 @@ echo $userid;
                 }
                 ?>
             </table>
+            </div>
             <div class="opration">
                 <button onclick="location.href='G2-1.php'">戻る</button>
 

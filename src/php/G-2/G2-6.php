@@ -52,6 +52,7 @@ $rank = 1;
                     <td>○○○○pt</td>
                 </tr> -->
             </table>
+            </div>
         </div>
     </div>
 </body>
