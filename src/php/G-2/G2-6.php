@@ -20,7 +20,9 @@ $count = 0;
         <div class="kuro">
             <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="Rankmodoru">戻る</a></button>
             <h1 class="rankh1"><img src="/kansho/JINTAMA/img/crown.png" width="40" height="40">　High Score　<img src="/kansho/JINTAMA/img/crown.png" width="40" height="40"></h1>
-            <table boder="1" class="scroll">
+            <div class="scroll">
+            <table boder="1">
+               
                 <?php
                     $stm = $db->prepare("SELECT * FROM `Eggs` ORDER BY score desc");
                     $stm->execute();
@@ -69,6 +71,7 @@ $count = 0;
                     <td>○○○○pt</td>
                 </tr> -->
             </table>
+            </div>
         </div>
     </div>
 </body>

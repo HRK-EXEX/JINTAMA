@@ -11,11 +11,14 @@ body{
     font-weight: 400;
     font-style: normal;
 }
+
 .scroll{
-        width: 300px;        /* 幅を設定 */
-        height: 200px;       /* 高さを設定 */
-        overflow-y: scroll;  /* 縦方向のスクロールを有効に */
-        border: 1px solid #ccc; /* 枠線を追加（オプション） */
+    /* 幅を設定 */
+width:70vw;
+overflow-x: hidden;
+height: 80vh;       /* 高さを設定 */
+overflow-y:scroll;  /* 縦方向のスクロールを有効に */
+
 }
 
 table {
