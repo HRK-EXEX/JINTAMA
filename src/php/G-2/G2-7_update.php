@@ -5,11 +5,13 @@ require '../db.php';
 
 $current_username = $_SESSION['user_name'] ?? '';
 
-    // var_dump($current_username);
-    // var_dump($new_username);
+error_log("現在のユーザー名: " . $current_username);
+
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new_username = $_POST['new_user_name'] ?? '';
+        error_log("新しいユーザー名: " . $new_username);
+
     
         if (!empty($new_username) && !empty($current_username)) {
             try {
