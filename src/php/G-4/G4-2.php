@@ -12,6 +12,7 @@
     <div class="all">
         <div class="kuro">
     <h1 class="adminh1">ユーザー削除</h1>
+    <div class="scroll">
     <table boder="1">
         <tr>
             <th>ID</th>
@@ -55,6 +56,7 @@
         ?>
         
     </table>
+    </div>
     </div>
     </div>
 </body>

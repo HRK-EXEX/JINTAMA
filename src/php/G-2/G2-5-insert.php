@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
             $update_stm->execute();
 
             // 部屋に入った後、リダイレクトする
-            header('Location: G2-5.php?room_id=' . $room_id);
+            header('Location: G2-5.php?room_id='. $room_id);
             exit;
         }
     }

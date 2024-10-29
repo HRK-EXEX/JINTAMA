@@ -18,7 +18,8 @@ $rank = 1;
         <div class="kuro">
             <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="Rankmodoru">戻る</a></button>
             <h1 class="rankh1"><img src="/kansho/JINTAMA/img/crown.png" width="40" height="40">　High Score　<img src="/kansho/JINTAMA/img/crown.png" width="40" height="40"></h1>
-            <table boder="1" class="scroll">
+            <div class="scroll">
+            <table boder="1">
                 <tr>
                     <th>順位</th>
                     <th></th>
@@ -52,6 +53,8 @@ $rank = 1;
                     <td>○○○○pt</td>
                 </tr> -->
             </table>
+                </div>
+            </div>
         </div>
     </div>
 </body>
