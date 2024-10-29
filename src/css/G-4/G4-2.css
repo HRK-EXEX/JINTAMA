@@ -66,3 +66,11 @@ th {
     font-weight: 400;
     font-style: normal;
 }
+.scroll{
+    /* 幅を設定 */
+width:70vw;
+overflow-x: hidden;
+height: 80vh;       /* 高さを設定 */
+overflow-y:scroll;  /* 縦方向のスクロールを有効に */
+
+}
