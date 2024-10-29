@@ -3,6 +3,20 @@ session_start();
 
 require '../db.php';
 $room_id = $_GET['room_id'];
+$stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
+$stm->execute([$room_id]);
+$score = $db->prepare('SELECT score FROM Eggs WHERE user_id = ?');
+$emptyArray = [];
+$emptyArray[] = [];
+
+for($i=1;$i<=4;$i++){
+$score->execute([$stm['room_user'.$i]]); 
+$emptyArray[$i-1][] = $stm['room_user'.$i];
+$emptyArray[$i-1][] = $score['score'];
+
+}
+
+echo $emptyArray;
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +34,9 @@ $room_id = $_GET['room_id'];
     </div>
     <div class="rankmain">
         <img src="/img/takuicon.png" alt="" class="icon">
-            <?php
-                $stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
-                $stm->execute([$room_id]);
+           
+
+
 
                 <div class="ranksabu">
                         <h1 style="font-size: 50px;">たくろう</h1>
@@ -31,7 +45,7 @@ $room_id = $_GET['room_id'];
                         <h2 style="font-size: 30px;">センス：100</h2>
                         <h2 style="font-size: 30px;">魅力:100</h2>
                 </div>
-            ?>
+         
     </div>
     <a href="/src/html/G-3/G3-3.html" class="nexttext"><h2>次へ→</h2></a>
 </body>

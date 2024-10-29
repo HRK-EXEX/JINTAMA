@@ -1,7 +1,35 @@
 <?php
 session_start();
+require '../db.php';
+$userid = $_SESSION['User']['user_id'];
 $error_message = $_SESSION['error_message'] ?? '';
+
+if(!isset($_SESSION['User'])){
+    $_SESSION['error_message']="ログインしていないため、このページにアクセスできません。";
+    header("Location:/kansho/JINTAMA/src/php/G-1/G1-5-log-input.php");
+    exit;
+}
+$userid=$_SESSION['User']['user_id'];
+
+$uname='';
+$stm = $db->prepare("SELECT * FROM `User` WHERE user_id = ?");
+$stm->execute([$userid]);
+$userData = $stm->fetch(PDO::FETCH_ASSOC);
+
+if ($userData) {
+    $uname = $userData['user_name']; 
+} else {
+    $error_message = "ユーザー情報が見つかりませんでした。";
+}
 unset($_SESSION['error_message']); 
+
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    include 'G2-7_ranking.php';
+}
+// foreach($stm as $un){
+//     $uname = $un['user_name'];
+// }
+
 ?>
 <?php if (!empty($error_message)): ?>
     <div class="error">
@@ -22,17 +50,19 @@ unset($_SESSION['error_message']);
 <body>
 
     <div class="kuro">
-        <a href="G2-7_update.php"><p class="delete">アカウント削除</p></a>
+        <a href="G2-7_delete.php"><p class="delete">アカウント削除</p></a>
     
         <form action="G2-7_update.php" method="POST">
         <div class="username">
-            ユーザー名 <input type="text" name="new_user_name" required><br>
+            ユーザー名 <input type="text" name="newname" <?php echo'value="'.$uname.'"'?> required><br>
         </div>
         <div class="ranking">
             ランキングへの情報送信<br>
-            <input type="radio" name="hozon" id="suru" class="radi" /><label for="suru">する？</label>
-            <input type="radio" name="hozon" id="sinai" class="radi" /><label for="sinai">しない？</label>
+            <input type="radio" name="hozon" id="suru" class="radi" value="1" checked/><label for="suru">する？</label>
+            <input type="radio" name="hozon" id="sinai" class="radi" value="0" /><label for="sinai">しない？</label>
         </div>
+        <input type="hidden" name="egg_id" value="1">
+        <input type="hidden" name="rank_num" value="1">
         <button type="submit">保存</button>
     </form>
 
