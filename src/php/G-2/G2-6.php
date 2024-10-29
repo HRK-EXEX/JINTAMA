@@ -19,15 +19,6 @@ $rank = 1;
             <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="Rankmodoru">戻る</a></button>
             <h1 class="rankh1"><img src="/kansho/JINTAMA/img/crown.png" width="40" height="40">　High Score　<img src="/kansho/JINTAMA/img/crown.png" width="40" height="40"></h1>
             <table boder="1" class="scroll">
-                <?php
-                    // $stm = $db->prepare("SELECT * FROM `Eggs` ORDER BY score desc");
-                    // $stm->execute();
-                    // foreach($stm as $rank){
-                    //     $count++;
-                    //     $ranking[]=$rank['score'];
-                    //     $userid[]=$rank['user_id'];
-                    // }
-                ?>
                 <tr>
                     <th>順位</th>
                     <th></th>
