@@ -1,11 +1,11 @@
 @font-face {
     font-family: "dot-regular";
-    src: url("/src/font/JF-Dot-MPlus12.ttf") format("truetype");
+    src: url("/kansho/JINTAMA/src/font/JF-Dot-MPlus12.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "dot-bold";
-    src: url("/src/font/JF-Dot-MPlus12B.ttf") format("truetype");
+    src: url("/kansho/JINTAMA/src/font/JF-Dot-MPlus12B.ttf") format("truetype");
 }
 
 * {
