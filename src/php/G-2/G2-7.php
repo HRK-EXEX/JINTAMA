@@ -13,7 +13,7 @@
 
     <div class="kuro">
         <a href="/src/html/G-2/G2-8.html"><p class="delete">アカウント削除</p></a>
-        <form action="G2-8">
+        <form action="G2-4.update.php">
             <div class="username">
                 ユーザー名 <input type="text"><br>
             </div>
