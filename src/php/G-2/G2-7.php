@@ -1,4 +1,8 @@
-
+<?php
+session_start();
+$error_message = $_SESSION['error_message'] ?? '';
+unset($_SESSION['error_message']); // メッセージを表示したら消去
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,22 +16,18 @@
 <body>
 
     <div class="kuro">
-        <a href="/src/html/G-2/G2-8.html"><p class="delete">アカウント削除</p></a>
-        <form action="G2-4.update.php">
-            <div class="username">
-                ユーザー名 <input type="text"><br>
-            </div>
-            <div class="ranking">
-                ランキングへの情報送信<br>
-            <input type="radio" name="hozon" id="suru" class="radi" /><label for="suru">する？</label>
-           <input type="radio" name="hozon" id="sinai" class="radi" /><label for="sinai">しない？</label>
+        <a href="G2-7_update.php"><p class="delete">アカウント削除</p></a>
+    
+        <form action="G2-7_update.php" method="POST">
+        <div class="username">
+            ユーザー名 <input type="text" name="new_user_name" required><br>
         </div>
-        </form>
-        
-    <form action="G2-7_update.php">
-        <button type="submit">
-            保存
-        </button>
+        <div class="ranking">
+            ランキングへの情報送信<br>
+            <input type="radio" name="hozon" id="suru" class="radi" /><label for="suru">する？</label>
+            <input type="radio" name="hozon" id="sinai" class="radi" /><label for="sinai">しない？</label>
+        </div>
+        <button type="submit">保存</button>
     </form>
 
             
