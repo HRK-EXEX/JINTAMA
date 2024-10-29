@@ -18,6 +18,12 @@ body {
     justify-content: center;
 }
 
+.scroll{      /* 幅を設定 */
+    height: 60vh;       /* 高さを設定 */
+    overflow:auto;  /* 縦方向のスクロールを有効に */
+    /* border: 1px solid #ccc; */
+}
+
 .room_list {
     margin: 0px auto 50px auto;
 }
