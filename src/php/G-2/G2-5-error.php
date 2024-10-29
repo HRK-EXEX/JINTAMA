@@ -25,7 +25,9 @@ $error_id = $_GET['error_id'];
             echo'この部屋には既にあなたが参加しています。';
         }
     ?></h1>
+    <button  onclick="location.href='/kansho/JINTAMA/src/php/G-2/G2-2-input.php'">戻る</button>
     </div>
+    
     </div>
 </body>
 </html>
