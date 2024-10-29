@@ -3,7 +3,7 @@ session_start();
 require '../db.php';
 $userid = $_SESSION['User']['user_id'];
 
-$roomcheck=$db->prepare("SELECT COUNT(*) FROM Room WHERE room_user1 = ?");
+$roomcheck=$db->prepare("SELECT COUNT(*) FROM Room WHERE room_user1 = ? OR room_user2 = ? OR room_user3 = ? OR room_user4=?");
 $roomcheck->execute([$userid]);
 $count=$roomcheck->fetchColumn();
 
