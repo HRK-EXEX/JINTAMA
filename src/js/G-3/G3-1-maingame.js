@@ -16,15 +16,27 @@ const tilemapNames = [
 ]
 
 // 変数名定義
+
+const DEFAULT_HEIGHT = screen.height // any height you want
+const DEFAULT_WIDTH = screen.width
+
 var cursor;
 var key;
 var debugInfo;
 var currentPlayer;
+const firstX = 9, firstY = 8.5, tileSize = 16;
+var scale = 3, spd = 10;
+var mapX = firstX * tileSize * scale;
+var mapY = firstY * tileSize * scale;
+var tileOffsetX = 0;
+var tileOffsetY = 0;
+
+var dialog;
+var player = [null,null,null,null];
 
 // 関数名定義
 var input;
 var loopMap;
-var mapX = 0, mapY = 0, scale = 3, spd = 10;
 
 var toRadian = (degrees) => {
     return degrees * Math.PI / 180;
@@ -33,6 +45,7 @@ var toRadian = (degrees) => {
 class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
+        
     }
 
     preload() {
@@ -45,9 +58,15 @@ class MainScene extends Phaser.Scene {
         this.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png')
         this.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png')
         this.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png')
-        this.load.image('loopTile', '/map/loops/forestLoop.png')
+        this.load.image('loopTile', '/map/loops/forestLoop+16Y.png')
         
         this.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json')
+    }
+
+    moveMapGroup(x, y) {
+        mapX += x; mapY += y
+        fieldMap.setXY(mapX, mapY)
+        loopMap.setTilePosition(-(mapX + tileOffsetX) / scale, -(mapY + tileOffsetY) / scale)
     }
 
     create() {
@@ -73,26 +92,20 @@ class MainScene extends Phaser.Scene {
         ]
 
         fieldMap = this.add.group()
-
-        // 位置の初期化
-        mapX = -8 * 23.4 * scale;
-        mapY = -8 * 69 * scale;
-        
-        // 画面中央のX座標
-        const worldX = this.game.config.width;
-        // 画面中央のY座標
-        const worldY = this.game.config.height;
         
         // 背景リピート
-        loopMap = this.add.tileSprite(4 * scale, 4 * scale, worldX, worldY, "loopTile");
+        loopMap = this.add.tileSprite(0, 0, this.game.config.width / 2, this.game.config.height / 2, "loopTile");
         loopMap.setScale(scale, scale);
+        loopMap.setOrigin(0, 0);
 
         // レイヤーを追加
         for(let i=0; i<layerNames.length; i++) {
-            let tmpLayer = map.createLayer(i, relatedTileSet[i], mapX, mapY)
+            let tmpLayer = map.createLayer(i, relatedTileSet[i], 0, 0)
             tmpLayer.setScale(scale, scale)
             fieldMap.add(tmpLayer)
         }
+
+        this.moveMapGroup(0, 0);
 
         // 入力のハンドリング
         cursor = this.input.keyboard.createCursorKeys()
@@ -119,13 +132,10 @@ class MainScene extends Phaser.Scene {
             return Number(button);
         }
 
-        debugInfo = this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' })
-    }
+        fieldMap.setAlpha(1);
+        loopMap.alpha = 1;
 
-    moveMapGroup(x, y) {
-        mapX += x; mapY += y
-        fieldMap.setXY(mapX, mapY)
-        loopMap.setTilePosition(-mapX / scale - 4 * scale, -mapY / scale - 8 * scale)
+        debugInfo = this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' })
     }
 
     update() {
@@ -135,7 +145,7 @@ class MainScene extends Phaser.Scene {
         //              (cursors.up.isDown ? 4 : 0) + 
         //              (cursors.down.isDown ? 8 : 0);
         var button = input();
-        var sprint = cursor.shift.isDown ? 4 : 1;
+        var sprint = ((button & 1<<4)>0) ? 4 : 1;
         if ((button & 1<<0)>0) this.moveMapGroup(spd * sprint, 0);
         if ((button & 1<<1)>0) this.moveMapGroup(-spd * sprint, 0);
         if ((button & 1<<2)>0) this.moveMapGroup(0, spd * sprint);
@@ -145,10 +155,6 @@ class MainScene extends Phaser.Scene {
         // console.log(button);
     }
 }
-
-const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth)
-const DEFAULT_HEIGHT = 720 // any height you want
-const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT
 
 //ゲームに関する設定
 const CONFIG = {
