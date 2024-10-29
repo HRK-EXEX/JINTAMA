@@ -2,7 +2,7 @@
 session_start();
 
 require '../db.php';
-
+$room_id = $_GET['room_id'];
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +21,8 @@ require '../db.php';
     <div class="rankmain">
         <img src="/img/takuicon.png" alt="" class="icon">
             <?php
-                $stm = $db->prepare('SELECT * FROM Eggs WHERE user_name = ?');
-                $stm->execute([$_POST['name'],$hashed_pass]);
+                $stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
+                $stm->execute([$room_id]);
 
                 <div class="ranksabu">
                         <h1 style="font-size: 50px;">たくろう</h1>
