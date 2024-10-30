@@ -5,24 +5,37 @@ require '../db.php';
 $room_id = $_GET['room_id'];
 $stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
 $stm->execute([$room_id]);
+$roomData = $stm->fetch(PDO::FETCH_ASSOC); 
+
 $score = $db->prepare('SELECT score FROM Eggs WHERE user_id = ?');
 $emptyArray = [];
-$emptyArray[] = [];
 
-for($i=1;$i<=4;$i++){
-$score->execute([$stm['room_user'.$i]]); 
-$emptyArray[$i-1][] = $stm['room_user'.$i];
-$emptyArray[$i-1][] = $score['score'];
+for ($i = 1; $i <= 4; $i++) {
+    $userId = $roomData['room_user' . $i];
+    $score->execute([$userId]);
+    $userScore = $score->fetch(PDO::FETCH_ASSOC);
 
+    if ($userScore !== false) {
+        $emptyArray[$i - 1][0] = $userId;
+        $emptyArray[$i - 1][1] = $userScore['score'];
+    } else {
+        $emptyArray[$i - 1][0] = $userId;
+        $emptyArray[$i - 1][1] = null;
+    }
 }
 
-echo $emptyArray;
+// スコアを基準に降順に並べ替え
+usort($emptyArray, function ($a, $b) {
+    return $b[1] <=> $a[1];
+});
+
+echo json_encode($emptyArray);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">a
     <link rel="stylesheet" href="/src/css/G-3/G3-2.css">
     <link rel="stylesheet" href="/src/css/base/dot_font.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     </form>
 
             
-        <button type="submit" onclick="location.href='/src/html/G-2/G2-1_mainmenu.html'">
+        <button type="submit" onclick="location.href='/kansho/JINTAMA/src/php/G-2/G2-1.php'">
             戻る
         </button>
 
