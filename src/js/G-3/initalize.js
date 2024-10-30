@@ -17,21 +17,16 @@ const tilemapNames = [
 
 // 変数名定義
 
-const DEFAULT_HEIGHT = screen.height // any height you want
-const DEFAULT_WIDTH = screen.width
-
 var cursor;
 var key;
 var debugInfo;
-var currentPlayer;
-const firstX = 9, firstY = 8.5, tileSize = 16;
+const firstX = 16.5, firstY = 30, tileSize = 16;
 var scale = 3, spd = 10;
-var mapX = firstX * tileSize * scale;
-var mapY = firstY * tileSize * scale;
+var mapX = -firstX * tileSize * scale;
+var mapY = -firstY * tileSize * scale;
 var tileOffsetX = 0;
 var tileOffsetY = 0;
 
-var dialog;
 var player = [null,null,null,null];
 
 // 関数名定義
@@ -42,7 +37,7 @@ var toRadian = (degrees) => {
     return degrees * Math.PI / 180;
 }
 
-class MainScene extends Phaser.Scene {
+export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
         
@@ -147,24 +142,11 @@ class MainScene extends Phaser.Scene {
         var button = input();
         var sprint = ((button & 1<<4)>0) ? 4 : 1;
         if ((button & 1<<0)>0) this.moveMapGroup(spd * sprint, 0);
-        if ((button & 1<<1)>0) this.moveMapGroup(-spd * sprint, 0);
-        if ((button & 1<<2)>0) this.moveMapGroup(0, spd * sprint);
-        if ((button & 1<<3)>0) this.moveMapGroup(0, -spd * sprint);
+        if ((button & 1<<1)>0) this.moveMapGroup(-spd * sprint,0);
+        if ((button & 1<<2)>0) this.moveMapGroup(0,spd * sprint );
+        if ((button & 1<<3)>0) this.moveMapGroup(0,-spd * sprint);
 
         debugInfo.setText(button)
         // console.log(button);
     }
 }
-
-//ゲームに関する設定
-const CONFIG = {
-    mode: Phaser.Scale.FIT,
-    type: Phaser.AUTO,
-    width: DEFAULT_WIDTH,
-    height: DEFAULT_HEIGHT,
-    scene: MainScene,
-    antialias: false
-}
-
-//ゲームオブジェクトの生成
-const GAME = new Phaser.Game(CONFIG)
