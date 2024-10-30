@@ -121,6 +121,7 @@ echo $userid;
                     echo'<input type="hidden" name="room_id" value="'.$room['room_id'].'">';
 
                     $room_count = 0;
+                    $a = 0;
 
                     // room_user1がNULLでない場合
                     if (is_null($room['room_user1'])) {
@@ -140,6 +141,30 @@ echo $userid;
                     // room_user4がNULLでない場合
                     if (is_null($room['room_user4'])) {
                         $room_count++;
+                    }
+                    
+
+                    if (is_null($room['room_user1'])||$room['room_user1']==9999||$room['room_user1']==9998) {
+                        $a++;
+                    }
+
+                   
+                    if (is_null($room['room_user2'])||$room['room_user2']==9999||$room['room_user2']==9998) {
+                        $a++;
+                    }
+
+                    
+                    if (is_null($room['room_user3'])||$room['room_user3']==9999||$room['room_user3']==9998) {
+                        $a++;
+                    }
+
+                    
+                    if (is_null($room['room_user4'])||$room['room_user4']==9999||$room['room_user4']==9998) {
+                        $a++;
+                    }
+                    if($a==4){
+                        $stm1 = $db->prepare("DELETE FROM `Room` WHERE room_id = ?");
+                        $stm1->execute([$room['room_id']]);
                     }
 
                     echo '<td><button class="team_name" type="submit">'.$room['room_name'].'(あと'.$room_count.'人)</button></td>';
