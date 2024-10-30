@@ -13,7 +13,7 @@ $stm = $db->prepare("INSERT INTO `Room`(`room_id`, `room_name`, `room_user1`, `r
     $stm = $db->prepare("INSERT INTO `Room`(`room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4`) VALUES (null,?,?,null,null,'9999')");
      $stm->execute([$teamname,$userid]);
 }else{
-    $stm = $db->prepare("INSERT INTO `Room`(`room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4`) VALUES (null,?,?,null,'9999','9999')");
+    $stm = $db->prepare("INSERT INTO `Room`(`room_id`, `room_name`, `room_user1`, `room_user2`, `room_user3`, `room_user4`) VALUES (null,?,?,null,'9999','9998')");
      $stm->execute([$teamname,$userid]);
 }
 $stm2 = $db->prepare("SELECT `room_id` FROM `Room` WHERE room_name = ?");
