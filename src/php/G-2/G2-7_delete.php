@@ -23,17 +23,25 @@ $roomCheck4 = $db->prepare("SELECT COUNT(*) FROM Room WHERE room_user4 = ?");
 $roomCheck4->execute([$userid]);
 $count4 = $roomCheck4->fetchColumn();
 
-if ($count1 > 0 || $count2 > 0 || $count3 > 0){
+if ($count1 > 0 || $count2 > 0 || $count3 > 0 || $count4>0){
     $_SESSION['error_message']="このユーザーはルームに参加しているため、アカウントを削除できません。";
     header("Location:/kansho/JINTAMA/src/php/G-2/G2-7.php");
     exit;
 }else{
     try{
-        $stm = $db->prepare("DELETE FROM `User` WHERE user_id=?");
-        $stm->execute([$userid]);
+        $db->beginTransaction();
+        $eggsDelete = $db->prepare("DELETE FROM Eggs WHERE user_id = ?");
+        $eggsDelete->execute([$userid]);
+
+       
+        $userDelete = $db->prepare("DELETE FROM `User` WHERE user_id = ?");
+        $userDelete->execute([$userid]);
+        $db->commit();
+       
 header("Location: /kansho/JINTAMA/src/php/G-2/G2-1.php");
         exit;
     }catch(PDOException $e){
+        $db->rollBack();
         $_SESSION['error_message']="エラー：".$e->getMessage();
         header("Location: /kansho/JINTAMA/src/php/G-2/G2-7.php");
         exit;
