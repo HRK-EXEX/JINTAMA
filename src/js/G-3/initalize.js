@@ -1,19 +1,7 @@
+import DialogSelectBox from './dialogSelectBox.js';
+import Player from './player.js';
+
 let fieldMap;
-
-const layerNames = [
-    'ground',
-    'background',
-    'route',
-    'jump',
-    'grid',
-    'foreground',
-]
-
-const tilemapNames = [
-    'baseTile',
-    'dirtTile1',
-    'dirtTile2',
-]
 
 // 変数名定義
 
@@ -38,6 +26,8 @@ var toRadian = (degrees) => {
 }
 
 export class MainScene extends Phaser.Scene {
+    dialog;
+
     constructor() {
         super("mainScene");
         
@@ -68,14 +58,6 @@ export class MainScene extends Phaser.Scene {
         // マップを追加
         const map = this.make.tilemap({ key: 'map' })
 
-        // キーは、Tiled JSONをロードしたときにpreload()関数で与えられた名前と一致する必要がある。
-        // また、タイルセット画像をPhaserマップオブジェクトに追加する必要がある。
-        const baseTileSet = map.addTilesetImage(tilemapNames[0], 'baseTileImage')
-        const dirtTileSet1 = map.addTilesetImage(tilemapNames[1], 'dirtTileImage')
-        const dirtTileSet2 = map.addTilesetImage(tilemapNames[2], 'dirtTileImage2')
-        // addTilesetImageの第一引数は、Tiledで使ったタイルセットの名前。
-        // 第二引数は、preload()関数で読み込んだ画像のキーである。
-
         // 関連するタイルセットの名前を定義
         const relatedTileSet = [
             baseTileSet,
@@ -92,15 +74,6 @@ export class MainScene extends Phaser.Scene {
         loopMap = this.add.tileSprite(0, 0, this.game.config.width / 2, this.game.config.height / 2, "loopTile");
         loopMap.setScale(scale, scale);
         loopMap.setOrigin(0, 0);
-
-        // レイヤーを追加
-        for(let i=0; i<layerNames.length; i++) {
-            let tmpLayer = map.createLayer(i, relatedTileSet[i], 0, 0)
-            tmpLayer.setScale(scale, scale)
-            fieldMap.add(tmpLayer)
-        }
-
-        this.moveMapGroup(0, 0);
 
         // 入力のハンドリング
         cursor = this.input.keyboard.createCursorKeys()
@@ -127,8 +100,56 @@ export class MainScene extends Phaser.Scene {
             return Number(button);
         }
 
-        fieldMap.setAlpha(1);
-        loopMap.alpha = 1;
+        // fieldMap.setAlpha(1);
+        // loopMap.alpha = 1;
+        
+        // ダイアログの作成
+        this.dialog = new DialogSelectBox(this, 50, 50, 700, 300);
+        
+        // クリックでダイアログを表示
+        // this.input.on('pointerdown', () => {
+        //     this.dialog.showDialog('これは通常のダイアログメッセージです。');
+        // });
+        this.input.on('pointerdown', () => {
+            this.dialog.showSelectDialog(
+                '何をしますか？',
+                [
+                    '➤ 進む（ルーレットで決める）',
+                    '➤ アイテムを使う',
+                    '➤ マップ'
+                ],
+                (choice) => {
+                    switch(choice) {
+                        case 0:
+                            this.dialog.showDialog('戦闘を開始します！');
+                            break;
+                        case 1:
+                            this.dialog.showSelectDialog(
+                                'どのアイテムを使用しますか？',
+                                ['➤ ポーション', '➤ エーテル', '➤ 戻る'],
+                                (itemChoice) => {
+                                    if (itemChoice === 2) {
+                                        this.dialog.hideDialog();
+                                    } else {
+                                        this.dialog.showDialog('アイテムを使用しました！');
+                                    }
+                                }
+                            );
+                            break;
+                        case 2:
+                            this.dialog.showDialog('逃げ出した！');
+                            break;
+                    }
+                }
+            );
+        });
+
+        // ESCキーでダイアログを非表示
+        this.input.keyboard.on('keydown-ESC', () => {
+            this.dialog.hideDialog();
+        });
+
+        this.player1 = new Player(this, this.game.config.width / 2, this.game.config.height / 2, 'Player 1');
 
         debugInfo = this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' })
     }
@@ -141,10 +162,12 @@ export class MainScene extends Phaser.Scene {
         //              (cursors.down.isDown ? 8 : 0);
         var button = input();
         var sprint = ((button & 1<<4)>0) ? 4 : 1;
-        if ((button & 1<<0)>0) this.moveMapGroup(spd * sprint, 0);
-        if ((button & 1<<1)>0) this.moveMapGroup(-spd * sprint,0);
-        if ((button & 1<<2)>0) this.moveMapGroup(0,spd * sprint );
-        if ((button & 1<<3)>0) this.moveMapGroup(0,-spd * sprint);
+        if (!this.dialog.visible) {
+            if ((button & 1<<0)>0) this.moveMapGroup(spd * sprint, 0);
+            if ((button & 1<<1)>0) this.moveMapGroup(-spd * sprint,0);
+            if ((button & 1<<2)>0) this.moveMapGroup(0,spd * sprint );
+            if ((button & 1<<3)>0) this.moveMapGroup(0,-spd * sprint);
+        }
 
         debugInfo.setText(button)
         // console.log(button);
