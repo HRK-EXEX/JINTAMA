@@ -3,39 +3,55 @@ session_start();
 
 require '../db.php';
 $room_id = $_GET['room_id'];
+
+
 $stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
 $stm->execute([$room_id]);
-$roomData = $stm->fetch(PDO::FETCH_ASSOC); 
+$roomData = $stm->fetch(PDO::FETCH_ASSOC);
 
-$score = $db->prepare('SELECT score FROM Eggs WHERE user_id = ?');
+if ($roomData === false) {
+    echo "指定されたroom_idの部屋が見つかりません";
+    exit;
+}
+
+$stm2 = $db->prepare('SELECT COUNT(*) as count FROM Eggs');
+$stm2->execute();
+$rowcount = $stm2->fetch(PDO::FETCH_ASSOC)['count'];
+
+$count = 0;
 $emptyArray = [];
 
 for ($i = 1; $i <= 4; $i++) {
     $userId = $roomData['room_user' . $i];
-    $score->execute([$userId]);
-    $userScore = $score->fetch(PDO::FETCH_ASSOC);
-
-    if ($userScore !== false) {
-        $emptyArray[$i - 1][0] = $userId;
-        $emptyArray[$i - 1][1] = $userScore['score'];
-    } else {
-        $emptyArray[$i - 1][0] = $userId;
-        $emptyArray[$i - 1][1] = null;
+    if ($userId !== null && $userId !== 9999 && $userId !== 9998) {
+        $count++;
     }
 }
 
-// スコアを基準に降順に並べ替え
-usort($emptyArray, function ($a, $b) {
-    return $b[1] <=> $a[1];
-});
+$rowcount = $rowcount - $count;
 
-echo json_encode($emptyArray);
+$stm3 = $db->prepare('SELECT *  FROM Eggs limit ? offset ?');
+$stm3->execute([$count,$rowcount]);
+$EggData = $stm2->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+// echo json_encode($emptyArray);
+// usort($emptyArray, function ($a, $b) {
+//     return $b[1] <=> $a[1];
+// });
+
+// $score->execute([$userId]);
+// $userScore = $score->fetch(PDO::FETCH_ASSOC);
+// $score = $db->prepare('SELECT score FROM Eggs WHERE user_id = ?');
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">a
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="/src/css/G-3/G3-2.css">
     <link rel="stylesheet" href="/src/css/base/dot_font.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
