@@ -1,5 +1,6 @@
 <?php session_start();
     $userid= $_SESSION['User']['user_id'];
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,7 @@
                 </tr>
             </table>
             <div class="opration">
-                <button formaction="G2-2-input.php">戻る</button>
+                <a class="modoru" href="G2-2-input.php" >戻る</a>
                 <input type="submit" class="submitbtn" value="ルーム作成">
             </div>
         </div>

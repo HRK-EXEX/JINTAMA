@@ -24,7 +24,7 @@
             <form action="G2-8_delete.php" method="POST">
                 <button type="submit" class="delete">削除</button>
             </form>
-            <button onclick="location.href='/kansho/JINTAMA/src/php/G-2/G2-7.php'">戻る</button>
+            <button class="back" onclick="location.href='/kansho/JINTAMA/src/php/G-2/G2-7.php'">戻る</button>
        </div>
     </div>
 </body>

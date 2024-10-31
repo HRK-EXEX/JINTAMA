@@ -18,39 +18,51 @@ body{
     margin-top: 20vh;
     font-size: 40px;
 }
-button{
+.command {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+}
+
+button, .delete {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
     border-color: #fff;
     border-style: solid;
-    background-color: #00000000;
+    background-color: transparent;
     color: #FFF;
-    margin: 3vw 2vw;
     text-align: center;
     font-size: clamp(20px, 3vw, 40px);
+    padding: 10px 20px;
 }
-.delete{
+
+.delete {
     border-color: #ff0000;
-    border-style: solid;
-    background-color: #00000000;
     color: #ff0000;
-    margin: 3vw 2vw;
-    text-align: center;
-    font-size: clamp(20px, 3vw, 40px);
+    position:relative;
+    right:7vw;
 }
-button:hover {
+
+.back{
+    position:relative;
+    left:7vw;
+}
+
+button:hover, .delete:hover {
     cursor: pointer;
     background-color: #00000080;
 }
 
-button:active {
-    cursor: pointer;
+button:active, .delete:active {
     background-color: #ffffff80;
     color: #000;
 }
 
 .error-message {
-    background-color: #f8d7da; /* 薄い赤色の背景 */
-    color: #721c24;            /* 濃い赤色の文字 */
-    border: 1px solid #f5c6cb; /* 薄い赤色のボーダー */
+    background-color: #f8d7da; 
+    color: #721c24;            
+    border: 1px solid #f5c6cb; 
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
