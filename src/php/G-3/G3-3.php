@@ -57,6 +57,6 @@ require '../db.php';
                 </div>
             </div>
             </div>
-            <a href="/src/html/G-2/G2-1_mainmenu.html" class="mainnext">メインメニューへ</a>
+            <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="mainnext">メインメニューへ</a>
 </body>
 </html>
