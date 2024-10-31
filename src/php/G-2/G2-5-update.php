@@ -1,6 +1,7 @@
 <?php
 session_start();
 ob_start();
+$_SESSION['User']['room_id']=null;
 require '../db.php';
 
 if (!isset($_GET['room_id'])) {
