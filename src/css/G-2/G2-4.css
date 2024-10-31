@@ -49,6 +49,17 @@ button {
     transition: 0.1s;
     font-size: min(1.5vw, 24px);
 }
+.modoru {
+    border-color: #fff;
+    border-style: solid;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 1vw 3vw;
+    text-align: center;
+    transition: 0.1s;
+    font-size: min(1.5vw, 24px);
+    text-decoration:none;
+}
 .submitbtn{
     border-color: #fff;
     border-style: solid;
