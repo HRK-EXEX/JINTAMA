@@ -1,139 +1,88 @@
+import { 
+    layerNames, tilemapNames, tileSize,
+    firstX, firstY, scale, spd,
+    tileOffsetX, tileOffsetY,
+    updateFieldMap, updateLoopMap
+} from './initialize.js';
+
 export class GameBoard {
-    // Objects
-    baseTileSet;
-    dirtTileSet1;
-    dirtTileSet2;
-    relatedTileSet;
-
-    // Defined Names
-    layerNames;
-    tilemapNames;
-
-    // Other things
-    loopTileSprite;
-    layers;
-
-    constructor(scene, mapKey) {
+    constructor(scene) {
         this.scene = scene;
+        this.fieldMap = null;
+        this.loopMap = null;
+        this.map = null;
         
-        /* ---------- PRELOADING AREA ---------- */
+        this.mapX = -firstX * tileSize * scale;
+        this.mapY = -firstY * tileSize * scale;
+    }
 
-        /*                              
-            ╔════════════════════════╗
-            ║ ２つ目のマップをロード ║
-            ╚════════════════════════╝
-                                        */
+    preloadAssets() {
+        this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
+        this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
+        this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
+        this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
+        this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+    }
 
-        this.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png')
-        this.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png')
-        this.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png')
-        this.load.image('loopTile', '/map/loops/forestLoop+16Y.png')
+    createMap() {
+        // マップを追加
+        this.map = this.scene.make.tilemap({ key: 'map' });
 
-        /* ---------- PRELOADING AREA ---------- */
+        const baseTileSet = this.map.addTilesetImage(tilemapNames[0], 'baseTileImage');
+        const dirtTileSet1 = this.map.addTilesetImage(tilemapNames[1], 'dirtTileImage');
+        const dirtTileSet2 = this.map.addTilesetImage(tilemapNames[2], 'dirtTileImage2');
+
+        const relatedTileSet = [
+            baseTileSet,
+            baseTileSet,
+            dirtTileSet1,
+            dirtTileSet2,
+            baseTileSet,
+            baseTileSet,
+        ];
+
+        // fieldMapの作成
+        this.fieldMap = this.scene.add.group();
+        updateFieldMap(this.fieldMap);
         
-        this.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json')
-    
-        // マップの作成
-        this.map = scene.make.tilemap({ key: mapKey });
+        // 背景リピートの作成
+        this.loopMap = this.scene.add.tileSprite(
+            0, 0, 
+            this.scene.game.config.width / 2, 
+            this.scene.game.config.height / 2, 
+            "loopTile"
+        );
+        updateLoopMap(this.loopMap);
         
-        // タイルセットの追加（'tiles'はTiledでのタイルセット名）
-        // キーは、Tiled JSONをロードしたときにpreload()関数で与えられた名前と一致する必要がある。
-        // また、タイルセット画像をPhaserマップオブジェクトに追加する必要がある。
-        this.baseTileSet = this.map.addTilesetImage(tilemapNames[0], 'baseTileImage')
-        this.dirtTileSet1 = this.map.addTilesetImage(tilemapNames[1], 'dirtTileImage')
-        this.dirtTileSet2 = this.map.addTilesetImage(tilemapNames[2], 'dirtTileImage2')
-        // addTilesetImageの第一引数は、Tiledで使ったタイルセットの名前。
-        // 第二引数は、preload()関数で読み込んだ画像のキーである。
-        
-        // 関連するタイルセットの名前を定義
-        switch (mapKey) {
-            case "map2":
-                this.layerNames = [
-                    'ground',
-                    'background',
-                    'route',
-                    'jump',
-                    'grid',
-                    'foreground',
-                ];
-
-                this.tilemapNames = [
-                    'baseTile',
-                    'dirtTile1',
-                    'dirtTile2',
-                ];
-
-                this.relatedTileSet = [
-                    baseTileSet,
-                    baseTileSet,
-                    dirtTileSet1,
-                    dirtTileSet2,
-                    baseTileSet,
-                    baseTileSet,
-                ];
-
-                // 背景リピート
-                this.loopTileSprite = scene.add.tileSprite(0, 0, this.game.config.width / 2, this.game.config.height / 2, "loopTile");
-                this.loopTileSprite.setScale(scale, scale);
-                this.loopTileSprite.setOrigin(0, 0);
-                break;
-        }
-
-        this.layers = scene.add.group();
+        this.loopMap.setScale(scale, scale);
+        this.loopMap.setOrigin(0, 0);
 
         // レイヤーを追加
-        for(let i=0; i<layerNames.length; i++) {
-            let tmpLayer = map.createLayer(i, relatedTileSet[i], 0, 0)
-            tmpLayer.setScale(scale, scale)
-            fieldMap.add(tmpLayer)
+        for(let i = 0; i < layerNames.length; i++) {
+            let tmpLayer = this.map.createLayer(i, relatedTileSet[i], 0, 0);
+            tmpLayer.setScale(scale, scale);
+            this.fieldMap.add(tmpLayer);
         }
 
+        this.fieldMap.setAlpha(1);
+        this.loopMap.alpha = 1;
+        
         this.moveMapGroup(0, 0);
+    }
+
+    moveMapGroup(x, y) {
+        this.mapX += x;
+        this.mapY += y;
+        this.fieldMap.setXY(this.mapX, this.mapY);
+        this.loopMap.setTilePosition(-(this.mapX + tileOffsetX) / scale, -(this.mapY + tileOffsetY) / scale);
+    }
+
+    update(button) {
+        const sprint = ((button & 1<<4) > 0) ? 4 : 1;
         
-        // マスの位置を格納する配列
-        this.cells = [];
-        this.initializeCells();
-        
-        // イベントタイプの定義
-        this.eventTypes = {
-            0: 'normal',    // 通常マス
-            1: 'work',      // 仕事マス
-            2: 'rest',      // 休憩マス
-            3: 'social',    // 社交マス
-            4: 'study'      // 勉強マス
-        };
-    }
-    
-    initializeCells() {
-        // pathレイヤーからマスの位置を取得
-        this.pathLayer.forEachTile(tile => {
-            if (tile.index !== -1) {  // -1は空のタイル
-                this.cells.push({
-                    x: tile.pixelX + tile.width / 2,
-                    y: tile.pixelY + tile.height / 2,
-                    index: this.cells.length,
-                    type: this.getEventTypeFromTile(tile)
-                });
-            }
-        });
-    }
-    
-    getEventTypeFromTile(tile) {
-        // タイルのプロパティからイベントタイプを取得
-        // Tiledでカスタムプロパティ 'eventType' を設定している前提
-        const eventType = tile.properties?.eventType ?? 0;
-        return this.eventTypes[eventType] || 'normal';
-    }
-    
-    getCellPosition(index) {
-        return this.cells[index] || null;
-    }
-    
-    getNextCellIndices(currentIndex) {
-        // 現在のマスから移動可能なマスのインデックスを返す
-        // この例では単純に次のマスを返していますが、
-        // 実際のゲームでは分岐なども考慮する必要があります
-        const nextIndex = currentIndex + 1;
-        return nextIndex < this.cells.length ? [nextIndex] : [];
+        if ((button & 1<<0) > 0) this.moveMapGroup(spd * sprint, 0);
+        if ((button & 1<<1) > 0) this.moveMapGroup(-spd * sprint, 0);
+        if ((button & 1<<2) > 0) this.moveMapGroup(0, spd * sprint);
+        if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
 }
