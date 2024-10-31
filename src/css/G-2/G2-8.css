@@ -46,3 +46,36 @@ button:active {
     background-color: #ffffff80;
     color: #000;
 }
+
+.error-message {
+    background-color: #f8d7da; /* 薄い赤色の背景 */
+    color: #721c24;            /* 濃い赤色の文字 */
+    border: 1px solid #f5c6cb; /* 薄い赤色のボーダー */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+@font-face {
+    font-family: "dot-regular";
+    src: url("/kansho/JINTAMA/src/font/JF-Dot-MPlus12.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "dot-bold";
+    src: url("/kansho/JINTAMA/src/font/JF-Dot-MPlus12B.ttf") format("truetype");
+}
+
+* {
+    font-family: "dot-regular", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3 {
+    font-family: "dot-bold", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
