@@ -1,6 +1,7 @@
 <?php session_start();
 require '../db.php';
 $room_id = $_GET['room_id'];
+echo $_SESSION['User']['room_id'];
 $memcount = 0;
 $maxcount = 4;
 $username =[];
