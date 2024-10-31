@@ -4,7 +4,7 @@ session_start();
 require '../db.php';
 $room_id = $_GET['room_id'];
 
-
+// Roomデータを取得
 $stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
 $stm->execute([$room_id]);
 $roomData = $stm->fetch(PDO::FETCH_ASSOC);
@@ -14,13 +14,14 @@ if ($roomData === false) {
     exit;
 }
 
+// Eggsテーブルのレコード数を取得
 $stm2 = $db->prepare('SELECT COUNT(*) as count FROM Eggs');
 $stm2->execute();
 $rowcount = $stm2->fetch(PDO::FETCH_ASSOC)['count'];
 
 $count = 0;
-$emptyArray = [];
 
+// ユーザー数の確認
 for ($i = 1; $i <= 4; $i++) {
     $userId = $roomData['room_user' . $i];
     if ($userId !== null && $userId !== 9999 && $userId !== 9998) {
@@ -28,11 +29,20 @@ for ($i = 1; $i <= 4; $i++) {
     }
 }
 
-$rowcount = $rowcount - $count;
+// レコード数からユーザー数を引く
+$offset = $rowcount - $count;
 
-$stm3 = $db->prepare('SELECT *  FROM Eggs limit ? offset ?');
-$stm3->execute([$count,$rowcount]);
-$EggData = $stm2->fetch(PDO::FETCH_ASSOC);
+// `LIMIT` と `OFFSET` を利用したEggsデータの取得
+$sql = 'SELECT * FROM Eggs LIMIT ' . $count . ' OFFSET ' . $offset;
+$stm3 = $db->prepare($sql);
+$stm3->execute();
+$EggData = $stm3->fetchAll(PDO::FETCH_ASSOC); 
+
+$emptyArray = [];
+
+for($i = 1; $i <= $count;$i++){
+
+}
 
 
 
@@ -52,17 +62,17 @@ $EggData = $stm2->fetch(PDO::FETCH_ASSOC);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/src/css/G-3/G3-2.css">
-    <link rel="stylesheet" href="/src/css/base/dot_font.css">
+    <link rel="stylesheet" href="/kansho/JINTAMA/src/css/G-3/G3-2.css">
+    <link rel="stylesheet" href="/kansho/JINTAMA/src/css/base/dot_font.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>リザルト画面</title>
 </head>
 <body>
     <div class="rank">
-        <h1><img src="/img/crown.png" alt=""><span class="ranktext">１位</span><img src="/img/crown.png" alt=""></h1>
+        <h1><img src="/kansho/JINTAMA/img/crown.png" alt=""><span class="ranktext">１位</span><img src="/kansho/JINTAMA/img/crown.png" alt=""></h1>
     </div>
     <div class="rankmain">
-        <img src="/img/takuicon.png" alt="" class="icon">
+        <img src="/kansho/JINTAMA/img/takuicon.png" alt="" class="icon">
            
 
 
