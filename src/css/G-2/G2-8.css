@@ -53,9 +53,9 @@ button:active, .delete:active {
 }
 
 .error-message {
-    background-color: #f8d7da; /* 薄い赤色の背景 */
-    color: #721c24;            /* 濃い赤色の文字 */
-    border: 1px solid #f5c6cb; /* 薄い赤色のボーダー */
+    background-color: #f8d7da; 
+    color: #721c24;            
+    border: 1px solid #f5c6cb; 
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
