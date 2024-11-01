@@ -2,47 +2,48 @@
 session_start();
 
 require '../db.php';
-$room_id = $_GET['room_id'];
 
-// Roomデータを取得
-$stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
-$stm->execute([$room_id]);
-$roomData = $stm->fetch(PDO::FETCH_ASSOC);
+// $room_id = $_GET['room_id'];
 
-if ($roomData === false) {
-    echo "指定されたroom_idの部屋が見つかりません";
-    exit;
-}
+// // Roomデータを取得
+// $stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
+// $stm->execute([$room_id]);
+// $roomData = $stm->fetch(PDO::FETCH_ASSOC);
 
-// Eggsテーブルのレコード数を取得
-$stm2 = $db->prepare('SELECT COUNT(*) as count FROM Eggs');
-$stm2->execute();
-$rowcount = $stm2->fetch(PDO::FETCH_ASSOC)['count'];
+// if ($roomData === false) {
+//     echo "指定されたroom_idの部屋が見つかりません";
+//     exit;
+// }
 
-$count = 0;
+// // Eggsテーブルのレコード数を取得
+// $stm2 = $db->prepare('SELECT COUNT(*) as count FROM Eggs');
+// $stm2->execute();
+// $rowcount = $stm2->fetch(PDO::FETCH_ASSOC)['count'];
 
-// ユーザー数の確認
-for ($i = 1; $i <= 4; $i++) {
-    $userId = $roomData['room_user' . $i];
-    if ($userId !== null && $userId !== 9999 && $userId !== 9998) {
-        $count++;
-    }
-}
+// $count = 0;
 
-// レコード数からユーザー数を引く
-$offset = $rowcount - $count;
+// // ユーザー数の確認
+// for ($i = 1; $i <= 4; $i++) {
+//     $userId = $roomData['room_user' . $i];
+//     if ($userId !== null && $userId !== 9999 && $userId !== 9998) {
+//         $count++;
+//     }
+// }
 
-// `LIMIT` と `OFFSET` を利用したEggsデータの取得
-$sql = 'SELECT * FROM Eggs LIMIT ' . $count . ' OFFSET ' . $offset;
-$stm3 = $db->prepare($sql);
-$stm3->execute();
-$EggData = $stm3->fetchAll(PDO::FETCH_ASSOC); 
+// // レコード数からユーザー数を引く
+// $offset = $rowcount - $count;
 
-$emptyArray = [];
+// // `LIMIT` と `OFFSET` を利用したEggsデータの取得
+// $sql = 'SELECT * FROM Eggs LIMIT ' . $count . ' OFFSET ' . $offset;
+// $stm3 = $db->prepare($sql);
+// $stm3->execute();
+// $EggData = $stm3->fetchAll(PDO::FETCH_ASSOC); 
 
-for($i = 1; $i <= $count;$i++){
+// $emptyArray = [];
 
-}
+// for($i = 1; $i <= $count;$i++){
+
+// }
 
 
 
@@ -78,14 +79,14 @@ for($i = 1; $i <= $count;$i++){
 
 
                 <div class="ranksabu">
-                        <h1 style="font-size: 50px;">たくろう</h1>
-                        <h2 style="font-size: 30px;">幸福度：100</h2>
-                        <h2 style="font-size: 30px;">体力：100</h2>
-                        <h2 style="font-size: 30px;">センス：100</h2>
-                        <h2 style="font-size: 30px;">魅力:100</h2>
+                        <h1 style="font-size: 50px;"><?php echo $_SESSION['User1']['name'] ?></h1>
+                        <h2 style="font-size: 30px;">幸福度：<?php echo $_SESSION['User1']['score'] ?></h2>
+                        <h2 style="font-size: 30px;">体力：<?php echo $_SESSION['User1']['hp'] ?></h2>
+                        <h2 style="font-size: 30px;">センス：<?php echo $_SESSION['User1']['sence'] ?></h2>
+                        <h2 style="font-size: 30px;">魅力:<?php echo $_SESSION['User1']['charm'] ?></h2>
                 </div>
          
     </div>
-    <a href="/src/html/G-3/G3-3.html" class="nexttext"><h2>次へ→</h2></a>
+    <a href="/kansho/JINTAMA/src/html/G-3/G3-3.php" class="nexttext"><h2>次へ→</h2></a>
 </body>
 </html>
