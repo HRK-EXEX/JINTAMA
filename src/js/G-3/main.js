@@ -1,4 +1,4 @@
-import { MainScene } from "./initalize.js";
+import { MainScene } from "./mainScene.js";
 
 const DEFAULT_WIDTH = 800
 const DEFAULT_HEIGHT = 800 // any height you want
