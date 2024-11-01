@@ -45,7 +45,7 @@ if ($count1 > 0 || $count2 > 0 || $count3 > 0 || $count4 > 0) {
 
         $db->commit();
 
-        header("Location: /kansho/JINTAMA/src/php/G-2/G2-1.php");
+        header("Location: /kansho/JINTAMA/src/php/G-1/G1-2.php");
         exit;
     } catch (PDOException $e) {
         $db->rollBack();
