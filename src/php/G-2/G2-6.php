@@ -27,12 +27,12 @@ $rank = 1;
                     <th>ポイント</th>
                 </tr>
                 <?php
-                 $stm2 = $db->prepare("SELECT score,u.user_id,u.user_name FROM Eggs e Join User u ON e.user_id = u.user_id ORDER BY e.score desc");
+                 $stm2 = $db->prepare("SELECT score,img,u.user_id,u.user_name FROM Eggs e Join User u ON e.user_id = u.user_id ORDER BY e.score desc");
                  $stm2-> execute();
                  foreach ($stm2 as $un) {
                     echo'<tr>';
                     echo'<td>'.$rank.'</td>';
-                    echo'<td><img src="/kansho/JINTAMA/img/icon2.png" width="40" height="40"></td>';
+                    echo'<td><img src="/kansho/JINTAMA/img/'.$un['img'].'" width="80" height="80" style="image-rendering: pixelated;"></td>';
                     echo'<td>'.$un['user_name'].'</td>';
                     echo'<td>'.$un['score'].'pt</td>';
                     echo'</tr>';
