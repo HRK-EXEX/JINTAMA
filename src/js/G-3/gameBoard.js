@@ -6,22 +6,44 @@ import {
 } from './initialize.js';
 
 export class GameBoard {
-    constructor(scene) {
+    constructor(scene, mapID) {
         this.scene = scene;
         this.fieldMap = null;
         this.loopMap = null;
         this.map = null;
+        this.mapID = mapID;
         
         this.mapX = -firstX * tileSize * scale;
         this.mapY = -firstY * tileSize * scale;
     }
 
     preloadAssets() {
-        this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
-        this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
-        this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
-        this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
-        this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+        switch (this.mapID) {
+            case 0:
+                this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
+                this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
+                // this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
+                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+                break;
+
+            case 1:
+                this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
+                this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
+                this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
+                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+                break;
+
+            case 2:
+                this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
+                this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
+                // this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
+                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+                break;
+        }
+        
     }
 
     createMap() {
@@ -46,13 +68,15 @@ export class GameBoard {
         updateFieldMap(this.fieldMap);
         
         // 背景リピートの作成
-        this.loopMap = this.scene.add.tileSprite(
-            0, 0, 
-            this.scene.game.config.width / 2, 
-            this.scene.game.config.height / 2, 
-            "loopTile"
-        );
-        updateLoopMap(this.loopMap);
+        if (this.mapID === 1) {
+            this.loopMap = this.scene.add.tileSprite(
+                0, 0, 
+                this.scene.game.config.width / 2, 
+                this.scene.game.config.height / 2, 
+                "loopTile"
+            );
+            updateLoopMap(this.loopMap);
+        }
         
         this.loopMap.setScale(scale, scale);
         this.loopMap.setOrigin(0, 0);

@@ -1,5 +1,5 @@
 // DialogSelectBox.js
-export default class DialogSelectBox extends Phaser.GameObjects.Container {
+export class DialogSelectBox extends Phaser.GameObjects.Container {
     constructor(scene, x, y, width, height) {
         super(scene, x, y);
         
@@ -81,10 +81,18 @@ export default class DialogSelectBox extends Phaser.GameObjects.Container {
     }
     
     // 下位互換性のある基本的なダイアログ表示
-    showDialog(message) {
+    showDialog(message, callback = null) {
         this.resetState();
         this.text.setText(message);
         this.setVisible(true);
+
+        if (callback === null) {
+            callback = () => {
+                this.hideDialog();
+            };
+        }
+
+        this.callback = callback;
     }
     
     // 選択肢付きダイアログ表示（新機能）
