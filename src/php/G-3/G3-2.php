@@ -3,6 +3,29 @@ session_start();
 $user_id=$_SESSION['User']['user_id']
 $room_id=$_SESSION['User']['room_id']
 require '../db.php';
+$sessionData = [
+    'User1' => $_SESSION['User1'],
+    'User2' => $_SESSION['User2'],
+    'User3' => $_SESSION['User3'],
+    'User4' => $_SESSION['User4'],
+];
+
+// 'score' を基準に降順でソート
+usort($sessionData, function ($a, $b) {
+    return $b['score'] - $a['score'];
+});
+
+// ソート後のセッションに戻す
+foreach ($sessionData as $index => $userData) {
+    $_SESSION['User' . ($index + 1)] = $userData;
+}
+
+// // ソート結果を表示（必要に応じて）
+// foreach ($_SESSION as $key => $userData) {
+//     echo $key . ': ';
+//     print_r($userData);
+//     echo '<br>';
+// }
 
 // $room_id = $_GET['room_id'];
 
@@ -128,6 +151,6 @@ require '../db.php';
                 </div>
          
     </div>
-    <a href="/kansho/JINTAMA/src/html/G-3/G3-3.php" class="nexttext"><h2>次へ→</h2></a>
+    <a href="/kansho/JINTAMA/src/php/G-3/G3-3.php" class="nexttext"><h2>次へ→</h2></a>
 </body>
 </html>

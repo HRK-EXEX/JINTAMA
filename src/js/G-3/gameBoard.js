@@ -1,9 +1,15 @@
-import { 
-    layerNames, tilemapNames, tileSize,
-    firstX, firstY, scale, spd,
-    tileOffsetX, tileOffsetY,
+import {
     updateFieldMap, updateLoopMap
 } from './initialize.js';
+
+// マップ設定の定数と変数
+const firstX = 16.5;
+const firstY = 30;
+const tileSize = 16;
+const scale = 3;
+const spd = 10;
+let tileOffsetX = 0;
+let tileOffsetY = 0;
 
 export class GameBoard {
     constructor(scene, mapID) {
@@ -20,11 +26,52 @@ export class GameBoard {
     preloadAssets() {
         switch (this.mapID) {
             case 0:
-                this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
-                this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
-                // this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+                this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('hana', '/map/mapchip2/MapChip/hana.png');
+                this.scene.load.image('koori2', '/map/mapchip2/MapChip/koori2.png');
+                this.scene.load.image('kusa-tuti2', '/map/mapchip2/MapChip/kusa1-kusa2.png');
+                this.scene.load.image('road', '/map/mapchip2/MapChip/tuti3.png');
+                this.scene.load.image('tuti2', '/map/mapchip2/MapChip/tuti2.png');
+                this.scene.load.image('tuti3', '/map/mapchip2/MapChip/tuti3.png');
+                this.scene.load.image('water1', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
+                this.scene.load.image('water2', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
+                this.scene.load.image('waterfall', '/map/mapchip2/MapChip/tuti2.png');
+                
+                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/first-map.json');
+                
+                this.layerNames = [
+                    'ground',
+                    'road',
+                    'houseWall',
+                    'snow',
+                    'houseDecoration',
+                    'showCliffDark',
+                    'showCliff',
+                    'ice',
+                    'icePoddle',
+                    'fieldPlants',
+                    'cliff',
+                    'cliffLedge',
+                    'newContinent',
+                    'newContinentRoad',
+                    'newContinentRoad2',
+                    'bridge',
+                    'water3',
+                    'theOneYouPutOnTheWater'
+                ];
+                
+                this.tilemapNames = [
+                    'base',
+                    'hana',
+                    'koori2',
+                    'kusa-tuti2',
+                    'road',
+                    'tuti2',
+                    'tuti3',
+                    'water1',
+                    'water2',
+                    'waterfall',
+                ];
                 break;
 
             case 1:
@@ -33,6 +80,22 @@ export class GameBoard {
                 this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
                 this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
                 this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+
+                this.layerNames = [
+                    'ground',
+                    'background',
+                    'route',
+                    'jump',
+                    'grid',
+                    'foreground',
+                ];
+                
+                this.tilemapNames = [
+                    'baseTile',
+                    'dirtTile1',
+                    'dirtTile2',
+                ];
+
                 break;
 
             case 2:
@@ -41,6 +104,23 @@ export class GameBoard {
                 this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
                 // this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
                 this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+                
+                this.layerNames = [
+                    'ground',
+                    'background',
+                    'route',
+                    'jump',
+                    'grid',
+                    'foreground',
+                ];
+
+                
+                this.tilemapNames = [
+                    'baseTile',
+                    'dirtTile1',
+                    'dirtTile2',
+                ];
+
                 break;
         }
         
@@ -50,18 +130,78 @@ export class GameBoard {
         // マップを追加
         this.map = this.scene.make.tilemap({ key: 'map' });
 
-        const baseTileSet = this.map.addTilesetImage(tilemapNames[0], 'baseTileImage');
-        const dirtTileSet1 = this.map.addTilesetImage(tilemapNames[1], 'dirtTileImage');
-        const dirtTileSet2 = this.map.addTilesetImage(tilemapNames[2], 'dirtTileImage2');
+        let tiles = [];
 
-        const relatedTileSet = [
-            baseTileSet,
-            baseTileSet,
-            dirtTileSet1,
-            dirtTileSet2,
-            baseTileSet,
-            baseTileSet,
-        ];
+        // It's for 2nd map
+        let baseTileSet;
+        let tutiTileSet1;
+        let tutiTileSet2;
+
+        let relatedTileSet;
+
+        switch (this.mapID) {
+            case 0:
+                for (let i=0; i<this.tilemapNames; i++) {
+                    tiles.push(this.map.addTilesetImage(this.tilemapNames[i], this.tilemapNames[i]));
+                }
+
+                /*
+
+                'ground',
+                'road',
+                'houseWall',
+                'snow',
+                'houseDecoration',
+                'showCliffDark',
+                'showCliff',
+                'ice',
+                'icePoddle',
+                'fieldPlants',
+                'cliff',
+                'cliffLedge',
+                'newContinent',
+                'newContinentRoad',
+                'newContinentRoad2',
+                'bridge',
+                'water3',
+                'theOneYouPutOnTheWater'
+                
+                'base',
+                'hana',
+                'koori2',
+                'kusa-tuti2',
+                'road',
+                'tuti2',
+                'tuti3',
+                'water1',
+                'water2',
+                'waterfall',
+
+                */
+
+                relatedTileSet = [
+                    tiles[0],
+                    baseTileSet,
+                    tutiTileSet1,
+                    tutiTileSet2,
+                    baseTileSet,
+                    baseTileSet,
+                ];
+
+            case 1:
+                baseTileSet = this.map.addTilesetImage(this.tilemapNames[0], 'baseTileImage');
+                tutiTileSet1 = this.map.addTilesetImage(this.tilemapNames[1], 'dirtTileImage');
+                tutiTileSet2 = this.map.addTilesetImage(this.tilemapNames[2], 'dirtTileImage2');
+
+                relatedTileSet = [
+                    baseTileSet,
+                    baseTileSet,
+                    tutiTileSet1,
+                    tutiTileSet2,
+                    baseTileSet,
+                    baseTileSet,
+                ];
+        }
 
         // fieldMapの作成
         this.fieldMap = this.scene.add.group();
@@ -76,20 +216,21 @@ export class GameBoard {
                 "loopTile"
             );
             updateLoopMap(this.loopMap);
+
+            this.loopMap.setScale(scale, scale);
+            this.loopMap.setOrigin(0, 0);
+            this.loopMap.alpha = 1; // it's for debug
         }
-        
-        this.loopMap.setScale(scale, scale);
-        this.loopMap.setOrigin(0, 0);
+        if (this.loopMap === null) console.log("there is no looping map");
 
         // レイヤーを追加
-        for(let i = 0; i < layerNames.length; i++) {
+        for(let i = 0; i < this.layerNames.length; i++) {
             let tmpLayer = this.map.createLayer(i, relatedTileSet[i], 0, 0);
             tmpLayer.setScale(scale, scale);
             this.fieldMap.add(tmpLayer);
         }
 
         this.fieldMap.setAlpha(1);
-        this.loopMap.alpha = 1;
         
         this.moveMapGroup(0, 0);
     }
@@ -98,7 +239,9 @@ export class GameBoard {
         this.mapX += x;
         this.mapY += y;
         this.fieldMap.setXY(this.mapX, this.mapY);
-        this.loopMap.setTilePosition(-(this.mapX + tileOffsetX) / scale, -(this.mapY + tileOffsetY) / scale);
+        if (this.loopMap !== null) {
+            this.loopMap.setTilePosition(-(this.mapX + tileOffsetX) / scale, -(this.mapY + tileOffsetY) / scale);
+        }
     }
 
     update(button) {
