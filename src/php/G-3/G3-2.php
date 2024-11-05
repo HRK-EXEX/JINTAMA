@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+$user_id=$_SESSION['User']['user_id']
+$room_id=$_SESSION['User']['room_id']
 require '../db.php';
 
 // $room_id = $_GET['room_id'];
@@ -43,9 +44,49 @@ require '../db.php';
 
 // for($i = 1; $i <= $count;$i++){
 
+// $room_id = $_GET['room_id'];
+
+// Roomデータを取得
+// $stm = $db->prepare('SELECT * FROM Room WHERE room_id = ?');
+// $stm->execute([$room_id]);
+// $roomData = $stm->fetch(PDO::FETCH_ASSOC);
+
+// if ($roomData === false) {
+//     echo "指定されたroom_idの部屋が見つかりません";
+//     exit;
 // }
 
+// // Eggsテーブルのレコード数を取得
+// $stm2 = $db->prepare('SELECT COUNT(*) as count FROM Eggs');
+// $stm2->execute();
+// $rowcount = $stm2->fetch(PDO::FETCH_ASSOC)['count'];
 
+// $count = 0;
+
+// // ユーザー数の確認
+// for ($i = 1; $i <= 4; $i++) {
+//     $userId = $roomData['room_user' . $i];
+//     if ($userId !== null && $userId !== 9999 && $userId !== 9998) {
+//         $count++;
+//     }
+// }
+
+// // レコード数からユーザー数を引く
+// $offset = $rowcount - $count;
+
+// // `LIMIT` と `OFFSET` を利用したEggsデータの取得
+// $sql = 'SELECT * FROM Eggs LIMIT ' . $count . ' OFFSET ' . $offset;
+// $stm3 = $db->prepare($sql);
+// $stm3->execute();
+// $EggData = $stm3->fetchAll(PDO::FETCH_ASSOC); 
+
+// $emptyArray = [];
+
+// for($i = 1; $i <= $count;$i++){
+
+// }
+
+3
 
 
 // echo json_encode($emptyArray);
