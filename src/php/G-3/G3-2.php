@@ -2,6 +2,20 @@
 session_start();
 
 require '../db.php';
+// セッションデータを一時配列に格納
+$sessionData = $_SESSION;
+
+// 'score' を基準に降順でソート
+usort($sessionData, function ($a, $b) {
+    return $b['score'] - $a['score'];
+});
+
+// ソート後の結果を表示（必要に応じてセッションに戻す）
+foreach ($sessionData as $key => $userData) {
+    echo "User" . ($key + 1) . ": ";
+    print_r($userData);
+    echo "<br>";
+}
 
 // $room_id = $_GET['room_id'];
 
