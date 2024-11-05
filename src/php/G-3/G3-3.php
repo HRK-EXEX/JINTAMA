@@ -20,7 +20,7 @@ require '../db.php';
         for($i=0;$i < 4; $i++){
             $r = $i +1;
             echo'<div class="result-box">';
-                echo'<img src="/kansho/JINTAMA/img/takugorira.png" alt="" class="icon" style="image-rendering: pixelated;">';
+                echo'<img src="/kansho/JINTAMA/img/melondog.png" alt="" class="icon" style="image-rendering: pixelated;">';
                 echo'<div class="resultsabu">';
                 echo'<h2>'.$r.'.'.$_SESSION['User'.$r]['name'].'</p>';
                 echo'<p>幸福度：'.$_SESSION['User'.$r]['score'].'</p>';
