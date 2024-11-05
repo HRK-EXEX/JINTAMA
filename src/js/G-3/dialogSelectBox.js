@@ -6,6 +6,7 @@ export class DialogSelectBox extends Phaser.GameObjects.Container {
         this.scene = scene;
         this.width = width;
         this.height = height;
+        this.canHide = true;
         
         // 背景
         this.background = scene.add.graphics();
@@ -64,39 +65,45 @@ export class DialogSelectBox extends Phaser.GameObjects.Container {
         
         // キーボード入力のリスナーを設定
         this.keyboardListener = (event) => {
-            if (!this.visible || !this.isSelectable) return;
+            if (!this.visible) return;
             
-            if (event.code === 'ArrowUp') {
+            if (event.code === 'ArrowUp' && this.isSelectable) {
                 this.currentChoice = (this.currentChoice - 1 + this.choices.length) % this.choices.length;
                 this.updateChoicesDisplay();
-            } else if (event.code === 'ArrowDown') {
+            } else if (event.code === 'ArrowDown' && this.isSelectable) {
                 this.currentChoice = (this.currentChoice + 1) % this.choices.length;
                 this.updateChoicesDisplay();
             } else if (event.code === 'Enter') {
+                
                 if (this.callback) {
                     this.callback(this.currentChoice);
+                    this.canHide = true;
                 }
             }
         };
     }
     
     // 下位互換性のある基本的なダイアログ表示
-    showDialog(message, callback = null) {
+    showDialog(message, canHide = false, callback = null) {
+        this.canHide = canHide;
         this.resetState();
         this.text.setText(message);
         this.setVisible(true);
 
-        if (callback === null) {
+        if (callback === null && this.canHide) {
             callback = () => {
                 this.hideDialog();
             };
         }
+        // キーボードリスナーを設定
+        this.scene.input.keyboard.on('keydown', this.keyboardListener);
 
         this.callback = callback;
     }
     
     // 選択肢付きダイアログ表示（新機能）
     showSelectDialog(message, choices = null, callback = null) {
+        this.canHide = false;
         this.resetState();
         this.text.setText(message);
         this.setVisible(true);
@@ -143,7 +150,7 @@ export class DialogSelectBox extends Phaser.GameObjects.Container {
     resetState() {
         this.choicesContainer.removeAll(true);
         this.choices = [];
-        this.currentChoice = 0;
+        this.currentChoice = -1;
         this.isSelectable = false;
         this.callback = null;
         this.scene.input.keyboard.removeListener('keydown', this.keyboardListener);

@@ -1,7 +1,8 @@
-import { initializeInput, input, updateDebugInfo, debugInfo } from './initialize.js';
+import { initializeInput, input, updateDebugInfo, debugInfo, player } from './initialize.js';
 import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
+import Player from './player.js';
 
 export class MainScene extends Phaser.Scene {
     constructor() {
@@ -36,7 +37,7 @@ export class MainScene extends Phaser.Scene {
         // Zキーでダイアログを表示
         this.input.keyboard.on('keydown-Z', () => {
             if (this.selectDialog.visible) this.selectDialog.hideDialog();
-            this.dialog.showDialog('これはテストメッセージです。\nダイアログボックスのテストです。', null);
+            this.dialog.showDialog('これはテストメッセージです。\nダイアログボックスのテストです。', false, null);
         });
 
         // Xキーで選択ダイアログを表示
@@ -47,20 +48,19 @@ export class MainScene extends Phaser.Scene {
                 ['選択肢１', '選択肢２', '選択肢３'],
                 (choice) => {
                     switch (choice) {
-                        case 0: this.dialog.showDialog('選択肢１が選択されました'); break;
-                        case 1: this.dialog.showDialog('選択肢２が選択されました'); break;
-                        case 2: this.dialog.showDialog('選択肢３が選択されました'); break;
+                        case 0: this.dialog.showDialog('選択肢１が選択されました', true); break;
+                        case 1: this.dialog.showDialog('選択肢２が選択されました', true); break;
+                        case 2: this.dialog.showDialog('選択肢３が選択されました', true); break;
                     }
                     this.selectDialog.hideDialog();
                 }
             );
         });
-        
-        // ESCキーでダイアログを非表示
-        this.input.keyboard.on('keydown-ESC', () => {
-            this.dialog.hideDialog();
-            this.selectDialog.hideDialog();
-        });
+
+        // プレイヤーの表示
+        for (let i=0; i<4; i++) {
+            player[i] = new Player(this, 40, 40 + i*40, 'player'+(i+1));
+        }        
 
         // デバッグ情報の初期化
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
@@ -70,6 +70,6 @@ export class MainScene extends Phaser.Scene {
         const button = input();
         if (!this.dialog.visible && !this.selectDialog.visible)
             this.gameBoard.update(button);
-        debugInfo.setText(button);
+        debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
     }
 }
