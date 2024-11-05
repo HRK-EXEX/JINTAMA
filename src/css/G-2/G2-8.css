@@ -1,6 +1,7 @@
 body{
     background-image:url(/kansho/JINTAMA/img/setteikuro.png);
     background-size: cover;
+    overflow: hidden; 
 }
 .main{
     color:#fff;
@@ -90,4 +91,123 @@ h1, h2, h3 {
     font-family: "dot-bold", sans-serif;
     font-weight: bold;
     font-style: normal;
+}
+
+
+/* 背景を暗くする */
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Dot Font', sans-serif;
+}
+
+/* メインコンテナのスタイル */
+.main {
+    text-align: center;
+    padding: 50px;
+}
+
+/* 警告テキストの赤い不気味なスタイル */
+h1.text {
+    color: #ff0000;
+    font-size: 3em;
+    text-shadow: 2px 2px 5px #800000;
+    animation: flicker 1.5s infinite;
+}
+
+/* コマンドボタンのスタイル */
+.command {
+    margin-top: 20px;
+}
+
+/* 削除ボタンのスタイル */
+button.delete {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    animation: shake 0.5s infinite;
+}
+
+button.delete:hover {
+    color: #ffffff;
+    background-color: #ff0000;
+    box-shadow: 0px 0px 10px #ff0000;
+}
+
+/* 戻るボタンのスタイル */
+button.back {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+button.back:hover {
+    color: #1a1a1a;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px #ffffff;
+}
+
+/* 不規則な点滅アニメーション */
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0;
+    }
+}
+
+/* ボタンを少し揺らすアニメーション */
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* 血のしずく効果 */
+button.delete::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background-color: #ff0000;
+    animation: drip 1s infinite;
+    transform: translateX(-50%);
+}
+
+@keyframes drip {
+    0% { height: 0; opacity: 1; }
+    100% { height: 15px; opacity: 0; }
+}
+
+/* エラーメッセージのスタイル */
+.error-message {
+    color: #ff4d4d;
+    background-color: #331111;
+    padding: 10px;
+    border: 1px solid #ff0000;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    animation: flicker 2s infinite;
 }
