@@ -3,6 +3,7 @@ export default class Player extends Phaser.GameObjects.Container {
         super(scene, x, y);
         
         this.name = name;
+        this.color = new Phaser.Display.Color(0, 0, 0);
         
         // 基本ステータス
         this.stats = {
@@ -50,18 +51,18 @@ export default class Player extends Phaser.GameObjects.Container {
     
     setupSprite() {
         // プレイヤーの見た目（仮の円で表現）
-        this.sprite = this.scene.add.circle(0, 0, 15, 0x00ff00);
+        this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
         // クリック可能にする
         this.sprite.setInteractive();
         
         // ホバー効果
         this.sprite.on('pointerover', () => {
-            this.sprite.setFillStyle(0x00aa00);
+            this.sprite.setFillStyle(this.color.random().color32);
             this.showDetailedStatus();
         });
         
         this.sprite.on('pointerout', () => {
-            this.sprite.setFillStyle(0x00ff00);
+            this.sprite.setFillStyle(this.color.random().color32);
             this.hideDetailedStatus();
         });
     }

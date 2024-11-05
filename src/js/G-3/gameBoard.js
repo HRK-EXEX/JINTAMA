@@ -3,8 +3,8 @@ import {
 } from './initialize.js';
 
 // マップ設定の定数と変数
-const firstX = 16.5;
-const firstY = 30;
+let firstX = 16.5;
+let firstY = 30;
 const tileSize = 16;
 const scale = 3;
 const spd = 10;
@@ -18,6 +18,21 @@ export class GameBoard {
         this.loopMap = null;
         this.map = null;
         this.mapID = mapID;
+
+        switch (mapID) {
+            case 0:
+                firstX = 0;
+                firstY = 0;
+                break;
+            case 1:
+                firstX = 16.5;
+                firstY = 30;
+                break;
+            case 2:
+                firstX = 0;
+                firstY = 0;
+                break;
+        }
         
         this.mapX = -firstX * tileSize * scale;
         this.mapY = -firstY * tileSize * scale;
@@ -142,7 +157,7 @@ export class GameBoard {
         switch (this.mapID) {
             case 0:
                 for (let i=0; i<this.tilemapNames; i++) {
-                    tiles.push(this.map.addTilesetImage(this.tilemapNames[i], this.tilemapNames[i]));
+                    tiles[i] = (this.map.addTilesetImage(this.tilemapNames[i], this.tilemapNames[i]));
                 }
 
                 /*
@@ -180,13 +195,9 @@ export class GameBoard {
                 */
 
                 relatedTileSet = [
-                    tiles[0],
-                    baseTileSet,
-                    tutiTileSet1,
-                    tutiTileSet2,
-                    baseTileSet,
-                    baseTileSet,
+                    tiles[0]
                 ];
+                break;
 
             case 1:
                 baseTileSet = this.map.addTilesetImage(this.tilemapNames[0], 'baseTileImage');
@@ -201,6 +212,7 @@ export class GameBoard {
                     baseTileSet,
                     baseTileSet,
                 ];
+                break;
         }
 
         // fieldMapの作成
@@ -225,7 +237,7 @@ export class GameBoard {
 
         // レイヤーを追加
         for(let i = 0; i < this.layerNames.length; i++) {
-            let tmpLayer = this.map.createLayer(i, relatedTileSet[i], 0, 0);
+            let tmpLayer = this.map.createLayer(i, relatedTileSet, 0, 0);
             tmpLayer.setScale(scale, scale);
             this.fieldMap.add(tmpLayer);
         }
