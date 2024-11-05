@@ -16,17 +16,22 @@ require '../db.php';
     <h1><img src="/kansho/JINTAMA/img/crown.png" alt="" class="crown"><span class="ranktext">リザルト</span><img src="/kansho/JINTAMA/img/crown.png" alt="" class="crown"></h1>
     </div>
     <div class="container">
-            <div class="result-box">
-                <img src="/kansho/JINTAMA/img/takuicon.png" alt="" class="icon">
-                <div class="resultsabu">
-                <h2>1.たくろう</p>
-                    <p>幸福度：999</p>
-                    <p>体力：100</p>
-                    <p>センス：100</p>
-                    <p>魅力：100</p>
-                </div>
-            </div>
-            <div class="result-box">
+        <?php 
+        for($i=0;$i < 4; $i++){
+            $r = $i +1;
+            echo'<div class="result-box">';
+                echo'<img src="/kansho/JINTAMA/img/takuicon.png" alt="" class="icon">';
+                echo'<div class="resultsabu">';
+                echo'<h2>'.$r.'.'.$_SESSION['User'.$r]['name'].'</p>';
+                echo'<p>幸福度：'.$_SESSION['User'.$r]['score'].'</p>';
+                echo'<p>体力：'.$_SESSION['User'.$r]['hp'].'</p>';
+                echo'<p>センス：'.$_SESSION['User'.$r]['sence'].'<p>';
+                echo'<p>魅力：'.$_SESSION['User'.$r]['charm'].'</p>';
+                echo'</div>
+            </div>';
+        }
+            ?>
+            <!-- <div class="result-box">
                 <img src="/kansho/JINTAMA/img/icon1.png" alt="" class="icon">
                 <div class="resultsabu">
                 <h2>2.ふかい</p>
@@ -55,7 +60,7 @@ require '../db.php';
                     <p>センス：100</p>
                     <p>魅力:100</p>
                 </div>
-            </div>
+            </div> -->
             </div>
             <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="mainnext">メインメニューへ</a>
 </body>
