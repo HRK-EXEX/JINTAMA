@@ -10,7 +10,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.gameBoard = new GameBoard(this);
+        this.gameBoard = new GameBoard(this, 1);
         this.gameBoard.preloadAssets();
 
         // ユーティリティクラスを使用可能に
@@ -21,17 +21,45 @@ export class MainScene extends Phaser.Scene {
         // マップの作成
         this.gameBoard.createMap();
 
+        let dialogW = 700;
+        let dialogH = 300;
+        let dialogX = 50;
+        let dialogY = this.game.config.height - 50 - dialogH;
+
+        // ダイアログの作成
+        this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
+        this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
+
         // 入力の初期化
         initializeInput(this);
 
-        // クリックでダイアログを表示
-        input.on('pointerdown', () => {
-            DialogSelectBox.showDialog('これはテストメッセージです。\nダイアログボックスのテストです。');
+        // Zキーでダイアログを表示
+        this.input.keyboard.on('keydown-Z', () => {
+            if (this.selectDialog.visible) this.selectDialog.hideDialog();
+            this.dialog.showDialog('これはテストメッセージです。\nダイアログボックスのテストです。', null);
+        });
+
+        // Xキーで選択ダイアログを表示
+        this.input.keyboard.on('keydown-X', () => {
+            if (this.dialog.visible) this.dialog.hideDialog();
+            this.selectDialog.showSelectDialog(
+                'これはテストメッセージです。\n選択ダイアログボックスのテストです。',
+                ['選択肢１', '選択肢２', '選択肢３'],
+                (choice) => {
+                    switch (choice) {
+                        case 0: this.dialog.showDialog('選択肢１が選択されました'); break;
+                        case 1: this.dialog.showDialog('選択肢２が選択されました'); break;
+                        case 2: this.dialog.showDialog('選択肢３が選択されました'); break;
+                    }
+                    this.selectDialog.hideDialog();
+                }
+            );
         });
         
         // ESCキーでダイアログを非表示
-        input.keyboard.on('keydown-ESC', () => {
-            DialogSelectBox.hideDialog();
+        this.input.keyboard.on('keydown-ESC', () => {
+            this.dialog.hideDialog();
+            this.selectDialog.hideDialog();
         });
 
         // デバッグ情報の初期化
@@ -40,7 +68,8 @@ export class MainScene extends Phaser.Scene {
 
     update() {
         const button = input();
-        this.gameBoard.update(button);
+        if (!this.dialog.visible && !this.selectDialog.visible)
+            this.gameBoard.update(button);
         debugInfo.setText(button);
     }
 }
