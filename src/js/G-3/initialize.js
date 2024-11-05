@@ -5,32 +5,6 @@ export let key;
 export let debugInfo;
 export let loopMap = null;
 
-// マップ関連の定数
-export const layerNames = [
-    'ground',
-    'background',
-    'route',
-    'jump',
-    'grid',
-    'foreground',
-];
-
-export const tilemapNames = [
-    'baseTile',
-    'dirtTile1',
-    'dirtTile2',
-];
-
-// マップ設定の定数と変数
-export const firstX = 16.5;
-export const firstY = 30;
-export const tileSize = 16;
-export const scale = 3;
-export const spd = 10;
-
-export let tileOffsetX = 0;
-export let tileOffsetY = 0;
-
 // プレイヤー関連
 export let player = [null, null, null, null];
 
