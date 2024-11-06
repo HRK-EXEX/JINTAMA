@@ -20,6 +20,7 @@ foreach ($sessionData as $index => $userData) {
     $_SESSION['User' . ($index + 1)] = $userData;
 }
 
+
 // // ソート結果を表示（必要に応じて）
 // foreach ($_SESSION as $key => $userData) {
 //     echo $key . ': ';
@@ -138,10 +139,6 @@ foreach ($sessionData as $index => $userData) {
     </div>
     <div class="rankmain">
         <img src="/kansho/JINTAMA/img/takuicon.png" alt="" class="icon">
-           
-
-
-
                 <div class="ranksabu">
                         <h1 style="font-size: 50px;"><?php echo $_SESSION['User1']['name'] ?></h1>
                         <h2 style="font-size: 30px;">幸福度：<?php echo $_SESSION['User1']['score'] ?></h2>
