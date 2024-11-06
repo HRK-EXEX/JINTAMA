@@ -66,11 +66,11 @@ foreach($stm4 as $un4){
         'sence' => 100,
     ];
 }
-
-echo $_SESSION['User1']['user_id'];
-echo $_SESSION['User2']['user_id'];
-echo $_SESSION['User3']['user_id'];
-echo $_SESSION['User4']['user_id'];
+echo 'ルームID：'.$_SESSION['User']['room_id'].'<br>';
+echo 'メンバー1：'.$_SESSION['User1']['user_id'].'<br>';
+echo 'メンバー2：'.$_SESSION['User2']['user_id'].'<br>';
+echo 'メンバー3：'.$_SESSION['User3']['user_id'].'<br>';
+echo 'メンバー4：'.$_SESSION['User4']['user_id'].'<br>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
