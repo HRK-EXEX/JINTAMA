@@ -122,7 +122,57 @@ export class GameBoard {
 
                 break;
 
-            case 2:
+            case 2: 
+            this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
+            this.scene.load.image('hana', '/map/mapchip2/MapChip/hana.png');
+            this.scene.load.image('koori2', '/map/mapchip2/MapChip/koori2.png');
+            this.scene.load.image('kusa-tuti2', '/map/mapchip2/MapChip/kusa1-kusa2.png');
+            this.scene.load.image('road', '/map/mapchip2/MapChip/tuti3.png');
+            this.scene.load.image('tuti2', '/map/mapchip2/MapChip/tuti2.png');
+            this.scene.load.image('tuti3', '/map/mapchip2/MapChip/tuti3.png');
+            this.scene.load.image('water1', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
+            this.scene.load.image('water2', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
+            this.scene.load.image('waterfall', '/map/mapchip2/MapChip/tuti2.png');
+            
+            // Tiledで出力したJsonファイルをロード
+            this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/first-map.json');
+            
+            // レイヤー名を入力
+            this.layerNames = [
+                'ground',
+                'road',
+                'houseWall',
+                'snow',
+                'houseDecoration',
+                'showCliffDark',
+                'showCliff',
+                'ice',
+                'icePoddle',
+                'fieldPlants',
+                'cliff',
+                'cliffLedge',
+                'newContinent',
+                'newContinentRoad',
+                'newContinentRoad2',
+                'bridge',
+                'water3',
+                'theOneYouPutOnTheWater'
+            ];
+            
+            // タイルマップ名を入力
+            this.tilemapNames = [
+                'base',
+                'hana',
+                'koori2',
+                'kusa-tuti2',
+                'road',
+                'tuti2',
+                'tuti3',
+                'water1',
+                'water2',
+                'waterfall',
+            ];
+        
                 
                 break;
         }
