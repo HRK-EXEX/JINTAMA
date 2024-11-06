@@ -8,6 +8,17 @@ export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
         this.gameBoard = null;
+        this.currentPlayer = 1;
+        /**
+         * クライアントの状態を表すフィールド。  
+         * 0: 待機中（他のクライアントのターン時）  
+         * 1: 入力待機中（自分のターン開始時）  
+         * 2: ルーレット  
+         * 3: マップ移動  
+         *   
+         */
+        this.state = 1;
+        this.once = false;
     }
 
     preload() {
@@ -32,7 +43,7 @@ export class MainScene extends Phaser.Scene {
         this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
 
         // 入力の初期化
-        initializeInput(this);
+        initializeInput(this); 
 
         // Zキーでダイアログを表示
         this.input.keyboard.on('keydown-Z', () => {
@@ -46,7 +57,7 @@ export class MainScene extends Phaser.Scene {
             this.selectDialog.showSelectDialog(
                 'これはテストメッセージです。\n選択ダイアログボックスのテストです。',
                 ['選択肢１', '選択肢２', '選択肢３'],
-                (choice) => {
+                choice => {
                     switch (choice) {
                         case 0: this.dialog.showDialog('選択肢１が選択されました', true); break;
                         case 1: this.dialog.showDialog('選択肢２が選択されました', true); break;
@@ -71,5 +82,30 @@ export class MainScene extends Phaser.Scene {
         if (!this.dialog.visible && !this.selectDialog.visible)
             this.gameBoard.update(button);
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
+        
+        if (!this.once) {
+            switch (this.state) {
+                case 0: break;
+                case 1:
+                    if (this.dialog.visible) this.dialog.hideDialog();
+                    this.selectDialog.showSelectDialog(
+                        'あなたのターンです。',
+                        ['ルーレット', 'ステータス', 'その他'],
+                        choice => {
+                            switch (choice) {
+                                case 0: this.dialog.showDialog('ルーレットを止めてください。', true, () => reSelectable()); this.state = 2; break;
+                                case 1: this.dialog.showDialog('ステータスは', true, () => reSelectable()); this.state = 2; break;
+                                case 2: this.dialog.showDialog('選択肢３が選択されました', true, () => reSelectable()); this.state = 2; break;
+                            }
+                            this.selectDialog.hideDialog();
+                        }
+                    );
+            }
+            this.once = !this.once;
+        }
+    }
+
+    reSelectable() {
+        this.once = !this.once;
     }
 }
