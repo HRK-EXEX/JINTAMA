@@ -41,6 +41,7 @@ export class GameBoard {
     preloadAssets() {
         switch (this.mapID) {
             case 0:
+                // マップ素材の画像をロード
                 this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
                 this.scene.load.image('hana', '/map/mapchip2/MapChip/hana.png');
                 this.scene.load.image('koori2', '/map/mapchip2/MapChip/koori2.png');
@@ -52,8 +53,10 @@ export class GameBoard {
                 this.scene.load.image('water2', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
                 this.scene.load.image('waterfall', '/map/mapchip2/MapChip/tuti2.png');
                 
+                // Tiledで出力したJsonファイルをロード
                 this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/first-map.json');
                 
+                // レイヤー名を入力
                 this.layerNames = [
                     'ground',
                     'road',
@@ -75,6 +78,7 @@ export class GameBoard {
                     'theOneYouPutOnTheWater'
                 ];
                 
+                // タイルマップ名を入力
                 this.tilemapNames = [
                     'base',
                     'hana',
@@ -90,12 +94,16 @@ export class GameBoard {
                 break;
 
             case 1:
+                // マップ素材の画像をロード
                 this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
                 this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
                 this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
                 this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
+
+                // Tiledで出力したJsonファイルをロード
                 this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
 
+                // レイヤー名を入力
                 this.layerNames = [
                     'ground',
                     'background',
@@ -105,6 +113,7 @@ export class GameBoard {
                     'foreground',
                 ];
                 
+                // タイルマップ名を入力
                 this.tilemapNames = [
                     'baseTile',
                     'dirtTile1',
@@ -113,29 +122,58 @@ export class GameBoard {
 
                 break;
 
-            case 2:
-                this.scene.load.image('baseTileImage', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('dirtTileImage', '/map/mapchip2/MapChip/tuti1.png');
-                this.scene.load.image('dirtTileImage2', '/map/mapchip2/MapChip/tuti2.png');
-                // this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+            case 2: 
+            this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
+            this.scene.load.image('hana', '/map/mapchip2/MapChip/hana.png');
+            this.scene.load.image('koori2', '/map/mapchip2/MapChip/koori2.png');
+            this.scene.load.image('kusa-tuti2', '/map/mapchip2/MapChip/kusa1-kusa2.png');
+            this.scene.load.image('road', '/map/mapchip2/MapChip/tuti3.png');
+            this.scene.load.image('tuti2', '/map/mapchip2/MapChip/tuti2.png');
+            this.scene.load.image('tuti3', '/map/mapchip2/MapChip/tuti3.png');
+            this.scene.load.image('water1', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
+            this.scene.load.image('water2', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
+            this.scene.load.image('waterfall', '/map/mapchip2/MapChip/tuti2.png');
+            
+            // Tiledで出力したJsonファイルをロード
+            this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/first-map.json');
+            
+            // レイヤー名を入力
+            this.layerNames = [
+                'ground',
+                'road',
+                'houseWall',
+                'snow',
+                'houseDecoration',
+                'showCliffDark',
+                'showCliff',
+                'ice',
+                'icePoddle',
+                'fieldPlants',
+                'cliff',
+                'cliffLedge',
+                'newContinent',
+                'newContinentRoad',
+                'newContinentRoad2',
+                'bridge',
+                'water3',
+                'theOneYouPutOnTheWater'
+            ];
+            
+            // タイルマップ名を入力
+            this.tilemapNames = [
+                'base',
+                'hana',
+                'koori2',
+                'kusa-tuti2',
+                'road',
+                'tuti2',
+                'tuti3',
+                'water1',
+                'water2',
+                'waterfall',
+            ];
+        
                 
-                this.layerNames = [
-                    'ground',
-                    'background',
-                    'route',
-                    'jump',
-                    'grid',
-                    'foreground',
-                ];
-
-                
-                this.tilemapNames = [
-                    'baseTile',
-                    'dirtTile1',
-                    'dirtTile2',
-                ];
-
                 break;
         }
         
@@ -156,47 +194,13 @@ export class GameBoard {
 
         switch (this.mapID) {
             case 0:
-                for (let i=0; i<this.tilemapNames; i++) {
-                    tiles[i] = (this.map.addTilesetImage(this.tilemapNames[i], this.tilemapNames[i]));
+            case 2:
+                for (let i=0; i<this.tilemapNames.length; i++) {
+                    // console.log(i);
+                    tiles.push(this.map.addTilesetImage(this.tilemapNames[i], this.tilemapNames[i]));
                 }
 
-                /*
-
-                'ground',
-                'road',
-                'houseWall',
-                'snow',
-                'houseDecoration',
-                'showCliffDark',
-                'showCliff',
-                'ice',
-                'icePoddle',
-                'fieldPlants',
-                'cliff',
-                'cliffLedge',
-                'newContinent',
-                'newContinentRoad',
-                'newContinentRoad2',
-                'bridge',
-                'water3',
-                'theOneYouPutOnTheWater'
-                
-                'base',
-                'hana',
-                'koori2',
-                'kusa-tuti2',
-                'road',
-                'tuti2',
-                'tuti3',
-                'water1',
-                'water2',
-                'waterfall',
-
-                */
-
-                relatedTileSet = [
-                    tiles[0]
-                ];
+                relatedTileSet = tiles;
                 break;
 
             case 1:
@@ -206,11 +210,8 @@ export class GameBoard {
 
                 relatedTileSet = [
                     baseTileSet,
-                    baseTileSet,
                     tutiTileSet1,
                     tutiTileSet2,
-                    baseTileSet,
-                    baseTileSet,
                 ];
                 break;
         }
