@@ -11,7 +11,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.gameBoard = new GameBoard(this, 1);
+        this.gameBoard = new GameBoard(this, 0);
         this.gameBoard.preloadAssets();
 
         // ユーティリティクラスを使用可能に
