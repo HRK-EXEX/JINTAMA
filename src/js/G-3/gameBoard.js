@@ -122,7 +122,75 @@ export class GameBoard {
 
                 break;
 
-            case 2:
+            case 2: 
+            this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
+            this.scene.load.image('ArmillarySphere', '/map/mapchip2/ArmillarySphere.png');
+            this.scene.load.image('byobu', '/map/mapchip2/byoubu.png');
+            this.scene.load.image('goal2', '/map/mapchip2/goal2.png');
+            this.scene.load.image('gpiano', '/map/mapchip2/gpiano.png');
+            this.scene.load.image('Le Penseur', '/map/mapchip2/Le Penseur.png');
+            this.scene.load.image('manekineko2', '/map/mapchip2/manekineko2.png');
+            this.scene.load.image('mizu1', '/map/mapchip2/MapChip/mizu1.png');
+            this.scene.load.image('mizu2', '/map/mapchip2/MapChip/mizu2.png');
+            this.scene.load.image('nizi', '/map/mapchip2/eEJjt6AYWTepUfe1730082958.png');
+            this.scene.load.image('patcar', '/map/mapchip2/patcar.png');
+            this.scene.load.image('syakanyorai2', '/map/mapchip2/syakanyorai2.png');
+            this.scene.load.image('taki2', '/map/mapchip2/MapChip/taki2.png');
+            this.scene.load.image('tigermat2', '/map/mapchip2/tigermat2.png');
+            this.scene.load.image('tuti2', '/map/mapchip2/Mapchip/tuti2.png');
+            this.scene.load.image('tuti3', '/map/mapchip2/Mapchip/tuti3.png');
+            this.scene.load.image('yougan', '/map/mapchip2/MapChip/yougan.png');
+            this.scene.load.image('kumo', '/map/mapchip2/kumo.png');
+            this.scene.load.image('sora', '/map/mapchip2/sora.png');
+           
+            // Tiledで出力したJsonファイルをロード
+            this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/third-map.json');
+            
+            // レイヤー名を入力
+            this.layerNames = [
+                'kumo2',
+                'goal!!!',
+                'nizi',
+                'hashi',
+                'kumo',
+                'miti',
+                'saku',
+                'okimono',
+                'ki',
+                'mizu',
+                'ikenomono',
+                'ike',
+                'snow',
+                'whitesuna',
+                'zimenn',
+                'gake',
+                'sky'
+                
+            ];
+            
+            // タイルマップ名を入力
+            this.tilemapNames = [
+                'base',
+                'ArmillarySphere',
+                'byobu',
+                'goal2',
+                'gpiano',
+                'Le Penseur',
+                'manekineko2',
+                'mizu1',
+                'mizu2',
+                'nizi',
+                'patcar',
+                'syakanyorai2',
+                'taki2',
+                'tigermat2',
+                'tuti2',
+                'tuti3',
+                'yougan',
+                'kumo',
+                'sora'
+            ];
+        
                 
                 break;
         }
