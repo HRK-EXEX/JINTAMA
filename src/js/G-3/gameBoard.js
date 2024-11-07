@@ -148,23 +148,23 @@ export class GameBoard {
             
             // レイヤー名を入力
             this.layerNames = [
-                'kumo2',
-                'goal!!!',
-                'nizi',
-                'hashi',
-                'kumo',
-                'miti',
-                'saku',
-                'okimono',
-                'ki',
-                'mizu',
-                'ikenomono',
-                'ike',
-                'snow',
-                'whitesuna',
+                // 'sky', 画像レイヤーは無視される
+                'gake',
                 'zimenn',
-                // 'gake',
-                // 'sky'
+                'whitesuna',
+                'snow',
+                'ike',
+                'ikenomono',
+                'mizu',
+                'ki',
+                'okimono',
+                'saku',
+                'miti',
+                'kumo',
+                'hashi',
+                'nizi',
+                'goal!!!',
+                // 'kumo2' 画像レイヤーは無視される
             ];
             
             // タイルマップ名を入力
