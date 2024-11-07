@@ -11,13 +11,15 @@ export class MainScene extends Phaser.Scene {
         super("mainScene");
         this.gameBoard = null;
         this.currentPlayer = 1;
+        this.turn = 1;
+        this.yourTurn = false;
         /**
          * クライアントの状態を表すフィールド。  
          * 0: 待機中（他のクライアントのターン時）  
          * 1: 入力待機中（自分のターン開始時）  
          * 2: ルーレット  
          * 3: マップ移動  
-         *   
+         * 4: ステータス閲覧  
          */
         this.state = 1;
         this.once = false;
@@ -92,24 +94,44 @@ export class MainScene extends Phaser.Scene {
                 case 0: break;
                 case 1:
                     if (this.dialog.visible) this.dialog.hideDialog();
-                    this.selectDialog.showSelectDialog(
-                        'あなたのターンです。',
-                        ['ルーレット', 'ステータス', 'その他'],
-                        choice => {
-                            switch (choice) {
-                                case 0: this.dialog.showDialog('ルーレットを止めてください。', true, () => reSelectable()); this.state = 2; break;
-                                case 1: this.dialog.showDialog('ステータスは', true, () => reSelectable()); this.state = 2; break;
-                                case 2: this.dialog.showDialog('選択肢３が選択されました', true, () => reSelectable()); this.state = 2; break;
+                    if (this.yourTurn) {
+                        this.selectDialog.showSelectDialog(
+                            'あなたのターンです。',
+                            ['ルーレット', 'ステータス', 'ターンスキップ'],
+                            choice => {
+                                switch (choice) {
+                                    case 0: this.dialog.showDialog('ルーレットを止めてください。', true, () => reSelectable(true)); this.state = 2; break;
+                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => reSelectable()); this.state = 4; break;
+                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。', true, () => reSelectable()); this.state = 2; break;
+                                }
+                                this.selectDialog.hideDialog();
                             }
-                            this.selectDialog.hideDialog();
-                        }
-                    );
+                        );
+                    } else {
+                        this.selectDialog.showSelectDialog(
+                            'ターン待機中です。',
+                            ['ルーレット', 'ステータス', 'ターンスキップ'],
+                            choice => {
+                                switch (choice) {
+                                    case 0: this.dialog.showDialog('ルーレットを止めてください。', true, () => reSelectable(true)); this.state = 2; break;
+                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => reSelectable()); this.state = 4; break;
+                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。', true, () => reSelectable()); this.state = 2; break;
+                                }
+                                this.selectDialog.hideDialog();
+                            }
+                        );
+                    }
             }
             reSelectable();
         }
     }
 
-    reSelectable() {
+    reSelectable(nextTurn) {
+        if (nextTurn)
+            this.currentPlayer = ++this.currentPlayer % player.length;
+
+        this.yourTurn = this.turn == this.currentPlayer;
+        this.state = this.yourTurn ? 1 : 0;
         this.once = !this.once;
     }
 }
