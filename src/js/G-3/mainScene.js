@@ -4,6 +4,8 @@ import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
 
+debug = false;
+
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
@@ -45,28 +47,30 @@ export class MainScene extends Phaser.Scene {
         // 入力の初期化
         initializeInput(this); 
 
-        // Zキーでダイアログを表示
-        this.input.keyboard.on('keydown-Z', () => {
-            if (this.selectDialog.visible) this.selectDialog.hideDialog();
-            this.dialog.showDialog('これはテストメッセージです。\nダイアログボックスのテストです。', false, null);
-        });
+        if (debug) {
+            // Zキーでダイアログを表示
+            this.input.keyboard.on('keydown-Z', () => {
+                if (this.selectDialog.visible) this.selectDialog.hideDialog();
+                this.dialog.showDialog('これはテストメッセージです。\nダイアログボックスのテストです。', false, null);
+            });
 
-        // Xキーで選択ダイアログを表示
-        this.input.keyboard.on('keydown-X', () => {
-            if (this.dialog.visible) this.dialog.hideDialog();
-            this.selectDialog.showSelectDialog(
-                'これはテストメッセージです。\n選択ダイアログボックスのテストです。',
-                ['選択肢１', '選択肢２', '選択肢３'],
-                choice => {
-                    switch (choice) {
-                        case 0: this.dialog.showDialog('選択肢１が選択されました', true); break;
-                        case 1: this.dialog.showDialog('選択肢２が選択されました', true); break;
-                        case 2: this.dialog.showDialog('選択肢３が選択されました', true); break;
+            // Xキーで選択ダイアログを表示
+            this.input.keyboard.on('keydown-X', () => {
+                if (this.dialog.visible) this.dialog.hideDialog();
+                this.selectDialog.showSelectDialog(
+                    'これはテストメッセージです。\n選択ダイアログボックスのテストです。',
+                    ['選択肢１', '選択肢２', '選択肢３'],
+                    choice => {
+                        switch (choice) {
+                            case 0: this.dialog.showDialog('選択肢１が選択されました', true); break;
+                            case 1: this.dialog.showDialog('選択肢２が選択されました', true); break;
+                            case 2: this.dialog.showDialog('選択肢３が選択されました', true); break;
+                        }
+                        this.selectDialog.hideDialog();
                     }
-                    this.selectDialog.hideDialog();
-                }
-            );
-        });
+                );
+            });
+        }
 
         // プレイヤーの表示
         for (let i=0; i<4; i++) {
@@ -101,7 +105,7 @@ export class MainScene extends Phaser.Scene {
                         }
                     );
             }
-            this.once = !this.once;
+            reSelectable();
         }
     }
 
