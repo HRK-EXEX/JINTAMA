@@ -11,7 +11,6 @@ foreach($stm as $un){
     $u3=$un['room_user3'];
     $u4=$un['room_user4'];
 }
-echo "".$u1.",".$u2.",".$u3.",".$u4."";
 $stm1 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
 $stm1->execute([$u1]);
 foreach($stm1 as $un1){
@@ -66,11 +65,11 @@ foreach($stm4 as $un4){
         'sence' => 100,
     ];
 }
-
-echo $_SESSION['User1']['user_id'];
-echo $_SESSION['User2']['user_id'];
-echo $_SESSION['User3']['user_id'];
-echo $_SESSION['User4']['user_id'];
+echo 'ルームID：'.$_SESSION['User']['room_id'].'<br>';
+echo 'メンバー1：'.$_SESSION['User1']['user_id'].'('.$_SESSION['User1']['name'].')<br>';
+echo 'メンバー2：'.$_SESSION['User2']['user_id'].'('.$_SESSION['User2']['name'].')<br>';
+echo 'メンバー3：'.$_SESSION['User3']['user_id'].'('.$_SESSION['User3']['name'].')<br>';
+echo 'メンバー4：'.$_SESSION['User4']['user_id'].'('.$_SESSION['User4']['name'].')<br>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +79,29 @@ echo $_SESSION['User4']['user_id'];
     <title>カリカリ</title>
 </head>
 <body>
+<table border="2" style="border-collapse: collapse; border-color: black">
+        <tr>
+            <th>ID</th>
+            <th>ユーザー名</th>
+            <th>幸福度</th>
+            <th>体力</th>
+            <th>魅力</th>
+            <th>センス</th>
+        </tr>
+        
+        <?php
+        for($i=1;$i<5;$i++){
+            echo'<tr>';
+            echo'<td>'.$_SESSION['User'.$i]['user_id'].'</td>';
+            echo'<td>'.$_SESSION['User'.$i]['name'].'</td>';
+            echo'<td>'.$_SESSION['User'.$i]['score'].'</td>';
+            echo'<td>'.$_SESSION['User'.$i]['hp'].'</td>';
+            echo'<td>'.$_SESSION['User'.$i]['charm'].'</td>';
+            echo'<td>'.$_SESSION['User'.$i]['sence'].'</td>';
+            echo'</tr>';}
+        ?>
+        
+    </table>
     <button onclick="location.href='/kansho/JINTAMA/src/php/G-3/G3-2.php'">ゲーム終了</button>
 </body>
 </html>
