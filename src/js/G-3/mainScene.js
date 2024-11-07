@@ -109,7 +109,7 @@ export class MainScene extends Phaser.Scene {
                         );
                     } else {
                         this.selectDialog.showSelectDialog(
-                            'ターン待機中です。',
+                            'ターン待機中です。Enterキーでスキップ',
                             ['ルーレット', 'ステータス', 'ターンスキップ'],
                             choice => {
                                 switch (choice) {
@@ -122,7 +122,7 @@ export class MainScene extends Phaser.Scene {
                         );
                     }
             }
-            reSelectable();
+            this.once = !this.once;
         }
     }
 
