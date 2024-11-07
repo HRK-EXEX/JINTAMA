@@ -74,7 +74,6 @@ export class DialogSelectBox extends Phaser.GameObjects.Container {
                 this.currentChoice = (this.currentChoice + 1) % this.choices.length;
                 this.updateChoicesDisplay();
             } else if (event.code === 'Enter') {
-                
                 if (this.callback) {
                     this.callback(this.currentChoice);
                     this.canHide = true;

@@ -125,7 +125,7 @@ export class GameBoard {
             case 2: 
             this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
             this.scene.load.image('ArmillarySphere', '/map/mapchip2/ArmillarySphere.png');
-            this.scene.load.image('byobu', '/map/mapchip2/byoubu.png');
+            this.scene.load.image('byobu', '/map/mapchip2/byobu.png');
             this.scene.load.image('goal2', '/map/mapchip2/goal2.png');
             this.scene.load.image('gpiano', '/map/mapchip2/gpiano.png');
             this.scene.load.image('Le Penseur', '/map/mapchip2/Le Penseur.png');
@@ -141,7 +141,7 @@ export class GameBoard {
             this.scene.load.image('tuti3', '/map/mapchip2/Mapchip/tuti3.png');
             this.scene.load.image('yougan', '/map/mapchip2/MapChip/yougan.png');
             this.scene.load.image('kumo', '/map/mapchip2/kumo.png');
-            this.scene.load.image('sora', '/map/mapchip2/sora.png');
+            this.scene.load.image('sora', '/map/mapchip2/sora.jpg');
            
             // Tiledで出力したJsonファイルをロード
             this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/third-map.json');
@@ -163,9 +163,8 @@ export class GameBoard {
                 'snow',
                 'whitesuna',
                 'zimenn',
-                'gake',
-                'sky'
-                
+                // 'gake',
+                // 'sky'
             ];
             
             // タイルマップ名を入力
