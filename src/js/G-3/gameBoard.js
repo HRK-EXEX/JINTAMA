@@ -261,7 +261,8 @@ export class GameBoard {
             let tmpLayer = this.map.createLayer(i, relatedTileSet, 0, 0);
             tmpLayer.setScale(scale, scale);
             mapWidth = Math.max(mapWidth, tmpLayer.width);
-            mapHeight = Math.max(mapWidth, tmpLayer.height);
+            mapHeight = Math.max(mapHeight, tmpLayer.height);
+            console.log(tmpLayer.width + ", " + tmpLayer.height);
             this.fieldMap.add(tmpLayer);
         }
 
@@ -282,9 +283,6 @@ export class GameBoard {
         
         if (0 < this.mapY) { this.mapY = 0; scrollLimit = true;}
         else if (limitY > this.mapY) { this.mapY = limitY; scrollLimit = true;}
-
-        // this.mapX = Math.min(0, Math.max(this.mapX, ));
-        this.mapY = Math.min(0, Math.max(this.mapY, ));
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
