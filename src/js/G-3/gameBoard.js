@@ -126,73 +126,72 @@ export class GameBoard {
                 break;
 
             case 2: 
-            this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
-            this.scene.load.image('ArmillarySphere', '/map/mapchip2/ArmillarySphere.png');
-            this.scene.load.image('byobu', '/map/mapchip2/byobu.png');
-            this.scene.load.image('goal2', '/map/mapchip2/goal2.png');
-            this.scene.load.image('gpiano', '/map/mapchip2/gpiano.png');
-            this.scene.load.image('Le Penseur', '/map/mapchip2/Le Penseur.png');
-            this.scene.load.image('manekineko2', '/map/mapchip2/manekineko2.png');
-            this.scene.load.image('mizu1', '/map/mapchip2/MapChip/mizu1.png');
-            this.scene.load.image('mizu2', '/map/mapchip2/MapChip/mizu2.png');
-            this.scene.load.image('nizi', '/map/mapchip2/eEJjt6AYWTepUfe1730082958.png');
-            this.scene.load.image('patcar', '/map/mapchip2/patcar.png');
-            this.scene.load.image('syakanyorai2', '/map/mapchip2/syakanyorai2.png');
-            this.scene.load.image('taki2', '/map/mapchip2/MapChip/taki2.png');
-            this.scene.load.image('tigermat2', '/map/mapchip2/tigermat2.png');
-            this.scene.load.image('tuti2', '/map/mapchip2/Mapchip/tuti2.png');
-            this.scene.load.image('tuti3', '/map/mapchip2/Mapchip/tuti3.png');
-            this.scene.load.image('yougan', '/map/mapchip2/MapChip/yougan.png');
-            this.scene.load.image('kumo', '/map/mapchip2/kumo.png');
-            this.scene.load.image('sora', '/map/mapchip2/sora.jpg');
-           
-            // Tiledで出力したJsonファイルをロード
-            this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/third-map.json');
+                this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('ArmillarySphere', '/map/mapchip2/ArmillarySphere.png');
+                this.scene.load.image('byobu', '/map/mapchip2/byobu.png');
+                this.scene.load.image('goal2', '/map/mapchip2/goal2.png');
+                this.scene.load.image('gpiano', '/map/mapchip2/gpiano.png');
+                this.scene.load.image('Le Penseur', '/map/mapchip2/Le Penseur.png');
+                this.scene.load.image('manekineko2', '/map/mapchip2/manekineko2.png');
+                this.scene.load.image('mizu1', '/map/mapchip2/MapChip/mizu1.png');
+                this.scene.load.image('mizu2', '/map/mapchip2/MapChip/mizu2.png');
+                this.scene.load.image('nizi', '/map/mapchip2/eEJjt6AYWTepUfe1730082958.png');
+                this.scene.load.image('patcar', '/map/mapchip2/patcar.png');
+                this.scene.load.image('syakanyorai2', '/map/mapchip2/syakanyorai2.png');
+                this.scene.load.image('taki2', '/map/mapchip2/MapChip/taki2.png');
+                this.scene.load.image('tigermat2', '/map/mapchip2/tigermat2.png');
+                this.scene.load.image('tuti2', '/map/mapchip2/Mapchip/tuti2.png');
+                this.scene.load.image('tuti3', '/map/mapchip2/Mapchip/tuti3.png');
+                this.scene.load.image('yougan', '/map/mapchip2/MapChip/yougan.png');
+                this.scene.load.image('kumo', '/map/mapchip2/kumo.png');
+                this.scene.load.image('sora', '/map/mapchip2/sora.jpg');
             
-            // レイヤー名を入力
-            this.layerNames = [
-                // 'sky', 画像レイヤーは無視される
-                'gake',
-                'zimenn',
-                'whitesuna',
-                'snow',
-                'ike',
-                'ikenomono',
-                'mizu',
-                'ki',
-                'okimono',
-                'saku',
-                'miti',
-                'kumo',
-                'hashi',
-                'nizi',
-                'goal!!!',
-                // 'kumo2' 画像レイヤーは無視される
-            ];
-            
-            // タイルマップ名を入力
-            this.tilemapNames = [
-                'base',
-                'ArmillarySphere',
-                'byobu',
-                'goal2',
-                'gpiano',
-                'Le Penseur',
-                'manekineko2',
-                'mizu1',
-                'mizu2',
-                'nizi',
-                'patcar',
-                'syakanyorai2',
-                'taki2',
-                'tigermat2',
-                'tuti2',
-                'tuti3',
-                'yougan',
-                'kumo',
-                'sora'
-            ];
-        
+                // Tiledで出力したJsonファイルをロード
+                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/third-map.json');
+                
+                // レイヤー名を入力
+                this.layerNames = [
+                    // 'sky', 画像レイヤーは無視される
+                    'gake',
+                    'zimenn',
+                    'whitesuna',
+                    'snow',
+                    'ike',
+                    'ikenomono',
+                    'mizu',
+                    'ki',
+                    'okimono',
+                    'saku',
+                    'miti',
+                    'kumo',
+                    'hashi',
+                    'nizi',
+                    'goal!!!',
+                    // 'kumo2' 画像レイヤーは無視される
+                ];
+                
+                // タイルマップ名を入力
+                this.tilemapNames = [
+                    'base',
+                    'ArmillarySphere',
+                    'byobu',
+                    'goal2',
+                    'gpiano',
+                    'Le Penseur',
+                    'manekineko2',
+                    'mizu1',
+                    'mizu2',
+                    'nizi',
+                    'patcar',
+                    'syakanyorai2',
+                    'taki2',
+                    'tigermat2',
+                    'tuti2',
+                    'tuti3',
+                    'yougan',
+                    'kumo',
+                    'sora'
+                ];
                 
                 break;
         }
@@ -261,7 +260,8 @@ export class GameBoard {
             let tmpLayer = this.map.createLayer(i, relatedTileSet, 0, 0);
             tmpLayer.setScale(scale, scale);
             mapWidth = Math.max(mapWidth, tmpLayer.width);
-            mapHeight = Math.max(mapWidth, tmpLayer.height);
+            mapHeight = Math.max(mapHeight, tmpLayer.height);
+            console.log(tmpLayer.width + ", " + tmpLayer.height);
             this.fieldMap.add(tmpLayer);
         }
 
@@ -282,9 +282,6 @@ export class GameBoard {
         
         if (0 < this.mapY) { this.mapY = 0; scrollLimit = true;}
         else if (limitY > this.mapY) { this.mapY = limitY; scrollLimit = true;}
-
-        // this.mapX = Math.min(0, Math.max(this.mapX, ));
-        this.mapY = Math.min(0, Math.max(this.mapY, ));
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
