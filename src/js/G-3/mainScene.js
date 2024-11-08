@@ -4,7 +4,7 @@ import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
 
-debug = false;
+let debug = false;
 
 export class MainScene extends Phaser.Scene {
     constructor() {
@@ -26,7 +26,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.gameBoard = new GameBoard(this, 2);
+        this.gameBoard = new GameBoard(this, 0);
         this.gameBoard.preloadAssets();
 
         // ユーティリティクラスを使用可能に
@@ -85,24 +85,27 @@ export class MainScene extends Phaser.Scene {
 
     update() {
         const button = input();
-        if (!this.dialog.visible && !this.selectDialog.visible)
+        if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
+            
+                this.once = !this.once;
+            
+        }
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
         
         if (!this.once) {
             switch (this.state) {
                 case 0: break;
                 case 1:
-                    if (this.dialog.visible) this.dialog.hideDialog();
                     if (this.yourTurn) {
                         this.selectDialog.showSelectDialog(
                             'あなたのターンです。',
                             ['ルーレット', 'ステータス', 'ターンスキップ'],
                             choice => {
                                 switch (choice) {
-                                    case 0: this.dialog.showDialog('ルーレットを止めてください。', true, () => reSelectable(true)); this.state = 2; break;
-                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => reSelectable()); this.state = 4; break;
-                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。', true, () => reSelectable()); this.state = 2; break;
+                                    case 0: this.dialog.showDialog('ルーレットを止めてください。',       true, () => this.reselectable(true)); this.state = 2; break;
+                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.reselectable()); this.state = 4; break;
+                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。',       true, () => this.reselectable(true)); this.state = 2; break;
                                 }
                                 this.selectDialog.hideDialog();
                             }
@@ -113,9 +116,9 @@ export class MainScene extends Phaser.Scene {
                             ['ルーレット', 'ステータス', 'ターンスキップ'],
                             choice => {
                                 switch (choice) {
-                                    case 0: this.dialog.showDialog('ルーレットを止めてください。', true, () => reSelectable(true)); this.state = 2; break;
-                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => reSelectable()); this.state = 4; break;
-                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。', true, () => reSelectable()); this.state = 2; break;
+                                    case 0: this.dialog.showDialog('ルーレットを止めてください。',       true, () => this.reselectable(true)); this.state = 2; break;
+                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.reselectable()); this.state = 4; break;
+                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。',       true, () => this.reselectable(true)); this.state = 2; break;
                                 }
                                 this.selectDialog.hideDialog();
                             }
@@ -126,7 +129,9 @@ export class MainScene extends Phaser.Scene {
         }
     }
 
-    reSelectable(nextTurn) {
+    reselectable(nextTurn) {
+        this.dialog.hideDialog();
+        this.selectDialog.hideDialog();
         if (nextTurn)
             this.currentPlayer = ++this.currentPlayer % player.length;
 

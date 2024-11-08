@@ -5,6 +5,7 @@ CREATE TABLE InitState(
     hp int(10) NOT NULL,
     charm int(10) NOT NULL,
     sense int(10) NOT NULL,
+    img varchar(100) NOT NULL,
     PRIMARY KEY (pattern_id),
     FOREIGN KEY (skill_id) REFERENCES Skills (skill_id)
 );

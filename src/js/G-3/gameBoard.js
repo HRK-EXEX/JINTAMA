@@ -10,6 +10,9 @@ const scale = 3;
 const spd = 10;
 let tileOffsetX = 0;
 let tileOffsetY = 0;
+let mapWidth = 0;
+let mapHeight = 0;
+let scrollLimit = 0;
 
 export class GameBoard {
     constructor(scene, mapID) {
@@ -125,7 +128,7 @@ export class GameBoard {
             case 2: 
             this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
             this.scene.load.image('ArmillarySphere', '/map/mapchip2/ArmillarySphere.png');
-            this.scene.load.image('byobu', '/map/mapchip2/byoubu.png');
+            this.scene.load.image('byobu', '/map/mapchip2/byobu.png');
             this.scene.load.image('goal2', '/map/mapchip2/goal2.png');
             this.scene.load.image('gpiano', '/map/mapchip2/gpiano.png');
             this.scene.load.image('Le Penseur', '/map/mapchip2/Le Penseur.png');
@@ -141,31 +144,30 @@ export class GameBoard {
             this.scene.load.image('tuti3', '/map/mapchip2/Mapchip/tuti3.png');
             this.scene.load.image('yougan', '/map/mapchip2/MapChip/yougan.png');
             this.scene.load.image('kumo', '/map/mapchip2/kumo.png');
-            this.scene.load.image('sora', '/map/mapchip2/sora.png');
+            this.scene.load.image('sora', '/map/mapchip2/sora.jpg');
            
             // Tiledで出力したJsonファイルをロード
             this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/third-map.json');
             
             // レイヤー名を入力
             this.layerNames = [
-                'kumo2',
-                'goal!!!',
-                'nizi',
-                'hashi',
-                'kumo',
-                'miti',
-                'saku',
-                'okimono',
-                'ki',
-                'mizu',
-                'ikenomono',
-                'ike',
-                'snow',
-                'whitesuna',
-                'zimenn',
+                // 'sky', 画像レイヤーは無視される
                 'gake',
-                'sky'
-                
+                'zimenn',
+                'whitesuna',
+                'snow',
+                'ike',
+                'ikenomono',
+                'mizu',
+                'ki',
+                'okimono',
+                'saku',
+                'miti',
+                'kumo',
+                'hashi',
+                'nizi',
+                'goal!!!',
+                // 'kumo2' 画像レイヤーは無視される
             ];
             
             // タイルマップ名を入力
@@ -258,6 +260,8 @@ export class GameBoard {
         for(let i = 0; i < this.layerNames.length; i++) {
             let tmpLayer = this.map.createLayer(i, relatedTileSet, 0, 0);
             tmpLayer.setScale(scale, scale);
+            mapWidth = Math.max(mapWidth, tmpLayer.width);
+            mapHeight = Math.max(mapWidth, tmpLayer.height);
             this.fieldMap.add(tmpLayer);
         }
 
@@ -269,6 +273,19 @@ export class GameBoard {
     moveMapGroup(x, y) {
         this.mapX += x;
         this.mapY += y;
+
+        let limitX = -mapWidth * scale + this.scene.game.config.width;
+        let limitY = -mapHeight * scale + this.scene.game.config.height;
+
+        if (0 < this.mapX) { this.mapX = 0; scrollLimit = true;}
+        else if (limitX > this.mapX) { this.mapX = limitX; scrollLimit = true;}
+        
+        if (0 < this.mapY) { this.mapY = 0; scrollLimit = true;}
+        else if (limitY > this.mapY) { this.mapY = limitY; scrollLimit = true;}
+
+        // this.mapX = Math.min(0, Math.max(this.mapX, ));
+        this.mapY = Math.min(0, Math.max(this.mapY, ));
+
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
             this.loopMap.setTilePosition(-(this.mapX + tileOffsetX) / scale, -(this.mapY + tileOffsetY) / scale);
