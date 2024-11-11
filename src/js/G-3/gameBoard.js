@@ -119,8 +119,9 @@ export class GameBoard {
                 // タイルマップ名を入力
                 this.tilemapNames = [
                     'baseTile',
-                    'dirtTile1',
+                    'dirtTile',
                     'dirtTile2',
+                    'loopTile',
                 ];
 
                 break;
@@ -193,7 +194,6 @@ export class GameBoard {
                 
                 break;
         }
-        
     }
 
     createMap() {
