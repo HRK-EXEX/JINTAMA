@@ -24,9 +24,9 @@ export class MainScene extends Phaser.Scene {
         this.state = 1;
         this.once = false;
     }
-
+// マップ変更点（0,1,2)
     preload() {
-        this.gameBoard = new GameBoard(this, 2);
+        this.gameBoard = new GameBoard(this, 1);
         this.gameBoard.preloadAssets();
 
         // ユーティリティクラスを使用可能に
