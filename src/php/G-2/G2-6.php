@@ -32,7 +32,7 @@ $rank = 1;
                  foreach ($stm2 as $un) {
                     echo'<tr>';
                     echo'<td>'.$rank.'</td>';
-                    echo'<td><img src="/kansho/JINTAMA/img/'.$un['img'].'" width="80" height="80" style="image-rendering: pixelated;"></td>';
+                    echo'<td><img src="/kansho/JINTAMA/characters/'.$un['img'].'" width="80" height="80" style="image-rendering: pixelated;"></td>';
                     echo'<td>'.$un['user_name'].'</td>';
                     echo'<td>'.$un['score'].'pt</td>';
                     echo'</tr>';
