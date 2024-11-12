@@ -5,6 +5,7 @@ CREATE TABLE Skills(
     PRIMARY KEY (skill_id),
 );
 
+                                   スキル内容         スキル効果                                            
 INSERT INTO `Skills`(`skill_id`, `skill_content`, `skill_effect`) VALUES (1,' ',' ');
 INSERT INTO `Skills`(`skill_id`, `skill_content`, `skill_effect`) VALUES (2,' ',' ');
 INSERT INTO `Skills`(`skill_id`, `skill_content`, `skill_effect`) VALUES (3,' ',' ');
