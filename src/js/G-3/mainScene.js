@@ -128,7 +128,7 @@ export class MainScene extends Phaser.Scene {
             this.once = !this.once;
         }
     }
-
+// 自分のターンなのか判断する処理
     reselectable(nextTurn) {
         this.dialog.hideDialog();
         this.selectDialog.hideDialog();
