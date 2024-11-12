@@ -25,52 +25,6 @@ export class MainScene extends Phaser.Scene {
         this.utility = new Utility();
     }
 
-    
-    
-
-    update() {
-        const button = input();
-        if (!this.dialog.visible && !this.selectDialog.visible) {
-            this.gameBoard.update(button);
-            this.once = !this.once;
-        }
-        debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
-        
-        if (!this.once) {
-            switch (this.state) {
-                case 0: break;
-                case 1:
-                    if (this.yourTurn) {
-                        this.selectDialog.showSelectDialog(
-                            'あなたのターンです。',
-                            ['ルーレット', 'ステータス', 'ターンスキップ'],
-                            choice => {
-                                switch (choice) {
-                                    case 0: 
-                                        this.dialog.showDialog('ルーレットを止めてください。', true, () => {
-                                            this.startRoulette();
-                                        });
-                                        this.state = 2;
-                                        break;
-                                    case 1: 
-                                        this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.reselectable());
-                                        this.state = 4;
-                                        break;
-                                    case 2: 
-                                        this.dialog.showDialog('つぎの人にターンを渡します。', true, () => this.reselectable(true));
-                                        this.state = 2;
-                                        break;
-                                }
-                                this.selectDialog.hideDialog();
-                            }
-                        );
-                    }
-            }
-            this.once = !this.once;
-        }
-    }
-
-
     create() {
         this.gameBoard.createMap();
     
@@ -125,6 +79,8 @@ export class MainScene extends Phaser.Scene {
         const stopButton = this.add.text(400, 500, 'Stop Roulette', { fontSize: '32px', color: '#f00' })
             .setInteractive()
             .on('pointerdown', () => this.stopRoulette());
+
+        this.reselectable(false);
     }
 
     // ルーレットを開始
@@ -153,4 +109,47 @@ export class MainScene extends Phaser.Scene {
         this.state = this.yourTurn ? 1 : 0;
         this.once = !this.once;
     }
+
+    update() {
+        const button = input();
+        if (!this.dialog.visible && !this.selectDialog.visible) {
+            this.gameBoard.update(button);
+            this.once = !this.once;
+        }
+        debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
+        
+        if (!this.once) {
+            switch (this.state) {
+                case 0: break;
+                case 1:
+                    if (this.yourTurn) {
+                        this.selectDialog.showSelectDialog(
+                            'あなたのターンです。',
+                            ['ルーレット', 'ステータス', 'ターンスキップ'],
+                            choice => {
+                                switch (choice) {
+                                    case 0: 
+                                        this.dialog.showDialog('ルーレットを止めてください。', true, () => {
+                                            this.startRoulette();
+                                        });
+                                        this.state = 2;
+                                        break;
+                                    case 1: 
+                                        this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.reselectable());
+                                        this.state = 4;
+                                        break;
+                                    case 2: 
+                                        this.dialog.showDialog('つぎの人にターンを渡します。', true, () => this.reselectable(true));
+                                        this.state = 2;
+                                        break;
+                                }
+                                this.selectDialog.hideDialog();
+                            }
+                        );
+                    }
+            }
+            this.once = !this.once;
+        }
+    }
+
 }
