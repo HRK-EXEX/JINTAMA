@@ -68,7 +68,7 @@ export class MainScene extends Phaser.Scene {
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
     
         // ルーレット表示用のテキスト要素を作成
-        this.rouletteText = this.add.text(400, 300, 'ルーレット', { fontSize: '48px', color: '#fff' });
+        this.rouletteText = this.add.text(75, 300);
     
         // ルーレット開始ボタンを作成
         const startButton = this.add.text(200, 500, 'Start Roulette', { fontSize: '32px', color: '#0f0' })
