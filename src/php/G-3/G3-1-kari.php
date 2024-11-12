@@ -103,5 +103,8 @@ echo 'メンバー4：'.$_SESSION['User4']['user_id'].'('.$_SESSION['User4']['na
         
     </table>
     <button onclick="location.href='/kansho/JINTAMA/src/php/G-3/G3-2.php'">ゲーム終了</button>
+    <script>
+        var status=<?php json_encode($_SESSION['']);?>;
+        </script>
 </body>
 </html>
