@@ -99,7 +99,7 @@ export class GameBoard {
             case 1:
                 // マップ素材の画像をロード
                 this.scene.load.image('baseTile', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('dirtTile', '/map/mapchip2/MapChip/tuti1.png');
+                this.scene.load.image('dirtTile1', '/map/mapchip2/MapChip/tuti1.png');
                 this.scene.load.image('dirtTile2', '/map/mapchip2/MapChip/tuti2.png');
                 this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
 
@@ -119,7 +119,7 @@ export class GameBoard {
                 // タイルマップ名を入力
                 this.tilemapNames = [
                     'baseTile',
-                    'dirtTile',
+                    'dirtTile1',
                     'dirtTile2',
                     'loopTile',
                 ];
