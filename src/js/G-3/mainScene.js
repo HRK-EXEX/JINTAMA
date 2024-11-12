@@ -13,50 +13,37 @@ export class MainScene extends Phaser.Scene {
         this.currentPlayer = 1;
         this.turn = 1;
         this.yourTurn = false;
-        /**
-         * クライアントの状態を表すフィールド。  
-         * 0: 待機中（他のクライアントのターン時）  
-         * 1: 入力待機中（自分のターン開始時）  
-         * 2: ルーレット  
-         * 3: マップ移動  
-         * 4: ステータス閲覧  
-         */
         this.state = 1;
         this.once = false;
+        this.rouletteInterval = null; // ルーレット用のタイマーを保存
+        this.rouletteText = null; // ルーレット結果を表示するテキスト
     }
-// マップ変更点（0,1,2)
+
     preload() {
         this.gameBoard = new GameBoard(this, 1);
         this.gameBoard.preloadAssets();
-
-        // ユーティリティクラスを使用可能に
         this.utility = new Utility();
     }
 
     create() {
-        // マップの作成
         this.gameBoard.createMap();
-
+    
         let dialogW = 700;
         let dialogH = 300;
         let dialogX = 50;
         let dialogY = this.game.config.height - 50 - dialogH;
-
-        // ダイアログの作成
+    
         this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
         this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
-
-        // 入力の初期化
+    
         initializeInput(this); 
-
+    
         if (debug) {
-            // Zキーでダイアログを表示
             this.input.keyboard.on('keydown-Z', () => {
                 if (this.selectDialog.visible) this.selectDialog.hideDialog();
                 this.dialog.showDialog('これはテストメッセージです。\nダイアログボックスのテストです。', false, null);
             });
-
-            // Xキーで選択ダイアログを表示
+    
             this.input.keyboard.on('keydown-X', () => {
                 if (this.dialog.visible) this.dialog.hideDialog();
                 this.selectDialog.showSelectDialog(
@@ -73,23 +60,33 @@ export class MainScene extends Phaser.Scene {
                 );
             });
         }
-
-        // プレイヤーの表示
-        for (let i=0; i<4; i++) {
-            player[i] = new Player(this, 40, 40 + i*40, 'player'+(i+1));
-        }        
-
-        // デバッグ情報の初期化
+    
+        for (let i = 0; i < 4; i++) {
+            player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));
+        }
+    
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
+    
+        // ルーレット表示用のテキスト要素を作成
+        this.rouletteText = this.add.text(400, 300, 'ルーレット', { fontSize: '48px', color: '#fff' });
+    
+        // ルーレット開始ボタンを作成
+        const startButton = this.add.text(200, 500, 'Start Roulette', { fontSize: '32px', color: '#0f0' })
+            .setInteractive()
+            .on('pointerdown', () => this.startRoulette());
+    
+        // ルーレット停止ボタンを作成
+        const stopButton = this.add.text(400, 500, 'Stop Roulette', { fontSize: '32px', color: '#f00' })
+            .setInteractive()
+            .on('pointerdown', () => this.stopRoulette());
     }
+    
 
     update() {
         const button = input();
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
-            
-                this.once = !this.once;
-            
+            this.once = !this.once;
         }
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
         
@@ -103,22 +100,20 @@ export class MainScene extends Phaser.Scene {
                             ['ルーレット', 'ステータス', 'ターンスキップ'],
                             choice => {
                                 switch (choice) {
-                                    case 0: this.dialog.showDialog('ルーレットを止めてください。',       true, () => this.reselectable(true)); this.state = 2; break;
-                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.reselectable()); this.state = 4; break;
-                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。',       true, () => this.reselectable(true)); this.state = 2; break;
-                                }
-                                this.selectDialog.hideDialog();
-                            }
-                        );
-                    } else {
-                        this.selectDialog.showSelectDialog(
-                            'ターン待機中です。Enterキーでスキップ',
-                            ['ルーレット', 'ステータス', 'ターンスキップ'],
-                            choice => {
-                                switch (choice) {
-                                    case 0: this.dialog.showDialog('ルーレットを止めてください。',       true, () => this.reselectable(true)); this.state = 2; break;
-                                    case 1: this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.reselectable()); this.state = 4; break;
-                                    case 2: this.dialog.showDialog('つぎの人にターンを渡します。',       true, () => this.reselectable(true)); this.state = 2; break;
+                                    case 0: 
+                                        this.dialog.showDialog('ルーレットを止めてください。', true, () => {
+                                            this.startRoulette();
+                                        });
+                                        this.state = 2;
+                                        break;
+                                    case 1: 
+                                        this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.reselectable());
+                                        this.state = 4;
+                                        break;
+                                    case 2: 
+                                        this.dialog.showDialog('つぎの人にターンを渡します。', true, () => this.reselectable(true));
+                                        this.state = 2;
+                                        break;
                                 }
                                 this.selectDialog.hideDialog();
                             }
@@ -128,7 +123,23 @@ export class MainScene extends Phaser.Scene {
             this.once = !this.once;
         }
     }
-// 自分のターンなのか判断する処理
+
+    // ルーレットを開始
+    startRoulette() {
+        this.rouletteInterval = setInterval(() => {
+            const randomNum = Math.floor(Math.random() * 6) + 1;
+            this.rouletteText.setText(randomNum); // ルーレットの数字を更新
+        }, 100); // 100msごとに更新
+    }
+
+    // ルーレットを停止
+    stopRoulette() {
+        clearInterval(this.rouletteInterval); // ルーレットを停止
+        const finalNumber = this.rouletteText.text;
+        this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true, () => this.reselectable(true));
+    }
+
+    // 自分のターンか判断する処理
     reselectable(nextTurn) {
         this.dialog.hideDialog();
         this.selectDialog.hideDialog();
