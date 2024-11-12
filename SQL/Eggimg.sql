@@ -5,3 +5,13 @@ CREATE TABLE Eggimg (
 );
 
 INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
+INSERT INTO `Eggimg`(`eggimg_id`, `img_pass`) VALUES (null,'');
