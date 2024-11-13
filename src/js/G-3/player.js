@@ -27,7 +27,7 @@ export default class Player extends Phaser.GameObjects.Container {
             charm: 0,
             sense: 0
         };
-        
+       
         // プレイヤーの見た目の設定
         this.setupSprite();
         
@@ -48,22 +48,36 @@ export default class Player extends Phaser.GameObjects.Container {
         // ステータス表示を更新
         this.updateStatusDisplay();
     }
-    
+
     setupSprite() {
         // プレイヤーの見た目（仮の円で表現）
-        this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
-        // クリック可能にする
+        // this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
+        this.sprite = this.scene.add.sprite(0, 0, 'playericon');
         this.sprite.setInteractive();
-        
+    
         // ホバー効果
         this.sprite.on('pointerover', () => {
-            this.sprite.setFillStyle(this.color.random().color32);
+            // ホバー時に、たとえば画像の透明度を少し変えるなどの効果
+            this.sprite.setAlpha(0.8);
             this.showDetailedStatus();
         });
         
         this.sprite.on('pointerout', () => {
-            this.sprite.setFillStyle(this.color.random().color32);
+            // ホバーを外したときに透明度を元に戻す
+            this.sprite.setAlpha(1);
             this.hideDetailedStatus();
+        // クリック可能にする
+        // this.sprite.setInteractive();
+        
+        // // ホバー効果
+        // this.sprite.on('pointerover', () => {
+        //     this.sprite.setFillStyle(this.color.random().color32);
+        //     this.showDetailedStatus();
+        // });
+        
+        // this.sprite.on('pointerout', () => {
+        //     this.sprite.setFillStyle(this.color.random().color32);
+        //     this.hideDetailedStatus();
         });
     }
     

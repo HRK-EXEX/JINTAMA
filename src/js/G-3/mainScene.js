@@ -23,6 +23,7 @@ export class MainScene extends Phaser.Scene {
         this.gameBoard = new GameBoard(this, 1);
         this.gameBoard.preloadAssets();
         this.utility = new Utility();
+        this.load.image('playericon', '/characters/melondog.png');
     }
 
     create() {
