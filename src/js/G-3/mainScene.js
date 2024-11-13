@@ -104,7 +104,6 @@ export class MainScene extends Phaser.Scene {
         this.selectDialog.hideDialog();
         if (nextTurn)
             this.currentPlayer = ++this.currentPlayer % player.length;
-
         this.yourTurn = this.turn == this.currentPlayer;
         this.state = this.yourTurn ? 1 : 0;
         this.once = !this.once;
