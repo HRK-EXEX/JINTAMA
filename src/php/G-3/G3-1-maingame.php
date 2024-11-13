@@ -1,15 +1,22 @@
+<?php
+    session_start();
+    echo "<div id='username' style='display: none;'>". $_SESSION['User1']."</div>";
+    echo "<div id='username' style='display: none;'>". $_SESSION['User2']."</div>";
+    echo "<div id='username' style='display: none;'>". $_SESSION['User3']."</div>";
+    echo "<div id='username' style='display: none;'>". $_SESSION['User4']."</div>";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/src/css/G-3/G3-1-game.css">
-    <link rel="stylesheet"  href="/src/css/base/dot_font.css" /> 
+    <link rel="stylesheet" href="/kansho/JINTAMA/src/css/G-3/G3-1-game.css">
+    <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/phaser@v3.85.2/dist/phaser.min.js"></script>
-    <script src="/src/js/G-3/initialize.js" type="module"></script>
-    <script src="/src/js/G-3/gameBoard.js" type="module"></script>
-    <script src="/src/js/G-3/dialogSelectBox.js" type="module"></script>
-    <script src="/src/js/G-3/main.js" type="module"></script>
+    <script src="/kansho/JINTAMA/src/js/G-3/initialize.js" type="module"></script>
+    <script src="/kansho/JINTAMA/src/js/G-3/gameBoard.js" type="module"></script>
+    <script src="/kansho/JINTAMA/src/js/G-3/dialogSelectBox.js" type="module"></script>
+    <script src="/kansho/JINTAMA/src/js/G-3/main.js" type="module"></script>
     <title>メインゲーム</title>
 </head>
 <body>
