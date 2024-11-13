@@ -1,3 +1,5 @@
+var username=document.getElementById('username').textContent;
+console.log(username);
 import { MainScene } from "./mainScene.js";
 
 const DEFAULT_WIDTH = window.innerWidth
