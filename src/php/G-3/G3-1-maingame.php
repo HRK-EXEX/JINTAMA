@@ -1,6 +1,7 @@
 <?php
-    echo "< div id='username' style='display: none;'>". var_dump($_SESSION['User'])."</div>";
-        ?>
+    session_start();
+    echo "<div id='username' style='display: none;'>". var_dump($_SESSION)."</div>";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
