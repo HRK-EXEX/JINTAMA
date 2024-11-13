@@ -1,6 +1,9 @@
 <?php
     session_start();
-    echo "<div id='username' style='display: none;'>". var_dump($_SESSION)."</div>";
+    echo "<div id='username' style='display: none;'>". $_SESSION['User1']."</div>";
+    echo "<div id='username' style='display: none;'>". $_SESSION['User2']."</div>";
+    echo "<div id='username' style='display: none;'>". $_SESSION['User3']."</div>";
+    echo "<div id='username' style='display: none;'>". $_SESSION['User4']."</div>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
