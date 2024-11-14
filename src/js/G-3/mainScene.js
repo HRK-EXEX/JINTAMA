@@ -16,6 +16,7 @@ export class MainScene extends Phaser.Scene {
         this.rouletteInterval = null;
         this.rouletteText = null;
         this.isRouletteRunning = false; // ルーレットが実行中かどうかを示すフラグ
+        this.isDialogActive = false;
     }
 
     preload() {
@@ -50,7 +51,11 @@ export class MainScene extends Phaser.Scene {
             if (this.isRouletteRunning) {
                 // ルーレットが実行中の場合は停止
                 this.stopRoulette(true);
-            } else {
+            } else if(this.isDialogActive){
+                this.dialog.hideDialog();
+                this.isDialogActive = false;
+                this.endTurn();
+            }else{
                 // ルーレットが停止中の場合は開始
                 this.startRoulette();
             }
@@ -74,6 +79,8 @@ export class MainScene extends Phaser.Scene {
         const finalNumber = this.rouletteText.text;  // 最後の数字を取得
         console.log("最終的な数字:", finalNumber);
         console.log(isEnterKey);
+
+        this.dialog.hideDialog();
     
         // ルーレット停止後にダイアログを表示
         if (isEnterKey) {
