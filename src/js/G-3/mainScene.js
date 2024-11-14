@@ -28,7 +28,6 @@ export class MainScene extends Phaser.Scene {
 
     create() {
         this.gameBoard.createMap();
-
         let dialogW = 700, dialogH = 300, dialogX = 50, dialogY = this.game.config.height - 50 - dialogH;
 
         this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);

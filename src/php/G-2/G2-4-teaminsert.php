@@ -20,6 +20,7 @@ $stm2 = $db->prepare("SELECT `room_id` FROM `Room` WHERE room_name = ?");
 $stm2->execute([$teamname]);
 foreach( $stm2 as $rm){
      $room_id = $rm['room_id'];
+     $_SESSION['User']['room_id'] = $rm['room_id'];
 }
 
      header("Location:/kansho/JINTAMA/src/php/G-2/G2-5.php?room_id=".$room_id."");
