@@ -1,14 +1,11 @@
 <?php
     session_start();
-    $array = [
-        '1' => $_SESSION['User1'],
-        '2' => $_SESSION['User2'],
-        '3' => $_SESSION['User3'],
-        '4' => $_SESSION['User4']
-    ]
-    foreach ($array as $index => $arr) {
-        echo "<div id='username$index' style='display: none;'>".implode(",", $arr)."</div>";
-    }
+    var_dump($_SESSION);
+    echo "<div id='username1' style='display: none;'>".isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty"."</div>";
+    echo "<div id='username2' style='display: none;'>".isset($_SESSION['User2']) ? implode(",", $_SESSION['User2']) : "empty"."</div>";
+    echo "<div id='username3' style='display: none;'>".isset($_SESSION['User3']) ? implode(",", $_SESSION['User3']) : "empty"."</div>";
+    echo "<div id='username4' style='display: none;'>".isset($_SESSION['User4']) ? implode(",", $_SESSION['User4']) : "empty"."</div>";
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
