@@ -1,11 +1,9 @@
 <?php
     session_start();
-    echo "<div id='username1' style='display: none;'>".implode(",",$_SESSION['User1'])."</div>";
-    echo "<div id='username2' style='display: none;'>".implode(",",$_SESSION['User2'])."</div>";
-    echo "<div id='username3' style='display: none;'>".implode(",",$_SESSION['User3'])."</div>";
-    echo "<div id='username4' style='display: none;'>".implode(",",$_SESSION['User4'])."</div>";
-
-
+    $array = [$_SESSION['User1'], $_SESSION['User2'], $_SESSION['User3'], $_SESSION['User4']]
+    foreach ($array as $index => $arr) {
+        echo "<div id='username$index' style='display: none;'>".implode(",", $arr)."</div>";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
