@@ -7,7 +7,7 @@
         '4' => $_SESSION['User4']
     );
     foreach ($array as $index => $arr) {
-        echo "<div id='username$index' style='display: none;'>".isset($arr) ? implode(",", $arr) : "empty"."</div>";
+        echo "<div id='username$index' style='display: none;'>".!empty($arr) ? implode(",", $arr) : "empty"."</div>";
     }
 ?>
 <!DOCTYPE html>
