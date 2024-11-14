@@ -19,6 +19,7 @@ $stm = $db->prepare("INSERT INTO `Room`(`room_id`, `room_name`, `room_user1`, `r
 $stm2 = $db->prepare("SELECT `room_id` FROM `Room` WHERE room_name = ?");
 $stm2->execute([$teamname]);
 foreach( $stm2 as $rm){
+     $room_id = $rm['room_id'];
      $_SESSION['User']['room_id'] = $rm['room_id'];
 }
 
