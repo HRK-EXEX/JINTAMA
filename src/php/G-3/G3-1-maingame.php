@@ -1,6 +1,11 @@
 <?php
     session_start();
-    $array = [$_SESSION['User1'], $_SESSION['User2'], $_SESSION['User3'], $_SESSION['User4']]
+    $array = [
+        1 => $_SESSION['User1'], 
+        2 => $_SESSION['User2'], 
+        3 => $_SESSION['User3'], 
+        4 => $_SESSION['User4']
+    ]
     foreach ($array as $index => $arr) {
         echo "<div id='username$index' style='display: none;'>".implode(",", $arr)."</div>";
     }
