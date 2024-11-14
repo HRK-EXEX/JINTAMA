@@ -1,9 +1,11 @@
 <?php
     session_start();
-    echo "<div id='username1' style='display: none;'>". $_SESSION['User1']."</div>";
-    echo "<div id='username2' style='display: none;'>". $_SESSION['User2']."</div>";
-    echo "<div id='username3' style='display: none;'>". $_SESSION['User3']."</div>";
-    echo "<div id='username4' style='display: none;'>". $_SESSION['User4']."</div>";
+    echo "<div id='username1' style='display: none;'>".implode(",",$_SESSION['User1'])."</div>";
+    echo "<div id='username2' style='display: none;'>".implode(",",$_SESSION['User2'])."</div>";
+    echo "<div id='username3' style='display: none;'>".implode(",",$_SESSION['User3'])."</div>";
+    echo "<div id='username4' style='display: none;'>".implode(",",$_SESSION['User4'])."</div>";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
