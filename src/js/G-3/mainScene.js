@@ -30,18 +30,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     create() {
-        this.gameBoard.createMap();
-        let dialogW = 700, dialogH = 300, dialogX = 50, dialogY = this.game.config.height - 50 - dialogH;
-
-        this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
-        this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
-
-        initializeInput(this); 
-        this.state = 1;
-        this.once = false;
-
-        this.showTurnOptions();
-
+        
         var username = document.getElementById('username1').textContent;
         console.log(username);
         const arr = username.split(',');
@@ -57,6 +46,18 @@ export class MainScene extends Phaser.Scene {
             });
         }
         
+        this.gameBoard.createMap();
+        let dialogW = 700, dialogH = 300, dialogX = 50, dialogY = this.game.config.height - 50 - dialogH;
+
+        this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
+        this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
+
+        initializeInput(this); 
+        this.state = 1;
+        this.once = false;
+
+        this.showTurnOptions();
+
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
         this.rouletteText = this.add.text(75, 300);
 
