@@ -57,11 +57,14 @@ export class MainScene extends Phaser.Scene {
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
                  this.rouletteText.setText(""); //ルーレットの数字を消す
-                this.endTurn();
-            }else{
-                // ルーレットが停止中の場合は開始
+                this.endTurn(true);
+            }else if(this.state === 2 && !this.isRouletteRunning){
                 this.startRoulette();
             }
+            // }else{
+            //     this.startRoulette();
+            // }
+        
         });
 
         // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
@@ -69,6 +72,7 @@ export class MainScene extends Phaser.Scene {
 
     startRoulette() {
         this.isRouletteRunning = true; // ルーレット実行中フラグを設定
+        this.rouletteText.setText("");
         this.rouletteInterval = setInterval(() => {
             const randomNum = Math.floor(Math.random() * 6) + 1;
             this.rouletteText.setText(randomNum);
@@ -80,27 +84,28 @@ export class MainScene extends Phaser.Scene {
         this.rouletteInterval = null;
         this.isRouletteRunning = false;  // ルーレット実行中フラグをリセット
         const finalNumber = this.rouletteText.text;  // 最後の数字を取得
-        this.dialog.hideDialog();
-        console.log("最終的な数字:", finalNumber);
-        console.log(isEnterKey);
+        // this.dialog.hideDialog();
+        // console.log("最終的な数字:", finalNumber);
+        // console.log(isEnterKey);
 
-        this.dialog.hideDialog();
+        // this.dialog.hideDialog();
     
         // ルーレット停止後にダイアログを表示
         if (isEnterKey) {
             this.isDialogActive = true;
             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
-            this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true, () => {}
-            );
+            this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true,() =>{
+                this.endTurn(false);
+            });
         } else {
             this.rouletteText.setText("");
-            this.endTurn();  // ルーレット停止時に即座にターンを終了
+            this.endTurn(true);  // ルーレット停止時に即座にターンを終了
         }
     }
     
 
-    endTurn() {
-        this.dialog.hideDialog();
+    endTurn(forceHide) {
+        if (forceHide) this.dialog.hideDialog();
         this.selectDialog.hideDialog();
         this.currentPlayer = (this.currentPlayer + 1) % player.length;
         this.yourTurn = (this.turn === this.currentPlayer);
@@ -131,16 +136,34 @@ export class MainScene extends Phaser.Scene {
             choice => {
                 switch (choice) {
                     case 0:
-                        this.dialog.showDialog('ルーレットを止めてください。', true, () => this.startRoulette());
+                        this.dialog.showDialog('ルーレットを止めてください。', true, () => {
+                            // this.isDialogActive = true;
+                            // ルーレット停止後に選ばれた数字を表示するダイアログを表示
+                            this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, false,() =>{
+                                this.endTurn(false);
+                            });
+                        });
+
                         this.state = 2;
+                        // this.isRouletteRunning = false;
+                        this.startRoulette();
+
                         break;
                     case 1:
-                        this.dialog.showDialog('ステータスは以下のようになります。', true, () => this.endTurn());
+                        this.rouletteText.setText("");
+                        this.dialog.showDialog('ステータスは以下のようになります。', true, () =>{
                         this.state = 4;
+                        this.isRouletteRunning = false;
+                        this.endTurn(true);
+                        });
                         break;
                     case 2:
-                        this.dialog.showDialog('つぎの人にターンを渡します。', true, () => this.endTurn());
-                        this.state = 2;
+                        this.rouletteText.setText("");
+                        this.dialog.showDialog('つぎの人にターンを渡します。', true, () =>{
+                        this.state = 0;
+                        this.isRouletteRunning = false;
+                        this.endTurn(true)
+                        });
                         break;
                 }
                 this.selectDialog.hideDialog();
