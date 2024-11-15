@@ -28,7 +28,7 @@ export default class Player extends Phaser.GameObjects.Container {
             sense: 0
         };
         this.sprite = scene.add.sprite(70, 70, 'playericon'); // 画像の中心が(0, 0)になるように調整
-        this.sprite.setDisplaySize(32, 32); // 画像サイズの調整
+        this.sprite.setScale(3,3);; // 画像サイズの調整
         this.add(this.sprite); // コンテナに画像を追加
         
         // プレイヤーの見た目の設定
@@ -57,6 +57,7 @@ export default class Player extends Phaser.GameObjects.Container {
         // this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
         this.sprite = this.scene.add.sprite(0, 0, 'playericon');
         this.sprite.setInteractive();
+       
     
         // ホバー効果
         this.sprite.on('pointerover', () => {
