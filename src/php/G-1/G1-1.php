@@ -8,17 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <title>タイトル画面</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.85.2/dist/phaser.min.js">
-    const music = new Howl({
-        src: '/kansho/JINTAMA/sounds/sound.mp3',
-        autoplay: true,
-        volume: 0.5,
-        loop: true,
-        });
-        music.play();
-    </script>
-    <!-- <audio id="bgm" src="/kansho/JINTAMA/sounds/sound.mp3" preload="auto" loop></audio>
-    <audio id="hoverSound" src="/kansho/JINTAMA/sounds/sound.mp3" preload="auto"></audio> -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.85.2/dist/phaser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
 </head>
 <body>
 <main data-barba="container" data-barba-namespace="home">
@@ -29,57 +22,68 @@
     <div class="kuro" id="show-later">
         <a href="G1-5-log-input.php"><h1>ログインへ</h1></a>
     </div>
-    </main>
 
-    <script>
-     
+</main>
 
-        // ページ読み込み時の処理
-        window.onload = function() {
-            const image = document.getElementById('title');
-            image.animate(
-                [
-                    { transform: 'translateY(0)' },
-                    { transform: 'translateY(28vw)' }
-                ],
-                {
-                    fill: 'forwards',
-                    duration: 3000
-                }
-            );
+<script>
+    // グローバルに音楽オブジェクトを定義
+    let music;
 
-            const showLater = document.getElementById("show-later");
-            setTimeout(() => {
-                showLater.classList.add("visible"); // 3秒後に一気に表示
-            }, 3000); // 3秒後にクラス追加
+    // 音楽を再生または再生済みか確認
+    function playMusic() {
+        if (!music) {
+            music = new Howl({
+                src: ['/kansho/JINTAMA/sounds/sound.mp3'],
+                autoplay: true,
+                loop: true,
+                volume: 0.5
+            });
+        }
+        if (!music.playing()) {
+            music.play();
+        }
+    }
 
-           
-        };
-        
-        barba.init({
+    // ページ読み込み時の処理
+    window.onload = function() {
+        playMusic(); // 音楽を再生
+        const image = document.getElementById('title');
+        image.animate(
+            [
+                { transform: 'translateY(0)' },
+                { transform: 'translateY(28vw)' }
+            ],
+            {
+                fill: 'forwards',
+                duration: 3000
+            }
+        );
+
+        const showLater = document.getElementById("show-later");
+        setTimeout(() => {
+            showLater.classList.add("visible");
+        }, 3000);
+    };
+
+    // barba.js 初期化
+    barba.init({
         transitions: [{
             leave(data) {
-            return gsap.to(data.current.container, {
-                x:"100%"
-            });
+                return gsap.to(data.current.container, {
+                    x: "100%",
+                    duration: 0.5
+                });
             },
             enter(data) {
-            gsap.from(data.next.container, {
-                x: "-100%"
-            });
+                gsap.from(data.next.container, {
+                    x: "-100%",
+                    duration: 0.5
+                });
+                playMusic(); // ページ移動後も音楽を再生
             }
         }]
-        });
+    });
+</script>
 
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
-    integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
-  <script src="./assets/base.js"></script>
-
-      
-    
 </body>
 </html>
