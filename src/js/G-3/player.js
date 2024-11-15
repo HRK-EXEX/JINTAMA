@@ -27,7 +27,7 @@ export default class Player extends Phaser.GameObjects.Container {
             charm: 0,
             sense: 0
         };
-        this.sprite = scene.add.sprite(70, 70, 'playericon'); // 画像の中心が(0, 0)になるように調整
+        this.sprite = scene.add.sprite(70, 70, 'playericon1'); // 画像の中心が(0, 0)になるように調整
         this.sprite.setScale(3,3);; // 画像サイズの調整
         this.add(this.sprite); // コンテナに画像を追加
         
@@ -55,8 +55,20 @@ export default class Player extends Phaser.GameObjects.Container {
     setupSprite() {
         // プレイヤーの見た目（仮の円で表現）
         // this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
-        this.sprite = this.scene.add.sprite(0, 0, 'playericon');
-        this.sprite.setInteractive();
+        // if(this.name=='Player 1'){
+            this.sprite = this.scene.add.sprite(0, 0, 'playericon1');
+            this.sprite.setInteractive();
+        // }else if(this.name=='Player 2'){
+        //     this.sprite = this.scene.add.sprite(0, 0, 'playericon2');
+        //     this.sprite.setInteractive();
+        // }else if(this.name=='Player 3'){
+        //     this.sprite = this.scene.add.sprite(0, 0, 'playericon3');
+        //     this.sprite.setInteractive();
+        // }else{
+        //     this.sprite = this.scene.add.sprite(0, 0, 'playericon4');
+        //     this.sprite.setInteractive();
+        // }
+        
        
     
         // ホバー効果
