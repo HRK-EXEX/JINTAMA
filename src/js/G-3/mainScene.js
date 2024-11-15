@@ -52,8 +52,8 @@ export class MainScene extends Phaser.Scene {
             p.modifyStats({
                 score: arr[3] - p.stats.score,    // 幸福度
                 hp: arr[4] - p.hp.score,     // 体力
-                charm: 50,   // 魅力
-                sense: 50    // センス
+                charm: arr[5] - p.charm.score,   // 魅力
+                sense: arr[6] - p.sense.score    // センス
             });
         }
         // 基本ステータス
