@@ -23,7 +23,10 @@ export class MainScene extends Phaser.Scene {
         this.gameBoard = new GameBoard(this, 1);
         this.gameBoard.preloadAssets();
         this.utility = new Utility();
-        this.load.image('playericon', '/characters/melondog.png');
+        this.load.image('playericon1', '/characters/melondog.png');
+        this.load.image('playericon2', '/characters/takugorira.png');
+        this.load.image('playericon3', '/characters/obake.png');
+        this.load.image('playericon4', '/characters/bakemon.png');
     }
 
     create() {
@@ -53,6 +56,7 @@ export class MainScene extends Phaser.Scene {
             } else if(this.isDialogActive){
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
+                 this.rouletteText.setText(""); //ルーレットの数字を消す
                 this.endTurn();
             }else{
                 // ルーレットが停止中の場合は開始
@@ -76,6 +80,7 @@ export class MainScene extends Phaser.Scene {
         this.rouletteInterval = null;
         this.isRouletteRunning = false;  // ルーレット実行中フラグをリセット
         const finalNumber = this.rouletteText.text;  // 最後の数字を取得
+        this.dialog.hideDialog();
         console.log("最終的な数字:", finalNumber);
         console.log(isEnterKey);
 
@@ -83,10 +88,12 @@ export class MainScene extends Phaser.Scene {
     
         // ルーレット停止後にダイアログを表示
         if (isEnterKey) {
+            this.isDialogActive = true;
             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
             this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true, () => {}
             );
         } else {
+            this.rouletteText.setText("");
             this.endTurn();  // ルーレット停止時に即座にターンを終了
         }
     }

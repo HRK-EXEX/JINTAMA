@@ -27,10 +27,23 @@ export default class Player extends Phaser.GameObjects.Container {
             charm: 0,
             sense: 0
         };
-        this.sprite = scene.add.sprite(20, 20, 'playericon'); // 画像の中心が(0, 0)になるように調整
-        this.sprite.setDisplaySize(30, 30); // 画像サイズの調整
-        this.add(this.sprite); // コンテナに画像を追加
-        
+        if(this.y==40){
+            this.sprite = scene.add.sprite(200,100, 'playericon1'); // 画像の中心が(0, 0)になるように調整
+            this.sprite.setScale(2,2);; // 画像サイズの調整
+            this.add(this.sprite); // コンテナに画像を追加
+        }else if(this.y==80){
+            this.sprite = scene.add.sprite(70, 70, 'playericon2'); // 画像の中心が(0, 0)になるように調整
+            this.sprite.setScale(2,2);; // 画像サイズの調整
+            this.add(this.sprite);
+        }else if(this.y==120){
+            this.sprite = scene.add.sprite(70, 70, 'playericon3'); // 画像の中心が(0, 0)になるように調整
+            this.sprite.setScale(2,2);; // 画像サイズの調整
+            this.add(this.sprite);
+        }else{
+            this.sprite = scene.add.sprite(70, 70, 'playericon4'); // 画像の中心が(0, 0)になるように調整
+            this.sprite.setScale(2,2);; // 画像サイズの調整
+            this.add(this.sprite);
+        }
         // プレイヤーの見た目の設定
         this.setupSprite();
         
@@ -55,9 +68,21 @@ export default class Player extends Phaser.GameObjects.Container {
     setupSprite() {
         // プレイヤーの見た目（仮の円で表現）
         // this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
-        this.sprite = this.scene.add.sprite(0, 0, 'playericon');
-        this.sprite.setInteractive();
+        if(this.y==40){
+            this.sprite = this.scene.add.sprite(0, 0, 'playericon1');
+            this.sprite.setInteractive();
+        }else if(this.y==80){
+            this.sprite = this.scene.add.sprite(0, 0, 'playericon2');
+            this.sprite.setInteractive();
+        }else if(this.y==120){
+            this.sprite = this.scene.add.sprite(0, 0, 'playericon3');
+            this.sprite.setInteractive();
+        }else{
+            this.sprite = this.scene.add.sprite(0, 0, 'playericon4');
+            this.sprite.setInteractive();
+        }
         
+       
     
         // ホバー効果
         this.sprite.on('pointerover', () => {
