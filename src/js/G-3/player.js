@@ -26,7 +26,7 @@ export default class Player extends Phaser.GameObjects.Container {
             hp: 0,
             charm: 0,
             sense: 0
-        };
+        };                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
         if(this.y==40){
             this.sprite = scene.add.sprite(200,100, 'playericon1'); // 画像の中心が(0, 0)になるように調整
             this.sprite.setScale(2,2);; // 画像サイズの調整

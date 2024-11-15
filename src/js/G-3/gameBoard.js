@@ -1,5 +1,5 @@
 import {
-    updateFieldMap, updateLoopMap
+    updateFieldMap, updateLoopMap, player
 } from './initialize.js';
 
 // マップ設定の定数と変数
@@ -241,6 +241,15 @@ export class GameBoard {
         }
 
         this.fieldMap.setAlpha(1);
+
+    //     this.players = [];
+    // for (let i = 0; i < 4; i++) {
+    //     const playerX = 50; // 初期位置のX座標
+    //     const playerY = 100 + i * 50; // 初期位置のY座標（各プレイヤーを縦に配置）
+    //     let player = new Player(this.scene, playerX, playerY, `player${i + 1}`);
+    //     this.players.push(player); // プレイヤーを配列に追加
+    //     this.scene.add.existing(player); // シーンにプレイヤーを追加
+    // }
         
         this.moveMapGroup(0, 0);
     }
@@ -249,6 +258,11 @@ export class GameBoard {
         scrollLimit = 0;
         this.mapX += x;
         this.mapY += y;
+
+        // player.forEach(p => {
+        //     p.x += x;
+        //     p.y += y;
+        // });
 
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
