@@ -40,9 +40,9 @@ export class MainScene extends Phaser.Scene {
             p = new Player(this, 40, 40 + i * 40, arr[2]);
             p.modifyStats({
                 score: arr[3] - p.stats.score,    // 幸福度
-                hp: arr[4] - p.hp.score,     // 体力
-                charm: arr[5] - p.charm.score,   // 魅力
-                sense: arr[6] - p.sense.score    // センス
+                hp: arr[4] - p.stats.hp,     // 体力
+                charm: arr[5] - p.stats.charm,   // 魅力
+                sense: arr[6] - p.stats.sense // センス
             });
         }
         
