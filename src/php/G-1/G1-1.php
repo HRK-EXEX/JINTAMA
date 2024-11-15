@@ -8,22 +8,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <title>タイトル画面</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.85.2/dist/phaser.min.js"></script>
-    <audio id="bgm" src="/kansho/JINTAMA/sounds/sound.mp3" preload="auto" loop></audio>
-    <audio id="hoverSound" src="/kansho/JINTAMA/sounds/sound.mp3" preload="auto"></audio>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.85.2/dist/phaser.min.js">
+    const music = new Howl({
+        src: '/kansho/JINTAMA/sounds/sound.mp3',
+        autoplay: true,
+        volume: 0.5,
+        loop: true,
+        });
+        music.play();
+    </script>
+    <!-- <audio id="bgm" src="/kansho/JINTAMA/sounds/sound.mp3" preload="auto" loop></audio>
+    <audio id="hoverSound" src="/kansho/JINTAMA/sounds/sound.mp3" preload="auto"></audio> -->
 </head>
 <body>
+<main data-barba="container" data-barba-namespace="home">
+
     <div class="title">
         <img src="/kansho/JINTAMA/img/JINTAMA.png" alt="タイトル画像" id="title">
     </div>
     <div class="kuro" id="show-later">
         <a href="G1-5-log-input.php"><h1>ログインへ</h1></a>
     </div>
+    </main>
 
     <script>
-        const bgm = document.getElementById('bgm');
-        const hoverSound = document.getElementById('hoverSound');
-        const loginButton = document.querySelector('.kuro a'); // ログインボタンを取得
+     
 
         // ページ読み込み時の処理
         window.onload = function() {
@@ -44,32 +53,33 @@
                 showLater.classList.add("visible"); // 3秒後に一気に表示
             }, 3000); // 3秒後にクラス追加
 
-            // BGMの状態を確認
-            const isPlaying = localStorage.getItem('bgmPlaying') === 'true';
-            if (isPlaying) {
-                bgm.play(); // BGMを再生
-                loginButton.style.display = 'none'; // ボタンを隠す（必要に応じて）
-            }
+           
         };
-
-        // ログインボタンがクリックされたときの処理
-        loginButton.addEventListener('click', () => {
-            bgm.play(); // BGMを再生
-            localStorage.setItem('bgmPlaying', 'true'); // 状態を保存
-            loginButton.style.display = 'none'; // ボタンを隠す
+        
+        barba.init({
+        transitions: [{
+            leave(data) {
+            return gsap.to(data.current.container, {
+                x:"100%"
+            });
+            },
+            enter(data) {
+            gsap.from(data.next.container, {
+                x: "-100%"
+            });
+            }
+        }]
         });
 
-        // マウスオーバー時に音を鳴らすイベント
-        loginButton.addEventListener('mouseenter', () => {
-            hoverSound.currentTime = 0; // 音声を先頭に戻す
-            hoverSound.play(); // 音声を再生
-        });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+    integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
+  <script src="./assets/base.js"></script>
 
-        // ページを離れる際の処理
-        window.addEventListener('beforeunload', function() {
-            bgm.pause(); // BGMを一時停止
-            localStorage.setItem('bgmPlaying', 'false'); // 状態を保存
-        });
-    </script>
+      
+    
 </body>
 </html>
