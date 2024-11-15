@@ -57,6 +57,7 @@ export default class Player extends Phaser.GameObjects.Container {
         // this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
         this.sprite = this.scene.add.sprite(0, 0, 'playericon');
         this.sprite.setInteractive();
+        
     
         // ホバー効果
         this.sprite.on('pointerover', () => {
