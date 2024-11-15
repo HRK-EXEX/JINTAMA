@@ -1,10 +1,10 @@
 <?php
     session_start();
     var_dump($_SESSION);
-    echo "<div id='username1' style='display: none;'>".(isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty")."</div>";
-    echo "<div id='username2' style='display: none;'>".(isset($_SESSION['User2']) ? implode(",", $_SESSION['User2']) : "empty")."</div>";
-    echo "<div id='username3' style='display: none;'>".(isset($_SESSION['User3']) ? implode(",", $_SESSION['User3']) : "empty")."</div>";
-    echo "<div id='username4' style='display: none;'>".(isset($_SESSION['User4']) ? implode(",", $_SESSION['User4']) : "empty")."</div>";
+    echo "<div id='username1' style='display: none;'>".(isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty")."</div><br>";
+    echo "<div id='username2' style='display: none;'>".(isset($_SESSION['User2']) ? implode(",", $_SESSION['User2']) : "empty")."</div><br>";
+    echo "<div id='username3' style='display: none;'>".(isset($_SESSION['User3']) ? implode(",", $_SESSION['User3']) : "empty")."</div><br>";
+    echo "<div id='username4' style='display: none;'>".(isset($_SESSION['User4']) ? implode(",", $_SESSION['User4']) : "empty")."</div><br>";
     
 ?>
 <!DOCTYPE html>
