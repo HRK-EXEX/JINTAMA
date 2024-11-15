@@ -56,15 +56,7 @@ export class MainScene extends Phaser.Scene {
                 sense: arr[6] - p.sense.score    // センス
             });
         }
-        // 基本ステータス
-        this.stats = {
-            score: 0,    // 幸福度
-            hp: 100,     // 体力
-            charm: 50,   // 魅力
-            sense: 50    // センス
-        };
-
-
+        
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
         this.rouletteText = this.add.text(75, 300);
 
