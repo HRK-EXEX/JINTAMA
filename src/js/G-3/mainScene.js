@@ -42,9 +42,28 @@ export class MainScene extends Phaser.Scene {
 
         this.showTurnOptions();
 
+        var username = document.getElementById('username1').textContent;
+        console.log(username);
+        const arr = username.split(',');
+
         for (let i = 0; i < 4; i++) {
-            player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));
+            var p = player[i]
+            p = new Player(this, 40, 40 + i * 40, arr[2]);
+            p.modifyStats({
+                score: arr[3] - p.stats.score,    // 幸福度
+                hp: arr[4] - p.hp.score,     // 体力
+                charm: 50,   // 魅力
+                sense: 50    // センス
+            });
         }
+        // 基本ステータス
+        this.stats = {
+            score: 0,    // 幸福度
+            hp: 100,     // 体力
+            charm: 50,   // 魅力
+            sense: 50    // センス
+        };
+
 
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
         this.rouletteText = this.add.text(75, 300);
