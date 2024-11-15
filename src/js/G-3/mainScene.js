@@ -23,7 +23,10 @@ export class MainScene extends Phaser.Scene {
         this.gameBoard = new GameBoard(this, 1);
         this.gameBoard.preloadAssets();
         this.utility = new Utility();
-        this.load.image('playericon', '/characters/melondog.png');
+        this.load.image('playericon1', '/characters/melondog.png');
+        this.load.image('playericon2', '/characters/takugorira.png');
+        this.load.image('playericon3', '/characters/obake.png');
+        this.load.image('playericon4', '/characters/bakemon.png');
     }
 
     create() {
