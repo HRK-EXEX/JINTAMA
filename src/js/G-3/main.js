@@ -1,11 +1,11 @@
-var username = document.getElementById('username1').textContent;
-console.log(username);
+// var username = document.getElementById('username1').textContent;
+// console.log(username);
 import { MainScene } from "./mainScene.js";
 
 const DEFAULT_WIDTH = window.innerWidth
 const DEFAULT_HEIGHT = window.innerHeight // any height you want
 
-const arr=username.split(',');
+// const arr=username.split(',');
 
 //ゲームに関する設定
 const CONFIG = {
