@@ -242,16 +242,33 @@ export class GameBoard {
 
         this.fieldMap.setAlpha(1);
 
-    //     this.players = [];
-    // for (let i = 0; i < 4; i++) {
-    //     const playerX = 50; // 初期位置のX座標
-    //     const playerY = 100 + i * 50; // 初期位置のY座標（各プレイヤーを縦に配置）
-    //     let player = new Player(this.scene, playerX, playerY, `player${i + 1}`);
-    //     this.players.push(player); // プレイヤーを配列に追加
-    //     this.scene.add.existing(player); // シーンにプレイヤーを追加
-    // }
-        
+        this.addCharacterIcons();
+
         this.moveMapGroup(0, 0);
+    }
+
+    addCharacterIcons() {
+        // キャラ画像を追加
+        const playerPositions = [
+            { x: 410, y: 560 }, // プレイヤー1
+            { x: 410, y: 560 }, // プレイヤー2
+            { x: 410, y: 560 }, // プレイヤー3
+            { x: 410, y: 560 }  // プレイヤー4
+        ];
+        let i = 1;
+        // キャラ画像を一つずつ配置
+        playerPositions.forEach((pos, index) => {
+            const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon'+(i));
+            i =i+1;
+            sprite.setScale(2); // サイズを調整
+            sprite.setOrigin(0.5); // 中心に設定
+            sprite.setDepth(0); // マップより前に表示されるように設定
+    
+            // プレイヤー情報に保存（必要ならグローバルな`player`にも保存可能）
+            if (!this.players) this.players = [];
+            this.players.push(sprite);
+            
+        });
     }
 
     moveMapGroup(x, y) {
@@ -259,12 +276,6 @@ export class GameBoard {
         this.mapX += x;
         this.mapY += y;
 
-        player.forEach(p => {
-            if (p != null) {
-                p.x += x;
-                p.y += y;
-            }
-        });
 
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
