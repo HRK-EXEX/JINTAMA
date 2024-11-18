@@ -27,5 +27,9 @@
     <title>メインゲーム</title>
 </head>
 <body>
+    <script>
+        var user1 = window.sessionStorage.getItem(['User1']);
+        console.log(user1);
+    </script>
 </body>
 </html>
