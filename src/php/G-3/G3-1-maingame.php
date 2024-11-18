@@ -1,7 +1,10 @@
 <?php
     session_start();
     var_dump($_SESSION);
+    $roomId = $_SESSION['User']['room_id'];
 
+    require "../db.php";
+    $db = "";
 
     echo "<div id='username1' style='display: none;'>".(isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty")."</div><br>";
     echo "<div id='username2' style='display: none;'>".(isset($_SESSION['User2']) ? implode(",", $_SESSION['User2']) : "empty")."</div><br>";
