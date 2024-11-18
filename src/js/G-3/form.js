@@ -1,5 +1,6 @@
 export function changeForm(players) {
     console.log(players[0]);
+    console.log(JSON.stringify(players[0]));
     document.getElementById("user1").value = JSON.stringify(players[0]);
     document.getElementById("user2").value = JSON.stringify(players[1]);
     document.getElementById("user3").value = JSON.stringify(players[2]);
