@@ -3,6 +3,7 @@ import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
+import { changeForm } from './form.js';
 
 export class MainScene extends Phaser.Scene {
     constructor() {
@@ -77,6 +78,8 @@ export class MainScene extends Phaser.Scene {
                 });
             }
         }
+
+        changeForm();
 
         // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
     }
