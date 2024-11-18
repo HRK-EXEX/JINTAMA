@@ -4,7 +4,7 @@
     $roomId = $_SESSION['User']['room_id'];
 
     require "../db.php";
-    $sql = $db -> query( "SELECT * FROM room");
+    $sql = $db -> query( "SELECT * FROM Room");
     $result=$sql ->fetchAll();
     
 
