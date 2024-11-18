@@ -5,7 +5,7 @@
 
     require "../db.php";
     $sql = $db -> query( "SELECT * FROM room");
-    $result=$sql ->fetchAll(PDO::FETCH_ASSOC);
+    $result=$sql ->fetchAll();
     
 
     echo "<div id='username1' style='display: none;'>".(isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty")."</div><br>";
