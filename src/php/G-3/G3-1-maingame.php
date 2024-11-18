@@ -24,12 +24,15 @@
     <script src="/kansho/JINTAMA/src/js/G-3/gameBoard.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/dialogSelectBox.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/main.js" type="module"></script>
+    <script src="/kansho/JINTAMA/src/js/G-3/form.js"></script>
     <title>メインゲーム</title>
 </head>
 <body>
-    <script>
-        var user1 = window.sessionStorage.getItem(['User1']);
-        console.log(user1);
-    </script>
+    <form name="resultForm" action="G3-2.php" method="POST">
+        <input id="user1" type="hidden" name="player[]" value="1">
+        <input id="user2" type="hidden" name="player[]" value="2">
+        <input id="user3" type="hidden" name="player[]" value="3">
+        <input id="user4" type="hidden" name="player[]" value="4">
+    </form>
 </body>
 </html>
