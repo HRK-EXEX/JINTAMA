@@ -27,23 +27,23 @@ export default class Player extends Phaser.GameObjects.Container {
             charm: 0,
             sense: 0
         };                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-        if(this.y==40){
-            this.sprite = scene.add.sprite(200,100, 'playericon1'); // 画像の中心が(0, 0)になるように調整
-            this.sprite.setScale(2,2);; // 画像サイズの調整
-            this.add(this.sprite); // コンテナに画像を追加
-        }else if(this.y==80){
-            this.sprite = scene.add.sprite(70, 70, 'playericon2'); // 画像の中心が(0, 0)になるように調整
-            this.sprite.setScale(2,2);; // 画像サイズの調整
-            this.add(this.sprite);
-        }else if(this.y==120){
-            this.sprite = scene.add.sprite(70, 70, 'playericon3'); // 画像の中心が(0, 0)になるように調整
-            this.sprite.setScale(2,2);; // 画像サイズの調整
-            this.add(this.sprite);
-        }else{
-            this.sprite = scene.add.sprite(70, 70, 'playericon4'); // 画像の中心が(0, 0)になるように調整
-            this.sprite.setScale(2,2);; // 画像サイズの調整
-            this.add(this.sprite);
-        }
+        // if(this.y==40){
+        //     this.sprite = scene.add.sprite(200,100, 'playericon1'); // 画像の中心が(0, 0)になるように調整
+        //     this.sprite.setScale(2,2);; // 画像サイズの調整
+        //     this.add(this.sprite); // コンテナに画像を追加
+        // }else if(this.y==80){
+        //     this.sprite = scene.add.sprite(70, 70, 'playericon2'); // 画像の中心が(0, 0)になるように調整
+        //     this.sprite.setScale(2,2);; // 画像サイズの調整
+        //     this.add(this.sprite);
+        // }else if(this.y==120){
+        //     this.sprite = scene.add.sprite(70, 70, 'playericon3'); // 画像の中心が(0, 0)になるように調整
+        //     this.sprite.setScale(2,2);; // 画像サイズの調整
+        //     this.add(this.sprite);
+        // }else{
+        //     this.sprite = scene.add.sprite(70, 70, 'playericon4'); // 画像の中心が(0, 0)になるように調整
+        //     this.sprite.setScale(2,2);; // 画像サイズの調整
+        //     this.add(this.sprite);
+        // }
         // プレイヤーの見た目の設定
         this.setupSprite();
         
