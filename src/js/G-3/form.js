@@ -16,7 +16,7 @@ export function changeForm(players) {
     const formData = form;
 
     // Fetch APIを使用して送信
-    fetch('/api/submit', {
+    fetch('./G3-2.php', {
         method: 'POST',
         body: formData
     })
