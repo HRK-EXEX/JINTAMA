@@ -1,6 +1,7 @@
 import { player } from "./initialize";
 
 export function changeForm() {
+    console.log(player[0] != null);
     document.getElementById("user1").value = JSON.stringify(player[0]);
     document.getElementById("user2").value = JSON.stringify(player[1]);
     document.getElementById("user3").value = JSON.stringify(player[2]);
