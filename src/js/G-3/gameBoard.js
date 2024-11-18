@@ -269,11 +269,21 @@ export class GameBoard {
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
 
-        if (0 < this.mapX) { this.mapX = 0; scrollLimit |= 1;}
-        else if (limitX > this.mapX) { this.mapX = limitX; scrollLimit |= 2;}
+        var plimity = false;
+        var plimitx = false;
+
+        if (0 < this.mapX) { plimitx=true; this.mapX = 0; scrollLimit |= 1;}
+        else if (limitX > this.mapX) {plimitx=true; this.mapX = limitX; scrollLimit |= 2;}
         
-        if (0 < this.mapY) { this.mapY = 0; scrollLimit |= 4;}
-        else if (limitY > this.mapY) { this.mapY = limitY; scrollLimit |= 8;}
+        if (0 < this.mapY) {plimity=true; this.mapY = 0; scrollLimit |= 4;}
+        else if (limitY > this.mapY) {plimity=true; this.mapY = limitY; scrollLimit |= 8;}
+
+        this.players.forEach(p => {
+            if (p != null) {
+                if(!plimitx)p.x += x;
+                if(!plimity)p.y += y;
+            }
+        });
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
