@@ -32,8 +32,9 @@ export class MainScene extends Phaser.Scene {
     create() {
 
         for (let i = 0; i < 4; i++) {
-            var username = document.getElementById('username' + (i+1).toString()).textContent;
+            var username = document.getElementById('username' + (i+1).toString());
             if (username != null) {
+                username = username.textContent;
                 console.log(username);
                 const arr = username.split(',');
 
