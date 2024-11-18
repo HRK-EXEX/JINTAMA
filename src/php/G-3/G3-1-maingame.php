@@ -5,7 +5,7 @@
 
     require "../db.php";
     $sql = $db -> query( "SELECT * FROM room");
-    $result = $sql -> fetchAll();
+    $result = $sql -> fetchAll();    
 
     echo "<div id='username1' style='display: none;'>".(isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty")."</div><br>";
     if (isset($result['Room']['room_user2'])) echo "<div id='username2' style='display: none;'>".(isset($_SESSION['User2']) ? implode(",", $_SESSION['User2']) : "empty")."</div><br>";
