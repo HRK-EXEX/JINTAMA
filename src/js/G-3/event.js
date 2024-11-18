@@ -24,3 +24,4 @@ function handleEvent(position) {
       console.log(`マス ${position}: 特別なイベントはありません。`);
     }
   }
+
