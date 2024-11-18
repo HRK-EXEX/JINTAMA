@@ -250,22 +250,24 @@ export class GameBoard {
     addCharacterIcons() {
         // キャラ画像を追加
         const playerPositions = [
-            { x: 100, y: 100 }, // プレイヤー1
-            { x: 200, y: 100 }, // プレイヤー2
-            { x: 100, y: 200 }, // プレイヤー3
-            { x: 200, y: 200 }  // プレイヤー4
+            { x: 410, y: 560 }, // プレイヤー1
+            { x: 410, y: 560 }, // プレイヤー2
+            { x: 410, y: 560 }, // プレイヤー3
+            { x: 410, y: 560 }  // プレイヤー4
         ];
-    
+        let i = 1;
         // キャラ画像を一つずつ配置
         playerPositions.forEach((pos, index) => {
-            const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon1');
-            sprite.setScale(0.5); // サイズを調整
+            const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon'+(i));
+            i =i+1;
+            sprite.setScale(2); // サイズを調整
             sprite.setOrigin(0.5); // 中心に設定
-            sprite.setDepth(10); // マップより前に表示されるように設定
+            sprite.setDepth(0); // マップより前に表示されるように設定
     
             // プレイヤー情報に保存（必要ならグローバルな`player`にも保存可能）
             if (!this.players) this.players = [];
             this.players.push(sprite);
+            
         });
     }
 
@@ -274,22 +276,25 @@ export class GameBoard {
         this.mapX += x;
         this.mapY += y;
 
-        this.players.forEach(p => {
-            if (p != null) {
-                p.x += x;
-                p.y += y;
-            }
-        });
-
 
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
 
-        if (0 < this.mapX) { this.mapX = 0; scrollLimit |= 1;}
-        else if (limitX > this.mapX) { this.mapX = limitX; scrollLimit |= 2;}
+        var plimity = false;
+        var plimitx = false;
+
+        if (0 < this.mapX) { plimitx=true; this.mapX = 0; scrollLimit |= 1;}
+        else if (limitX > this.mapX) {plimitx=true; this.mapX = limitX; scrollLimit |= 2;}
         
-        if (0 < this.mapY) { this.mapY = 0; scrollLimit |= 4;}
-        else if (limitY > this.mapY) { this.mapY = limitY; scrollLimit |= 8;}
+        if (0 < this.mapY) {plimity=true; this.mapY = 0; scrollLimit |= 4;}
+        else if (limitY > this.mapY) {plimity=true; this.mapY = limitY; scrollLimit |= 8;}
+
+        this.players.forEach(p => {
+            if (p != null) {
+                if(!plimitx)p.x += x;
+                if(!plimity)p.y += y;
+            }
+        });
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
