@@ -27,7 +27,7 @@
     <title>メインゲーム</title>
 </head>
 <body>
-    <form name="resultForm" action="G3-2.php" method="POST">
+    <form id="resultForm" name="resultForm" action="G3-2.php" method="POST">
         <input id="user1" type="hidden" name="player[]" value="1">
         <input id="user2" type="hidden" name="player[]" value="2">
         <input id="user3" type="hidden" name="player[]" value="3">
