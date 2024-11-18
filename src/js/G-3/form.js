@@ -5,8 +5,15 @@ export function changeForm(players) {
     document.getElementById("user3").value = JSON.stringify(players[2]);
     document.getElementById("user4").value = JSON.stringify(players[3]);
 
+    const form = document.getElementById('resultForm');
+            
+    // フォーム要素が取得できているか確認
+    if (!form || !(form instanceof HTMLFormElement)) {
+        throw new Error('フォーム要素が見つかりません');
+    }
+
     // FormDataを使用してデータを収集
-    const formData = new FormData(document.getElementById('resultForm'));
+    const formData = form;
 
     // Fetch APIを使用して送信
     fetch('/api/submit', {
