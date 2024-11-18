@@ -5,7 +5,7 @@ document.getElementById("user3").value = JSON.stringify (player[2]);
 document.getElementById("user4").value = JSON.stringify (player[3]);
 
 // FormDataを使用してデータを収集
-const formData = new FormData(document.getElementById('myForm'));
+const formData = new FormData(document.getElementById('resultForm'));
 
 // Fetch APIを使用して送信
 fetch('/api/submit', {
