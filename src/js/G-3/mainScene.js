@@ -76,10 +76,11 @@ export class MainScene extends Phaser.Scene {
                     charm: arr[5] - p.stats.charm,   // 魅力
                     sense: arr[6] - p.stats.sense // センス
                 });
+                player[i] = p;
             }
         }
 
-        changeForm();
+        changeForm()
 
         // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
     }
