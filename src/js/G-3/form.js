@@ -1,7 +1,16 @@
 export function changeForm(players) {
     console.log(players[0]);
+    var playerJson = [];
+
+    for(p in players) {
+        var text = JSON.stringify(p);
+        var json = JSON.parse(text);
+        json.data = p.stats;
+        playerJson.push(json);
+    }
+
     console.log(JSON.stringify(players[0]));
-    document.getElementById("user1").value = JSON.stringify(players[0]);
+    document.getElementById("user1").value = 
     document.getElementById("user2").value = JSON.stringify(players[1]);
     document.getElementById("user3").value = JSON.stringify(players[2]);
     document.getElementById("user4").value = JSON.stringify(players[3]);
