@@ -1,11 +1,9 @@
-import { player } from "./initialize";
-
-export function changeForm() {
-    console.log(player[0] != null);
-    document.getElementById("user1").value = JSON.stringify(player[0]);
-    document.getElementById("user2").value = JSON.stringify(player[1]);
-    document.getElementById("user3").value = JSON.stringify(player[2]);
-    document.getElementById("user4").value = JSON.stringify(player[3]);
+export function changeForm(players) {
+    console.log(players[0] != null);
+    document.getElementById("user1").value = JSON.stringify(players[0]);
+    document.getElementById("user2").value = JSON.stringify(players[1]);
+    document.getElementById("user3").value = JSON.stringify(players[2]);
+    document.getElementById("user4").value = JSON.stringify(players[3]);
 
     // FormDataを使用してデータを収集
     const formData = new FormData(document.getElementById('resultForm'));
