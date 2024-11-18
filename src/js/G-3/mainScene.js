@@ -29,26 +29,7 @@ export class MainScene extends Phaser.Scene {
         this.load.image('playericon4', '/kansho/JINTAMA/characters/bakemon.png');
     }
 
-    create() {
-
-        for (let i = 0; i < 4; i++) {
-            var username = document.getElementById('username' + (i+1).toString());
-            if (username != null) {
-                username = username.textContent;
-                console.log(username);
-                const arr = username.split(',');
-
-                var p = player[i];
-                p = new Player(this, 40, 40 + i * 40, arr[2]);
-                p.modifyStats({
-                    score: arr[3] - p.stats.score,    // 幸福度
-                    hp: arr[4] - p.stats.hp,     // 体力
-                    charm: arr[5] - p.stats.charm,   // 魅力
-                    sense: arr[6] - p.stats.sense // センス
-                });
-            }
-        }
-        
+    create() {      
         this.gameBoard.createMap();
         let dialogW = 700, dialogH = 300, dialogX = 50, dialogY = this.game.config.height - 50 - dialogH;
 
@@ -78,6 +59,24 @@ export class MainScene extends Phaser.Scene {
                 this.startRoulette();
             }
         });
+        
+        for (let i = 0; i < 4; i++) {
+            var username = document.getElementById('username' + (i+1).toString());
+            if (username != null) {
+                username = username.textContent;
+                console.log(username);
+                const arr = username.split(',');
+
+                var p = player[i];
+                p = new Player(this, 40, 40 + i * 40, arr[2]);
+                p.modifyStats({
+                    score: arr[3] - p.stats.score,    // 幸福度
+                    hp: arr[4] - p.stats.hp,     // 体力
+                    charm: arr[5] - p.stats.charm,   // 魅力
+                    sense: arr[6] - p.stats.sense // センス
+                });
+            }
+        }
 
         // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
     }
