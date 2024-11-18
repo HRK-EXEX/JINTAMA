@@ -259,10 +259,12 @@ export class GameBoard {
         this.mapX += x;
         this.mapY += y;
 
-        // player.forEach(p => {
-        //     p.x += x;
-        //     p.y += y;
-        // });
+        player.forEach(p => {
+            if (p != null) {
+                p.x += x;
+                p.y += y;
+            }
+        });
 
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
