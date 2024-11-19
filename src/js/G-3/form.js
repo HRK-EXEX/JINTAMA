@@ -38,34 +38,22 @@ export function changeForm(players) {
         body: JSON.stringify(data)
     })
     .then(response => {
-        try {
-            if (!response.ok) {
-                // エラーレスポンスをテキストとして読み取る
-                return response.text().then(text => {
-                throw new Error(`サーバーエラー: ${text}`);
-                });
-            }
-            return response.json();
-        } catch (e) {
-            // JSON.parseのエラーをより詳細に表示
-            console.error('パースエラーの詳細:', {
-              name: e.name,
-              message: e.message,
-              // エラー位置の前後のコンテキストを表示
-              context: e.message.split('at position')[0],
-              // 生のレスポンスの最初の部分を表示（必要に応じて長さを調整）
-              rawResponse: text.substring(0, 1000)
+        if (!response.ok) {
+            // エラーレスポンスをテキストとして読み取る
+            return response.text().then(text => {
+            throw new Error(`サーバーエラー: ${text}`);
             });
-            throw e;
         }
+        return response.json();
+        
     })
     .then(data => {
         console.log('送信成功:', data);
     })
-    .catch(error => {
-        console.log(error);
-        console.log(error.message);
-        console.log(error.stack);
-        console.error('エラー:', error);
-    });
+    // .catch(error => {
+    //     console.log(error);
+    //     console.log(error.message);
+    //     console.log(error.stack);
+    //     console.error('エラー:', error);
+    // });
 }
