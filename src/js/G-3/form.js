@@ -1,3 +1,8 @@
+// FormDataを使用してデータを収集
+var form = document.getElementById('resultForm');
+var formData = new FormData(form);
+var data = Object.fromEntries(formData.entries()); // JSON形式に変換
+
 export function changeForm(players) {
     // console.log(players[0]);
     var playerJson = [];
@@ -21,7 +26,7 @@ export function changeForm(players) {
     document.getElementById("user3").value = JSON.stringify(players[2]);
     document.getElementById("user4").value = JSON.stringify(players[3]);
 
-    const form = document.getElementById('resultForm');
+    form = document.getElementById('resultForm');
 
     // フォーム要素が取得できているか確認
     if (!form || !(form instanceof HTMLFormElement)) {
@@ -29,9 +34,11 @@ export function changeForm(players) {
     }
 
     // FormDataを使用してデータを収集
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries()); // JSON形式に変換
+    formData = new FormData(form);
+    data = Object.fromEntries(formData.entries()); // JSON形式に変換
+}
 
+export function sendForm() {
     // Fetch APIを使用して送信
     fetch('./G3-2.php', {
         method: 'POST',
@@ -50,10 +57,7 @@ export function changeForm(players) {
     .then(data => {
         console.log('送信成功:', data);
     })
-    // .catch(error => {
-    //     console.log(error);
-    //     console.log(error.message);
-    //     console.log(error.stack);
-    //     console.error('エラー:', error);
-    // });
+    .catch(error => {
+        console.error('エラー:', error);
+    });
 }

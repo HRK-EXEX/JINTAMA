@@ -27,7 +27,7 @@
     <title>メインゲーム</title>
 </head>
 <body>
-    <form id="resultForm">
+    <form id="resultForm" >
         <input id="user1" type="hidden" name="player[]" value="1">
         <input id="user2" type="hidden" name="player[]" value="2">
         <input id="user3" type="hidden" name="player[]" value="3">
