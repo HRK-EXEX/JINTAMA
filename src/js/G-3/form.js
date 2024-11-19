@@ -37,7 +37,15 @@ export function changeForm(players) {
         method: 'POST',
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            // エラーレスポンスをテキストとして読み取る
+            return response.text().then(text => {
+            throw new Error(`サーバーエラー: ${text}`);
+            });
+        }
+        return response.json();
+    })
     .then(data => {
         console.log('送信成功:', data);
     })
