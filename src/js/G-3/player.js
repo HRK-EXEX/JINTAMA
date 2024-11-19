@@ -237,5 +237,49 @@ ${this.name}
         });
         return `${this.name}は勉強して成長した！`;
     }
+
+    Skill1() {
+        this.modifyStats({
+            hp: 8
+        });
+        return `${this.name}は羽休めした`;
+    }
+
+    
+    Skill2() {
+        document.write("${this.name}は羽休めした </br>")
+        this.modifyStats({
+            hp: 8
+            
+        });
+        return `${this.name}は体力が上がった！！`;
+    }
+
+    Skill3() {
+        this.modifyStats({
+            charm: 8
+        });
+        return `${this.name}は成長した！`;
+    }
+
+    Skill4() {
+        this.modifyStats({
+            hp: -4,
+            sense: 12
+        });
+        return `${this.name}は体力を減らしてセンスを磨いた！`;
+    }
+
+    
+    Skill4() {
+        this.modifyStats({
+            hp: -4,
+            sense: 12
+        });
+        return `${this.name}は体力を減らしてセンスを磨いた！`;
+    }
+
+    
+
 }
 
