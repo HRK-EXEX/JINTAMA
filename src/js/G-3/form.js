@@ -9,14 +9,17 @@ export function changeForm(players) {
         playerJson.push(json);
     }
 
-    console.log(JSON.stringify(players[0]));
+    console.log(JSON.stringify(playerJson[0]));
+    
+    /*
     document.getElementById("user1").value = 
     document.getElementById("user2").value = JSON.stringify(players[1]);
     document.getElementById("user3").value = JSON.stringify(players[2]);
     document.getElementById("user4").value = JSON.stringify(players[3]);
+    */
 
     const form = document.getElementById('resultForm');
-            
+
     // フォーム要素が取得できているか確認
     if (!form || !(form instanceof HTMLFormElement)) {
         throw new Error('フォーム要素が見つかりません');
