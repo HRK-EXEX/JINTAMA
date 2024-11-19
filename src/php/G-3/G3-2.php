@@ -1,7 +1,7 @@
 <?php
 session_start();
-$user_id=$_SESSION['User']['user_id']
-$room_id=$_SESSION['User']['room_id']
+$user_id=$_SESSION['User']['user_id'];
+$room_id=$_SESSION['User']['room_id'];
 require '../db.php';
 $sessionData = [
     'User1' => $_SESSION['User1'],

@@ -313,5 +313,20 @@ export class GameBoard {
         if ((button & 1<<1) > 0) this.moveMapGroup(-spd * sprint, 0);
         if ((button & 1<<2) > 0) this.moveMapGroup(0, spd * sprint);
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
+
+        // const speed = 4; // キャラクターの移動速度
+
+        // // キー入力に応じてキャラクターを移動
+        // if (this.cursors.left.isDown) {
+        //     this.player.x -= speed;
+        // } else if (this.cursors.right.isDown) {
+        //     this.player.x += speed;
+        // }
+
+        // if (this.cursors.up.isDown) {
+        //     this.player.y -= speed;
+        // } else if (this.cursors.down.isDown) {
+        //     this.player.y += speed;
+        // }
     }
 }
