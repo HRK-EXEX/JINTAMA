@@ -239,6 +239,7 @@ ${this.name}
     }
 
     Skill1() {
+        document.write("${this.name}は怖い顔をした </br>")
         this.modifyStats({
             hp: 8
         });
