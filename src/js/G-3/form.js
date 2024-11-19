@@ -5,7 +5,7 @@ export function changeForm(players) {
     for(let p in players) {
         var text = JSON.stringify(p);
         var json = JSON.parse(text);
-        json.data = JSON.parse(JSON.stringify(p.stats)); // データを文字列に変換してからJSONに変換
+        // json.data = JSON.parse(JSON.stringify(p.stats)); // データを文字列に変換してからJSONに変換
         playerJson.push(json);
     }
 
