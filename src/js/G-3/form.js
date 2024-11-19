@@ -5,11 +5,12 @@ export function changeForm(players) {
     for(let p in players) {
         var text = JSON.stringify(p);
         var json = JSON.parse(text);
+        console.log(json);
         // json.data = JSON.parse(JSON.stringify(p.stats)); // データを文字列に変換してからJSONに変換
         playerJson.push(json);
     }
 
-    console.log(JSON.stringify(playerJson[0]));
+    // console.log(playerJson[0]);
 
     /*
     document.getElementById("user1").value = 
