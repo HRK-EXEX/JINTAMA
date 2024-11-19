@@ -43,6 +43,8 @@ export function changeForm(players) {
     })
     .catch(error => {
         console.log(error);
+        console.log(error.message);
+        console.log(error.stack);
         console.error('エラー:', error);
     });
 }
