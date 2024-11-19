@@ -1,5 +1,5 @@
 export function changeForm(players) {
-    console.log(players[0]);
+    // console.log(players[0]);
     var playerJson = [];
 
     for(let pl in players) {
@@ -8,6 +8,7 @@ export function changeForm(players) {
         var json = JSON.parse(text);
         console.log(p);
         console.log(text);
+        json.stats = p.stats;
         console.log(json);
         // json.data = JSON.parse(JSON.stringify(p.stats)); // データを文字列に変換してからJSONに変換
         playerJson.push(json);
