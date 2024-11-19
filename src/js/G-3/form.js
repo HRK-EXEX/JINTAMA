@@ -2,7 +2,7 @@ export function changeForm(players) {
     console.log(players[0]);
     var playerJson = [];
 
-    for(p in players) {
+    for(let p in players) {
         var text = JSON.stringify(p);
         var json = JSON.parse(text);
         json.data = p.stats;
