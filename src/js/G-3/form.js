@@ -42,6 +42,7 @@ export function changeForm(players) {
         console.log('送信成功:', data);
     })
     .catch(error => {
+        console.log(error);
         console.error('エラー:', error);
     });
 }
