@@ -4,14 +4,16 @@ export function changeForm(players) {
 
     for(let pl in players) {
         var p = players[pl];
-        var text = JSON.stringify(p);
-        var json = JSON.parse(text);
-        console.log(p);
-        console.log(text);
-        json.stats = p.stats;
-        console.log(json);
-        // json.data = JSON.parse(JSON.stringify(p.stats)); // データを文字列に変換してからJSONに変換
-        playerJson.push(json);
+        if (p != null) {
+            var text = JSON.stringify(p);
+            var json = JSON.parse(text);
+            console.log(p);
+            console.log(text);
+            json.stats = p.stats;
+            console.log(json);
+            // json.data = JSON.parse(JSON.stringify(p.stats)); // データを文字列に変換してからJSONに変換
+            playerJson.push(json);
+        }
     }
 
     // console.log(playerJson[0]);
