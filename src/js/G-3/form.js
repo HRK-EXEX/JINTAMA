@@ -16,14 +16,10 @@ export function changeForm(players) {
         }
     }
 
-    // console.log(playerJson[0]);
-
-    /*
     document.getElementById("user1").value = 
     document.getElementById("user2").value = JSON.stringify(players[1]);
     document.getElementById("user3").value = JSON.stringify(players[2]);
     document.getElementById("user4").value = JSON.stringify(players[3]);
-    */
 
     const form = document.getElementById('resultForm');
 
@@ -33,12 +29,13 @@ export function changeForm(players) {
     }
 
     // FormDataを使用してデータを収集
-    const formData = form;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries()); // JSON形式に変換
 
     // Fetch APIを使用して送信
     fetch('./G3-2.php', {
         method: 'POST',
-        body: formData
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
