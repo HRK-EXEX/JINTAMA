@@ -41,7 +41,8 @@ export function changeForm(players) {
 
     players.forEach((player, index) => {
         if (player) {
-            const json = { ...player, stats: player.stats };
+            var json = JSON.parse(JSON.stringify(player));
+            json.stats = player.stats;
             playerJson.push(json);
 
             const userElement = document.getElementById(`user${index + 1}`);
