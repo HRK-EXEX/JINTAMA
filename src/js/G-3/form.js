@@ -91,7 +91,7 @@ export function sendForm(data) {
     .then((responseData) => {
         console.log('送信成功:', responseData);
     })
-    .catch((error) => {
-        console.error('送信エラー:', error);
-    });
+    // .catch((error) => {
+    //     console.error('送信エラー:', error);
+    // });
 }
