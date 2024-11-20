@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
 
         const formData = new FormData(form); // FormDataを生成
-        var json = JSON.parse({dummy: 0}); // 空のデータをJSON変換。実質初期化。
+        var json = new Array(); // 空のデータをJSON変換。実質初期化。
 
         // JSON形式に変換
         formData.entries().forEach((data, index) => {
