@@ -14,14 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
 
         const formData = new FormData(form); // FormDataを生成
-        const data = Object.fromEntries(formData.entries()); // JSON形式に変換
+        var json = new JSON();
 
-        
-        for (let data of formData.entries()) {
+        // JSON形式に変換
+        formData.entries().forEach((data, index) => {
             console.log(data);
-        }
+            json[`user${index + 1}`] = JSON.parse(data[1]);
+        });
         
-        console.log("送信データ:", data); // デバッグ用のログ
+        console.log("送信データ:", JSON.stringify(json)); // デバッグ用のログ
 
         // フォームのデータを送信
         sendForm(data);
