@@ -1,14 +1,25 @@
 <?php
 session_start();
-$user_id=$_SESSION['User']['user_id']
-$room_id=$_SESSION['User']['room_id']
+$user_id=$_SESSION['User']['user_id'];
+$room_id=$_SESSION['User']['room_id'];
 require '../db.php';
-$sessionData = [
-    'User1' => $_SESSION['User1'],
-    'User2' => $_SESSION['User2'],
-    'User3' => $_SESSION['User3'],
-    'User4' => $_SESSION['User4'],
-];
+
+$results = $_POST['player'];
+
+// for backup
+// $sessionData = [
+//     'User1' => $_SESSION['User1'],
+//     'User2' => $_SESSION['User2'],
+//     'User3' => $_SESSION['User3'],
+//     'User4' => $_SESSION['User4'],
+// ];
+var_dump($results);
+// $sessionData = [
+//     'User1' => $results[0],
+//     'User2' => $results[1],
+//     'User3' => $results[2],
+//     'User4' => $results[33],
+// ];
 
 // 'score' を基準に降順でソート
 usort($sessionData, function ($a, $b) {
