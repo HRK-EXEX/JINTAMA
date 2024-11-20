@@ -40,16 +40,19 @@ export function changeForm(players) {
     const playerJson = [];
 
     players.forEach((player, index) => {
+        var userElement;
         if (player) {
             var json = JSON.parse(JSON.stringify(player));
             json.stats = player.stats;
             playerJson.push(json);
 
-            const userElement = document.getElementById(`user${index + 1}`);
+            userElement = document.getElementById(`user${index + 1}`);
             if (userElement) {
                 userElement.value = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
             }
         }
+
+        console.log(userElement.value);
     });
 
     console.log("変更後のプレイヤーデータ:", playerJson);
