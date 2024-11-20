@@ -22,10 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
             json[`user${index + 1}`] = JSON.parse(data[1]);
         });
         
-        console.log("送信データ:", JSON.stringify(json)); // デバッグ用のログ
+        var text = JSON.stringify(json);
+        console.log("送信データ:", text); // デバッグ用のログ
 
         // フォームのデータを送信
-        sendForm(data);
+        sendForm(text);
     });
 });
 
