@@ -121,9 +121,6 @@ foreach ($sessionData as $index => $userData) {
 
 // }
 
-3
-
-
 // echo json_encode($emptyArray);
 // usort($emptyArray, function ($a, $b) {
 //     return $b[1] <=> $a[1];

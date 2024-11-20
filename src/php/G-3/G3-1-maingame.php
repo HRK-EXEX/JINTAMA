@@ -29,10 +29,10 @@
 </head>
 <body>
     <form id="resultForm" action="G3-2.php" method="POST">
-        <input id="user1" type="hidden" name="player[]" value="1">
-        <input id="user2" type="hidden" name="player[]" value="2">
-        <input id="user3" type="hidden" name="player[]" value="3">
-        <input id="user4" type="hidden" name="player[]" value="4">
+        <input id="user1" type="hidden" name="player[]" value="null">
+        <input id="user2" type="hidden" name="player[]" value="null">
+        <input id="user3" type="hidden" name="player[]" value="null">
+        <input id="user4" type="hidden" name="player[]" value="null">
         <button id="send" type="submit">send</button>
     </form>
 </body>

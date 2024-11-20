@@ -7,14 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    sendForm(form);
+
     // 送信ボタンにイベントリスナーを追加
     sendButton.addEventListener("click", (event) => {
         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
 
         const formData = new FormData(form); // FormDataを生成
         const data = Object.fromEntries(formData.entries()); // JSON形式に変換
-
-        console.log(data);
 
         console.log("送信データ:", data); // デバッグ用のログ
 
@@ -37,6 +37,8 @@ const getCircularReplacer = () => {
 	}
 }
 
+var userElements;
+
 // フォームデータの変更を処理する関数
 export function changeForm(players) {
     const playerJson = [];
@@ -53,6 +55,8 @@ export function changeForm(players) {
                 userElement.value = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
             } else console.log("userElement is undefined");
         }
+
+        userElements.push(userElement);
 
         if (userElement) console.log(userElement.value);
     });
