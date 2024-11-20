@@ -129,6 +129,9 @@ export class MainScene extends Phaser.Scene {
         }
     }
 
+     
+    
+
     showTurnOptions() {
         this.selectDialog.showSelectDialog(
             'あなたのターンです。',
@@ -140,6 +143,9 @@ export class MainScene extends Phaser.Scene {
                             // this.isDialogActive = true;
                             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
                             this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, false,() =>{
+                                stepsRemaining = finalNumber;
+                                moveCharacter();
+
                                 this.endTurn(false);
                             });
                         });
@@ -166,8 +172,27 @@ export class MainScene extends Phaser.Scene {
                         });
                         break;
                 }
+
+
+
                 this.selectDialog.hideDialog();
             }
         );
+    }
+    
+    moveCharacter() {
+        if (stepsRemaining > 0) {
+            px++; // 右に1マス移動（サンプルでは右移動のみ）
+            if (px >= map[0].length) { // マップの右端を超えたら下に移動
+                px = 0;
+                py++;
+                if (py >= map.length) {
+                    py = 0; // マップの範囲外に行かないようにリセット
+                }
+            }
+            stepsRemaining--;
+            paint();
+            setTimeout(moveCharacter, 200); // 200msごとに次のステップを実行
+        }
     }
 }
