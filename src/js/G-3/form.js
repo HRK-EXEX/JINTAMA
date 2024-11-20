@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(form); // FormDataを生成
         const data = Object.fromEntries(formData.entries()); // JSON形式に変換
 
+        console.log(formData);
         console.log("送信データ:", data); // デバッグ用のログ
 
         // フォームのデータを送信
