@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("送信データ:", text); // デバッグ用のログ
 
         // フォームのデータを送信
-        sendForm(json);
+        sendForm(text);
     });
 });
 
@@ -74,13 +74,13 @@ export function changeForm(players) {
 }
 
 // フォームデータをサーバーに送信する関数
-export function sendForm(data) {
+export function sendForm(text) {
     fetch('./G3-2.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'normal', // JSON形式で送信
         },
-        body: JSON.stringify(data),
+        body: text,
     })
     .then((response) => {
         if (!response.ok) {
