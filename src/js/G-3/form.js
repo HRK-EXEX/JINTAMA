@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(data);
             if (data[1] != "null") {
                 json[`user${index + 1}`] = JSON.parse(data[1]);
+                json.length++;
             }
         });
         
