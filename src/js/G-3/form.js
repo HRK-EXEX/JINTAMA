@@ -21,6 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// 循環構造用
+const getCircularReplacer = () => {
+	const seen = new WeakSet()
+	return (key, value) => {
+		if (typeof value === "object" && value !== null) {
+			if (seen.has(value)) {
+				return
+			}
+			seen.add(value)
+		}
+		return value
+	}
+}
+
 // フォームデータの変更を処理する関数
 export function changeForm(players) {
     const playerJson = [];
@@ -32,7 +46,7 @@ export function changeForm(players) {
 
             const userElement = document.getElementById(`user${index + 1}`);
             if (userElement) {
-                userElement.value = JSON.stringify(json); // 各ユーザーのデータを埋め込む
+                userElement.value = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
             }
         }
     });
