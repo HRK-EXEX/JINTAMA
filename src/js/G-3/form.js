@@ -48,7 +48,7 @@ export function changeForm(players) {
 
             userElement = document.getElementById(`user${index + 1}`);
             if (userElement) {
-                userElement.value = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
+                userElement.value.innerHTML = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
             } else console.log("userElement is undefined");
         }
 
