@@ -49,10 +49,10 @@ export function changeForm(players) {
             userElement = document.getElementById(`user${index + 1}`);
             if (userElement) {
                 userElement.value = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
-            }
+            } else console.log("userElement is undefined");
         }
 
-        console.log(userElement.value);
+        if (userElement) console.log(userElement.value);
     });
 
     console.log("変更後のプレイヤーデータ:", playerJson);
