@@ -19,14 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // JSON形式に変換
         formData.entries().forEach((data, index) => {
             console.log(data);
-            json[`user${index + 1}`] = JSON.parse(data[1]);
+            if (data[1] != "null") {
+                json[`user${index + 1}`] = JSON.parse(data[1]);
+            }
         });
         
         var text = JSON.stringify(json);
         console.log("送信データ:", text); // デバッグ用のログ
 
         // フォームのデータを送信
-        sendForm(text);
+        sendForm(json);
     });
 });
 
@@ -76,7 +78,7 @@ export function sendForm(data) {
     fetch('./G3-2.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json', // JSON形式で送信
+            'Content-Type': 'normal', // JSON形式で送信
         },
         body: JSON.stringify(data),
     })
