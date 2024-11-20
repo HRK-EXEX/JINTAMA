@@ -1,5 +1,7 @@
 <?php
 session_start();
+var_dump($_POST);
+
 $user_id=$_SESSION['User']['user_id'];
 $room_id=$_SESSION['User']['room_id'];
 require '../db.php';
@@ -13,7 +15,7 @@ $results = $_POST['player'];
 //     'User3' => $_SESSION['User3'],
 //     'User4' => $_SESSION['User4'],
 // ];
-var_dump($results);
+
 // $sessionData = [
 //     'User1' => $results[0],
 //     'User2' => $results[1],
