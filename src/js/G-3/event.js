@@ -8,32 +8,30 @@ export function triggerRandomEvent() {
 ];
 
 
-  const randomIndex = Math.floor(Math.random() * events.length);
-  const selectedEvent = events[randomIndex];
+// export function triggerRandomEvent() {
+//   const randomIndex = Math.floor(Math.random() * events.length);
+//   const selectedEvent = events[randomIndex];
 
-  console.log(`イベント発生: ${selectedEvent.message}`);
-  selectedEvent.effect(); // イベントの効果を実行
-  return selectedEvent.message; // メッセージを返す（UI表示などで利用可能）
-  const eventMessage = events[randomIndex];
-
-  console.log(`イベント発生: ${eventMessage}`);
-  return eventMessage; // 必要に応じてメッセージを返す
-}
+//   console.log(`イベント発生: ${selectedEvent.message}`);
+//   selectedEvent.effect(); // イベントの効果を実行
+//   return selectedEvent.message; // メッセージを返す（UI表示などで利用可能）
+// }
 
 
 // マスにイベント情報を格納
-const events = {
-1: "イベント",
-}
+// const events = {
+// 1: "イベント",
+// }
 
 // プレイヤーの現在位置
-let playerPosition = 1;
+ let playerPosition = 9394;
 
 
 // プレイヤーがサイコロを振って進む
 function rollDice() {
     const diceRoll = Math.floor(Math.random() * 6) + 1;
     playerPosition += diceRoll;
+    console.log(`サイコロの目: ${diceRoll} | 新しい位置: ${playerPosition}`);
     handleEvent(playerPosition);
   }
 
@@ -48,3 +46,4 @@ function handleEvent(position) {
     }
   }
 
+}
