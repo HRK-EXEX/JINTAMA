@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    sendForm(form);
+    console.log(form);
 
     // 送信ボタンにイベントリスナーを追加
     sendButton.addEventListener("click", (event) => {
