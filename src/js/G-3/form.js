@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         
         var text = JSON.stringify(json);
+        console.log("実データ:", json); // デバッグ用のログ
         console.log("送信データ:", text); // デバッグ用のログ
 
         // フォームのデータを送信
