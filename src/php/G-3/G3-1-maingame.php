@@ -4,7 +4,7 @@
     $roomId = $_SESSION['User']['room_id'];
 
     require "../db.php";
-    $sql = $db -> query( "SELECT * FROM Room");
+    $sql = $db -> query("SELECT * FROM Room");
     $result = $sql -> fetchAll();    
 
     echo "<div id='username1' style='display: none;'>".(isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty")."</div><br>";
@@ -24,6 +24,7 @@
     <script src="/kansho/JINTAMA/src/js/G-3/gameBoard.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/dialogSelectBox.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/main.js" type="module"></script>
+    <script src="/kansho/JINTAMA/src/js/G-3/form.js" type="module"></script>
     <title>メインゲーム</title>
 </head>
 <body>
@@ -32,6 +33,7 @@
         <input id="user2" type="hidden" name="player[]" value="2">
         <input id="user3" type="hidden" name="player[]" value="3">
         <input id="user4" type="hidden" name="player[]" value="4">
+        <button id="send" type="submit">send</button>
     </form>
 </body>
 </html>
