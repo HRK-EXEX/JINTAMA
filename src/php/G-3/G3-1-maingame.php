@@ -1,16 +1,16 @@
 <?php
     session_start();
-    echo "<div id='users' style='display: none;'>".json_encode($_SESSION)."</div><br>";
     $roomId = $_SESSION['User1']['room_id'];
 
     require "../db.php";
-    // $sql = $db -> query("SELECT * FROM Room");
-    // $result = $sql -> fetchAll();    
+    $sql = $db -> query("SELECT * FROM Room WHERE ");
+    $result = $sql -> fetch();
 
-    // echo "<div id='username1' style='display: none;'>".(isset($_SESSION['User1']) ? implode(",", $_SESSION['User1']) : "empty")."</div><br>";
-    // if (isset($result['Room']['room_user2'])) echo "<div id='username2' style='display: none;'>".(isset($_SESSION['User2']) ? implode(",", $_SESSION['User2']) : "empty")."</div><br>";
-    // if (isset($result['Room']['room_user3'])) echo "<div id='username3' style='display: none;'>".(isset($_SESSION['User3']) ? implode(",", $_SESSION['User3']) : "empty")."</div><br>";
-    // if (isset($result['Room']['room_user4'])) echo "<div id='username4' style='display: none;'>".(isset($_SESSION['User4']) ? implode(",", $_SESSION['User4']) : "empty")."</div><br>";
+    if (isset($result['Room']['room_user2'])) $_SESSION['User']['room_limit'] = 2;
+    if (isset($result['Room']['room_user3'])) $_SESSION['User']['room_limit'] = 3;
+    if (isset($result['Room']['room_user4'])) $_SESSION['User']['room_limit'] = 4;
+    
+    echo "<div id='users' style='display: none;'>".json_encode($_SESSION)."</div><br>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
