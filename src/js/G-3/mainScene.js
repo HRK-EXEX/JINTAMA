@@ -86,7 +86,7 @@ export class MainScene extends Phaser.Scene {
         var jsonData = JSON.parse(json);
         jsonData.layers[jsonData.layers.length - 1].data;
 
-        let playerPosition = 9394;
+        let playerPosition = 9385;
 
         function checkPlayerPosition() {
             // プレイヤーが最後の data 配列の特定の位置にいる場合
