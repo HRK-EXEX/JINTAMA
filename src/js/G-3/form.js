@@ -61,7 +61,11 @@ export function changeForm(players) {
         var properies = ["score", "hp", "charm", "sense"];
 
         console.log(p);
-        properies.forEach(v => json[v] = p.stats[v]);
+        // properies.forEach(v => json[v] = p.stats[v]);
+        json.score = p.stats.score;
+        json.hp = p.stats.hp;
+        json.charm = p.stats.charm;
+        json.sense = p.stats.sense;
 
         phpSessionJson["User" + (i + 1)] = json[v];
     });
