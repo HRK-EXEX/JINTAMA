@@ -72,6 +72,43 @@ export class MainScene extends Phaser.Scene {
         
         });
 
+        var json;
+        switch(this.gameBoard.mapID) {
+            case 0:
+                json = require('.map-data/first-map.json');
+                break;
+                case 1:
+                json = require('.map-data/second-map.json');
+                break;
+                case 2:
+                json = require('.map-data/third-map.json');
+                break;
+                default:
+                console.error("未知のマップIDです！");
+                return;
+        }
+        
+        var jsonData = JSON.parse(json);
+        jsonData.layers[jsonData.layers.length - 1].data;
+
+        let playerPosition = 9385;
+
+        function checkPlayerPosition() {
+            // プレイヤーが最後の data 配列の特定の位置にいる場合
+            if (lastLayerData[playerPosition] === 9385) {
+                console.log("プレイヤーがマス9385に到達しました！");
+                const eventMessage = triggerRandomEvent(); // ランダムイベントを実行
+                displayEvent(eventMessage); // 結果を表示する関数
+            }
+        }
+
+
+        function displayEvent(message) {
+            console.log(`イベント: ${message}`);
+            // 必要に応じてUIに反映する処理を追加
+        }
+
+        checkPlayerPosition();
         // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
     }
 
