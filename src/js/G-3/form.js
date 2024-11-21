@@ -2,7 +2,7 @@ let phpSessionJson;
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
-    phpSessionJson = document.getElementById("users").slice(2, -2);
+    let phpSessionJson = document.getElementById("users").innerHTML.slice(2, -2);
     const sendButton = document.getElementById("send");
 
     if (!form || !sendButton) {
@@ -57,7 +57,7 @@ export function changeForm(players) {
     players.forEach((p, i) => {
         var json = users["User" + (i + 1)];
         var properies = ["score", "hp", "charm", "sence"];
-        
+
         console.log(p);
         properies.forEach(v => json[v] = p.stats[v]);
 
