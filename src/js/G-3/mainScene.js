@@ -80,7 +80,7 @@ export class MainScene extends Phaser.Scene {
             }
         }
 
-        console.log("hi");
+        console.log(player);
         changeForm(player);
 
         // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
