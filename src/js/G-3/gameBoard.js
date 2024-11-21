@@ -314,8 +314,10 @@ export class GameBoard {
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
 
         
-
-        
+    }
+    movecharacter(finalNumber){
+        initialize() ;
+            
     }
    
 }
