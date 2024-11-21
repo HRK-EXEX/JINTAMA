@@ -137,7 +137,7 @@ export class MainScene extends Phaser.Scene {
             this.isDialogActive = true;
             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
             this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true,() =>{
-                GameBoard.movecharacter(finalNumber);
+                // GameBoard.movecharacter(finalNumber);
                 this.endTurn(false);
             });
         } else {
