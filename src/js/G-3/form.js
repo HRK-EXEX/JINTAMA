@@ -61,6 +61,7 @@ export function changeForm(players) {
         var properies = ["score", "hp", "charm", "sense"];
 
         console.log(p);
+        console.log(json);
         // properies.forEach(v => json[v] = p.stats[v]);
         json.score = p.stats.score;
         json.hp = p.stats.hp;
