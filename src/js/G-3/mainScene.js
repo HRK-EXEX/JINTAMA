@@ -63,7 +63,7 @@ export class MainScene extends Phaser.Scene {
         });
         
         for (let i = 0; i < 4; i++) {
-            var username = playerData["user" + (i+1)];
+            var username = playerData["User" + (i+1)];
             console.log(username);
             if (username) {
                 console.log(username);
