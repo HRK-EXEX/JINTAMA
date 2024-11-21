@@ -2,8 +2,9 @@ import { initializeInput, input, updateDebugInfo, debugInfo, player } from './in
 import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
-import Player from './player.js';
+import { Player } from './player.js';
 import { changeForm } from './form.js';
+import { playerData } from './main.js';
 
 export class MainScene extends Phaser.Scene {
     constructor() {
@@ -62,19 +63,17 @@ export class MainScene extends Phaser.Scene {
         });
         
         for (let i = 0; i < 4; i++) {
-            var username = document.getElementById('username' + (i+1).toString());
-            if (username != null) {
-                username = username.textContent;
+            var username = playerData["user" + (i+1)];
+            if (!empty(username)) {
                 console.log(username);
-                const arr = username.split(',');
 
                 var p = player[i];
-                p = new Player(this, 40, 40 + i * 40, arr[2]);
+                p = new Player(this, 40, 40 + i * 40, username.name);
                 p.modifyStats({
-                    score: arr[3] - p.stats.score,    // 幸福度
-                    hp: arr[4] - p.stats.hp,     // 体力
-                    charm: arr[5] - p.stats.charm,   // 魅力
-                    sense: arr[6] - p.stats.sense // センス
+                    score: username.score - p.stats.score,    // 幸福度
+                    hp: username.hp - p.stats.hp,     // 体力
+                    charm: username.charm - p.stats.charm,   // 魅力
+                    sense: username.sense - p.stats.sense // センス
                 });
                 player.push(p);
             }

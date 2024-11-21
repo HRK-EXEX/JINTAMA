@@ -1,8 +1,10 @@
+import { playerData } from './main.js';
+
 let phpSessionJson;
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
-    let phpSessionJson = document.getElementById("users").innerHTML;
+    let phpSessionJson = playerData;
     const sendButton = document.getElementById("send");
 
     if (!form || !sendButton) {
