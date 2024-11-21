@@ -1,6 +1,6 @@
 <?php
     session_start();
-    echo JSON.stringify($_SESSION);
+    echo json_encode($_SESSION);
     $roomId = $_SESSION['User']['room_id'];
 
     require "../db.php";
