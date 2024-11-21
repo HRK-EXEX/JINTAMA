@@ -50,8 +50,7 @@ export class MainScene extends Phaser.Scene {
         for (let i = 0; i < 4; i++) {
             player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));
         }
-
-        updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
+        // updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
         this.rouletteText = this.add.text(75, 300);
 
         this.input.keyboard.on('keydown-ENTER', () => {
