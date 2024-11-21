@@ -2,7 +2,7 @@ let phpSessionJson;
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
-    let phpSessionJson = document.getElementById("users").innerHTML.slice(2, -2);
+    let phpSessionJson = document.getElementById("users").innerHTML.slice(1, -1);
     const sendButton = document.getElementById("send");
 
     if (!form || !sendButton) {
