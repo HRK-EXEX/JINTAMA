@@ -4,7 +4,7 @@ let phpSessionJson;
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
-    let phpSessionJson = playerData;
+    phpSessionJson = playerData;
     const sendButton = document.getElementById("send");
 
     if (!form || !sendButton) {
@@ -60,15 +60,15 @@ export function changeForm(players) {
         var json = phpSessionJson["User" + (i + 1)];
         var properies = ["score", "hp", "charm", "sense"];
 
-        console.log(p);
-        console.log(json);
-        // properies.forEach(v => json[v] = p.stats[v]);
-        json.score = p.stats.score;
-        json.hp = p.stats.hp;
-        json.charm = p.stats.charm;
-        json.sense = p.stats.sense;
+        // console.log(p);
+        // console.log(json);
+        properies.forEach(v => json[v] = p.stats[v]);
+        // json.score = p.stats.score;
+        // json.hp = p.stats.hp;
+        // json.charm = p.stats.charm;
+        // json.sense = p.stats.sense;
 
-        phpSessionJson["User" + (i + 1)] = json[v];
+        phpSessionJson["User" + (i + 1)] = json[i];
     });
 
     console.log("変更後のプレイヤーデータ:", phpSessionJson);
