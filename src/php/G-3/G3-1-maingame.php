@@ -3,7 +3,7 @@
     $roomId = $_SESSION['User1']['room_id'];
 
     require "../db.php";
-    $sql = $db -> query("SELECT * FROM Room WHERE ");
+    $sql = $db -> query("SELECT * FROM Room WHERE room_id = $roomId");
     $result = $sql -> fetch();
 
     if (isset($result['Room']['room_user2'])) $_SESSION['User']['room_limit'] = 2;
