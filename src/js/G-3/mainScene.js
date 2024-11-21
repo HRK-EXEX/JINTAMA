@@ -5,10 +5,7 @@ import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
  
 
-function initialize() {
-    gc = document.getElementById("test").getContext("2d");
-    paint();
-}
+
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
