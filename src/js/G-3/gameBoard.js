@@ -315,9 +315,5 @@ export class GameBoard {
 
         
     }
-    // movecharacter(finalNumber){
-    //     initialize() ;
-            
-    // }
    
 }
