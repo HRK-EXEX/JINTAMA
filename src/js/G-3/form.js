@@ -57,7 +57,7 @@ const getCircularReplacer = () => {
 // フォームデータの変更を処理する関数
 export function changeForm(players) {
     players.forEach((p, i) => {
-        var json = phpSessionJson[i];
+        var json = phpSessionJson["User" + (i + 1)];
         var properies = ["score", "hp", "charm", "sense"];
 
         console.log(p);
