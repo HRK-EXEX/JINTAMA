@@ -67,7 +67,7 @@ export class MainScene extends Phaser.Scene {
             // }
         
         });
-
+        
         var json;
         switch(this.gameBoard.mapID) {
             case 0:
@@ -115,7 +115,7 @@ export class MainScene extends Phaser.Scene {
             const randomNum = Math.floor(Math.random() * 6) + 1;
             this.rouletteText.setText(randomNum);
         }, 100);
-    }
+        }
 
     stopRoulette(isEnterKey) {
         clearInterval(this.rouletteInterval);  // ルーレットを停止
