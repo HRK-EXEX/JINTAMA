@@ -66,8 +66,6 @@ export class MainScene extends Phaser.Scene {
             var username = playerData["User" + (i+1)];
             console.log(username);
             if (username) {
-                console.log(username);
-
                 var p = new Player(this, 40, 40 + i * 40, username.name);
                 p.modifyStats({
                     score: username.score - p.stats.score,    // 幸福度
