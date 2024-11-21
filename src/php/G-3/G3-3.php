@@ -25,7 +25,7 @@ require '../db.php';
                 echo'<h2>'.$r.'.'.$_SESSION['User'.$r]['name'].'</p>';
                 echo'<p>幸福度：'.$_SESSION['User'.$r]['score'].'</p>';
                 echo'<p>体力：'.$_SESSION['User'.$r]['hp'].'</p>';
-                echo'<p>センス：'.$_SESSION['User'.$r]['sence'].'<p>';
+                echo'<p>センス：'.$_SESSION['User'.$r]['sense'].'<p>';
                 echo'<p>魅力：'.$_SESSION['User'.$r]['charm'].'</p>';
                 echo'</div>
             </div>';

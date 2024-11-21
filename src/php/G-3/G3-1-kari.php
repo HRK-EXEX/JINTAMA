@@ -21,7 +21,7 @@ foreach($stm1 as $un1){
         'score' => 120,
         'hp' => 100,
         'charm' => 100,
-        'sence' => 100,
+        'sense' => 100,
     ];
 }
 
@@ -35,7 +35,7 @@ foreach($stm2 as $un2){
         'score' => 90,
         'hp' => 100,
         'charm' => 100,
-        'sence' => 100,
+        'sense' => 100,
     ];
 }
 
@@ -49,7 +49,7 @@ foreach($stm3 as $un3){
         'score' => 70,
         'hp' => 100,
         'charm' => 100,
-        'sence' => 100,
+        'sense' => 100,
     ];
 }
 $stm4 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
@@ -62,7 +62,7 @@ foreach($stm4 as $un4){
         'score' => 50,
         'hp' => 100,
         'charm' => 100,
-        'sence' => 100,
+        'sense' => 100,
     ];
 }
 echo 'ルームID：'.$_SESSION['User']['room_id'].'<br>';
@@ -97,7 +97,7 @@ echo 'メンバー4：'.$_SESSION['User4']['user_id'].'('.$_SESSION['User4']['na
             echo'<td>'.$_SESSION['User'.$i]['score'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['hp'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['charm'].'</td>';
-            echo'<td>'.$_SESSION['User'.$i]['sence'].'</td>';
+            echo'<td>'.$_SESSION['User'.$i]['sense'].'</td>';
             echo'</tr>';}
         ?>
         

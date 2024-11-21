@@ -153,7 +153,7 @@ foreach ($sessionData as $index => $userData) {
                         <h1 style="font-size: 50px;"><?php echo $_SESSION['User1']['name'] ?></h1>
                         <h2 style="font-size: 30px;">幸福度：<?php echo $_SESSION['User1']['score'] ?></h2>
                         <h2 style="font-size: 30px;">体力：<?php echo $_SESSION['User1']['hp'] ?></h2>
-                        <h2 style="font-size: 30px;">センス：<?php echo $_SESSION['User1']['sence'] ?></h2>
+                        <h2 style="font-size: 30px;">センス：<?php echo $_SESSION['User1']['sense'] ?></h2>
                         <h2 style="font-size: 30px;">魅力:<?php echo $_SESSION['User1']['charm'] ?></h2>
                 </div>
          
