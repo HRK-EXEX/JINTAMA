@@ -64,7 +64,7 @@ export class MainScene extends Phaser.Scene {
         
         for (let i = 0; i < 4; i++) {
             var username = playerData["user" + (i+1)];
-            if (!empty(username)) {
+            if (username) {
                 console.log(username);
 
                 var p = player[i];
