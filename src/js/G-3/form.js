@@ -1,5 +1,8 @@
+let phpSessionJson;
+
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
+    phpSessionJson = document.getElementById("users").slice(2, -2);
     const sendButton = document.getElementById("send");
 
     if (!form || !sendButton) {
@@ -8,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     console.log(form);
+    console.log(phpSessionJson);
 
     // 送信ボタンにイベントリスナーを追加
     sendButton.addEventListener("click", (event) => {
@@ -52,27 +56,15 @@ var userElements = new Array();
 
 // フォームデータの変更を処理する関数
 export function changeForm(players) {
-    const playerJson = [];
+    players.forEach((p, i) => {
+        var json = users["User" + (i + 1)];
+        var properies = ["score", "hp", "charm", "sence"];
+        properies.forEach(v => json[v] = p.stats[v]);
 
-    players.forEach((player, index) => {
-        var userElement;
-        if (player) {
-            var json = JSON.parse(JSON.stringify(player));
-            json.stats = player.stats;
-            playerJson.push(json);
-
-            userElement = document.getElementById(`user${index + 1}`);
-            if (userElement) {
-                userElement.value = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
-            } else console.log("userElement is undefined");
-        }
-
-        userElements.push(userElement);
-
-        if (userElement) console.log(userElement.value);
+        phpSessionJson["User" + (i + 1)] = json[v];
     });
 
-    console.log("変更後のプレイヤーデータ:", playerJson);
+    console.log("変更後のプレイヤーデータ:", phpSessionJson);
 }
 
 // フォームデータをサーバーに送信する関数

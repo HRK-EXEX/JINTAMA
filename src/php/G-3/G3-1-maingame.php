@@ -1,6 +1,6 @@
 <?php
     session_start();
-    echo "<div id='username1' style='display: none;'>".json_encode($_SESSION)."</div><br>";
+    echo "<div id='users' style='display: none;'>".json_encode($_SESSION)."</div><br>";
     $roomId = $_SESSION['User1']['room_id'];
 
     require "../db.php";
