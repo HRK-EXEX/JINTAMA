@@ -57,6 +57,8 @@ export function changeForm(players) {
     players.forEach((p, i) => {
         var json = users["User" + (i + 1)];
         var properies = ["score", "hp", "charm", "sence"];
+        
+        console.log(p);
         properies.forEach(v => json[v] = p.stats[v]);
 
         phpSessionJson["User" + (i + 1)] = json[v];
