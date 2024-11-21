@@ -52,8 +52,6 @@ const getCircularReplacer = () => {
 	}
 }
 
-var userElements = new Array();
-
 // フォームデータの変更を処理する関数
 export function changeForm(players) {
     players.forEach((p, i) => {
