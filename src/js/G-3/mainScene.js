@@ -76,7 +76,7 @@ export class MainScene extends Phaser.Scene {
                     charm: arr[5] - p.stats.charm,   // 魅力
                     sense: arr[6] - p.stats.sense // センス
                 });
-                player[i] = p;
+                player.push(p);
             }
         }
 

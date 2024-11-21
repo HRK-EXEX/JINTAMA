@@ -6,7 +6,7 @@ export let debugInfo;
 export let loopMap = null;
 
 // プレイヤー関連
-export let player = [null, null, null, null];
+export let player = [];
 
 // 入力処理関数
 export let input;
