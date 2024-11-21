@@ -2,7 +2,7 @@ import { initializeInput, input, updateDebugInfo, debugInfo, player } from './in
 import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
-import { Player } from './player.js';
+import Player from './player.js';
 import { changeForm } from './form.js';
 import { playerData } from './main.js';
 
