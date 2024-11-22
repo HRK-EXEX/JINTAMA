@@ -12,8 +12,6 @@
     if (isset($result['Room']['room_user4'])) $_SESSION['User']['room_limit'] = 4;
 
     var_dump($_SESSION);
-    
-    echo "<div id='json' style='display: none;'>".json_encode($_SESSION, JSON_UNESCAPED_UNICODE)."</div>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +29,9 @@
     <title>メインゲーム</title>
 </head>
 <body>
+    <div id='json' style='display: none;'>
+        <?=json_encode($_SESSION, JSON_UNESCAPED_UNICODE)?>
+    </div>
     <form id="resultForm" action="G3-2.php" method="POST">
         <input id="user1" type="hidden" name="player[]" value="null">
         <input id="user2" type="hidden" name="player[]" value="null">
