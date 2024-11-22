@@ -10,6 +10,8 @@
     if (isset($result['Room']['room_user2'])) $_SESSION['User']['room_limit'] = 2;
     if (isset($result['Room']['room_user3'])) $_SESSION['User']['room_limit'] = 3;
     if (isset($result['Room']['room_user4'])) $_SESSION['User']['room_limit'] = 4;
+
+    var_dump($_SESSION);
     
     echo "<div id='json' style='display: none;'>".json_encode($_SESSION, JSON_UNESCAPED_UNICODE)."</div>";
 ?>
