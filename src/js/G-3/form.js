@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // JSON形式に変換
         formData.entries().forEach((data, index) => {
-            data[1] = JSON.stringify(phpSessionJson[`User${index + 1}`]);
+            data[1] = JSON.stringify(phpSessionJson.User1);
             console.log(data);
             if (data[1] != "null") {
                 json.push(JSON.parse(data[1]));
