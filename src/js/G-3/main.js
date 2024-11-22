@@ -3,7 +3,7 @@ import { MainScene } from "./mainScene.js";
 const DEFAULT_WIDTH = window.innerWidth
 const DEFAULT_HEIGHT = window.innerHeight // any height you want
 
-export var playerData = JSON.parse(document.getElementById("users").innerHTML.slice(1,-1));
+export var playerData = JSON.parse(document.getElementById("users").textContent);
 console.log(playerData);
 
 //ゲームに関する設定
