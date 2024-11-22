@@ -1,6 +1,8 @@
 <?php
     session_start();
+    header('Content-Type: application/json; charset=UTF-8');
     $roomId = $_SESSION['User1']['room_id'];
+    $_SESSION['User']['room_limit'] = 1;
 
     require "../db.php";
     $sql = $db -> query("SELECT * FROM Room WHERE room_id = $roomId");
