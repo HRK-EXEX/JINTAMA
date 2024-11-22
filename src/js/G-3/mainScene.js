@@ -5,7 +5,10 @@ import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
  
 
-
+// function initialize() {
+//     gc = document.getElementById("test").getContext("2d");
+//     paint();
+// }
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
@@ -67,25 +70,37 @@ export class MainScene extends Phaser.Scene {
             // }
         
         });
+
+        // let json_data;
+        // var xhr = new XMLHttpRequest();
+
+        // var parentPath = '../../js/G-3/map-data/';
+        // switch(this.gameBoard.mapID) {
+        //     case 0:
+        //         xhr.open('GET', parentPath + 'first-map.json');
+        //         // json = FileSystem.require ('.map-data/first-map.json');
+        //         break;
+        //         case 1:
+        //         xhr.open('GET', parentPath + 'second-map.json');
+        //         break;
+        //         case 2:
+        //         xhr.open('GET', parentPath + 'third-map.json');
+        //         break;
+        //         default:
+        //         console.error("未知のマップIDです！");
+        //         return;
+        // }
+        // xhr.send();
+
+        // xhr.onreadystatechange = function () {
+        //     if (xhr.readyState === 4 && xhr.status === 200) {
+        //         json_data = JSON.parse(xhr.response);
+        //         return console.log(json_data);
+        //     };
+        // }
         
-        var json;
-        switch(this.gameBoard.mapID) {
-            case 0:
-                json = require('.map-data/first-map.json');
-                break;
-                case 1:
-                json = require('.map-data/second-map.json');
-                break;
-                case 2:
-                json = require('.map-data/third-map.json');
-                break;
-                default:
-                console.error("未知のマップIDです！");
-                return;
-        }
-        
-        var jsonData = JSON.parse(json);
-        jsonData.layers[jsonData.layers.length - 1].data;
+        // var mapData = json_data.layers[0].data;
+        // console(mapData);
 
         let playerPosition = 9385;
 
