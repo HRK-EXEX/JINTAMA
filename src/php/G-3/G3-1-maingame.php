@@ -11,7 +11,7 @@
     if (isset($result['Room']['room_user3'])) $_SESSION['User']['room_limit']++;
     if (isset($result['Room']['room_user4'])) $_SESSION['User']['room_limit']++;
 
-    // var_dump($_SESSION);
+    var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
