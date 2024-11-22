@@ -30,6 +30,7 @@
 </head>
 <body>
     <div id='json' style='display: none;'><?=json_encode($_SESSION, JSON_UNESCAPED_UNICODE)?></div>
+    <?php echo $_SESSION ?>
     <form id="resultForm" action="G3-2.php" method="POST">
         <input id="user1" type="hidden" name="player[]" value="null">
         <input id="user2" type="hidden" name="player[]" value="null">
