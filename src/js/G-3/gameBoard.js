@@ -304,16 +304,14 @@ export class GameBoard {
 
     update(button) {
         const sprint = ((button & 1<<4) > 0) ? 4 : 1;
+
         if (scrollLimit > 0) {
-          
+            
         }
         
         if ((button & 1<<0) > 0) this.moveMapGroup(spd * sprint, 0);
         if ((button & 1<<1) > 0) this.moveMapGroup(-spd * sprint, 0);
         if ((button & 1<<2) > 0) this.moveMapGroup(0, spd * sprint);
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
-
-        
     }
-   
 }

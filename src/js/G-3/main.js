@@ -1,7 +1,7 @@
 // var username = document.getElementById('username1').textContent;
 // console.log(username);
 import { MainScene } from "./mainScene.js";
-import { triggerRandomEvent } from './event.js';
+// import { triggerRandomEvent } from './event.js';
 
 const DEFAULT_WIDTH = window.innerWidth
 const DEFAULT_HEIGHT = window.innerHeight // any height you want
