@@ -13,6 +13,9 @@ let tileOffsetY = 0;
 let mapWidth = 0;
 let mapHeight = 0;
 let scrollLimit = 0;
+// const canvas = document.getElementById("gameCanvas");
+// const ctx = canvas.getContext("2d");
+
 
 export class GameBoard {
     constructor(scene, mapID) {
@@ -249,6 +252,7 @@ export class GameBoard {
 
     addCharacterIcons() {
         // キャラ画像を追加
+        if (this.mapID === 2) {
         const playerPositions = [
             { x: 410, y: 560 }, // プレイヤー1
             { x: 410, y: 560 }, // プレイヤー2
@@ -269,6 +273,7 @@ export class GameBoard {
             this.players.push(sprite);
             
         });
+    }
     }
 
     moveMapGroup(x, y) {
