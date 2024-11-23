@@ -253,6 +253,7 @@ export class GameBoard {
     addCharacterIcons() {
         // キャラ画像を追加
         if (this.mapID === 2) {
+        // 初期位置（マップsecond)
         const playerPositions = [
             { x: 410, y: 560 }, // プレイヤー1
             { x: 410, y: 560 }, // プレイヤー2

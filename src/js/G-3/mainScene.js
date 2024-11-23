@@ -20,7 +20,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.gameBoard = new GameBoard(this, 1);
+        this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
         this.gameBoard.preloadAssets();
         this.utility = new Utility();
         this.load.image('playericon1', '/characters/melondog.png');
