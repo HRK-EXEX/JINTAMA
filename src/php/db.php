@@ -1,6 +1,4 @@
-<?php
-    echo $_SERVER['SERVER_NAME'];
-    
+<?php    
     $server = "localhost";
     $dbName = "test";
     $dbUser = "root";
