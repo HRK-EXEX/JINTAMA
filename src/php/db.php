@@ -1,5 +1,5 @@
 <?php
-    var $db; // db用変数
+    echo $_SERVER['SERVER_NAME'];
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
         // 仮想環境
         const SERVER = "localhost";
