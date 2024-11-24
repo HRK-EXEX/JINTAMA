@@ -72,11 +72,20 @@ if ($u4 != null) {
         ];
     }
 } else $stm4 = $_SESSION['User4'] = null;
-echo 'ルームID：'.$_SESSION['User']['room_id'].'<br>';
-echo 'メンバー1：'.$_SESSION['User1']['user_id'].'('.$_SESSION['User1']['name'].')<br>';
-echo 'メンバー2：'.$_SESSION['User2']['user_id'] ?? 'なし'.'('.$_SESSION['User2']['name'] ?? 'なし'.')<br>';
-echo 'メンバー3：'.$_SESSION['User3']['user_id'] ?? 'なし'.'('.$_SESSION['User3']['name'] ?? 'なし'.')<br>';
-echo 'メンバー4：'.$_SESSION['User4']['user_id'] ?? 'なし'.'('.$_SESSION['User4']['name'] ?? 'なし'.')<br>';
+
+$uArray = [
+    $_SESSION['User']['room_id'],
+    isset($_SESSION['User1']) ? $_SESSION['User1']['user_id'] : 'なし',
+    isset($_SESSION['User2']) ? $_SESSION['User2']['user_id'] : 'なし',
+    isset($_SESSION['User3']) ? $_SESSION['User3']['user_id'] : 'なし',
+    isset($_SESSION['User4']) ? $_SESSION['User4']['user_id'] : 'なし',
+]
+
+echo 'ルームID：'.$uArray[0].'<br>';
+echo 'メンバー1：'.$uArray[1].'('.$uArray[1].')<br>';
+echo 'メンバー2：'.$uArray[2].'('.$uArray[2].')<br>';
+echo 'メンバー3：'.$uArray[3].'('.$uArray[3].')<br>';
+echo 'メンバー4：'.$uArray[4].'('.$uArray[4].')<br>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
