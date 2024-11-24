@@ -25,51 +25,58 @@ foreach($stm1 as $un1){
     ];
 }
 
-$stm2 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
-$stm2->execute([$u2]);
-foreach($stm2 as $un2){
-    $_SESSION['User2'] = [
-        'room_id' =>$room_id,
-        'user_id' => $un2['user_id'],
-        'name' => $un2['user_name'],
-        'score' => 90,
-        'hp' => 100,
-        'charm' => 100,
-        'sense' => 100,
-    ];
-}
+if ($u2 != null) {
+    $stm2 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
+    $stm2->execute([$u2]);
+    foreach($stm2 as $un2) {
+        $_SESSION['User2'] = [
+            'room_id' =>$room_id,
+            'user_id' => $un2['user_id'],
+            'name' => $un2['user_name'],
+            'score' => 90,
+            'hp' => 100,
+            'charm' => 100,
+            'sense' => 100,
+        ];
+    }
+} else $stm2 = $_SESSION['User2'] = null;
 
-$stm3= $db->prepare('SELECT * FROM User WHERE user_id = ?');
-$stm3->execute([$u3]);
-foreach($stm3 as $un3){
-    $_SESSION['User3'] = [
-        'room_id' =>$room_id,
-        'user_id' => $un3['user_id'],
-        'name' => $un3['user_name'],
-        'score' => 70,
-        'hp' => 100,
-        'charm' => 100,
-        'sense' => 100,
-    ];
-}
-$stm4 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
-$stm4->execute([$u4]);
-foreach($stm4 as $un4){
-    $_SESSION['User4'] = [
-        'room_id' =>$room_id,
-        'user_id' => $un4['user_id'],
-        'name' => $un4['user_name'],
-        'score' => 50,
-        'hp' => 100,
-        'charm' => 100,
-        'sense' => 100,
-    ];
-}
+if ($u3 != null) {
+    $stm3= $db->prepare('SELECT * FROM User WHERE user_id = ?');
+    $stm3->execute([$u3]);
+    foreach($stm3 as $un3){
+        $_SESSION['User3'] = [
+            'room_id' =>$room_id,
+            'user_id' => $un3['user_id'],
+            'name' => $un3['user_name'],
+            'score' => 70,
+            'hp' => 100,
+            'charm' => 100,
+            'sense' => 100,
+        ];
+    }
+} else $stm3 = $_SESSION['User3'] = null;
+
+if ($u4 != null) {
+    $stm4 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
+    $stm4->execute([$u4]);
+    foreach($stm4 as $un4){
+        $_SESSION['User4'] = [
+            'room_id' =>$room_id,
+            'user_id' => $un4['user_id'],
+            'name' => $un4['user_name'],
+            'score' => 50,
+            'hp' => 100,
+            'charm' => 100,
+            'sense' => 100,
+        ];
+    }
+} else $stm4 = $_SESSION['User4'] = null;
 echo 'ルームID：'.$_SESSION['User']['room_id'].'<br>';
 echo 'メンバー1：'.$_SESSION['User1']['user_id'].'('.$_SESSION['User1']['name'].')<br>';
-echo 'メンバー2：'.$_SESSION['User2']['user_id'].'('.$_SESSION['User2']['name'].')<br>';
-echo 'メンバー3：'.$_SESSION['User3']['user_id'].'('.$_SESSION['User3']['name'].')<br>';
-echo 'メンバー4：'.$_SESSION['User4']['user_id'].'('.$_SESSION['User4']['name'].')<br>';
+echo 'メンバー2：'.$_SESSION['User2']['user_id'] ?? 'なし'.'('.$_SESSION['User2']['name'] ?? 'なし'.')<br>';
+echo 'メンバー3：'.$_SESSION['User3']['user_id'] ?? 'なし'.'('.$_SESSION['User3']['name'] ?? 'なし'.')<br>';
+echo 'メンバー4：'.$_SESSION['User4']['user_id'] ?? 'なし'.'('.$_SESSION['User4']['name'] ?? 'なし'.')<br>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
