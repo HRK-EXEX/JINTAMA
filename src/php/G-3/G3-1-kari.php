@@ -106,7 +106,9 @@ echo 'メンバー4：'.$uArray[4].'('.$uArray[4].')<br>';
         </tr>
         
         <?php
-        for($i=1;$i<5;$i++){
+        for($i=1;$i<5;$i++)
+        {
+            if (is_null($_SESSION[`User$i`])) continue;
             echo'<tr>';
             echo'<td>'.$_SESSION['User'.$i]['user_id'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['name'].'</td>';
@@ -114,7 +116,8 @@ echo 'メンバー4：'.$uArray[4].'('.$uArray[4].')<br>';
             echo'<td>'.$_SESSION['User'.$i]['hp'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['charm'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['sense'].'</td>';
-            echo'</tr>';}
+            echo'</tr>';
+        }
         ?>
         
     </table>
