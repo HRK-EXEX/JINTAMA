@@ -79,7 +79,7 @@ $uArray = [
     isset($_SESSION['User2']) ? $_SESSION['User2']['user_id'] : 'なし',
     isset($_SESSION['User3']) ? $_SESSION['User3']['user_id'] : 'なし',
     isset($_SESSION['User4']) ? $_SESSION['User4']['user_id'] : 'なし',
-]
+];
 
 echo 'ルームID：'.$uArray[0].'<br>';
 echo 'メンバー1：'.$uArray[1].'('.$uArray[1].')<br>';
