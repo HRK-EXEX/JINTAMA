@@ -1,14 +1,14 @@
 <?php    
-    $server = "localhost";
-    $dbName = "test";
-    $dbUser = "root";
-    $dbPass = "";
-    $dbInfo = 'mysql:host='.$server.';dbname='.$dbName.';charset=utf8';
+    // $server = "localhost";
+    // $dbName = "test";
+    // $dbUser = "root";
+    // $dbPass = "";
+    // $dbInfo = 'mysql:host='.$server.';dbname='.$dbName.';charset=utf8';
 
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
         // 仮想環境
         $server = "localhost";
-        $dbName = "test";
+        $dbName = "kansho";
         $dbUser = "root";
         $dbPass = "";
     } else {
