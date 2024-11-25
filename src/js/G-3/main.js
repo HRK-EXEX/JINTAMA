@@ -3,8 +3,23 @@ import { MainScene } from "./mainScene.js";
 const DEFAULT_WIDTH = window.innerWidth
 const DEFAULT_HEIGHT = window.innerHeight // any height you want
 
-export var playerData = JSON.parse(document.getElementById("json").textContent);
+function getSessionData() {
+    try {
+        const element = document.getElementById('session-data');
+        const jsonText = element.textContent.trim();
+        console.log('JSON内容:', jsonText);
+        return JSON.parse(jsonText);
+    } catch (error) {
+        console.error('JSONパースエラー:', error);
+        return null;
+    }
+}
+
+export var playerData = getSessionData();
+export var playerData2 = document.getElementById('session-data');
+
 console.log(playerData);
+console.log(playerData2);
 
 //ゲームに関する設定
 const CONFIG = {

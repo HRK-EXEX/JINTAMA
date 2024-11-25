@@ -62,9 +62,9 @@ export class MainScene extends Phaser.Scene {
             }
         });
         
+        console.log(playerData);
         for (let i = 0; i < 4; i++) {
             var username = playerData["User" + (i+1)];
-            console.log(username);
             if (username) {
                 var p = new Player(this, 40, 40 + i * 40, username.name);
                 p.modifyStats({
@@ -74,8 +74,14 @@ export class MainScene extends Phaser.Scene {
                     sense: username.sense - p.stats.sense // センス
                 });
                 player.push(p);
+                console.log(p);
             }
+            console.log(username);
+            playerData["User" + (i+1)] = username;
         }
+        console.log(playerData);
+
+        phpSessionJson = playerData;
 
         console.log(player);
         changeForm(player);

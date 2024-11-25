@@ -12,6 +12,48 @@
     if (isset($result['Room']['room_user4'])) $_SESSION['User']['room_limit']++;
 
     var_dump($_SESSION);
+
+    // データを安全に出力するためのヘルパー関数
+    function safeJsonEncode($data) {
+        // 必要なデータのみを抽出
+        $safeData = [
+            'User' => [
+                'user_id' => (int)$data['User']['user_id'],
+                'user_name' => $data['User']['user_name'],
+                'room_id' => (int)$data['User']['room_id'],  // 文字列から数値に変換
+                'room_limit' => (int)$data['User']['room_limit']
+            ],
+            'User1' => [
+                'room_id' => (int)$data['User1']['room_id'], // 文字列から数値に変換
+                'user_id' => (int)$data['User1']['user_id'],
+                'name' => $data['User1']['name'],
+                'score' => (int)$data['User1']['score'],
+                'hp' => (int)$data['User1']['hp'],
+                'charm' => (int)$data['User1']['charm'],
+                'sense' => (int)$data['User1']['sense']
+            ]
+        ];
+
+        // nullのユーザーも含めて送信（追加ユーザー参加時の処理に必要かもしれないため）
+        for ($i=2; $i<=4; $i++) {
+            // NULL分岐
+            if (isset($data["User$i"])) {
+                array_push($safeData, 
+                    ["User$i" => [
+                        'room_id' => (int)$data["User$i"]['room_id'], // 文字列から数値に変換
+                        'user_id' => (int)$data["User$i"]['user_id'],
+                        'name' => $data["User$i"]['name'],
+                        'score' => (int)$data["User$i"]['score'],
+                        'hp' => (int)$data["User$i"]['hp'],
+                        'charm' => (int)$data["User$i"]['charm'],
+                        'sense' => (int)$data["User$i"]['sense']
+                    ]]
+                );
+            } else $data["User$i"] = null;
+        }
+        
+        return htmlspecialchars(json_encode($safeData), ENT_NOQUOTES, 'UTF-8');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +71,10 @@
     <title>メインゲーム</title>
 </head>
 <body>
-    <div id='json' style='display: none;'><?=json_encode($_SESSION)?></div>
+    <!-- データ出力用の要素 -->
+    <div id="session-data" type="application/json">
+        <?php echo safeJsonEncode($_SESSION)?>
+    </div>
     <form id="resultForm" action="G3-2.php" method="POST">
         <input id="user1" type="hidden" name="player[]" value="null">
         <input id="user2" type="hidden" name="player[]" value="null">
