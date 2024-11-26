@@ -108,8 +108,8 @@ export class MainScene extends Phaser.Scene {
     endTurn(forceHide) {
         if (forceHide) this.dialog.hideDialog();
         this.selectDialog.hideDialog();
-        this.currentsPlayer = (this.currentPlayer + 1) % player.length;
-        this.yourTurn = (this.turn === this.currentPlayer);
+        this.currentPlayer = (this.currentPlayer + 1) % player.length;
+        this.yourTurn = (this.currentPlayer === 0);
         this.state = this.yourTurn ? 1 : 0;
         this.once = !this.once;
     }
@@ -144,6 +144,9 @@ export class MainScene extends Phaser.Scene {
                                 this.endTurn(false);
                             });
                         });
+                        console.log(`現在のプレイヤー: Player ${this.currentPlayer + 1}`);
+console.log(`Your Turn: ${this.yourTurn}, State: ${this.state}`);
+
 
                         this.state = 2;
                         // this.isRouletteRunning = false;
