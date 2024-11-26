@@ -14,7 +14,7 @@ require '../db.php'; // データベース接続
     $user = $_POST['user_name_form'];
     $pass = $_POST['password_form'];
 
-    echo $user."\n".$pass;
+    // echo $user."\n".$pass;
 
     // POSTデータが存在するか確認
 
