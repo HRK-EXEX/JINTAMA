@@ -18,8 +18,8 @@ function getSessionData() {
 export var playerData = getSessionData();
 export var playerData2 = document.getElementById('session-data');
 
-console.log(playerData);
-console.log(playerData2);
+// console.log(playerData);
+// console.log(playerData2);
 
 //ゲームに関する設定
 const CONFIG = {
