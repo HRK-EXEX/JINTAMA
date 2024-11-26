@@ -1,6 +1,6 @@
 import { playerData } from './main.js';
  
-export let phpSessionJson = null;
+export let phpSessionJson;
  
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
@@ -42,22 +42,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
  
-// フォームデータの変更を処理する関数
 export function changeForm(players) {
+    // 新しいオブジェクトを作成
+    const updatedSessionJson = { ...phpSessionJson };
+ 
     players.forEach((p, i) => {
-        var json = phpSessionJson["User" + (i + 1)];
-        var properies = ["score", "hp", "charm", "sense"];
- 
-        // console.log(p);
-        // console.log(json);
-        properies.forEach(v => json[v] = p.stats[v]);
-        // json.score = p.stats.score;
-        // json.hp = p.stats.hp;
-        // json.charm = p.stats.charm;
-        // json.sense = p.stats.sense;
- 
-        phpSessionJson["User" + (i + 1)] = json;
+        const userKey = "User" + (i + 1);
+        updatedSessionJson[userKey] = {
+            ...updatedSessionJson[userKey],
+            score: p.stats.score,
+            hp: p.stats.hp,
+            charm: p.stats.charm,
+            sense: p.stats.sense
+        };
     });
+ 
+    // グローバル変数を更新
+    phpSessionJson = updatedSessionJson;
  
     console.log("変更後のプレイヤーデータ:", phpSessionJson);
 }

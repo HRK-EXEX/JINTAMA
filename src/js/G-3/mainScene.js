@@ -84,7 +84,8 @@ export class MainScene extends Phaser.Scene {
                 player.push(p);
             }
         }
-        phpSessionJson = playerData;
+        // プレイヤーデータを更新
+        console.log(player);
         changeForm(player);
     }
  
@@ -97,7 +98,6 @@ export class MainScene extends Phaser.Scene {
                 this.closeDialogAndEndTurn();
             } else {
                 this.startRoulette();
-                
             }
         });
     }
