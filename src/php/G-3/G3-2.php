@@ -17,13 +17,6 @@ for ($i=0; $i<4; ++$i) {
 }
 
 $sessionData = [
-    'User1' => $_SESSION['User1'],
-    'User2' => $_SESSION['User2'],
-    'User3' => $_SESSION['User3'],
-    'User4' => $_SESSION['User4'],
-];
-
-$sessionData = [
     'User1' => $results[0],
     'User2' => $results[1],
     'User3' => $results[2],

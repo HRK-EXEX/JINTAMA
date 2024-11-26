@@ -20,20 +20,18 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
  
         const formData = new FormData(form); // FormDataを生成
-        var json = new Array(); // 空のデータをJSON変換。実質初期化。
+        let json = new Array(); // 空のデータをJSON変換。実質初期化。
  
         // JSON形式に変換
         formData.entries().forEach((data, index) => {
-            data[1] = JSON.stringify(phpSessionJson.User1);
-            console.log(data);
-            if (data[1] != "null") {
-                json.push(JSON.parse(data[1]));
- 
-                // wtf
+            const jsonData = phpSessionJson["User" + (index+1)];
+            data[1] = JSON.stringify(jsonData);
+            if (data[1] !== null && data[1] !== undefined) {
+                console.log(data); json.push(JSON.parse(data[1]));
             }
         });
        
-        var text = JSON.stringify(json);
+        let text = JSON.stringify(json);
         console.log("実データ:", json); // デバッグ用のログ
         console.log("送信データ:", text); // デバッグ用のログ
  
@@ -65,10 +63,11 @@ export function changeForm(players) {
  
 // フォームデータをサーバーに送信する関数
 export function sendForm(text) {
+    console.log(text);
     fetch('./G3-2.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'normal', // JSON形式で送信
+            'Content-Type': 'text/javascript', // JSON形式で送信
         },
         body: text,
     })

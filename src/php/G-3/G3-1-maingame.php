@@ -1,6 +1,11 @@
 <?php
     session_start();
-    $roomId = $_SESSION['User1']['room_id'];
+    
+    // echo "<pre>";
+    // var_dump($_SESSION);
+    // echo "</pre>";
+
+    $roomId = $_SESSION['User']['room_id'];
     $_SESSION['User']['room_limit'] = 1;
 
     require "../db.php";
@@ -10,10 +15,6 @@
     if (isset($result['Room']['room_user2'])) $_SESSION['User']['room_limit']++;
     if (isset($result['Room']['room_user3'])) $_SESSION['User']['room_limit']++;
     if (isset($result['Room']['room_user4'])) $_SESSION['User']['room_limit']++;
-
-    echo "<pre>";
-    var_dump($_SESSION);
-    echo "</pre>";
 
     // データを安全に出力するためのヘルパー関数
     function safeJsonEncode($data) {
