@@ -15,7 +15,6 @@ $stm1 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
 $stm1->execute([$u1]);
 foreach($stm1 as $un1){
     $_SESSION['User1'] = [
-        'room_id' =>$room_id,
         'user_id' => $un1['user_id'],
         'name' => $un1['user_name'],
         'score' => 120,
@@ -25,12 +24,11 @@ foreach($stm1 as $un1){
     ];
 }
 
-if ($u2 != null) {
+if ($u2) {
     $stm2 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
     $stm2->execute([$u2]);
     foreach($stm2 as $un2) {
         $_SESSION['User2'] = [
-            'room_id' =>$room_id,
             'user_id' => $un2['user_id'],
             'name' => $un2['user_name'],
             'score' => 90,
@@ -41,12 +39,11 @@ if ($u2 != null) {
     }
 } else $stm2 = $_SESSION['User2'] = null;
 
-if ($u3 != null) {
+if ($u3) {
     $stm3= $db->prepare('SELECT * FROM User WHERE user_id = ?');
     $stm3->execute([$u3]);
     foreach($stm3 as $un3){
         $_SESSION['User3'] = [
-            'room_id' =>$room_id,
             'user_id' => $un3['user_id'],
             'name' => $un3['user_name'],
             'score' => 70,
@@ -57,12 +54,11 @@ if ($u3 != null) {
     }
 } else $stm3 = $_SESSION['User3'] = null;
 
-if ($u4 != null) {
+if ($u4) {
     $stm4 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
     $stm4->execute([$u4]);
     foreach($stm4 as $un4){
         $_SESSION['User4'] = [
-            'room_id' =>$room_id,
             'user_id' => $un4['user_id'],
             'name' => $un4['user_name'],
             'score' => 50,
