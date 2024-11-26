@@ -59,6 +59,7 @@ export class MainScene extends Phaser.Scene {
             }else{
                 // ルーレットが停止中の場合は開始
                 this.startRoulette();
+                
             }
         });
         
