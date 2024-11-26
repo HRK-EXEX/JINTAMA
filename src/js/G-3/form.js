@@ -42,20 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// 循環構造用
-const getCircularReplacer = () => {
-	const seen = new WeakSet()
-	return (key, value) => {
-		if (typeof value === "object" && value !== null) {
-			if (seen.has(value)) {
-				return
-			}
-			seen.add(value)
-		}
-		return value
-	}
-}
-
 // フォームデータの変更を処理する関数
 export function changeForm(players) {
     players.forEach((p, i) => {

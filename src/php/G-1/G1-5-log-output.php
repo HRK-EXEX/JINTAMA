@@ -43,13 +43,22 @@ require '../db.php'; // データベース接続
         
         // ユーザー情報が見つかる場合の処理
         if ($row = $sql->fetch()) {
-            // パスワードの検証（ハッシュ化されていない場合）
-            if (password_verify($pass,$row['password'])) {
+            // パスワードの検証
+            if (password_verify($pass,$row['password']) || $pass == $row['password']) {
                 // セッションにユーザー情報を格納（パスワードは除外）
                 $_SESSION['User'] = [
                     'user_id' => $row['user_id'],
                     'user_name' => $row['user_name']
                 ];
+
+                // ハッシュ化されていない場合
+                if ($pass === $row['password']) {
+                    $row['password'] = password_hash($row['password'],PASSWORD_DEFAULT);
+
+                    // SQL文をプリペアドステートメントで準備
+                    $sql = $db->prepare('UPDATE User SET password = ? WHERE user_id = ?');
+                    $sql->execute([$row['password'], $row['user_id']]);
+                }
                 
                 if ($row['user_name'] === $user && $row['user_name'] != "kanri") {
                     header('Location: /kansho/JINTAMA/src/php/G-2/G2-1.php');

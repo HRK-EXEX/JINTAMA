@@ -81,11 +81,13 @@ $uArray = [
     isset($_SESSION['User4']) ? $_SESSION['User4']['user_id'] : 'なし',
 ];
 
-echo 'ルームID：'.$uArray[0].'<br>';
-echo 'メンバー1：'.$uArray[1].'('.$uArray[1].')<br>';
-echo 'メンバー2：'.$uArray[2].'('.$uArray[2].')<br>';
-echo 'メンバー3：'.$uArray[3].'('.$uArray[3].')<br>';
-echo 'メンバー4：'.$uArray[4].'('.$uArray[4].')<br>';
+// echo 'ルームID：'.$uArray[0].'<br>';
+// echo 'メンバー1：'.$uArray[1].'('.$uArray[1].')<br>';
+// echo 'メンバー2：'.$uArray[2].'('.$uArray[2].')<br>';
+// echo 'メンバー3：'.$uArray[3].'('.$uArray[3].')<br>';
+// echo 'メンバー4：'.$uArray[4].'('.$uArray[4].')<br>';
+
+header('Location: G3-1-maingame.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
