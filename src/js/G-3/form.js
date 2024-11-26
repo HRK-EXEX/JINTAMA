@@ -1,6 +1,6 @@
 import { playerData } from './main.js';
 
-let phpSessionJson;
+export var phpSessionJson;
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
