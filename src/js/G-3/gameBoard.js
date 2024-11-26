@@ -123,6 +123,7 @@ export class GameBoard {
                     'dirtTile2',
                     'loopTile',
                 ];
+                
 
                 break;
 
@@ -192,6 +193,7 @@ export class GameBoard {
                     'yougan'
                 ];
                 
+        
                 break;
         }
     }
@@ -248,27 +250,96 @@ export class GameBoard {
     }
 
     addCharacterIcons() {
-        // キャラ画像を追加
-        const playerPositions = [
-            { x: 410, y: 560 }, // プレイヤー1
-            { x: 410, y: 560 }, // プレイヤー2
-            { x: 410, y: 560 }, // プレイヤー3
-            { x: 410, y: 560 }  // プレイヤー4
+         this.coordinates = [
+            { x: 410, y: 560 },
+            { x: 215, y: 560 },
+            { x: 215, y: 370 },
+            { x: 20, y: 370 },
+            { x: 20, y: 170 },
+            { x: -220, y: 170 },
+            { x: -360, y: -20 },
+            { x: -220, y: -215 },
+            { x: -360, y: -410 },
+            { x: -220, y: -600 },
+            { x: -360, y: -410 },
+            { x: -220, y: -980 },
+            { x: 410, y: -1150 },
+            { x: 1030, y: -800 },
+            { x: 410, y: -1150 },
+            { x: 1270, y: -800 },
+            { x: 1270, y: -615 },
+            { x: 1150, y: -300 },
+            { x: 1030, y: 10 },
+            { x: 1030, y: 210 },
+            { x: 1270, y: 10 },
+            { x: 1270, y: 210 },
+            { x: 790, y: 560 },
+            { x: 400, y: 370 },
+            { x: 410, y: 170 },
+            { x: 600, y: 170 },
+            { x: 790, y: -15 },
+            { x: 410, y: -15 },
+            { x: 20, y: -15 },
+            { x: 410, y: -450 },
+            { x: 575, y: -450 },
+            { x: 740, y: -450 },
+            { x: 240, y: -450 },
+            { x: 70, y: -450 },
+            { x: 740, y: -590 },
+            { x: 575, y: -590 },
+            { x: 410, y: -590 },
+            { x: 240, y: -590 },
+            { x: 70, y: -590 },
+            { x: 740, y: -730 },
+            { x: 575, y: -730 },
+            { x: 410, y: -730 },
+            { x: 240, y: -730 },
+            { x: 70, y: -730 }
         ];
-        let i = 1;
-        // キャラ画像を一つずつ配置
-        playerPositions.forEach((pos, index) => {
-            const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon'+(i));
-            i =i+1;
-            sprite.setScale(2); // サイズを調整
-            sprite.setOrigin(0.5); // 中心に設定
-            sprite.setDepth(0); // マップより前に表示されるように設定
-    
-            // プレイヤー情報に保存（必要ならグローバルな`player`にも保存可能）
-            if (!this.players) this.players = [];
-            this.players.push(sprite);
+        //プレイヤー1
+        // const startPosition = coordinates[0]; // 初期位置
+        const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー
+        this.playerPos =[0,0,0,0] ;//プレイヤー位置をいれておく
+        if (!this.players) this.players = []; // プレイヤー配列を初期化
+        
+        // プレイヤー数分ループしてスプライトを作成
+        for (let i = 0; i < playerIcons.length; i++) {
+          this.sprite = this.scene.add.sprite(this.coordinates[ this.playerPos[i] ].x, this.coordinates[ this.playerPos[i] ].y, playerIcons[i]);
+            this.sprite.setScale(2); // サイズ調整
+            this.sprite.setOrigin(0.5); // 中心設定
+            this.sprite.setDepth(0); // 表示順序を設定
+            // プレイヤー情報（スプライトと現在位置）を保存
+            this.players.push(this.sprite);
+        //     this.playerPositions.push({position: {            // 現在の座標
+        //         x: startPosition.x,
+        //         y: startPosition.y
+        // }});
+        }
+        // キャラ画像を追加
+        // const playerPositions = [
+        //     { x: 410 , y: 560
+        //     }, // 1プレイヤー1
+        //     { x: 410, y: 560 
             
-        });
+        //     }, // プレイヤー2
+        //     { x: 410, y: 560 }, // プレイヤー3
+        //     { x: 410, y: 560 }  // プレイヤー4
+        // ];
+        // let i = 1;
+        // // キャラ画像を一つずつ配置
+        // playerPositions.forEach((pos, index) => {
+        //     const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon'+(i));
+        //     i =i+1;
+        //     sprite.setScale(2); // サイズを調整
+        //     sprite.setOrigin(0.5); // 中心に設定
+        //     sprite.setDepth(0); // マップより前に表示されるように設定
+    
+        //     // プレイヤー情報に保存（必要ならグローバルな`player`にも保存可能）
+        //     if (!this.players) this.players = [];
+        //     this.players.push(sprite);
+            
+        // });
+
     }
 
     moveMapGroup(x, y) {
@@ -314,4 +385,20 @@ export class GameBoard {
         if ((button & 1<<2) > 0) this.moveMapGroup(0, spd * sprint);
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
+    movechar(playernum,num){
+        const playerIndex = playernum -1;
+        this.playerPos[playerIndex]+=Number(num);
+        const pos = this.playerPos[playerIndex];
+        if (this.players[playerIndex]) {
+            this.players[playerIndex].destroy();
+        }
+    
+        const sprite = this.scene.add.sprite(this.coordinates[pos].x, this.coordinates[pos].y, 'playericon'+(playernum));
+        sprite.setScale(2); // サイズ調整
+        sprite.setOrigin(0.5); // 中心設定
+        sprite.setDepth(0); // 表示順序を設定
+        this.players[playerIndex] =sprite;
+        
+    }
+
 }

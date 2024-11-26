@@ -92,9 +92,10 @@ export class MainScene extends Phaser.Scene {
     
         // ルーレット停止後にダイアログを表示
         if (isEnterKey) {
-            this.isDialogActive = true;
+            this.isDialogActive = true; 
             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
             this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true,() =>{
+                this.gameBoard.movechar(this.currentPlayer,finalNumber);
                 this.endTurn(false);
             });
         } else {
@@ -107,7 +108,7 @@ export class MainScene extends Phaser.Scene {
     endTurn(forceHide) {
         if (forceHide) this.dialog.hideDialog();
         this.selectDialog.hideDialog();
-        this.currentPlayer = (this.currentPlayer + 1) % player.length;
+        this.currentsPlayer = (this.currentPlayer + 1) % player.length;
         this.yourTurn = (this.turn === this.currentPlayer);
         this.state = this.yourTurn ? 1 : 0;
         this.once = !this.once;
@@ -131,7 +132,7 @@ export class MainScene extends Phaser.Scene {
 
     showTurnOptions() {
         this.selectDialog.showSelectDialog(
-            'あなたのターンです。',
+            `プレイヤー${this.currentPlayer}のターンです。`,
             ['ルーレット', 'ステータス', 'ターンスキップ'],
             choice => {
                 switch (choice) {
