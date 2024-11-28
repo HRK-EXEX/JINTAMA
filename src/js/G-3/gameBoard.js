@@ -386,7 +386,7 @@ export class GameBoard {
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
     movechar(playernum,num){
-        const playerIndex = playernum -1;
+        const playerIndex = playernum;
         this.playerPos[playerIndex]+=Number(num);
         const pos = this.playerPos[playerIndex];
         if (this.players[playerIndex]) {
