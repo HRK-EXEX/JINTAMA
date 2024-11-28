@@ -3,7 +3,7 @@ import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
-import { phpSessionJson, changeForm } from './form.js';
+import { changeForm } from './form.js';
 import { playerData } from './main.js';
  
 export class MainScene extends Phaser.Scene {
@@ -46,6 +46,19 @@ export class MainScene extends Phaser.Scene {
     create() {
         this.initializeGame();
         this.registerInputHandlers();
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const b = document.getElementById("cheat");
+
+        //     b.addEventListener("click", event => {
+        //         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+
+        //         this.cheat();
+        //     });
+        // });
+        
+        this.cheat();
+        changeForm(player);
     }
  
     // ゲーム初期化
@@ -178,5 +191,22 @@ export class MainScene extends Phaser.Scene {
                 break;
         }
         this.selectDialog.hideDialog();
+    }
+
+    cheat() {
+        let cnt = 0;
+        player.forEach(p => {
+            if (p != null && p != undefined) {
+                p.modifyStats({
+                    score: Math.random() * 999,
+                    hp: Math.random() * 999,
+                    charm: Math.random() * 999,
+                    sense: Math.random() * 999,
+                });
+                cnt++;
+            }
+        });
+
+        console.log("changed "+cnt+" stats");
     }
 }
