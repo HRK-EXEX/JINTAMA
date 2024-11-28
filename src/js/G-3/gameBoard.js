@@ -94,6 +94,28 @@ export class GameBoard {
                     'water2',
                     'waterfall',
                 ];
+                this.coordinates = [
+                    { x: 430, y: 1260 }, 
+                    { x: 430, y: 1120 },
+                    { x: 430, y: 970 },
+                    { x: 430, y: 820 },
+                    { x: 430, y: 680 },  
+                    { x: 430, y: 540 },  
+                    { x: 570, y: 540 },  
+                    { x: 720, y: 540 },  
+                    { x: 860, y: 540 },  
+                    { x: 1010, y: 540 }, 
+                    { x: 1150, y: 540 }, 
+                    { x: 1290, y: 540 }, 
+                    { x: 1440, y: 540 }, 
+                    { x: 1580, y: 540 }, 
+                    { x: 1730, y: 540 }, 
+                    { x: 1730, y: 680 }, 
+                    { x: 1730, y: 830 }, 
+                    { x: 1730, y: 970 }, 
+                    { x: 1730, y: 1120 }, 
+                    { x: 1730, y: 1280 } 
+                ];
                 break;
 
             case 1:
@@ -123,7 +145,52 @@ export class GameBoard {
                     'dirtTile2',
                     'loopTile',
                 ];
-                
+                this.coordinates = [
+                    { x: 410, y: 560 },
+                    { x: 215, y: 560 },
+                    { x: 215, y: 370 ,branches: [3, 23] },
+                    { x: 20, y: 370 },
+                    { x: 20, y: 170 },
+                    { x: -220, y: 170 ,branches:[6,12] },
+                    { x: -360, y: -20 },
+                    { x: -220, y: -215 },
+                    { x: -360, y: -410 },
+                    { x: -220, y: -600 },
+                    { x: -360, y: -410 },
+                    { x: -220, y: -980 },
+                    { x: 410, y: -1150 },
+                    { x: 1030, y: -800 },
+                    { x: 410, y: -1150 ,branches:[13,15]},
+                    { x: 1270, y: -800 },
+                    { x: 1270, y: -615 },
+                    { x: 1150, y: -300 ,branches:[18,20]},
+                    { x: 1030, y: 10 },
+                    { x: 1030, y: 210 },
+                    { x: 1270, y: 10 },
+                    { x: 1270, y: 210 },
+                    { x: 790, y: 560 },
+                    // { x: 400, y: 370 },
+                    { x: 410, y: 170 },
+                    { x: 600, y: 170 },
+                    { x: 790, y: -15 },
+                    { x: 410, y: -15 },
+                    { x: 20, y: -15 },
+                    { x: 410, y: -450 },
+                    { x: 575, y: -450 },
+                    { x: 740, y: -450 },
+                    { x: 240, y: -450 },
+                    { x: 70, y: -450 },
+                    { x: 740, y: -590 },
+                    { x: 575, y: -590 },
+                    { x: 410, y: -590 },
+                    { x: 240, y: -590 },
+                    { x: 70, y: -590 },
+                    { x: 740, y: -730 },
+                    { x: 575, y: -730 },
+                    { x: 410, y: -730 },
+                    { x: 240, y: -730 },
+                    { x: 70, y: -730 }
+                ];
 
                 break;
 
@@ -250,52 +317,7 @@ export class GameBoard {
     }
 
     addCharacterIcons() {
-         this.coordinates = [
-            { x: 410, y: 560 },
-            { x: 215, y: 560 },
-            { x: 215, y: 370 },
-            { x: 20, y: 370 },
-            { x: 20, y: 170 },
-            { x: -220, y: 170 },
-            { x: -360, y: -20 },
-            { x: -220, y: -215 },
-            { x: -360, y: -410 },
-            { x: -220, y: -600 },
-            { x: -360, y: -410 },
-            { x: -220, y: -980 },
-            { x: 410, y: -1150 },
-            { x: 1030, y: -800 },
-            { x: 410, y: -1150 },
-            { x: 1270, y: -800 },
-            { x: 1270, y: -615 },
-            { x: 1150, y: -300 },
-            { x: 1030, y: 10 },
-            { x: 1030, y: 210 },
-            { x: 1270, y: 10 },
-            { x: 1270, y: 210 },
-            { x: 790, y: 560 },
-            { x: 400, y: 370 },
-            { x: 410, y: 170 },
-            { x: 600, y: 170 },
-            { x: 790, y: -15 },
-            { x: 410, y: -15 },
-            { x: 20, y: -15 },
-            { x: 410, y: -450 },
-            { x: 575, y: -450 },
-            { x: 740, y: -450 },
-            { x: 240, y: -450 },
-            { x: 70, y: -450 },
-            { x: 740, y: -590 },
-            { x: 575, y: -590 },
-            { x: 410, y: -590 },
-            { x: 240, y: -590 },
-            { x: 70, y: -590 },
-            { x: 740, y: -730 },
-            { x: 575, y: -730 },
-            { x: 410, y: -730 },
-            { x: 240, y: -730 },
-            { x: 70, y: -730 }
-        ];
+        
         //プレイヤー1
         // const startPosition = coordinates[0]; // 初期位置
         const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー
@@ -315,30 +337,6 @@ export class GameBoard {
         //         y: startPosition.y
         // }});
         }
-        // キャラ画像を追加
-        // const playerPositions = [
-        //     { x: 410 , y: 560
-        //     }, // 1プレイヤー1
-        //     { x: 410, y: 560 
-            
-        //     }, // プレイヤー2
-        //     { x: 410, y: 560 }, // プレイヤー3
-        //     { x: 410, y: 560 }  // プレイヤー4
-        // ];
-        // let i = 1;
-        // // キャラ画像を一つずつ配置
-        // playerPositions.forEach((pos, index) => {
-        //     const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon'+(i));
-        //     i =i+1;
-        //     sprite.setScale(2); // サイズを調整
-        //     sprite.setOrigin(0.5); // 中心に設定
-        //     sprite.setDepth(0); // マップより前に表示されるように設定
-    
-        //     // プレイヤー情報に保存（必要ならグローバルな`player`にも保存可能）
-        //     if (!this.players) this.players = [];
-        //     this.players.push(sprite);
-            
-        // });
 
     }
 
@@ -387,18 +385,203 @@ export class GameBoard {
     }
     movechar(playernum,num){
         const playerIndex = playernum -1;
-        this.playerPos[playerIndex]+=Number(num);
-        const pos = this.playerPos[playerIndex];
-        if (this.players[playerIndex]) {
-            this.players[playerIndex].destroy();
-        }
+        let i = 0;
+
+        const movenext = async() =>{
+            if(i >= num) return;
+
+            this.playerPos[playerIndex]++;
+            console.log(`おるマス${this.playerPos[playerIndex]}`);
+            if(this.coordinates[i].branches){
+                const branches = this.coordinates[i].branches;
+                let bunki= this.playerPos[playerIndex] -1;
+                console.log(`bunki${bunki}`);
+
+                // if (this.players[playerIndex]) {
+                //     this.players[playerIndex].destroy();
+                // }
     
-        const sprite = this.scene.add.sprite(this.coordinates[pos].x, this.coordinates[pos].y, 'playericon'+(playernum));
-        sprite.setScale(2); // サイズ調整
-        sprite.setOrigin(0.5); // 中心設定
-        sprite.setDepth(0); // 表示順序を設定
-        this.players[playerIndex] =sprite;
-        
+                // 新しい位置にスプライトを配置
+                // const sprite = this.scene.add.sprite(this.coordinates[bunki].x, this.coordinates[bunki].y, `playericon${playerIndex + 1}`);
+                // sprite.setScale(2);  // サイズ調整
+                // sprite.setOrigin(0.5);  // 中心設定
+                // sprite.setDepth(0);  // 表示順序を設定
+                // this.players[playerIndex] = sprite;
+                const currentTile = this.coordinates[this.playerPos[playerIndex]];
+
+                this.selectbunki(branches).then((choice) => {
+                    console.log(`選ばれたルート: ${choice}`);
+                    this.playerPos[playerIndex] = branches[choice];
+    
+                
+                this.playerPos[playerIndex] = branches[choice];
+                
+                if (this.players[playerIndex]) {
+                    this.players[playerIndex].destroy();
+                }
+    
+                // 新しい位置にスプライトを配置
+                const sprite = this.scene.add.sprite(this.coordinates[this.playerPos[playerIndex]].x, this.coordinates[this.playerPos[playerIndex]].y, `playericon${playerIndex + 1}`);
+                sprite.setScale(2);  // サイズ調整
+                sprite.setOrigin(0.5);  // 中心設定
+                sprite.setDepth(0);  // 表示順序を設定
+                this.players[playerIndex] = sprite;
+                i++;
+                movenext();
+            });
+           
+            } else {
+                console.log(`${i}`);
+                const pos = this.playerPos[playerIndex];
+            if (this.players[playerIndex]) {
+                        this.players[playerIndex].destroy();
+                    }
+                
+                    // 新しい位置にスプライトを配置
+                    const sprite = this.scene.add.sprite(this.coordinates[pos].x,this.coordinates[pos].y,`playericon${playerIndex + 1}`
+                    );
+                    sprite.setScale(2); // サイズ調整
+                    sprite.setOrigin(0.5); // 中心設定
+                    sprite.setDepth(0); // 表示順序を設定
+                
+                    this.players[playerIndex] = sprite;
+
+                    i++
+                    movenext();
+
+            }
+        }
+        movenext();
     }
+
+    selectbunki(branches) {
+        return new Promise((resolve) => {
+            // ダイアログ背景
+            const dialogBackground = this.scene.add.rectangle(800, 300, 500, 300, 0x000000)
+                .setOrigin(0.5)
+                .setAlpha(0.8);
+    
+            // ダイアログテキスト
+            const dialogText = this.scene.add.text(600, 170, '分岐点に到達しました。\nどちらに進みますか？(クリック！)', {
+                fontSize: '24px',
+                fill: '#fff'
+            });
+    
+            const buttons = [];
+            branches.forEach((branchIndex, index) => {
+                const button = this.scene.add.text(600, 250 + index * 70, `ルート ${branchIndex}`, {
+                    fontSize: '20px',
+                    fill: '#fff'
+                })
+                .setInteractive()
+            .on('pointerdown', () => {
+                // 選択された分岐を返す
+                resolve(index);
+
+                // ダイアログ要素を削除
+                dialogBackground.destroy();
+                dialogText.destroy();
+                buttons.forEach(btn => btn.destroy());
+            })
+            .on('pointerover', () => {
+                // マウスオーバーで色を変更
+                button.setStyle({ fill: '#ff0' }); // 黄色に変更
+            })
+            .on('pointerout', () => {
+                // マウスが外れたら元の色に戻す
+                button.setStyle({ fill: '#fff' }); // 白色に戻す
+            });
+                buttons.push(button);
+            });
+        });
+    }
+    
+    //  movechar(playernum,num){
+    //     const playerIndex = playernum -1;
+    //     // const num2 = Number(num);
+    //     for(let i = 0; i < num; i++){
+    //         console.log(`for${i}`);
+    //         this.playerPos[playerIndex]++;
+    //         console.log(`basho${this.playerPos[playerIndex]}`);
+    //         if(this.coordinates[i].branches){
+
+    //             const branches = this.coordinates[i].branches;
+    //             let bunki= this.playerPos[playerIndex] -1;
+    //             console.log(`bunki${bunki}`);
+    //             if (this.players[playerIndex]) {
+    //                         this.players[playerIndex].destroy();
+    //                     }
+    //             const sprite = this.scene.add.sprite(this.coordinates[bunki].x,this.coordinates[bunki].y,`playericon${playerIndex + 1}`);
+    //             sprite.setScale(2); // サイズ調整
+    //             sprite.setOrigin(0.5); // 中心設定
+    //             sprite.setDepth(0); // 表示順序を設定
+    //             this.players[playerIndex] = sprite;
+                
+    //             this.showBranchDialog(branches, (choice) => {
+    //                 // 選ばれた分岐に進む
+    //                 this.playerPos[playerIndex] = branches[choice];
+    //               // プレイヤーのスプライト更新
+    //             });
+    //             this.scene.dialog.showSelectDialog(
+    //                             `分岐点に到達しました。どちらに進みますか？`,
+    //                             branches.map(branchIndex => `ルート ${branchIndex}`),
+    //                             (choice) => {
+    //                                 // 選択されたルートに進む
+    //                                 this.playerPos[playerIndex] = branches[choice];
+                                    
+    //                             }
+    //                         );
+    //         }
+    //         const pos = this.playerPos[playerIndex];
+    //         if (this.players[playerIndex]) {
+    //                     this.players[playerIndex].destroy();
+    //                 }
+                
+    //                 // 新しい位置にスプライトを配置
+    //                 const sprite = this.scene.add.sprite(this.coordinates[pos].x,this.coordinates[pos].y,`playericon${playerIndex + 1}`
+    //                 );
+    //                 sprite.setScale(2); // サイズ調整
+    //                 sprite.setOrigin(0.5); // 中心設定
+    //                 sprite.setDepth(0); // 表示順序を設定
+                
+    //                 this.players[playerIndex] = sprite;
+    //     }
+    // }
+
+    // movechar(playernum,num){
+    //     const playerIndex = playernum -1;
+    //     this.playerPos[playerIndex]+=Number(num);
+    //     const pos = this.playerPos[playerIndex];
+    //     if (this.coordinates[pos].branches) {
+    //         const branches = this.coordinates[pos].branches;
+            
+    //         this.scene.dialog.showSelectDialog(
+    //             `分岐点に到達しました。どちらに進みますか？`,
+    //             branches.map(branchIndex => `ルート ${branchIndex}`),
+    //             (choice) => {
+    //                 // 選択されたルートに進む
+    //                 this.playerPos[playerIndex] = branches[choice];
+    //                 this.updatePlayerPosition(playerIndex, this.playerPos[playerIndex]);
+    //             }
+    //         );
+           
+    //     }
+    //     this.updatemove(playerIndex,pos);
+    // }
+    // updatemove(playerIndex, pos){
+    //     if (this.players[playerIndex]) {
+    //         this.players[playerIndex].destroy();
+    //     }
+    
+    //     // 新しい位置にスプライトを配置
+    //     const sprite = this.scene.add.sprite(this.coordinates[pos].x,this.coordinates[pos].y,`playericon${playerIndex + 1}`
+    //     );
+    //     sprite.setScale(2); // サイズ調整
+    //     sprite.setOrigin(0.5); // 中心設定
+    //     sprite.setDepth(0); // 表示順序を設定
+    
+    //     this.players[playerIndex] = sprite;
+        
+    // }
 
 }
