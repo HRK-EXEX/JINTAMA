@@ -407,7 +407,7 @@ export class GameBoard {
                 // sprite.setOrigin(0.5);  // 中心設定
                 // sprite.setDepth(0);  // 表示順序を設定
                 // this.players[playerIndex] = sprite;
-               
+                const currentTile = this.coordinates[this.playerPos[playerIndex]];
 
                 this.selectbunki(branches).then((choice) => {
                     console.log(`選ばれたルート: ${choice}`);
