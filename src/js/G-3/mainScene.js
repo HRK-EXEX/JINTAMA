@@ -85,7 +85,7 @@ export class MainScene extends Phaser.Scene {
             }
         }
         // プレイヤーデータを更新
-        console.log(player);
+        // console.log(player);
         changeForm(player);
     }
  

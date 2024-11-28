@@ -19,49 +19,51 @@ require '../db.php';
         <?php 
         for($i=0;$i < 4; $i++){
             $r = $i +1;
-            echo'<div class="result-box">';
-                echo'<img src="/kansho/JINTAMA/img/bakemonpng.png" alt="" class="icon" style="image-rendering: pixelated;">';
-                echo'<div class="resultsabu">';
-                echo'<h2>'.$r.'.'.$_SESSION['User'.$r]['name'].'</p>';
-                echo'<p>幸福度：'.$_SESSION['User'.$r]['score'].'</p>';
-                echo'<p>体力：'.$_SESSION['User'.$r]['hp'].'</p>';
-                echo'<p>センス：'.$_SESSION['User'.$r]['sense'].'<p>';
-                echo'<p>魅力：'.$_SESSION['User'.$r]['charm'].'</p>';
-                echo'</div>
-            </div>';
+            if (isset($_SESSION['User'.$r])) {
+                echo'<div class="result-box">';
+                    echo'<img src="/kansho/JINTAMA/img/bakemon.png" alt="" class="icon" style="image-rendering: pixelated;">';
+                    echo'<div class="resultsabu">';
+                    echo'<h2>'.$r.'.'.$_SESSION['User'.$r]['name'].'</p>';
+                    echo'<p>幸福度：'.$_SESSION['User'.$r]['score'].'</p>';
+                    echo'<p>体力：'.$_SESSION['User'.$r]['hp'].'</p>';
+                    echo'<p>センス：'.$_SESSION['User'.$r]['sense'].'<p>';
+                    echo'<p>魅力：'.$_SESSION['User'.$r]['charm'].'</p>';
+                    echo'</div>
+                </div>';
+            }
         }
-            ?>
-            <!-- <div class="result-box">
-                <img src="/kansho/JINTAMA/img/icon1.png" alt="" class="icon">
-                <div class="resultsabu">
-                <h2>2.ふかい</p>
-                    <p>幸福度：500</p>
-                    <p>体力：100</p>
-                    <p>センス：100</p>
-                    <p>魅力：100</p>
-                </div>
+        ?>
+        <!-- <div class="result-box">
+            <img src="/kansho/JINTAMA/img/icon1.png" alt="" class="icon">
+            <div class="resultsabu">
+            <h2>2.ふかい</p>
+                <p>幸福度：500</p>
+                <p>体力：100</p>
+                <p>センス：100</p>
+                <p>魅力：100</p>
             </div>
-            <div class="result-box">
-                <img src="/kansho/JINTAMA/img/icon2.png" alt="" class="icon">
-                <div class="resultsabu">
-                <h2>3.はやと</p>
-                    <p>幸福度：100</p>
-                    <p>体力：100</p>
-                    <p>センス：100</p>
-                    <p>魅力：100</p>
-                </div>
+        </div>
+        <div class="result-box">
+            <img src="/kansho/JINTAMA/img/icon2.png" alt="" class="icon">
+            <div class="resultsabu">
+            <h2>3.はやと</p>
+                <p>幸福度：100</p>
+                <p>体力：100</p>
+                <p>センス：100</p>
+                <p>魅力：100</p>
             </div>
-            <div class="result-box">
-                <img src="/kansho/JINTAMA/img/icon3.png" alt="" class="icon">
-                <div class="resultsabu">
-                <h2>4.さちか</p>
-                    <p>幸福度：10</p>
-                    <p>体力：100</p>
-                    <p>センス：100</p>
-                    <p>魅力:100</p>
-                </div>
-            </div> -->
+        </div>
+        <div class="result-box">
+            <img src="/kansho/JINTAMA/img/icon3.png" alt="" class="icon">
+            <div class="resultsabu">
+            <h2>4.さちか</p>
+                <p>幸福度：10</p>
+                <p>体力：100</p>
+                <p>センス：100</p>
+                <p>魅力:100</p>
             </div>
-            <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="mainnext">メインメニューへ</a>
+        </div> -->
+        </div>
+        <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="mainnext">メインメニューへ</a>
 </body>
 </html>

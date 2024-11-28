@@ -1,38 +1,36 @@
 <?php
 session_start();
-
-var_dump($_POST);
+// var_dump($_POST);
 
 $user_id=$_SESSION['User']['user_id'];
 $room_id=$_SESSION['User']['room_id'];
 require '../db.php';
 
-$results = $_POST['player'];
+$results = json_decode($_POST['userJson'], true);
+// $json = $results[];
+// var_dump($results);
+// print_r($results);
 
-// for backup
-$sessionData = [];
-$sessionData = [];
-for ($i=0; $i<4; ++$i) {
-    
-}
+// 多次元配列のソート
+// var_dump($results);
+array_multisort(array_column($results, "score"), SORT_DESC, SORT_REGULAR, $results);
+// var_dump($results);
 
-$sessionData = [
-    'User1' => $results[0],
-    'User2' => $results[1],
-    'User3' => $results[2],
-    'User4' => $results[3],
-];
-
-// 'score' を基準に降順でソート
-usort($sessionData, function ($a, $b) {
-    return $b['score'] - $a['score'];
-});
-
-// ソート後のセッションに戻す
-foreach ($sessionData as $index => $userData) {
+foreach ($results as $index => $userData) {
     $_SESSION['User' . ($index + 1)] = $userData;
 }
 
+$_SESSION['User1'] = $results[0] ?? null;
+
+// ソート後のセッションに戻す
+// $index = 1;
+// foreach ($sessionData as $userData) {
+//     $_SESSION['User' . ($index + 1)] = $userData;
+// }
+
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
 
 // // ソート結果を表示（必要に応じて）
 // foreach ($_SESSION as $key => $userData) {
@@ -149,14 +147,13 @@ foreach ($sessionData as $index => $userData) {
     </div>
     <div class="rankmain">
         <img src="/kansho/JINTAMA/img/takuicon.png" alt="" class="icon">
-                <div class="ranksabu">
-                        <h1 style="font-size: 50px;"><?php echo $_SESSION['User1']['name'] ?></h1>
-                        <h2 style="font-size: 30px;">幸福度：<?php echo $_SESSION['User1']['score'] ?></h2>
-                        <h2 style="font-size: 30px;">体力：<?php echo $_SESSION['User1']['hp'] ?></h2>
-                        <h2 style="font-size: 30px;">センス：<?php echo $_SESSION['User1']['sense'] ?></h2>
-                        <h2 style="font-size: 30px;">魅力:<?php echo $_SESSION['User1']['charm'] ?></h2>
-                </div>
-         
+        <div class="ranksabu">
+                <h1 style="font-size: 50px;"><?php echo $_SESSION['User1']['name'] ?></h1>
+                <h2 style="font-size: 30px;">幸福度：<?php echo $_SESSION['User1']['score'] ?></h2>
+                <h2 style="font-size: 30px;">体力：<?php echo $_SESSION['User1']['hp'] ?></h2>
+                <h2 style="font-size: 30px;">センス：<?php echo $_SESSION['User1']['sense'] ?></h2>
+                <h2 style="font-size: 30px;">魅力:<?php echo $_SESSION['User1']['charm'] ?></h2>
+        </div>
     </div>
     <a href="/kansho/JINTAMA/src/php/G-3/G3-3.php" class="nexttext"><h2>次へ→</h2></a>
 </body>

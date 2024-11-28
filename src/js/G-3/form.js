@@ -1,6 +1,7 @@
 import { playerData } from './main.js';
  
 export let phpSessionJson;
+let formData; // ブロック外でも使いたいのでファイル内グローバル化
  
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
@@ -12,28 +13,34 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
  
-    console.log(form);
-    console.log(phpSessionJson);
+    // console.log(form);
+    // console.log(phpSessionJson);
  
     // 送信ボタンにイベントリスナーを追加
     sendButton.addEventListener("click", (event) => {
         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
  
-        const formData = new FormData(form); // FormDataを生成
+        formData = new FormData(form); // FormDataを生成
         let json = new Array(); // 空のデータをJSON変換。実質初期化。
- 
+        
+        console.log(phpSessionJson);
+
         // JSON形式に変換
-        formData.entries().forEach((data, index) => {
-            const jsonData = phpSessionJson["User" + (index+1)];
-            data[1] = JSON.stringify(jsonData);
-            if (data[1] !== null && data[1] !== undefined) {
-                console.log(data); json.push(JSON.parse(data[1]));
+        for (let index=1; index<=phpSessionJson['User']['room_limit']; index++)
+        {
+            let data = phpSessionJson["User" + index];
+            if (data !== null && data !== undefined) {
+                console.log(data);
+                json.push(data);
             }
-        });
-       
+        }
+        
         let text = JSON.stringify(json);
         console.log("実データ:", json); // デバッグ用のログ
         console.log("送信データ:", text); // デバッグ用のログ
+
+        // これを使うことで、PHPの$_POSTからアクセスできる
+        formData.append("userJson", text);
  
         // フォームのデータを送信
         sendForm(text);
@@ -58,32 +65,46 @@ export function changeForm(players) {
     // グローバル変数を更新
     phpSessionJson = updatedSessionJson;
  
-    console.log("変更後のプレイヤーデータ:", phpSessionJson);
+    // console.log("変更後のプレイヤーデータ:", phpSessionJson);
 }
  
 // フォームデータをサーバーに送信する関数
 export function sendForm(text) {
-    console.log(text);
-    fetch('./G3-2.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'text/javascript', // JSON形式で送信
-        },
-        body: text,
-    })
-    .then((response) => {
-        if (!response.ok) {
-            return response.text().then((text) => {
-                throw new Error(`サーバーエラー: ${text}`);
-            });
-        }
-        return response.json();
-    })
-    .then((responseData) => {
-        console.log('送信成功:', responseData);
-    })
+    postJson("./G3-2.php", text);
+    // fetch('./G3-2.php', {
+    //     method: 'post', // 通信メソッド
+	// 	// headers: {
+	// 	// 	'Content-Type': 'application/json' // JSON形式のデータのヘッダー
+	// 	// },
+	// 	body: formData // FormDataオブジェクトを格納
+    // })
+    // .then(response => {
+    //     if (!response.ok) {
+    //         return response.text().then((text) => {
+    //             throw new Error(`サーバーエラー: ${text}`);
+    //         });
+    //     }
+    //     return response.text();
+    // })
+    // .then(text => console.log(text))
+    // .then(responseData => {
+    //     console.log('送信成功:', responseData);
+    // })
     // .catch((error) => {
     //     console.error('送信エラー:', error);
     // });
 }
- 
+
+function postJson(path, text) {
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    const form = document.getElementById("resultForm");
+    form.method = 'post';
+    form.action = path;
+  
+    const hiddenField = document.getElementById('userJson');
+    hiddenField.value = text;
+  
+    document.body.appendChild(form);
+    form.submit();
+}

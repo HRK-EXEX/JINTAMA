@@ -1,5 +1,6 @@
 <?php session_start();
-$error_id = $_GET['error_id'];
+    $error_id = $_GET['error_id'];
+    $rId = $_GET['room_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,8 @@ $error_id = $_GET['error_id'];
         }elseif($error_id==3){
             echo'空いている部屋がありません。';
         }else{
-            echo'この部屋には既にあなたが参加しています。';
+            echo'この部屋には既にあなたが参加しています。<br>';
+            echo'<button onclick="location.href=\'/kansho/JINTAMA/src/php/G-3/G3-1-kari.php?room_id='.$rId.'\'">ゲームに参加しなおす</button>';
         }
     ?></h1>
     <button  onclick="location.href='/kansho/JINTAMA/src/php/G-2/G2-2-input.php'">戻る</button>

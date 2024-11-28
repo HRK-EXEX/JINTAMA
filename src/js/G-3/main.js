@@ -7,7 +7,7 @@ function getSessionData() {
     try {
         const element = document.getElementById('session-data');
         const jsonText = element.textContent.trim();
-        console.log('JSON内容:', jsonText);
+        // console.log('JSON内容:', jsonText);
         return JSON.parse(jsonText);
     } catch (error) {
         console.error('JSONパースエラー:', error);
@@ -15,11 +15,11 @@ function getSessionData() {
     }
 }
 
-export let playerData = getSessionData();
-export let playerData2 = document.getElementById('session-data');
+export const playerData = getSessionData();
+export const playerJson = document.getElementById('session-data').textContent.trim();
 
 // console.log(playerData);
-// console.log(playerData2);
+// console.log(playerJson);
 
 //ゲームに関する設定
 const CONFIG = {

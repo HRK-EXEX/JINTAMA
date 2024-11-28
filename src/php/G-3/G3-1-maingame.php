@@ -12,9 +12,9 @@
     $sql = $db -> query("SELECT * FROM Room WHERE room_id = $roomId");
     $result = $sql -> fetch();
 
-    if (isset($result['Room']['room_user2'])) $_SESSION['User']['room_limit']++;
-    if (isset($result['Room']['room_user3'])) $_SESSION['User']['room_limit']++;
-    if (isset($result['Room']['room_user4'])) $_SESSION['User']['room_limit']++;
+    if (isset($result['room_user2'])) $_SESSION['User']['room_limit']++;
+    if (isset($result['room_user3'])) $_SESSION['User']['room_limit']++;
+    if (isset($result['room_user4'])) $_SESSION['User']['room_limit']++;
 
     // データを安全に出力するためのヘルパー関数
     function safeJsonEncode($data) {
@@ -80,10 +80,7 @@
         <pre><?php echo safeJsonEncode($_SESSION)?></pre>
     </div>
     <form id="resultForm" action="G3-2.php" method="POST">
-        <input id="user1" type="hidden" name="player[]" value="null">
-        <input id="user2" type="hidden" name="player[]" value="null">
-        <input id="user3" type="hidden" name="player[]" value="null">
-        <input id="user4" type="hidden" name="player[]" value="null">
+        <input id="userJson" type="hidden" name="userJson">
         <button id="send" type="submit">send</button>
     </form>
 </body>
