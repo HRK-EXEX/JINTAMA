@@ -64,6 +64,12 @@ require '../db.php';
             </div>
         </div> -->
         </div>
-        <a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="mainnext">メインメニューへ</a>
+        <?php
+            if ($_SESSION['User']['user_id'] == $_SESSION['User1']['user_id']) {
+                echo '<a href="/kansho/JINTAMA/src/php/G-3/G3-3-post.php?room_id='.$_SESSION['User']['room_id'].'" class="mainnext">メインメニューへ</a>';
+            } else {
+                echo '<a href="/kansho/JINTAMA/src/php/G-2/G2-1.php" class="mainnext">メインメニューへ</a>';
+            }
+        ?>
 </body>
 </html>
