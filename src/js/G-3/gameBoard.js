@@ -384,7 +384,7 @@ export class GameBoard {
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
     movechar(playernum,num){
-        const playerIndex = playernum ;
+        const playerIndex = playernum-1 ;
         let i = 0;
 
         const movenext = async() =>{

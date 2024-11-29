@@ -8,7 +8,7 @@ export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
         this.gameBoard = null;
-        this.currentPlayer = 0;
+        this.currentPlayer = 1;
         this.turn = 1;
         this.yourTurn = false;
         this.state = 1;
