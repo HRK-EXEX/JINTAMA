@@ -58,7 +58,7 @@ export class MainScene extends Phaser.Scene {
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
                  this.rouletteText.setText(""); //ルーレットの数字を消す
-                this.endTurn(true);
+                 this.showNextTurnButton();
             }else if(this.state === 2 && !this.isRouletteRunning){
                 this.startRoulette();
             }
@@ -71,7 +71,7 @@ export class MainScene extends Phaser.Scene {
         // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
     }
 
-    startRoulette() {
+    startRoulette() { 
         this.isRouletteRunning = true; // ルーレット実行中フラグを設定
         this.rouletteText.setText("");
         this.rouletteInterval = setInterval(() => {
@@ -101,7 +101,7 @@ export class MainScene extends Phaser.Scene {
             });
         } else {
             this.rouletteText.setText("");
-            this.endTurn(true);  // ルーレット停止時に即座にターンを終了
+              // ルーレット停止時に即座にターンを終了
         }
     }
     
@@ -124,7 +124,7 @@ export class MainScene extends Phaser.Scene {
         this.turn=this.currentPlayer;
         this.yourTurn = (this.currentPlayer === 0);
         this.state =  1;
-        
+        this.showNextTurnButton
         // デバッグ用ログ
     
         
@@ -141,10 +141,9 @@ export class MainScene extends Phaser.Scene {
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
 
         // 必要に応じて状態に応じた処理を追加
-    if (this.state === 1) {
-        this.state = 0; // 繰り返し呼び出さないようにする
+         // 繰り返し呼び出さないようにする
         this.showTurnOptions();
-    }
+    
     }
 
     showTurnOptions() {
@@ -190,4 +189,32 @@ export class MainScene extends Phaser.Scene {
             }
         );
     }
+    showNextTurnButton() {
+        // ボタンの背景
+        const buttonBackground = this.add.rectangle(400, 300, 200, 50, 0x000000)
+            .setOrigin(0.5)
+            .setAlpha(0.8)
+            .setInteractive();
+        
+        // ボタンのテキスト
+        const buttonText = this.add.text(400, 300, '次のターンへ!', {
+            fontSize: '20px',
+            fill: '#ffffff',
+        }).setOrigin(0.5);
+        buttonBackground.on('pointerover', () => {
+            buttonText.setStyle({ fill: '#ff0' });
+        });
+    
+        buttonBackground.on('pointerout', () => {
+            buttonText.setStyle({ fill: '#ffffff' }); 
+        });
+    
+        // ボタンがクリックされたら次のターンに移行
+        buttonBackground.on('pointerdown', () => {
+            this.endTurn(true);  // endTurnを呼び出して次のターンに進む
+            buttonBackground.destroy();  // ボタン背景の削除
+            buttonText.destroy();  // ボタンテキストの削除
+        });
+    }
+
 }
