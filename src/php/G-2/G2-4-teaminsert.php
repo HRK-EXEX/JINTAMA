@@ -11,9 +11,15 @@ $stm->execute([$teamname,$userid]);
 
 $stm2 = $db->prepare("SELECT `room_id` FROM `Room` WHERE room_name = ?");
 $stm2->execute([$teamname]);
-foreach( $stm2 as $rm){
-     $room_id = $rm['room_id'];
-     $_SESSION['User']['room_id'] = $rm['room_id'];
+$room_id = null;
+
+foreach($stm2 as $rm){
+     // 値が入るまで続ける
+     if (is_null($room_id)) {
+          $room_id = $rm['room_id'];
+          if (is_null($room_id)) continue;
+          $_SESSION['User']['room_id'] =$room_id;
+     } else break;
 }
 
      header("Location:/kansho/JINTAMA/src/php/G-2/G2-5.php?room_id=".$room_id."");
