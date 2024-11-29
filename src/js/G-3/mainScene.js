@@ -57,7 +57,7 @@ export class MainScene extends Phaser.Scene {
         //     });
         // });
         
-        this.cheat();
+        // this.cheat();
         changeForm(player);
     }
  
