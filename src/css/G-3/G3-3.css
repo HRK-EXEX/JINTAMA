@@ -42,7 +42,9 @@ body {
 }
 h1{
     color: #fff;
-    -webkit-text-stroke: 3px #030303;
+    -webkit-text-stroke: .2em #030303;
+    -webkit-text-fill-color: white;
+    paint-order: stroke fill;
 }
 .mainnext{
     color: #fff;
