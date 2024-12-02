@@ -1,6 +1,17 @@
 {
-  "dependencies": {
-    "express": "^4.21.1",
-    "socket.io": "^4.8.1"
-  }
+	"name": "socket-chat-example",
+	"version": "0.0.1",
+	"description": "my first socket.io app",
+	"type": "commonjs",
+	"dependencies": {
+		"express": "^4.21.1",
+		"socket.io": "^4.8.1"
+	},
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }

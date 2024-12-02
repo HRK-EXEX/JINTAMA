@@ -4,6 +4,7 @@
 import { MainScene } from "./mainScene.js";
 // import { triggerRandomEvent } from './event.js';
 
+const socket = io('http://localhost:3000');
 const DEFAULT_WIDTH = window.innerWidth
 const DEFAULT_HEIGHT = window.innerHeight // any height you want
 
@@ -36,6 +37,10 @@ const CONFIG = {
     scene: MainScene,
     antialias: false
 }
+
+socket.on('connect', () => {
+    console.log('サーバーに接続しました');
+});
 
 //ゲームオブジェクトの生成
 const GAME = new Phaser.Game(CONFIG)
