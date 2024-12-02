@@ -72,6 +72,7 @@
     <script src="/kansho/JINTAMA/src/js/G-3/dialogSelectBox.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/main.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/form.js" type="module"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <title>メインゲーム</title>
 </head>
 <body>
