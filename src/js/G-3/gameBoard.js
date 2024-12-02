@@ -48,19 +48,19 @@ export class GameBoard {
         switch (this.mapID) {
             case 0:
                 // マップ素材の画像をロード
-                this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('hana', '/map/mapchip2/MapChip/hana.png');
-                this.scene.load.image('koori2', '/map/mapchip2/MapChip/koori2.png');
-                this.scene.load.image('kusa-tuti2', '/map/mapchip2/MapChip/kusa1-kusa2.png');
-                this.scene.load.image('road', '/map/mapchip2/MapChip/tuti3.png');
-                this.scene.load.image('tuti2', '/map/mapchip2/MapChip/tuti2.png');
-                this.scene.load.image('tuti3', '/map/mapchip2/MapChip/tuti3.png');
-                this.scene.load.image('water1', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
-                this.scene.load.image('water2', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
-                this.scene.load.image('waterfall', '/map/mapchip2/MapChip/tuti2.png');
+                this.scene.load.image('base', '/kansho/JINTAMA/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('hana', '/kansho/JINTAMA/map/mapchip2/MapChip/hana.png');
+                this.scene.load.image('koori2', '/kansho/JINTAMA/map/mapchip2/MapChip/koori2.png');
+                this.scene.load.image('kusa-tuti2', '/kansho/JINTAMA/map/mapchip2/MapChip/kusa1-kusa2.png');
+                this.scene.load.image('road', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti3.png');
+                this.scene.load.image('tuti2', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti2.png');
+                this.scene.load.image('tuti3', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti3.png');
+                this.scene.load.image('water1', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu1_doukutu5.png');
+                this.scene.load.image('water2', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu1_doukutu5.png');
+                this.scene.load.image('waterfall', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti2.png');
                 
                 // Tiledで出力したJsonファイルをロード
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/first-map.json');
+                this.scene.load.tilemapTiledJSON('map', '/kansho/JINTAMA/src/js/G-3/map-data/first-map.json');
                 
                 // レイヤー名を入力
                 this.layerNames = [
@@ -101,13 +101,13 @@ export class GameBoard {
 
             case 1:
                 // マップ素材の画像をロード
-                this.scene.load.image('baseTile', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('dirtTile1', '/map/mapchip2/MapChip/tuti1.png');
-                this.scene.load.image('dirtTile2', '/map/mapchip2/MapChip/tuti2.png');
-                this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
+                this.scene.load.image('baseTile', '/kansho/JINTAMA/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('dirtTile1', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti1.png');
+                this.scene.load.image('dirtTile2', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti2.png');
+                this.scene.load.image('loopTile', '/kansho/JINTAMA/map/loops/forestLoop+16Y.png');
 
                 // Tiledで出力したJsonファイルをロード
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
+                this.scene.load.tilemapTiledJSON('map', '/kansho/JINTAMA/src/js/G-3/map-data/second-map.json');
 
                 // レイヤー名を入力
                 this.layerNames = [
@@ -130,28 +130,28 @@ export class GameBoard {
                 break;
 
             case 2: 
-                this.scene.load.image('ArmillarySphere', '/map/mapchip2/ArmillarySphere.png');
-                this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('byobu', '/map/mapchip2/byobu.png');
-                this.scene.load.image('eEJjt6AYWTepUfe1730082958', '/map/mapchip2/eEJjt6AYWTepUfe1730082958.png');
-                this.scene.load.image('goal2', '/map/mapchip2/goal2.png');
-                this.scene.load.image('gpiano', '/map/mapchip2/gpiano.png');
-                this.scene.load.image('Le Penseur', '/map/mapchip2/Le Penseur.png');
-                this.scene.load.image('manekineko2', '/map/mapchip2/manekineko2.png');
-                this.scene.load.image('mizu1', '/map/mapchip2/MapChip/mizu1.png');
-                this.scene.load.image('mizu2', '/map/mapchip2/MapChip/mizu2.png');
-                this.scene.load.image('patcar', '/map/mapchip2/patcar.png');
-                this.scene.load.image('syakanyorai2', '/map/mapchip2/syakanyorai2.png');
-                this.scene.load.image('taki2', '/map/mapchip2/MapChip/taki2.png');
-                this.scene.load.image('tigermat2', '/map/mapchip2/tigermat2.png');
-                this.scene.load.image('tuti2', '/map/mapchip2/Mapchip/tuti2.png');
-                this.scene.load.image('tuti3', '/map/mapchip2/Mapchip/tuti3.png');
-                this.scene.load.image('yougan', '/map/mapchip2/MapChip/yougan.png');
-                this.scene.load.image('kumo', '/map/mapchip2/kumo.png');
-                this.scene.load.image('sora', '/map/mapchip2/sora.jpg');
+                this.scene.load.image('ArmillarySphere', '/kansho/JINTAMA/map/mapchip2/ArmillarySphere.png');
+                this.scene.load.image('base', '/kansho/JINTAMA/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('byobu', '/kansho/JINTAMA/map/mapchip2/byobu.png');
+                this.scene.load.image('eEJjt6AYWTepUfe1730082958', '/kansho/JINTAMA/map/mapchip2/eEJjt6AYWTepUfe1730082958.png');
+                this.scene.load.image('goal2', '/kansho/JINTAMA/map/mapchip2/goal2.png');
+                this.scene.load.image('gpiano', '/kansho/JINTAMA/map/mapchip2/gpiano.png');
+                this.scene.load.image('Le Penseur', '/kansho/JINTAMA/map/mapchip2/Le Penseur.png');
+                this.scene.load.image('manekineko2', '/kansho/JINTAMA/map/mapchip2/manekineko2.png');
+                this.scene.load.image('mizu1', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu1.png');
+                this.scene.load.image('mizu2', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu2.png');
+                this.scene.load.image('patcar', '/kansho/JINTAMA/map/mapchip2/patcar.png');
+                this.scene.load.image('syakanyorai2', '/kansho/JINTAMA/map/mapchip2/syakanyorai2.png');
+                this.scene.load.image('taki2', '/kansho/JINTAMA/map/mapchip2/MapChip/taki2.png');
+                this.scene.load.image('tigermat2', '/kansho/JINTAMA/map/mapchip2/tigermat2.png');
+                this.scene.load.image('tuti2', '/kansho/JINTAMA/map/mapchip2/Mapchip/tuti2.png');
+                this.scene.load.image('tuti3', '/kansho/JINTAMA/map/mapchip2/Mapchip/tuti3.png');
+                this.scene.load.image('yougan', '/kansho/JINTAMA/map/mapchip2/MapChip/yougan.png');
+                this.scene.load.image('kumo', '/kansho/JINTAMA/map/mapchip2/kumo.png');
+                this.scene.load.image('sora', '/kansho/JINTAMA/map/mapchip2/sora.jpg');
             
                 // Tiledで出力したJsonファイルをロード
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/third-map.json');
+                this.scene.load.tilemapTiledJSON('map', '/kansho/JINTAMA/src/js/G-3/map-data/third-map.json');
                 
                 // レイヤー名を入力
                 this.layerNames = [
