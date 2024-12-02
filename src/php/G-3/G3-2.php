@@ -1,7 +1,5 @@
 <?php
 session_start();
-// var_dump($_POST);
-
 $user_id=$_SESSION['User']['user_id'];
 $room_id=$_SESSION['User']['room_id'];
 require '../db.php';
