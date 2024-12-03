@@ -21,6 +21,8 @@ export class GameBoard {
         this.loopMap = null;
         this.map = null;
         this.mapID = mapID;
+        this.routeDate =[];
+        this.shokiDate =[];
 
         switch (mapID) {
             case 0:
@@ -39,6 +41,8 @@ export class GameBoard {
         
         this.mapX = -firstX * tileSize * scale;
         this.mapY = -firstY * tileSize * scale;
+
+        console.log("x",this.mapX,"y",this.mapY);
     }
 
     preloadAssets() {
@@ -191,6 +195,7 @@ export class GameBoard {
                     { x: 240, y: -730 },
                     { x: 70, y: -730 }
                 ];
+                
 
                 break;
 
@@ -260,7 +265,6 @@ export class GameBoard {
                     'yougan'
                 ];
                 
-        
                 break;
         }
     }
@@ -309,6 +313,29 @@ export class GameBoard {
             this.fieldMap.add(tmpLayer);
         }
 
+        const routeLayer = this.map.layers.find(layer => layer.name === 'route');
+        const shokiLayer = this.map.layers.find(layer => layer.name === 'grid');
+        this.shokiDate = shokiLayer.data;
+        if (routeLayer) {
+            this.routeData = routeLayer.data; // routeデータを格納
+            console.log("Route data:", this.routeData); // デバッグ用
+        } else {
+            console.error('Route layer not found!');
+        }
+        console.log("Route data:", this.shokiDate);
+        for (let i = 0; i < this.shokiDate.length; i++) {
+            for (let j = 0; j < this.shokiDate.length; j++) {
+                if(this.shokiDate[i][j].index==430){
+                console.log("なかみ:", this.shokiDate[i][j]);
+                this.plx = (this.shokiDate[i][j].x* tileSize * scale)-this.mapX;
+                this.ply = (this.shokiDate[i][j].y* tileSize * scale)-this.mapY;
+                console.log("なかみ:", this.plx,"y",this.ply);
+                }
+            }
+        }
+       
+    
+
         this.fieldMap.setAlpha(1);
 
         this.addCharacterIcons();
@@ -316,6 +343,8 @@ export class GameBoard {
         this.moveMapGroup(0, 0);
     }
 
+    
+ 
     addCharacterIcons() {
         
         //プレイヤー1
@@ -326,7 +355,7 @@ export class GameBoard {
         
         // プレイヤー数分ループしてスプライトを作成
         for (let i = 0; i < playerIcons.length; i++) {
-          this.sprite = this.scene.add.sprite(this.coordinates[ this.playerPos[i] ].x, this.coordinates[ this.playerPos[i] ].y, playerIcons[i]);
+          this.sprite = this.scene.add.sprite(this.coordinates[this.playerPos[i]].x,this.coordinates[this.playerPos[i]].y, playerIcons[i]);
             this.sprite.setScale(2); // サイズ調整
             this.sprite.setOrigin(0.5); // 中心設定
             this.sprite.setDepth(0); // 表示順序を設定
@@ -339,12 +368,11 @@ export class GameBoard {
         }
 
     }
-
     moveMapGroup(x, y) {
         scrollLimit = 0;
         this.mapX += x;
         this.mapY += y;
-
+        console.log("x",this.mapX,"y",this.mapY);
 
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
@@ -384,29 +412,30 @@ export class GameBoard {
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
     movechar(playernum,num){
-        const playerIndex = playernum-1 ;
+        console.log(`pure${playernum}`);
+        const playerIndex = playernum ;
         let i = 0;
 
         const movenext = async() =>{
             if(i >= num) return;
 
             this.playerPos[playerIndex]++;
-            console.log(`おるマス${this.playerPos[playerIndex]}`);
-            if(this.coordinates[i].branches){
-                const branches = this.coordinates[i].branches;
+            console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
+            if(this.coordinates[this.playerPos[playerIndex]-1].branches){
+                const branches = this.coordinates[this.playerPos[playerIndex]-1].branches;
                 let bunki= this.playerPos[playerIndex] -1;
                 console.log(`bunki${bunki}`);
 
-                // if (this.players[playerIndex]) {
-                //     this.players[playerIndex].destroy();
-                // }
+                if (this.players[playerIndex]) {
+                    this.players[playerIndex].destroy();
+                }
     
                 // 新しい位置にスプライトを配置
-                // const sprite = this.scene.add.sprite(this.coordinates[bunki].x, this.coordinates[bunki].y, `playericon${playerIndex + 1}`);
-                // sprite.setScale(2);  // サイズ調整
-                // sprite.setOrigin(0.5);  // 中心設定
-                // sprite.setDepth(0);  // 表示順序を設定
-                // this.players[playerIndex] = sprite;
+                const sprite = this.scene.add.sprite(this.coordinates[bunki].x, this.coordinates[bunki].y, `playericon${playerIndex + 1}`);
+                sprite.setScale(2);  // サイズ調整
+                sprite.setOrigin(0.5);  // 中心設定
+                sprite.setDepth(0);  // 表示順序を設定
+                this.players[playerIndex] = sprite;
                 
                 this.selectbunki(branches).then((choice) => {
                     console.log(`選ばれたルート: ${choice}`);
@@ -418,14 +447,16 @@ export class GameBoard {
                 if (this.players[playerIndex]) {
                     this.players[playerIndex].destroy();
                 }
+                const pos = this.playerPos[playerIndex]
     
                 // 新しい位置にスプライトを配置
-                const sprite = this.scene.add.sprite(this.coordinates[this.playerPos[playerIndex]].x, this.coordinates[this.playerPos[playerIndex]].y, `playericon${playerIndex + 1}`);
+                const sprite = this.scene.add.sprite(this.coordinates[pos].x, this.coordinates[pos].y, `playericon${playerIndex + 1}`);
                 sprite.setScale(2);  // サイズ調整
                 sprite.setOrigin(0.5);  // 中心設定
                 sprite.setDepth(0);  // 表示順序を設定
                 this.players[playerIndex] = sprite;
                 i++;
+                console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
                 movenext();
             });
            
@@ -446,6 +477,7 @@ export class GameBoard {
                     this.players[playerIndex] = sprite;
 
                     i++
+                    console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
                     movenext();
 
             }
