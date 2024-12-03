@@ -3,12 +3,13 @@ import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
+import { getRandomEvent } from './event.js';
 
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
         this.gameBoard = null;
-        this.currentPlayer = 1;
+        this.currentPlayer = 0;
         this.turn = 1;
         this.yourTurn = false;
         this.state = 1;
@@ -20,7 +21,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
+        this.gameBoard = new GameBoard(this, 0); //マップ変更するために変える
         this.gameBoard.preloadAssets();
         this.utility = new Utility();
         this.load.image('playericon1', '/characters/melondog.png');
@@ -41,7 +42,8 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
 
         this.showTurnOptions();
-
+        
+        player.splice(0,player.length);
         for (let i = 0; i < 4; i++) {
             player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));
         }
@@ -57,6 +59,7 @@ export class MainScene extends Phaser.Scene {
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
                  this.rouletteText.setText(""); //ルーレットの数字を消す
+                 this.showNextTurnButton();
                 this.endTurn(true);
             }else if(this.state === 2 && !this.isRouletteRunning){
                 this.startRoulette();
@@ -80,26 +83,35 @@ export class MainScene extends Phaser.Scene {
     }
 
     stopRoulette(isEnterKey) {
-        clearInterval(this.rouletteInterval);  // ルーレットを停止
+        clearInterval(this.rouletteInterval);
         this.rouletteInterval = null;
-        this.isRouletteRunning = false;  // ルーレット実行中フラグをリセット
-        const finalNumber = this.rouletteText.text;  // 最後の数字を取得
-        // this.dialog.hideDialog();
-        // console.log("最終的な数字:", finalNumber);
-        // console.log(isEnterKey);
-
-        // this.dialog.hideDialog();
-    
-        // ルーレット停止後にダイアログを表示
+        this.isRouletteRunning = false;
+        const finalNumber = this.rouletteText.text;
+ 
         if (isEnterKey) {
-            this.isDialogActive = true;
-            // ルーレット停止後に選ばれた数字を表示するダイアログを表示
-            this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true,() =>{
-                this.endTurn(false);
-            });
+            if (!this.isDialogActive) {
+                this.isDialogActive = true;
+                // currentPlayer が配列の範囲内かチェック
+                const playerIndex = this.currentPlayer >= 0 && this.currentPlayer < player.length ? 
+                    this.currentPlayer : 0;
+                const currentPlayer = player[playerIndex];
+                if (!currentPlayer) {
+                    console.error('Player not found:', playerIndex);
+                    return;
+                }
+ 
+                const event = getRandomEvent();
+                const eventResult = event.action(currentPlayer);
+                let eventLog = `${currentPlayer.name}のイベント: ${event.name}\n${eventResult}`;
+ 
+                this.dialog.showDialog(eventLog, true, () => {
+                    this.isDialogActive = false;
+                    this.endTurn(false);
+                });
+            }
         } else {
             this.rouletteText.setText("");
-            this.endTurn(true);  // ルーレット停止時に即座にターンを終了
+            this.endTurn(true);
         }
     }
     
@@ -107,7 +119,18 @@ export class MainScene extends Phaser.Scene {
     endTurn(forceHide) {
         if (forceHide) this.dialog.hideDialog();
         this.selectDialog.hideDialog();
-        this.currentPlayer = (this.currentPlayer + 1) % player.length;
+        console.log("=== endTurn() 開始 ===");
+        console.log(`現在のプレイヤー: Player ${this.currentPlayer + 1}`);
+        this.currentPlayer = (this.currentPlayer + 1);
+        this.currentPlayer %= player.length;
+        // this.currentPlayer = (this.currentPlayer + 1) % player.length;
+        console.log(`次のプレイヤー: Player ${this.currentPlayer + 1}`);
+        console.log(`player.length: ${player.length}, currentPlayer: ${this.currentPlayer}`);
+        console.log("=== endTurn() 終了 ===");
+        this.turn=this.currentPlayer;
+        this.yourTurn = (this.currentPlayer === 0);
+        this.state =  1;
+        this.showNextTurnButton
         this.yourTurn = (this.turn === this.currentPlayer);
         this.state = this.yourTurn ? 1 : 0;
         this.once = !this.once;
@@ -115,23 +138,40 @@ export class MainScene extends Phaser.Scene {
 
     update() {
         const button = input();
+
+        console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer + 1}`);
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
             this.once = !this.once;
         }
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
-
-        if (!this.once) {
-            if (this.state === 1 && this.yourTurn) {
-                this.showTurnOptions();
-            }
-            this.once = !this.once;
-        }
+ 
+        // 必要に応じて状態に応じた処理を追加
+         // 繰り返し呼び出さないようにする
+        this.showTurnOptions();
+   
     }
 
+
+
+    //     if (!this.dialog.visible && !this.selectDialog.visible) {
+    //         this.gameBoard.update(button);
+    //         this.once = !this.once;
+    //     }
+    //     debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
+
+    //     if (!this.once) {
+    //         if (this.state === 1 && this.yourTurn) {
+    //             this.showTurnOptions();
+    //         }
+    //         this.once = !this.once;
+    //     }
+    // }
+
     showTurnOptions() {
+        if(this.state !== 1) return;
         this.selectDialog.showSelectDialog(
-            'あなたのターンです。',
+            `プレイヤー${this.currentPlayer+1}のターンです。`,
             ['ルーレット', 'ステータス', 'ターンスキップ'],
             choice => {
                 switch (choice) {
@@ -140,6 +180,7 @@ export class MainScene extends Phaser.Scene {
                             // this.isDialogActive = true;
                             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
                             this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, false,() =>{
+                                
                                 this.endTurn(false);
                             });
                         });
@@ -170,4 +211,30 @@ export class MainScene extends Phaser.Scene {
             }
         );
     }
+    showNextTurnButton() {
+        // ボタンの背景
+        const buttonBackground = this.add.rectangle(400, 300, 200, 50, 0x000000)
+            .setOrigin(0.5)
+            .setAlpha(0.8)
+            .setInteractive();
+
+            const buttonText = this.add.text(400, 300, '次のターンへ!', {
+                fontSize: '20px',
+                fill: '#ffffff',
+            }).setOrigin(0.5);
+            buttonBackground.on('pointerover', () => {
+                buttonText.setStyle({ fill: '#ff0' });
+            });
+       
+            buttonBackground.on('pointerout', () => {
+                buttonText.setStyle({ fill: '#ffffff' });
+            });
+       
+            // ボタンがクリックされたら次のターンに移行
+            buttonBackground.on('pointerdown', () => {
+                this.endTurn(true);  // endTurnを呼び出して次のターンに進む
+                buttonBackground.destroy();  // ボタン背景の削除
+                buttonText.destroy();  // ボタンテキストの削除
+            });
+        }
 }

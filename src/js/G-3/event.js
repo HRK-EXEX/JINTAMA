@@ -1,26 +1,41 @@
-// マスにイベント情報を格納
-const events = {
-  1: "イベント",
+// event.js
+export function getRandomEvent() {
+  const events = [
+      {
+          name: '幸福度増加',
+          action: (player) => {
+              if (player && typeof player.modifyStats === 'function') {
+                  player.modifyStats({ score: 10 });
+                  return `幸福度: ${player.stats.score}`;
+              }
+              console.error('Invalid player object:', player);
+              return '幸福度増加失敗';
+          },
+      },
+      {
+          name: '魅力減少',
+          action: (player) => {
+              if (player && typeof player.modifyStats === 'function') {
+                  player.modifyStats({ charm: -5 });
+                  return `魅力度: ${player.stats.charm}`;
+              }
+              console.error('Invalid player object:', player);
+              return '魅力減少失敗';
+          },
+      },
+  ];
+
+  const randomIndex = Math.floor(Math.random() * events.length);
+  return events[randomIndex];
+}
+
+export function triggerRandomEvent(player) {
+  if (!player) {
+      console.error('Player object is undefined');
+      return;
   }
-  
-  // プレイヤーの現在位置
-  let playerPosition = 1;
-  
-  
-  // プレイヤーがサイコロを振って進む
-  function rollDice() {
-      const diceRoll = Math.floor(Math.random() * 6) + 1;
-      playerPosition += diceRoll;
-      handleEvent(playerPosition);
-    }
-  
-  
-    // 指定されたマスのイベントを処理する関数
-  function handleEvent(position) {
-      const event = events[position];
-      if (event) {
-        console.log(`マス ${position}: ${event}`);
-      } else {
-        console.log(`マス ${position}: 特別なイベントはありません。`);
-      }
-    }
+  const event = getRandomEvent();
+  console.log(`ランダムイベント: ${event.name}`);
+  const result = event.action(player);
+  console.log(result);
+}
