@@ -11,6 +11,7 @@ const io = socketIo(server, {
 	}
 });
 
+
 io.on('connect', socket => {
 	console.log('新しいクライアントが接続しました');
   

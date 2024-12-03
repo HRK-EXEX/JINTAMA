@@ -63,6 +63,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
     <link rel="stylesheet" href="/kansho/JINTAMA/src/css/G-3/G3-1-game.css">
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
