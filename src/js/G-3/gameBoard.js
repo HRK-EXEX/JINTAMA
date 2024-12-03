@@ -295,12 +295,14 @@ export class GameBoard {
         if (0 < this.mapY) {plimity=true; this.mapY = 0; scrollLimit |= 4;}
         else if (limitY > this.mapY) {plimity=true; this.mapY = limitY; scrollLimit |= 8;}
 
-        this.players.forEach(p => {
-            if (p != null) {
-                if(!plimitx)p.x += x;
-                if(!plimity)p.y += y;
-            }
-        });
+        if (this.players != undefined && this.players != null) {
+            this.players.forEach(p => {
+                if (p != null) {
+                    if(!plimitx)p.x += x;
+                    if(!plimity)p.y += y;
+                }
+            });
+        }
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {

@@ -72,10 +72,26 @@
     <script src="/kansho/JINTAMA/src/js/G-3/dialogSelectBox.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/main.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/form.js" type="module"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var ws;
+
+        function init() {
+            ws = new WebSocket("ws://localhost:8081/kansho/JINTAMA/src/server/webSocket.php");
+            ws.onmessage = function(event) {
+                $("#messages").append("<p>" + event.data + "</p>");
+            };
+        }
+
+        function sendMessage() {
+            var message = $("#message").val();
+            ws.send(message);
+            $("#message").val("");
+        }
+    </script>
     <title>メインゲーム</title>
 </head>
-<body>
+<body onload="init()">
     <!-- データ出力用の要素 -->
     <div id="session-data" type="application/json" style="display: none;">
         <?php echo safeJsonEncode($_SESSION); ?>
