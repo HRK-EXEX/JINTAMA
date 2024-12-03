@@ -2,6 +2,7 @@
 // console.log(username);
 
 import { MainScene } from "./mainScene.js";
+import { io } from "/kansho/JINTAMA/src/server/socket-server.js";
 // import { triggerRandomEvent } from './event.js';
 
 const socket = io('http://localhost:3000');

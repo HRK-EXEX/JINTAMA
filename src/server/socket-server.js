@@ -4,13 +4,12 @@ const socketIo = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, {
+export const io = socketIo(server, {
 	cors: {
 		origin: "http://localhost",  // XAMPPのデフォルトURL
 		methods: ["GET", "POST"]
 	}
 });
-
 
 io.on('connect', socket => {
 	console.log('新しいクライアントが接続しました');

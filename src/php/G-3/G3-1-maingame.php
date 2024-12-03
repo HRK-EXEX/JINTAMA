@@ -63,7 +63,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <link rel="stylesheet" href="/kansho/JINTAMA/src/css/G-3/G3-1-game.css">
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,25 +73,9 @@
     <script src="/kansho/JINTAMA/src/js/G-3/main.js" type="module"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/form.js" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        var ws;
-
-        function init() {
-            ws = new WebSocket("ws://localhost:8081/kansho/JINTAMA/src/server/webSocket.php");
-            ws.onmessage = function(event) {
-                $("#messages").append("<p>" + event.data + "</p>");
-            };
-        }
-
-        function sendMessage() {
-            var message = $("#message").val();
-            ws.send(message);
-            $("#message").val("");
-        }
-    </script>
     <title>メインゲーム</title>
 </head>
-<body onload="init()">
+<body>
     <!-- データ出力用の要素 -->
     <div id="session-data" type="application/json" style="display: none;">
         <?php echo safeJsonEncode($_SESSION); ?>
