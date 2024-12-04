@@ -13,6 +13,7 @@ export class MainScene extends Phaser.Scene {
         this.yourTurn = false;
         this.state = 1;
         this.once = false;
+
         this.rouletteInterval = null;
         this.rouletteText = null;
         this.isRouletteRunning = false; // ルーレットが実行中かどうかを示すフラグ
@@ -41,8 +42,9 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
 
         this.showTurnOptions();
-        this.scale.resize(window.innerWidth,window.innerHeight);
+        this.scale.resize(window.innerWidth, window.innerHeight);
 
+        
         player.splice(0, player.length);
         for (let i = 0; i < 4; i++) {
             player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));
@@ -112,13 +114,13 @@ export class MainScene extends Phaser.Scene {
         this.selectDialog.hideDialog();
 
         console.log("=== endTurn() 開始 ===");
-        console.log(`現在のプレイヤー: Player ${this.currentPlayer + 1}`);
+        console.log(`現在のプレイヤー: Player ${this.currentPlayer+1}`);
 
-        this.currentPlayer = (this.currentPlayer + 1);
-        this.currentPlayer %= player.length;
+        this.currentPlayer = (this.currentPlayer);
+        this.currentPlayer = (this.currentPlayer + 1) % player.length;;
 
-        console.log(`次のプレイヤー: Player ${this.currentPlayer + 1}`);
-        console.log(`player.length: ${player.length}, currentPlayer: ${this.currentPlayer}`);
+        console.log(`次のプレイヤー: Player ${this.currentPlayer + 1 }`);
+        console.log(`player.length: ${player.length}, currentPlayer: ${this.currentPlayer }`);
         console.log("=== endTurn() 終了 ===");
 
     
@@ -134,7 +136,7 @@ export class MainScene extends Phaser.Scene {
     update() {
         const button = input();
          // 現在のターン情報を表示
-    console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer + 1}`);
+    console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer +1}`);
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
             this.once = !this.once;
@@ -150,7 +152,7 @@ export class MainScene extends Phaser.Scene {
     showTurnOptions() {
         if (this.state !== 1) return;
         this.selectDialog.showSelectDialog(
-            `プレイヤー${this.currentPlayer+1}のターンです。`,
+            `プレイヤー${this.currentPlayer +1}のターンです。`,
             ['ルーレット', 'ステータス', 'ターンスキップ'],
             choice => {
                 switch (choice) {
