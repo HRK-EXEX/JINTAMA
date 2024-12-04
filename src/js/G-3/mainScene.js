@@ -45,7 +45,7 @@ export class MainScene extends Phaser.Scene {
         
         player.splice(0,player.length);
         for (let i = 0; i < 4; i++) {
-            player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));
+            player[i] = new Player(this, 40 + i * 120, 40, 'player' + (i + 1));
         }
 
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
@@ -58,8 +58,8 @@ export class MainScene extends Phaser.Scene {
             } else if(this.isDialogActive){
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
-                 this.rouletteText.setText(""); //ルーレットの数字を消す
-                 this.showNextTurnButton();
+                this.rouletteText.setText(""); //ルーレットの数字を消す
+                // this.showNextTurnButton();
                 this.endTurn(true);
             }else if(this.state === 2 && !this.isRouletteRunning){
                 this.startRoulette();
@@ -136,7 +136,7 @@ export class MainScene extends Phaser.Scene {
     update() {
         const button = input();
 
-        console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer + 1}`);
+        // console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer + 1}`);
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
             this.once = !this.once;
@@ -215,23 +215,24 @@ export class MainScene extends Phaser.Scene {
             .setAlpha(0.8)
             .setInteractive();
 
-            const buttonText = this.add.text(400, 300, '次のターンへ!', {
-                fontSize: '20px',
-                fill: '#ffffff',
-            }).setOrigin(0.5);
-            buttonBackground.on('pointerover', () => {
-                buttonText.setStyle({ fill: '#ff0' });
-            });
-       
-            buttonBackground.on('pointerout', () => {
-                buttonText.setStyle({ fill: '#ffffff' });
-            });
-       
-            // ボタンがクリックされたら次のターンに移行
-            buttonBackground.on('pointerdown', () => {
-                this.endTurn(true);  // endTurnを呼び出して次のターンに進む
-                buttonBackground.destroy();  // ボタン背景の削除
-                buttonText.destroy();  // ボタンテキストの削除
-            });
-        }
+        const buttonText = this.add.text(400, 300, '次のターンへ!', {
+            fontSize: '20px',
+            fill: '#ffffff',
+        }).setOrigin(0.5);
+
+        buttonBackground.on('pointerover', () => {
+            buttonText.setStyle({ fill: '#ff0' });
+        });
+    
+        buttonBackground.on('pointerout', () => {
+            buttonText.setStyle({ fill: '#ffffff' });
+        });
+    
+        // ボタンがクリックされたら次のターンに移行
+        buttonBackground.on('pointerdown', () => {
+            this.endTurn(true);  // endTurnを呼び出して次のターンに進む
+            buttonBackground.destroy();  // ボタン背景の削除
+            buttonText.destroy();  // ボタンテキストの削除
+        });
+    }
 }
