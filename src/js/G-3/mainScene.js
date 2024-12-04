@@ -13,7 +13,7 @@ export class MainScene extends Phaser.Scene {
         this.yourTurn = false;
         this.state = 1;
         this.once = false;
-        
+
         this.rouletteInterval = null;
         this.rouletteText = null;
         this.isRouletteRunning = false; // ルーレットが実行中かどうかを示すフラグ
@@ -42,7 +42,9 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
 
         this.showTurnOptions();
+        this.scale.resize(window.innerWidth, window.innerHeight);
 
+        
         player.splice(0, player.length);
         for (let i = 0; i < 4; i++) {
             player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));

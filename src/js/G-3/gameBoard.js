@@ -30,8 +30,8 @@ export class GameBoard {
                 firstY = 0;
                 break;
             case 1:
-                firstX = 16.5;
-                firstY = 30;
+                firstX = 0;
+                firstY = 0;
                 break;
             case 2:
                 firstX = 0;
@@ -313,37 +313,62 @@ export class GameBoard {
             this.fieldMap.add(tmpLayer);
         }
 
-        const routeLayer = this.map.layers.find(layer => layer.name === 'route');
-        const shokiLayer = this.map.layers.find(layer => layer.name === 'grid');
-        this.shokiDate = shokiLayer.data;
-        if (routeLayer) {
-            this.routeData = routeLayer.data; // routeデータを格納
-            console.log("Route data:", this.routeData); // デバッグ用
-        } else {
-            console.error('Route layer not found!');
-        }
-        console.log("Route data:", this.shokiDate);
-        for (let i = 0; i < this.shokiDate.length; i++) {
-            for (let j = 0; j < this.shokiDate.length; j++) {
-                if(this.shokiDate[i][j].index==430){
-                console.log("なかみ:", this.shokiDate[i][j]);
-                this.plx = (this.shokiDate[i][j].x* tileSize * scale)-this.mapX;
-                this.ply = (this.shokiDate[i][j].y* tileSize * scale)-this.mapY;
-                console.log("なかみ:", this.plx,"y",this.ply);
-                }
-            }
-        }
+        // const routeLayer = this.map.layers.find(layer => layer.name === 'route');
+        // const shokiLayer = this.map.layers.find(layer => layer.name === 'grid');
+        // this.shokiDate = shokiLayer.data;
+        // if (routeLayer) {
+        //     this.routeData = routeLayer.data; // routeデータを格納
+        //     console.log("Route data:", this.routeData); // デバッグ用
+        // } else {
+        //     console.error('Route layer not found!');
+        // }
+        // console.log("Route data:", this.shokiDate);
+        // for (let i = 0; i < this.shokiDate.length; i++) {
+        //     for (let j = 0; j < this.shokiDate.length; j++) {
+        //         if(this.shokiDate[i][j].index==430){
+        //         console.log("なかみ:", this.shokiDate[i][j]);
+        //         this.plx = (this.shokiDate[i][j].x* tileSize * scale)-this.mapX;
+        //         this.ply = (this.shokiDate[i][j].y* tileSize * scale)-this.mapY;
+        //         console.log("なかみ:", this.plx,"y",this.ply);
+        //         }
+        //     }
+        // }
        
-    
+  // マップサイズを計算 (タイル数 × タイルサイズ × スケール)
+  const mapPixelWidth = this.map.widthInPixels * scale;
+  const mapPixelHeight = this.map.heightInPixels * scale;
+
+  // カメラ設定を更新
+  this.adjustCamera(mapPixelWidth, mapPixelHeight);
 
         this.fieldMap.setAlpha(1);
 
         this.addCharacterIcons();
 
         this.moveMapGroup(0, 0);
+        
     }
 
+    adjustCamera(mapPixelWidth, mapPixelHeight) {
+        const camera = this.scene.cameras.main;
     
+        // ゲーム画面の幅と高さを取得
+        const screenWidth = this.scene.game.config.width;
+        const screenHeight = this.scene.game.config.height;
+    
+        // ズーム値を計算
+        const zoomX = screenWidth / mapPixelWidth;
+        const zoomY = screenHeight / mapPixelHeight;
+        const zoom = Math.min(zoomX, zoomY); // 小さい方を採用
+    
+        camera.setZoom(zoom);
+    
+        // カメラをマップ中央に配置
+        camera.centerOn(mapPixelWidth / 2, mapPixelHeight / 2);
+
+        // 必要に応じてカメラのズームを調整
+    
+    }
  
     addCharacterIcons() {
         
