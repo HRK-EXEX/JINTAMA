@@ -104,10 +104,7 @@ export class MainScene extends Phaser.Scene {
                 const eventResult = event.action(currentPlayer);
                 let eventLog = `${currentPlayer.name}のイベント: ${event.name}\n${eventResult}`;
  
-                this.dialog.showDialog(eventLog, true, () => {
-                    this.isDialogActive = false;
-                    this.endTurn(false);
-                });
+                this.dialog.showDialog(eventLog, true, () => {});
             }
         } else {
             this.rouletteText.setText("");
