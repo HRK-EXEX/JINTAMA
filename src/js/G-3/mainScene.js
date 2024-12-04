@@ -8,7 +8,7 @@ export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
         this.gameBoard = null;
-        this.currentPlayer = 1;
+        this.currentPlayer = 0;
         this.turn = 1;
         this.yourTurn = false;
         this.state = 1;
@@ -41,6 +41,7 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
 
         this.showTurnOptions();
+        this.scale.resize(window.innerWidth,window.innerHeight);
 
         player.splice(0, player.length);
         for (let i = 0; i < 4; i++) {
