@@ -129,6 +129,7 @@ export default class Player extends Phaser.GameObjects.Container {
         
         // ステータス変更後のイベントを発火
         this.emit('statsChanged', this.stats);
+        
     }
     
     // 基本的なステータス表示の更新

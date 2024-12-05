@@ -71,34 +71,10 @@ button:active, .delete:active {
     text-align: center;
 }
 
-@font-face {
-    font-family: "dot-regular";
-    src: url("/kansho/JINTAMA/src/font/JF-Dot-MPlus12.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "dot-bold";
-    src: url("/kansho/JINTAMA/src/font/JF-Dot-MPlus12B.ttf") format("truetype");
-}
-
-* {
-    font-family: "dot-regular", sans-serif;
-    font-weight: normal;
-    font-style: normal;
-}
-
-h1, h2, h3 {
-    font-family: "dot-bold", sans-serif;
-    font-weight: bold;
-    font-style: normal;
-}
-
-
 /* 背景を暗くする */
 body {
     background-color: #1a1a1a;
     color: #ffffff;
-    font-family: 'Dot Font', sans-serif;
 }
 
 /* メインコンテナのスタイル */

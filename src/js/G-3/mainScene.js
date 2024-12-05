@@ -3,11 +3,19 @@ import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
 import Player from './player.js';
-import { getRandomEvent } from './event.js';
 
+import { getRandomEvent } from './event.js';
+import { changeForm } from './form.js';
+import { playerData } from './main.js';
+ 
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
+        this.initGameState();
+    }
+ 
+    // 初期ゲーム状態の設定
+    initGameState() {
         this.gameBoard = null;
         this.currentPlayer = 0;
         this.turn = 1;
@@ -16,45 +24,103 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
         this.rouletteInterval = null;
         this.rouletteText = null;
-        this.isRouletteRunning = false; // ルーレットが実行中かどうかを示すフラグ
+        this.isRouletteRunning = false;
         this.isDialogActive = false;
     }
-
+ 
     preload() {
+      
         this.gameBoard = new GameBoard(this, 0); //マップ変更するために変える
         this.gameBoard.preloadAssets();
+      
         this.utility = new Utility();
-        this.load.image('playericon1', '/characters/melondog.png');
-        this.load.image('playericon2', '/characters/takugorira.png');
-        this.load.image('playericon3', '/characters/obake.png');
-        this.load.image('playericon4', '/characters/bakemon.png');
+        this.gameBoard = new GameBoard(this, 1);
+      
+        this.gameBoard.preloadAssets();
+ 
+        // プレイヤーアイコンのロード
+        const playerIcons = [
+            '/kansho/JINTAMA/characters/melondog.png',
+            '/kansho/JINTAMA/characters/takugorira.png',
+            '/kansho/JINTAMA/characters/obake.png',
+            '/kansho/JINTAMA/characters/bakemon.png',
+        ];
+        playerIcons.forEach((icon, index) => {
+            this.load.image(`playericon${index + 1}`, icon);
+        });
     }
-
+ 
     create() {
+        this.initializeGame();
+        this.registerInputHandlers();
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const b = document.getElementById("cheat");
+
+        //     b.addEventListener("click", event => {
+        //         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+
+        //         this.cheat();
+        //     });
+        // });
+        
+        // this.cheat();
+        changeForm(player);
+    }
+ 
+    // ゲーム初期化
+    initializeGame() {
         this.gameBoard.createMap();
-        let dialogW = 700, dialogH = 300, dialogX = 50, dialogY = this.game.config.height - 50 - dialogH;
-
-        this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
-        this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
-
-        initializeInput(this); 
+ 
+        // ダイアログボックスの作成
+        const dialogConfig = { width: 700, height: 300, x: 50, y: this.game.config.height - 350 };
+        this.dialog = new DialogSelectBox(this, dialogConfig.x, dialogConfig.y, dialogConfig.width, dialogConfig.height);
+        this.selectDialog = new DialogSelectBox(this, dialogConfig.x, dialogConfig.y, dialogConfig.width, dialogConfig.height);
+ 
+        initializeInput(this);
         this.state = 1;
         this.once = false;
-
         this.showTurnOptions();
+      
         
         player.splice(0,player.length);
         for (let i = 0; i < 4; i++) {
             player[i] = new Player(this, 40 + i * 120, 40, 'player' + (i + 1));
         }
-
+ 
+        // デバッグ情報の初期化
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
         this.rouletteText = this.add.text(75, 300);
-
+ 
+        this.initializePlayers();
+    }
+ 
+    // プレイヤーの初期化
+    initializePlayers() {
+        for (let i = 0; i < 4; i++) {
+            const username = playerData[`User${i + 1}`];
+            if (username) {
+                const p = new Player(this, 40, 40 + i * 40, username.name);
+                p.modifyStats({
+                    score: username.score - p.stats.score,
+                    hp: username.hp - p.stats.hp,
+                    charm: username.charm - p.stats.charm,
+                    sense: username.sense - p.stats.sense,
+                });
+                player.push(p);
+            }
+        }
+        // プレイヤーデータを更新
+        // console.log(player);
+        changeForm(player);
+    }
+ 
+    // 入力ハンドラの登録
+    registerInputHandlers() {
         this.input.keyboard.on('keydown-ENTER', () => {
             if (this.isRouletteRunning) {
-                // ルーレットが実行中の場合は停止
                 this.stopRoulette(true);
+              
             } else if(this.isDialogActive){
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
@@ -69,25 +135,25 @@ export class MainScene extends Phaser.Scene {
             // }
         
         });
-
-        // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
     }
-
+ 
     startRoulette() {
         this.isRouletteRunning = true; // ルーレット実行中フラグを設定
         this.rouletteText.setText("");
+
         this.rouletteInterval = setInterval(() => {
             const randomNum = Math.floor(Math.random() * 6) + 1;
             this.rouletteText.setText(randomNum);
         }, 100);
     }
-
+ 
     stopRoulette(isEnterKey) {
         clearInterval(this.rouletteInterval);
         this.rouletteInterval = null;
+      
         this.isRouletteRunning = false;
         const finalNumber = this.rouletteText.text;
- 
+
         if (isEnterKey) {
             if (!this.isDialogActive) {
                 this.isDialogActive = true;
@@ -115,7 +181,9 @@ export class MainScene extends Phaser.Scene {
 
     endTurn(forceHide) {
         if (forceHide) this.dialog.hideDialog();
+
         this.selectDialog.hideDialog();
+      
         console.log("=== endTurn() 開始 ===");
         console.log(`現在のプレイヤー: Player ${this.currentPlayer + 1}`);
         this.currentPlayer = (this.currentPlayer + 1);
@@ -129,18 +197,19 @@ export class MainScene extends Phaser.Scene {
         this.state =  1;
         this.showNextTurnButton
         this.yourTurn = (this.turn === this.currentPlayer);
-        this.state = this.yourTurn ? 1 : 0;
-        this.once = !this.once;
-    }
 
+      
+        this.state = this.yourTurn ? 1 : 0;
+    }
+ 
     update() {
         const button = input();
 
         // console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer + 1}`);
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
-            this.once = !this.once;
         }
+      
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
  
         // 必要に応じて状態に応じた処理を追加
@@ -148,28 +217,12 @@ export class MainScene extends Phaser.Scene {
         this.showTurnOptions();
    
     }
-
-
-
-    //     if (!this.dialog.visible && !this.selectDialog.visible) {
-    //         this.gameBoard.update(button);
-    //         this.once = !this.once;
-    //     }
-    //     debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
-
-    //     if (!this.once) {
-    //         if (this.state === 1 && this.yourTurn) {
-    //             this.showTurnOptions();
-    //         }
-    //         this.once = !this.once;
-    //     }
-    // }
-
     showTurnOptions() {
         if(this.state !== 1) return;
         this.selectDialog.showSelectDialog(
             `プレイヤー${this.currentPlayer+1}のターンです。`,
             ['ルーレット', 'ステータス', 'ターンスキップ'],
+
             choice => {
                 switch (choice) {
                     case 0:

@@ -17,37 +17,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
         if (in_array($userid, [$room['room_user1'], $room['room_user2'], $room['room_user3'], $room['room_user4']])) {
             $duplicate_error = "この部屋には既にあなたが参加しています。";
             $error_id = 4;
-            header('Location: G2-5-error.php?error_id=' . $error_id);
+            header('Location: G2-5-error.php?error_id='.$error_id.'&room_id='.$room['room_id']);
             exit;
         } else {
-        // 選ばれた部屋にユーザーを割り当てる処理
-        if (is_null($room['room_user1'])) {
-            $update_stm = $db->prepare("UPDATE Room SET room_user1 = :userid WHERE room_id = :room_id");
-        } elseif (is_null($room['room_user2'])) {
-            $update_stm = $db->prepare("UPDATE Room SET room_user2 = :userid WHERE room_id = :room_id");
-        } elseif (is_null($room['room_user3'])) {
-            $update_stm = $db->prepare("UPDATE Room SET room_user3 = :userid WHERE room_id = :room_id");
-        } elseif (is_null($room['room_user4'])) {
-            $update_stm = $db->prepare("UPDATE Room SET room_user4 = :userid WHERE room_id = :room_id");
-        } else {
-            // 全員埋まっている場合
-            $room_full_error = "この部屋は満員です。";
-            $error_id = 1;
-            header('Location: G2-5-error.php?error_id=' . $error_id);
-            exit;
-        }
+            // 選ばれた部屋にユーザーを割り当てる処理
+            if (is_null($room['room_user1'])) {
+                $update_stm = $db->prepare("UPDATE Room SET room_user1 = :userid WHERE room_id = :room_id");
+            } elseif (is_null($room['room_user2'])) {
+                $update_stm = $db->prepare("UPDATE Room SET room_user2 = :userid WHERE room_id = :room_id");
+            } elseif (is_null($room['room_user3'])) {
+                $update_stm = $db->prepare("UPDATE Room SET room_user3 = :userid WHERE room_id = :room_id");
+            } elseif (is_null($room['room_user4'])) {
+                $update_stm = $db->prepare("UPDATE Room SET room_user4 = :userid WHERE room_id = :room_id");
+            } else {
+                // 全員埋まっている場合
+                $room_full_error = "この部屋は満員です。";
+                $error_id = 1;
+                header('Location: G2-5-error.php?error_id=' . $error_id);
+                exit;
+            }
 
-        if (isset($update_stm)) {
-            $update_stm->bindParam(':userid', $userid, PDO::PARAM_INT);
-            $update_stm->bindParam(':room_id', $room_id, PDO::PARAM_INT);
-            $update_stm->execute();
+            if (isset($update_stm)) {
+                $update_stm->bindParam(':userid', $userid, PDO::PARAM_INT);
+                $update_stm->bindParam(':room_id', $room_id, PDO::PARAM_INT);
+                $update_stm->execute();
 
-            $_SESSION['User']['room_id']=$room_id;
-            // 部屋に入った後、リダイレクトする
-            header('Location: G2-5.php?room_id='. $room_id);
-            exit;
+                $_SESSION['User']['room_id']=$room_id;
+                // 部屋に入った後、リダイレクトする
+                header('Location: G2-5.php?room_id='. $room_id);
+                exit;
+            }
         }
-    }
         
     } else {
         // 部屋が見つからない場合のエラー処理
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['random_enter'])) {
         if (in_array($userid, [$room['room_user1'], $room['room_user2'], $room['room_user3'], $room['room_user4']])) {
             $duplicate_error = "この部屋には既にあなたが参加しています。";
             $error_id = 4;
-            header('Location: G2-5-error.php?error_id=' . $error_id);
+            header('Location: G2-5-error.php?error_id='.$error_id.'&room_id='.$room['room_id']);
             exit;
         } else {
         // 選ばれた部屋にユーザーを割り当てる処理

@@ -4,7 +4,7 @@ ob_start();
 require '../db.php';
 $userid = $_SESSION['User']['user_id'];
 $username = $_SESSION['User']['user_name'];
-echo $userid;
+// echo $userid;
 
 
 // if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {

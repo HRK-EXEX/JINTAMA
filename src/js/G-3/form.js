@@ -1,99 +1,110 @@
+import { playerData } from './main.js';
+ 
+export let phpSessionJson;
+let formData; // ブロック外でも使いたいのでファイル内グローバル化
+ 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("resultForm");
+    phpSessionJson = playerData;
     const sendButton = document.getElementById("send");
-
+ 
     if (!form || !sendButton) {
         console.error("フォームまたは送信ボタンが見つかりません");
         return;
     }
-
-    console.log(form);
-
+ 
+    // console.log(form);
+    // console.log(phpSessionJson);
+ 
     // 送信ボタンにイベントリスナーを追加
     sendButton.addEventListener("click", (event) => {
         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
-
-        const formData = new FormData(form); // FormDataを生成
-        var json = new Array(); // 空のデータをJSON変換。実質初期化。
+ 
+        formData = new FormData(form); // FormDataを生成
+        let json = new Array(); // 空のデータをJSON変換。実質初期化。
+        
+        console.log(phpSessionJson);
 
         // JSON形式に変換
-        formData.entries().forEach((data, index) => {
-            console.log(data);
-            if (data[1] != "null") {
-                json[`user${index + 1}`] = JSON.parse(data[1]);
+        for (let index=1; index<=phpSessionJson['User']['room_limit']; index++)
+        {
+            let data = phpSessionJson["User" + index];
+            if (data !== null && data !== undefined) {
+                console.log(data);
+                json.push(data);
             }
-        });
+        }
         
-        var text = JSON.stringify(json);
+        let text = JSON.stringify(json);
+        console.log("実データ:", json); // デバッグ用のログ
         console.log("送信データ:", text); // デバッグ用のログ
 
+        // これを使うことで、PHPの$_POSTからアクセスできる
+        formData.append("userJson", text);
+ 
         // フォームのデータを送信
         sendForm(text);
     });
 });
-
-// 循環構造用
-const getCircularReplacer = () => {
-	const seen = new WeakSet()
-	return (key, value) => {
-		if (typeof value === "object" && value !== null) {
-			if (seen.has(value)) {
-				return
-			}
-			seen.add(value)
-		}
-		return value
-	}
-}
-
-var userElements = new Array();
-
-// フォームデータの変更を処理する関数
+ 
 export function changeForm(players) {
-    const playerJson = [];
-
-    players.forEach((player, index) => {
-        var userElement;
-        if (player) {
-            var json = JSON.parse(JSON.stringify(player));
-            json.stats = player.stats;
-            playerJson.push(json);
-
-            userElement = document.getElementById(`user${index + 1}`);
-            if (userElement) {
-                userElement.value = JSON.stringify(json, getCircularReplacer()); // 各ユーザーのデータを埋め込む
-            } else console.log("userElement is undefined");
-        }
-
-        userElements.push(userElement);
-
-        if (userElement) console.log(userElement.value);
+    // 新しいオブジェクトを作成
+    const updatedSessionJson = { ...phpSessionJson };
+ 
+    players.forEach((p, i) => {
+        const userKey = "User" + (i + 1);
+        updatedSessionJson[userKey] = {
+            ...updatedSessionJson[userKey],
+            score: p.stats.score,
+            hp: p.stats.hp,
+            charm: p.stats.charm,
+            sense: p.stats.sense
+        };
     });
-
-    console.log("変更後のプレイヤーデータ:", playerJson);
+ 
+    // グローバル変数を更新
+    phpSessionJson = updatedSessionJson;
+ 
+    // console.log("変更後のプレイヤーデータ:", phpSessionJson);
 }
-
+ 
 // フォームデータをサーバーに送信する関数
 export function sendForm(text) {
-    fetch('./G3-2.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'normal', // JSON形式で送信
-        },
-        body: text,
-    })
-    .then((response) => {
-        if (!response.ok) {
-            return response.text().then((text) => {
-                throw new Error(`サーバーエラー: ${text}`);
-            });
-        }
-        return response.json();
-    })
-    .then((responseData) => {
-        console.log('送信成功:', responseData);
-    })
+    postJson("./G3-2.php", text);
+    // fetch('./G3-2.php', {
+    //     method: 'post', // 通信メソッド
+	// 	// headers: {
+	// 	// 	'Content-Type': 'application/json' // JSON形式のデータのヘッダー
+	// 	// },
+	// 	body: formData // FormDataオブジェクトを格納
+    // })
+    // .then(response => {
+    //     if (!response.ok) {
+    //         return response.text().then((text) => {
+    //             throw new Error(`サーバーエラー: ${text}`);
+    //         });
+    //     }
+    //     return response.text();
+    // })
+    // .then(text => console.log(text))
+    // .then(responseData => {
+    //     console.log('送信成功:', responseData);
+    // })
     // .catch((error) => {
     //     console.error('送信エラー:', error);
     // });
+}
+
+function postJson(path, text) {
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    const form = document.getElementById("resultForm");
+    form.method = 'post';
+    form.action = path;
+  
+    const hiddenField = document.getElementById('userJson');
+    hiddenField.value = text;
+  
+    document.body.appendChild(form);
+    form.submit();
 }

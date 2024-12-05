@@ -14,9 +14,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center; /* 中央揃え */
-    font-family: "DotGothic16", sans-serif;
     color: white;
-    font-family: "DotGothic16", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -57,12 +55,10 @@ th {
 }
 
 .delete{
-    font-family: "DotGothic16", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 .f{
-    font-family: "DotGothic16", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
