@@ -328,7 +328,7 @@ this.playersData.forEach(player => {
         if (0 < this.mapY) {plimity=true; this.mapY = 0; scrollLimit |= 4;}
         else if (limitY > this.mapY) {plimity=true; this.mapY = limitY; scrollLimit |= 8;}
 
-        for (const player of players) {
+        for (const p of player) {
             if (p != null) {
                 if(!plimitx)p.x += x;
                 if(!plimity)p.y += y;
