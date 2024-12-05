@@ -21,7 +21,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.gameBoard = new GameBoard(this, 1);
+        this.gameBoard = new GameBoard(this, 0);
         this.gameBoard.preloadAssets();
         this.utility = new Utility();
         this.load.image('playericon1', '/characters/melondog.png');
@@ -32,8 +32,8 @@ export class MainScene extends Phaser.Scene {
 
     create() {
         this.gameBoard.createMap();
-        let dialogW = 700, dialogH = 300, dialogX = 50, dialogY = this.game.config.height - 50 - dialogH;
-
+        // dialogY = this.game.config.height - 50 - dialogH
+        let dialogW = 1000, dialogH = 500, dialogX = 500, dialogY = 1000;
         this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
         this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
 
@@ -47,11 +47,12 @@ export class MainScene extends Phaser.Scene {
         
         player.splice(0, player.length);
         for (let i = 0; i < 4; i++) {
-            player[i] = new Player(this, 40, 40 + i * 40, 'player' + (i + 1));
+            player[i] = new Player(this, 40, 40 + i * 100, 'player' + (i + 1));
         }
 
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
-        this.rouletteText = this.add.text(75, 300);
+        
+        this.rouletteText = this.add.text(1000, 800,'',{fontSize:'60px',backgroundColor: '#333333'});
 
         this.input.keyboard.on('keydown-ENTER', () => {
             if (this.isRouletteRunning) {

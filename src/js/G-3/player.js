@@ -49,7 +49,7 @@ export default class Player extends Phaser.GameObjects.Container {
         
         // ステータス表示テキスト
         this.statusText = scene.add.text(30, -10, '', {
-            fontSize: '16px',
+            fontSize: '50px',
             fill: '#ffffff',
             backgroundColor: '#333333',
             padding: { x: 5, y: 5 }
@@ -71,15 +71,21 @@ export default class Player extends Phaser.GameObjects.Container {
         if(this.y==40){
             this.sprite = this.scene.add.sprite(0, 0, 'playericon1');
             this.sprite.setInteractive();
-        }else if(this.y==80){
+            this.sprite.setScale(3);
+        }else if(this.y==140){
             this.sprite = this.scene.add.sprite(0, 0, 'playericon2');
             this.sprite.setInteractive();
-        }else if(this.y==120){
+            this.sprite.setScale(3);
+        }else if(this.y==240){
             this.sprite = this.scene.add.sprite(0, 0, 'playericon3');
             this.sprite.setInteractive();
+            this.sprite.setScale(3);
         }else{
             this.sprite = this.scene.add.sprite(0, 0, 'playericon4');
             this.sprite.setInteractive();
+            this.sprite.setScale(3
+                
+            );
         }
         
        
