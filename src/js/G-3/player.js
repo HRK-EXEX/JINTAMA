@@ -5,6 +5,7 @@ export default class Player extends Phaser.GameObjects.Container {
         this.name = name;
         this.color = new Phaser.Display.Color(0, 0, 0);
         
+        
         // 基本ステータス
         this.stats = {
             score: 0,    // 幸福度

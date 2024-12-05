@@ -1,6 +1,6 @@
-import {
-    updateFieldMap, updateLoopMap, player
-} from './initialize.js';
+import { getRandomEvent } from './event.js';
+import { updateFieldMap, updateLoopMap, player } from './initialize.js';
+import  Player  from './player.js';
 
 // マップ設定の定数と変数
 let firstX = 16.5;
@@ -24,6 +24,22 @@ export class GameBoard {
         this.loopMap = null;
         this.map = null;
         this.mapID = mapID;
+        this.playersData = [];
+        this.eventLog = [];
+
+        // GameBoardの初期化時にPlayerインスタンスを作成
+this.playersData = [
+    new Player(this.scene, 100, 40, "Player 1"),
+    new Player(this.scene, 100, 80, "Player 2"),
+    new Player(this.scene, 100, 120, "Player 3"),
+    new Player(this.scene, 100, 160, "Player 4")
+];
+
+// プレイヤーオブジェクトをシーンに追加
+this.playersData.forEach(player => {
+    this.scene.add.existing(player);
+});
+
 
         switch (mapID) {
             case 0:
@@ -251,29 +267,46 @@ export class GameBoard {
     }
 
     addCharacterIcons() {
+        this.coordinates = [     { x: 430, y: 1260 }, { x: 430, y: 1120 }, { x: 430, y: 970 },  { x: 430, y: 820 }, { x: 430, y: 680 },   { x: 430, y: 540 }, { x: 570, y: 540 },   { x: 720, y: 540 },    { x: 860, y: 540 },   { x: 1010, y: 540 },   { x: 1150, y: 540 }, { x: 1290, y: 540 }, { x: 1440, y: 540 }, { x: 1580, y: 540 },  { x: 1730, y: 540 },  { x: 1730, y: 680 }, { x: 1730, y: 830 }, { x: 1730, y: 970 }, { x: 1730, y: 1120 }, { x: 1730, y: 1280 }  ];
         // キャラ画像を追加
         if (this.mapID === 2) {
         // 初期位置（マップsecond)
-        const playerPositions = [
-            { x: 410, y: 560 }, // プレイヤー1
-            { x: 410, y: 560 }, // プレイヤー2
-            { x: 410, y: 560 }, // プレイヤー3
-            { x: 410, y: 560 }  // プレイヤー4
-        ];
-        let i = 1;
-        // キャラ画像を一つずつ配置
-        playerPositions.forEach((pos, index) => {
-            const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon'+(i));
-            i =i+1;
-            sprite.setScale(2); // サイズを調整
-            sprite.setOrigin(0.5); // 中心に設定
-            sprite.setDepth(0); // マップより前に表示されるように設定
-    
-            // プレイヤー情報に保存（必要ならグローバルな`player`にも保存可能）
-            if (!this.players) this.players = [];
+        const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー
+        this.player1Pos = 0;
+        this.player2Pos = 0;
+        this.player3Pos = 0;
+        this.player4Pos = 0;//プレイヤー位置をいれておく
+        if (!this.players) this.players = []; // プレイヤー配列を初期化
+       
+        // プレイヤー数分ループしてスプライトを作成
+        for (let i = 0; i < playerIcons.length; i++) {
+            const sprite = this.scene.add.sprite(this.coordinates[ this.player1Pos ].x, this.coordinates[ this.player1Pos ].y, playerIcons[i]);
+            sprite.setScale(2); // サイズ調整
+            sprite.setOrigin(0.5); // 中心設定
+            sprite.setDepth(0); // 表示順序を設定
+            // プレイヤー情報（スプライトと現在位置）を保存
             this.players.push(sprite);
+        //     this.playerPositions.push({position: {            // 現在の座標
+        //         x: startPosition.x,
+        //         y: startPosition.y
+        // }});
+        }
+
+
+        // let i = 1;
+        // // キャラ画像を一つずつ配置
+        // playerPositions.forEach((pos, index) => {
+        //     const sprite = this.scene.add.sprite(pos.x, pos.y, 'playericon'+(i));
+        //     i =i+1;
+        //     sprite.setScale(2); // サイズを調整
+        //     sprite.setOrigin(0.5); // 中心に設定
+        //     sprite.setDepth(0); // マップより前に表示されるように設定
+    
+        //     // プレイヤー情報に保存（必要ならグローバルな`player`にも保存可能）
+        //     if (!this.players) this.players = [];
+        //     this.players.push(sprite);
             
-        });
+        // });
     }
     }
 
@@ -320,4 +353,50 @@ export class GameBoard {
         if ((button & 1<<2) > 0) this.moveMapGroup(0, spd * sprint);
         if ((button & 1<<3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
+
+
+
+
+    movechar(num) {
+        // プレイヤー位置を更新
+        this.player1Pos += Number(num);
+
+        // プレイヤーのアイコン更新
+        if (this.players[3]) {
+            this.players[3].destroy();
+        }
+        const player = this.playersData[0]; // Playerインスタンス
+        const coord = this.coordinates[this.player1Pos];
+        player.moveToPosition(
+        this.coordinates[this.player1Pos].x,
+        this.coordinates[this.player1Pos].y
+    );
+        const sprite = this.scene.add.sprite(
+            this.coordinates[this.player1Pos].x,
+            this.coordinates[this.player1Pos].y,
+            'playericon4'
+        );
+        sprite.setScale(2);
+        sprite.setOrigin(0.5);
+        this.players[3] = sprite;
+
+        // イベントを発生
+        const event = getRandomEvent();
+        // const result = event.action(player); // Playerインスタンスで処理
+        // this.eventLog.push(`${player.name}のイベント: ${event.name} - ${result}`);
+        console.log(`${player.name}のイベント: ${event.name} - 幸福度: ${player.stats.score}`);
+        event.action(player);
+        // this.updateLog();
+    }
+
+
+    updateLog() {
+        // 最新のイベントログをコンソール表示
+        console.clear();
+        console.log('--- イベントログ ---');
+        console.log(this.eventLog.join('\n'));
+    }
+
+
+
 }
