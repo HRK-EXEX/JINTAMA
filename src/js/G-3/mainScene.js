@@ -91,14 +91,13 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
         this.showTurnOptions();
 
-        this.scale.resize(window.innerWidth, window.innerHeight);
+        // this.scale.resize(window.innerWidth, window.innerHeight);
 
-        
-        player.splice(0, player.length);
-        for (let i = 0; i < 4; i++) {
-            player[i] = new Player(this, 40, 40 + i * 100, 'player' + (i + 1));
+        // player.splice(0, player.length);
+        // for (let i = 0; i < 4; i++) {
+        //     player[i] = new Player(this, 40, 40 + i * 100, 'player' + (i + 1));
 
-        }
+        // }
  
         // デバッグ情報の初期化
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
@@ -115,7 +114,7 @@ export class MainScene extends Phaser.Scene {
         for (let i = 0; i < 4; i++) {
             const username = playerData[`User${i + 1}`];
             if (username) {
-                const p = new Player(this, 40, 40 + i * 40, username.name);
+                const p = new Player(this, 40 + i * 120, 40, username.name);
                 p.modifyStats({
                     score: username.score - p.stats.score,
                     hp: username.hp - p.stats.hp,
