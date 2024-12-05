@@ -22,6 +22,7 @@ export class MainScene extends Phaser.Scene {
         this.yourTurn = false;
         this.state = 1;
         this.once = false;
+
         this.rouletteInterval = null;
         this.rouletteText = null;
         this.isRouletteRunning = false;
@@ -51,6 +52,13 @@ export class MainScene extends Phaser.Scene {
     }
  
     create() {
+
+        this.gameBoard.createMap();
+        // dialogY = this.game.config.height - 50 - dialogH
+        let dialogW = 1000, dialogH = 500, dialogX = 500, dialogY = 1000;
+        this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
+        this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
+
         this.initializeGame();
         this.registerInputHandlers();
 
@@ -59,6 +67,7 @@ export class MainScene extends Phaser.Scene {
 
         //     b.addEventListener("click", event => {
         //         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+      
 
         //         this.cheat();
         //     });
@@ -81,17 +90,23 @@ export class MainScene extends Phaser.Scene {
         this.state = 1;
         this.once = false;
         this.showTurnOptions();
-      
+
+        this.scale.resize(window.innerWidth, window.innerHeight);
+
         
-        player.splice(0,player.length);
+        player.splice(0, player.length);
         for (let i = 0; i < 4; i++) {
-            player[i] = new Player(this, 40 + i * 120, 40, 'player' + (i + 1));
+            player[i] = new Player(this, 40, 40 + i * 100, 'player' + (i + 1));
+
         }
  
         // デバッグ情報の初期化
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
-        this.rouletteText = this.add.text(75, 300);
- 
+        
+        this.rouletteText = this.add.text(1000, 800,'',{fontSize:'60px',backgroundColor: '#333333'});
+
+
+       
         this.initializePlayers();
     }
  
@@ -117,6 +132,7 @@ export class MainScene extends Phaser.Scene {
  
     // 入力ハンドラの登録
     registerInputHandlers() {
+
         this.input.keyboard.on('keydown-ENTER', () => {
             if (this.isRouletteRunning) {
                 this.stopRoulette(true);
@@ -124,9 +140,14 @@ export class MainScene extends Phaser.Scene {
             } else if(this.isDialogActive){
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
+
+                 this.rouletteText.setText(""); //ルーレットの数字を消す
+                 this.showNextTurnButton();
+
                 this.rouletteText.setText(""); //ルーレットの数字を消す
                 // this.showNextTurnButton();
                 this.endTurn(true);
+
             }else if(this.state === 2 && !this.isRouletteRunning){
                 this.startRoulette();
             }
@@ -136,8 +157,10 @@ export class MainScene extends Phaser.Scene {
         
         });
     }
+
  
     startRoulette() {
+
         this.isRouletteRunning = true; // ルーレット実行中フラグを設定
         this.rouletteText.setText("");
 
@@ -155,6 +178,7 @@ export class MainScene extends Phaser.Scene {
         const finalNumber = this.rouletteText.text;
 
         if (isEnterKey) {
+
             if (!this.isDialogActive) {
                 this.isDialogActive = true;
                 // currentPlayer が配列の範囲内かチェック
@@ -175,6 +199,7 @@ export class MainScene extends Phaser.Scene {
         } else {
             this.rouletteText.setText("");
             this.endTurn(true);
+
         }
     }
     
@@ -183,7 +208,7 @@ export class MainScene extends Phaser.Scene {
         if (forceHide) this.dialog.hideDialog();
 
         this.selectDialog.hideDialog();
-      
+
         console.log("=== endTurn() 開始 ===");
         console.log(`現在のプレイヤー: Player ${this.currentPlayer + 1}`);
         this.currentPlayer = (this.currentPlayer + 1);
@@ -192,25 +217,28 @@ export class MainScene extends Phaser.Scene {
         console.log(`次のプレイヤー: Player ${this.currentPlayer + 1}`);
         console.log(`player.length: ${player.length}, currentPlayer: ${this.currentPlayer}`);
         console.log("=== endTurn() 終了 ===");
+
         this.turn=this.currentPlayer;
         this.yourTurn = (this.currentPlayer === 0);
         this.state =  1;
         this.showNextTurnButton
+
         this.yourTurn = (this.turn === this.currentPlayer);
 
       
         this.state = this.yourTurn ? 1 : 0;
+
     }
  
     update() {
         const button = input();
 
-        // console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer + 1}`);
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
         }
       
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
+
  
         // 必要に応じて状態に応じた処理を追加
          // 繰り返し呼び出さないようにする
@@ -218,9 +246,11 @@ export class MainScene extends Phaser.Scene {
    
     }
     showTurnOptions() {
+
         if(this.state !== 1) return;
         this.selectDialog.showSelectDialog(
             `プレイヤー${this.currentPlayer+1}のターンです。`,
+
             ['ルーレット', 'ステータス', 'ターンスキップ'],
 
             choice => {
@@ -234,6 +264,7 @@ export class MainScene extends Phaser.Scene {
                                 this.endTurn(false);
                             });
                         });
+
 
                         this.state = 2;
                         // this.isRouletteRunning = false;
@@ -268,6 +299,7 @@ export class MainScene extends Phaser.Scene {
             .setAlpha(0.8)
             .setInteractive();
 
+
         const buttonText = this.add.text(400, 300, '次のターンへ!', {
             fontSize: '20px',
             fill: '#ffffff',
@@ -278,7 +310,9 @@ export class MainScene extends Phaser.Scene {
         });
     
         buttonBackground.on('pointerout', () => {
-            buttonText.setStyle({ fill: '#ffffff' });
+
+            buttonText.setStyle({ fill: '#ffffff' }); 
+
         });
     
         // ボタンがクリックされたら次のターンに移行
@@ -288,4 +322,5 @@ export class MainScene extends Phaser.Scene {
             buttonText.destroy();  // ボタンテキストの削除
         });
     }
+
 }
