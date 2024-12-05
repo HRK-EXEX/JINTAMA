@@ -467,186 +467,88 @@ export class GameBoard {
     }
     
     movechar(playernum, num) {
-        this.scene.tweens.add({
-            targets: this.scene.cameras.main,
-            zoom: 1.7,  // ズームイン
-            duration: 1000,  // アニメーションの時間
-            ease: 'Power2',  // イージングのタイプ
-        });
-        // const mapWidth = this.map.widthInPixels;
-        // const mapHeight = this.map.heightInPixels;
-        
-        // // カメラの範囲をマップに合わせて設定
-        // this.scene.cameras.main.setBounds(0, 0, mapWidth, mapHeight);
-        this.scene.cameras.main.setZoom(1.1)
-        const playerIndex = playernum - 1;
-        this.playerPos[playerIndex] += Number(num);
-        const pos = this.playerPos[playerIndex];
-        
-        const targetX = this.coordinates[pos].x;
-        const targetY = this.coordinates[pos].y;
+        const playerIndex = playernum ;
     
+        // プレイヤーの現在位置を取得
+        let currentPosition = this.playerPos[playerIndex];
         const sprite = this.players[playerIndex];
     
-        // スプライトがなければ新規作成
-      
-        if (!sprite) {
-            const newSprite = this.scene.add.sprite(targetX, targetY, 'playericon' + playernum + '_side1');
-            newSprite.setScale(2);       // サイズ調整
-            newSprite.setOrigin(0.5);    // 中心設定
-            newSprite.setDepth(0);       // 表示順序を設定
-            this.players[playerIndex] = newSprite;
-
-            // 最初に移動する処理を追加
-            this.moveSprite(newSprite, targetX, targetY, playernum);
-
-            return; // 初期表示のみなので移動処理は不要
+        // 移動キューの確認または初期化
+        if (!this.moveQueue) {
+            this.moveQueue = {};
         }
-
-    
-        if (sprite) {
-            this.scene.tweens.killTweensOf(sprite); // 現在のアニメーションをキャンセル
+        if (!this.moveQueue[playerIndex]) {
+            this.moveQueue[playerIndex] = Promise.resolve();
         }
-        const diffX = Math.abs(targetX - sprite.x);
-        const diffY = Math.abs(targetY - sprite.y);
-
-      
     
-        // 移動の種類に応じた処理
-        if (diffX > 0 && diffY === 0) {
-            // X軸のみ移動
-            const camera = this.scene.cameras.main;
-            this.scene.cameras.main.stopFollow();
-
-        camera.startFollow(sprite, true, 0.1, 0.1);
-            this.scene.tweens.add({
-                targets: sprite,
-                x: targetX,
-                duration: 1000,
-                onUpdate: (tween) => {
-                    if (Math.floor(tween.progress * 2) % 2 === 0) {
-                        sprite.setTexture('playericon' + playernum + '_side1');
-                    } else {
-                        sprite.setTexture('playericon' + playernum + '_side2');
-                    }
-    
-                    // 移動中の方向を調整（右向き/左向き）
-                    if (targetX > sprite.x) {
-                        sprite.setFlipX(true); // 右向きに設定
-                    } else {
-                        sprite.setFlipX(false);  // 左向きに設定
-                    }
-                },
-                onComplete: () => {
-                    // 移動完了後に元のアイコンに戻す
-                    sprite.setTexture('playericon' + playernum );
-                    sprite.setFlipX(false); // アイコンを正しい向きに戻す
+        // 非同期処理で移動を管理
+        const move = async () => {
+            for (let i = 0; i < num; i++) {
+                currentPosition++;
+                if (currentPosition >= this.coordinates.length) {
+                    currentPosition = 0; // マップをループさせる場合
                 }
-            });
-        } else if (diffX === 0 && diffY > 0) {
-            const camera = this.scene.cameras.main;
-            this.scene.cameras.main.stopFollow();
-
-        camera.startFollow(sprite, true, 0.1, 0.1);
-            // Y軸のみ移動
-            this.scene.tweens.add({
-                targets: sprite,
-                y: targetY,
-                duration: 1000,
-                onUpdate: () => {
-                    sprite.setTexture('playericon' + playernum + '_up');
-                    sprite.setFlipX(false); // 上向きの場合は反転解除
-                },
-                onComplete: () => {
-                    // 移動完了後に元のアイコンに戻す
-                    sprite.setTexture('playericon' + playernum );
-                    sprite.setFlipX(false);
+    
+                const targetX = this.coordinates[currentPosition].x;
+                const targetY = this.coordinates[currentPosition].y;
+    
+                // XとYの移動量を比較して優先順位を決定
+                const diffX = Math.abs(targetX - sprite.x);
+                const diffY = Math.abs(targetY - sprite.y);
+    
+                if (diffY >= diffX) {
+                    // Y方向を先に移動
+                    await this.moveTo(sprite, { x: sprite.x, y: targetY }, playernum, 'up');
+                    if (diffX > 0) {
+                        // 次にX方向
+                        await this.moveTo(sprite, { x: targetX, y: targetY }, playernum, 'side');
+                    }
+                } else {
+                    // X方向を先に移動
+                    await this.moveTo(sprite, { x: targetX, y: sprite.y }, playernum, 'side');
+                    if (diffY > 0) {
+                        // 次にY方向
+                        await this.moveTo(sprite, { x: targetX, y: targetY }, playernum, 'up');
+                    }
                 }
-            });
-            
-        } else if (diffX > 0 && diffY > 0) {
-            // XとYの両方が異なる場合
-            const camera = this.scene.cameras.main;
-            this.scene.cameras.main.stopFollow();
-
-        camera.startFollow(sprite, true, 0.1, 0.1);
-            if (diffX > diffY) {
-                // X軸方向を先に移動
-                this.scene.tweens.add({
-                    targets: sprite,
-                    x: targetX,
-                    duration: 1000,
-                    onUpdate: (tween) => {
-                        if (Math.floor(tween.progress * 2) % 2 === 0) {
-                            sprite.setTexture('playericon' + playernum + '_side1');
-                        } else {
-                            sprite.setTexture('playericon' + playernum + '_side2');
-                        }
     
-                        if (targetX > sprite.x) {
-                            sprite.setFlipX(true); // 右向きに設定
-                        } else {
-                            sprite.setFlipX(false);  // 左向きに設定
-                        }
-                    },
-                    onComplete: () => {
-                        // Y軸方向を移動
-                        this.scene.tweens.add({
-                            targets: sprite,
-                            y: targetY,
-                            duration: 1000,
-                            onUpdate: () => {
-                                sprite.setTexture('playericon' + playernum + '_up');
-                                sprite.setFlipX(false); // 上向きの場合は反転解除
-                            },
-                            onComplete: () => {
-                                sprite.setTexture('playericon' + playernum + '_side1');
-                                sprite.setFlipX(false);
-                            }
-                        });
-                    }
-                });
-            } else {
-                // Y軸方向を先に移動
-                this.scene.tweens.add({
-                    targets: sprite,
-                    y: targetY,
-                    duration: 1000,
-                    onUpdate: () => {
-                        sprite.setTexture('playericon' + playernum + '_up');
-                        sprite.setFlipX(false);
-                    },
-                    onComplete: () => {
-                        // X軸方向を移動
-                        this.scene.tweens.add({
-                            targets: sprite,
-                            x: targetX,
-                            duration: 1000,
-                            onUpdate: (tween) => {
-                                if (Math.floor(tween.progress * 2) % 2 === 0) {
-                                    sprite.setTexture('playericon' + playernum + '_side1');
-                                } else {
-                                    sprite.setTexture('playericon' + playernum + '_side2');
-                                }
-    
-                                if (targetX > sprite.x) {
-                                    sprite.setFlipX(true); // 右向きに設定
-                                } else {
-                                    sprite.setFlipX(false);  // 左向きに設定
-                                }
-                            },
-                            onComplete: () => {
-                                sprite.setTexture('playericon' + playernum );
-                                sprite.setFlipX(false);
-                            }
-                        });
-                    }
-                });
+                // 現在位置を更新
+                this.playerPos[playerIndex] = currentPosition;
             }
-        }
+    
+            // 最終目的地に着いたら真正面を向く
+            sprite.setTexture(`playericon${playernum}`);
+        };
+    
+        // キューに移動を追加
+        this.moveQueue[playerIndex] = this.moveQueue[playerIndex].then(move);
     }
     
+    // スプライトを指定の座標に移動させる関数
+    moveTo(sprite, target, playernum, direction) {
+        return new Promise((resolve) => {
+            const duration = 300;
+            const textureBase = `playericon${playernum}`;
     
-    
- 
-} 
+            this.scene.tweens.add({
+                targets: sprite,
+                x: target.x,
+                y: target.y,
+                duration,
+                onUpdate: (tween) => {
+                    if (direction === 'side') {
+                        if (Math.floor(tween.progress * 2) % 2 === 0) {
+                            sprite.setTexture(`${textureBase}_side1`);
+                        } else {
+                            sprite.setTexture(`${textureBase}_side2`);
+                        }
+                        sprite.setFlipX(target.x < sprite.x);
+                    } else if (direction === 'up') {
+                        sprite.setTexture(`${textureBase}_up`);
+                    }
+                },
+                onComplete: resolve
+            });
+        });
+    }
+}    
