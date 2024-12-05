@@ -1,7 +1,8 @@
-import {
-    updateFieldMap, updateLoopMap, player
-} from './initialize.js';
- 
+
+import { getRandomEvent } from './event.js';
+import { updateFieldMap, updateLoopMap, player } from './initialize.js';
+import  Player  from './player.js';
+
 // マップ設定の定数と変数
 let firstX = 16.5;
 let firstY = 30;
@@ -13,7 +14,6 @@ let tileOffsetY = 0;
 let mapWidth = 0;
 let mapHeight = 0;
 let scrollLimit = 0;
- 
 export class GameBoard {
     constructor(scene, mapID) {
         this.scene = scene;
@@ -21,8 +21,24 @@ export class GameBoard {
         this.loopMap = null;
         this.map = null;
         this.mapID = mapID;
-        this.routeDate =[];
-        this.shokiDate =[];
+
+        this.playersData = [];
+        this.eventLog = [];
+
+        // GameBoardの初期化時にPlayerインスタンスを作成
+this.playersData = [
+    new Player(this.scene, 100, 40, "Player 1"),
+    new Player(this.scene, 100, 80, "Player 2"),
+    new Player(this.scene, 100, 120, "Player 3"),
+    new Player(this.scene, 100, 160, "Player 4")
+];
+
+// プレイヤーオブジェクトをシーンに追加
+this.playersData.forEach(player => {
+    this.scene.add.existing(player);
+});
+
+
 
         switch (mapID) {
             case 0:
@@ -49,20 +65,21 @@ export class GameBoard {
         switch (this.mapID) {
             case 0:
                 // マップ素材の画像をロード
-                this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('hana', '/map/mapchip2/MapChip/hana.png');
-                this.scene.load.image('koori2', '/map/mapchip2/MapChip/koori2.png');
-                this.scene.load.image('kusa-tuti2', '/map/mapchip2/MapChip/kusa1-kusa2.png');
-                this.scene.load.image('road', '/map/mapchip2/MapChip/tuti3.png');
-                this.scene.load.image('tuti2', '/map/mapchip2/MapChip/tuti2.png');
-                this.scene.load.image('tuti3', '/map/mapchip2/MapChip/tuti3.png');
-                this.scene.load.image('water1', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
-                this.scene.load.image('water2', '/map/mapchip2/MapChip/mizu1_doukutu5.png');
-                this.scene.load.image('waterfall', '/map/mapchip2/MapChip/tuti2.png');
-               
+
+                this.scene.load.image('base', '/kansho/JINTAMA/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('hana', '/kansho/JINTAMA/map/mapchip2/MapChip/hana.png');
+                this.scene.load.image('koori2', '/kansho/JINTAMA/map/mapchip2/MapChip/koori2.png');
+                this.scene.load.image('kusa-tuti2', '/kansho/JINTAMA/map/mapchip2/MapChip/kusa1-kusa2.png');
+                this.scene.load.image('road', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti3.png');
+                this.scene.load.image('tuti2', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti2.png');
+                this.scene.load.image('tuti3', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti3.png');
+                this.scene.load.image('water1', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu1_doukutu5.png');
+                this.scene.load.image('water2', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu1_doukutu5.png');
+                this.scene.load.image('waterfall', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti2.png');
+                
                 // Tiledで出力したJsonファイルをロード
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/first-map.json');
-               
+                this.scene.load.tilemapTiledJSON('map', '/kansho/JINTAMA/src/js/G-3/map-data/first-map.json');
+                
                 // レイヤー名を入力
                 this.layerNames = [
                     'ground',
@@ -124,14 +141,14 @@ export class GameBoard {
  
             case 1:
                 // マップ素材の画像をロード
-                this.scene.load.image('baseTile', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('dirtTile1', '/map/mapchip2/MapChip/tuti1.png');
-                this.scene.load.image('dirtTile2', '/map/mapchip2/MapChip/tuti2.png');
-                this.scene.load.image('loopTile', '/map/loops/forestLoop+16Y.png');
- 
+                this.scene.load.image('baseTile', '/kansho/JINTAMA/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('dirtTile1', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti1.png');
+                this.scene.load.image('dirtTile2', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti2.png');
+                this.scene.load.image('loopTile', '/kansho/JINTAMA/map/loops/forestLoop+16Y.png');
+
                 // Tiledで出力したJsonファイルをロード
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/second-map.json');
- 
+                this.scene.load.tilemapTiledJSON('map', '/kansho/JINTAMA/src/js/G-3/map-data/second-map.json');
+
                 // レイヤー名を入力
                 this.layerNames = [
                     'ground',
@@ -181,31 +198,33 @@ export class GameBoard {
                 
 
                 break;
- 
-            case 2:
-                this.scene.load.image('ArmillarySphere', '/map/mapchip2/ArmillarySphere.png');
-                this.scene.load.image('base', '/map/mapchip2/MapChip/base.png');
-                this.scene.load.image('byobu', '/map/mapchip2/byobu.png');
-                this.scene.load.image('eEJjt6AYWTepUfe1730082958', '/map/mapchip2/eEJjt6AYWTepUfe1730082958.png');
-                this.scene.load.image('goal2', '/map/mapchip2/goal2.png');
-                this.scene.load.image('gpiano', '/map/mapchip2/gpiano.png');
-                this.scene.load.image('Le Penseur', '/map/mapchip2/Le Penseur.png');
-                this.scene.load.image('manekineko2', '/map/mapchip2/manekineko2.png');
-                this.scene.load.image('mizu1', '/map/mapchip2/MapChip/mizu1.png');
-                this.scene.load.image('mizu2', '/map/mapchip2/MapChip/mizu2.png');
-                this.scene.load.image('patcar', '/map/mapchip2/patcar.png');
-                this.scene.load.image('syakanyorai2', '/map/mapchip2/syakanyorai2.png');
-                this.scene.load.image('taki2', '/map/mapchip2/MapChip/taki2.png');
-                this.scene.load.image('tigermat2', '/map/mapchip2/tigermat2.png');
-                this.scene.load.image('tuti2', '/map/mapchip2/Mapchip/tuti2.png');
-                this.scene.load.image('tuti3', '/map/mapchip2/Mapchip/tuti3.png');
-                this.scene.load.image('yougan', '/map/mapchip2/MapChip/yougan.png');
-                this.scene.load.image('kumo', '/map/mapchip2/kumo.png');
-                this.scene.load.image('sora', '/map/mapchip2/sora.jpg');
-           
+
+
+            case 2: 
+                this.scene.load.image('ArmillarySphere', '/kansho/JINTAMA/map/mapchip2/ArmillarySphere.png');
+                this.scene.load.image('base', '/kansho/JINTAMA/map/mapchip2/MapChip/base.png');
+                this.scene.load.image('byobu', '/kansho/JINTAMA/map/mapchip2/byobu.png');
+                this.scene.load.image('eEJjt6AYWTepUfe1730082958', '/kansho/JINTAMA/map/mapchip2/eEJjt6AYWTepUfe1730082958.png');
+                this.scene.load.image('goal2', '/kansho/JINTAMA/map/mapchip2/goal2.png');
+                this.scene.load.image('gpiano', '/kansho/JINTAMA/map/mapchip2/gpiano.png');
+                this.scene.load.image('Le Penseur', '/kansho/JINTAMA/map/mapchip2/Le Penseur.png');
+                this.scene.load.image('manekineko2', '/kansho/JINTAMA/map/mapchip2/manekineko2.png');
+                this.scene.load.image('mizu1', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu1.png');
+                this.scene.load.image('mizu2', '/kansho/JINTAMA/map/mapchip2/MapChip/mizu2.png');
+                this.scene.load.image('patcar', '/kansho/JINTAMA/map/mapchip2/patcar.png');
+                this.scene.load.image('syakanyorai2', '/kansho/JINTAMA/map/mapchip2/syakanyorai2.png');
+                this.scene.load.image('taki2', '/kansho/JINTAMA/map/mapchip2/MapChip/taki2.png');
+                this.scene.load.image('tigermat2', '/kansho/JINTAMA/map/mapchip2/tigermat2.png');
+                this.scene.load.image('tuti2', '/kansho/JINTAMA/map/mapchip2/Mapchip/tuti2.png');
+                this.scene.load.image('tuti3', '/kansho/JINTAMA/map/mapchip2/Mapchip/tuti3.png');
+                this.scene.load.image('yougan', '/kansho/JINTAMA/map/mapchip2/MapChip/yougan.png');
+                this.scene.load.image('kumo', '/kansho/JINTAMA/map/mapchip2/kumo.png');
+                this.scene.load.image('sora', '/kansho/JINTAMA/map/mapchip2/sora.jpg');
+            
                 // Tiledで出力したJsonファイルをロード
-                this.scene.load.tilemapTiledJSON('map', '/src/js/G-3/map-data/third-map.json');
-               
+                this.scene.load.tilemapTiledJSON('map', '/kansho/JINTAMA/src/js/G-3/map-data/third-map.json');
+                
+
                 // レイヤー名を入力
                 this.layerNames = [
                     // 'sky', 画像レイヤーは無視される
@@ -292,7 +311,7 @@ export class GameBoard {
             tmpLayer.setScale(scale, scale);
             mapWidth = Math.max(mapWidth, tmpLayer.width);
             mapHeight = Math.max(mapHeight, tmpLayer.height);
-           
+           z 
             this.fieldMap.add(tmpLayer);
         }
 
@@ -332,6 +351,7 @@ export class GameBoard {
         
     }
 
+
     adjustCamera(mapPixelWidth, mapPixelHeight) {
         const camera = this.scene.cameras.main;
     
@@ -351,6 +371,7 @@ export class GameBoard {
 
         // 必要に応じてカメラのズームを調整
     
+
     }
  
     addCharacterIcons() {
@@ -444,6 +465,12 @@ export class GameBoard {
                 sprite.setOrigin(0.5);  // 中心設定
                 sprite.setDepth(0);  // 表示順序を設定
                 this.players[playerIndex] = sprite;
+               const event = getRandomEvent();
+               // const result = event.action(player); // Playerインスタンスで処理
+        // this.eventLog.push(`${player.name}のイベント: ${event.name} - ${result}`);
+        console.log(`${player.name}のイベント: ${event.name} - 幸福度: ${player.stats.score}`);
+        event.action(player);
+        // this.updateLog();
                 
                 this.selectbunki(branches).then((choice) => {
                     console.log(`選ばれたルート: ${choice}`);
@@ -463,6 +490,12 @@ export class GameBoard {
                 sprite.setOrigin(0.5);  // 中心設定
                 sprite.setDepth(0);  // 表示順序を設定
                 this.players[playerIndex] = sprite;
+                   const event = getRandomEvent();
+        // const result = event.action(player); // Playerインスタンスで処理
+        // this.eventLog.push(`${player.name}のイベント: ${event.name} - ${result}`);
+        console.log(`${player.name}のイベント: ${event.name} - 幸福度: ${player.stats.score}`);
+        event.action(player);
+        // this.updateLog();
                 i++;
                 console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
                 movenext();
@@ -483,6 +516,12 @@ export class GameBoard {
                     sprite.setDepth(0); // 表示順序を設定
                
                     this.players[playerIndex] = sprite;
+               const event = getRandomEvent();
+        // const result = event.action(player); // Playerインスタンスで処理
+        // this.eventLog.push(`${player.name}のイベント: ${event.name} - ${result}`);
+        console.log(`${player.name}のイベント: ${event.name} - 幸福度: ${player.stats.score}`);
+        event.action(player);
+        // this.updateLog();
  
                     i++
                     console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
@@ -533,7 +572,13 @@ export class GameBoard {
                 buttons.push(button);
             });
         });
+      
     }
-   
+    updateLog() {
+        // 最新のイベントログをコンソール表示
+        console.clear();
+        console.log('--- イベントログ ---');
+        console.log(this.eventLog.join('\n'));
+    }
  
 }

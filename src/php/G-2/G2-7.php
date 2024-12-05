@@ -50,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <body>
 
     <div class="kuro">
-        <a href="G2-7_delete.php"><p class="delete">アカウント削除</p></a>
+        <a href="G2-8.php"><p class="delete">アカウント削除</p></a>
     
         <form action="G2-7_update.php" method="POST">
         <div class="username">

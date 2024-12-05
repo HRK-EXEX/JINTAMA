@@ -5,6 +5,7 @@ export default class Player extends Phaser.GameObjects.Container {
         this.name = name;
         this.color = new Phaser.Display.Color(0, 0, 0);
         
+        
         // 基本ステータス
         this.stats = {
             score: 0,    // 幸福度
@@ -16,9 +17,9 @@ export default class Player extends Phaser.GameObjects.Container {
         // ステータスの最大・最小値
         this.maxStats = {
             score: 999,
-            hp: 100,
-            charm: 100,
-            sense: 100
+            hp: 999,
+            charm: 999,
+            sense: 999
         };
         
         this.minStats = {
@@ -134,6 +135,7 @@ export default class Player extends Phaser.GameObjects.Container {
         
         // ステータス変更後のイベントを発火
         this.emit('statsChanged', this.stats);
+        
     }
     
     // 基本的なステータス表示の更新

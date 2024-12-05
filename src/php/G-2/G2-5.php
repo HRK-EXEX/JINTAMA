@@ -19,7 +19,7 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
                 }
         if(!is_null($rm['room_user2'])){
             $user2 = $rm['room_user2'];
-            $memcount = 2;
+            $memcount++;
             $ucheck =$db->prepare("SELECT * FROM `User` WHERE user_id = ?");
             $ucheck->execute([$user2]);
                 foreach($ucheck as $un){
@@ -28,10 +28,8 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
         }
         if(!is_null($rm['room_user3'])){
             $user3 = $rm['room_user3'];
-            if($user3 == 9999){
-                $maxcount = 2;
-            }else{
-                $memcount = 3;
+            if($user3 != null){
+                $memcount++;
                 $ucheck =$db->prepare("SELECT * FROM `User` WHERE user_id = ?");
                 $ucheck->execute([$user3]);
                     foreach($ucheck as $un){
@@ -41,12 +39,8 @@ $stm = $db->prepare("SELECT `room_id`, `room_name`, `room_user1`, `room_user2`, 
         }
         if(!is_null($rm['room_user4'])){
             $user4 = $rm['room_user4'];
-            if($user4 == 9999){
-                $maxcount = 3;
-            }elseif($user4 == 9998){
-                $maxcount =2;
-            }else{
-                $memcount = 4;
+            if($user4 != null){
+                $memcount++;
                 $ucheck =$db->prepare("SELECT * FROM `User` WHERE user_id = ?");
                 $ucheck->execute([$user4]);
                     foreach($ucheck as $un){

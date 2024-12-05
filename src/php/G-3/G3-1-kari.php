@@ -21,55 +21,73 @@ foreach($stm1 as $un1){
         'score' => 120,
         'hp' => 100,
         'charm' => 100,
-        'sence' => 100,
+        'sense' => 100,
     ];
 }
 
-$stm2 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
-$stm2->execute([$u2]);
-foreach($stm2 as $un2){
-    $_SESSION['User2'] = [
-        'room_id' =>$room_id,
-        'user_id' => $un2['user_id'],
-        'name' => $un2['user_name'],
-        'score' => 90,
-        'hp' => 100,
-        'charm' => 100,
-        'sence' => 100,
-    ];
-}
+if ($u2) {
+    $stm2 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
+    $stm2->execute([$u2]);
+    foreach($stm2 as $un2) {
+        $_SESSION['User2'] = [
+            'room_id' =>$room_id,
+            'user_id' => $un2['user_id'],
+            'name' => $un2['user_name'],
+            'score' => 90,
+            'hp' => 100,
+            'charm' => 100,
+            'sense' => 100,
+        ];
+    }
+} else $stm2 = $_SESSION['User2'] = null;
 
-$stm3= $db->prepare('SELECT * FROM User WHERE user_id = ?');
-$stm3->execute([$u3]);
-foreach($stm3 as $un3){
-    $_SESSION['User3'] = [
-        'room_id' =>$room_id,
-        'user_id' => $un3['user_id'],
-        'name' => $un3['user_name'],
-        'score' => 70,
-        'hp' => 100,
-        'charm' => 100,
-        'sence' => 100,
-    ];
-}
-$stm4 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
-$stm4->execute([$u4]);
-foreach($stm4 as $un4){
-    $_SESSION['User4'] = [
-        'room_id' =>$room_id,
-        'user_id' => $un4['user_id'],
-        'name' => $un4['user_name'],
-        'score' => 50,
-        'hp' => 100,
-        'charm' => 100,
-        'sence' => 100,
-    ];
-}
-echo 'ルームID：'.$_SESSION['User']['room_id'].'<br>';
-echo 'メンバー1：'.$_SESSION['User1']['user_id'].'('.$_SESSION['User1']['name'].')<br>';
-echo 'メンバー2：'.$_SESSION['User2']['user_id'].'('.$_SESSION['User2']['name'].')<br>';
-echo 'メンバー3：'.$_SESSION['User3']['user_id'].'('.$_SESSION['User3']['name'].')<br>';
-echo 'メンバー4：'.$_SESSION['User4']['user_id'].'('.$_SESSION['User4']['name'].')<br>';
+if ($u3) {
+    $stm3= $db->prepare('SELECT * FROM User WHERE user_id = ?');
+    $stm3->execute([$u3]);
+    foreach($stm3 as $un3){
+        $_SESSION['User3'] = [
+            'room_id' =>$room_id,
+            'user_id' => $un3['user_id'],
+            'name' => $un3['user_name'],
+            'score' => 70,
+            'hp' => 100,
+            'charm' => 100,
+            'sense' => 100,
+        ];
+    }
+} else $stm3 = $_SESSION['User3'] = null;
+
+if ($u4) {
+    $stm4 = $db->prepare('SELECT * FROM User WHERE user_id = ?');
+    $stm4->execute([$u4]);
+    foreach($stm4 as $un4){
+        $_SESSION['User4'] = [
+            'room_id' =>$room_id,
+            'user_id' => $un4['user_id'],
+            'name' => $un4['user_name'],
+            'score' => 50,
+            'hp' => 100,
+            'charm' => 100,
+            'sense' => 100,
+        ];
+    }
+} else $stm4 = $_SESSION['User4'] = null;
+
+$uArray = [
+    $_SESSION['User']['room_id'],
+    isset($_SESSION['User1']) ? $_SESSION['User1']['user_id'] : 'なし',
+    isset($_SESSION['User2']) ? $_SESSION['User2']['user_id'] : 'なし',
+    isset($_SESSION['User3']) ? $_SESSION['User3']['user_id'] : 'なし',
+    isset($_SESSION['User4']) ? $_SESSION['User4']['user_id'] : 'なし',
+];
+
+// echo 'ルームID：'.$uArray[0].'<br>';
+// echo 'メンバー1：'.$uArray[1].'('.$uArray[1].')<br>';
+// echo 'メンバー2：'.$uArray[2].'('.$uArray[2].')<br>';
+// echo 'メンバー3：'.$uArray[3].'('.$uArray[3].')<br>';
+// echo 'メンバー4：'.$uArray[4].'('.$uArray[4].')<br>';
+
+header('Location: G3-1-maingame.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,15 +108,18 @@ echo 'メンバー4：'.$_SESSION['User4']['user_id'].'('.$_SESSION['User4']['na
         </tr>
         
         <?php
-        for($i=1;$i<5;$i++){
+        for($i=1;$i<5;$i++)
+        {
+            if (is_null($_SESSION['User'.$i])) continue;
             echo'<tr>';
             echo'<td>'.$_SESSION['User'.$i]['user_id'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['name'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['score'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['hp'].'</td>';
             echo'<td>'.$_SESSION['User'.$i]['charm'].'</td>';
-            echo'<td>'.$_SESSION['User'.$i]['sence'].'</td>';
-            echo'</tr>';}
+            echo'<td>'.$_SESSION['User'.$i]['sense'].'</td>';
+            echo'</tr>';
+        }
         ?>
         
     </table>
