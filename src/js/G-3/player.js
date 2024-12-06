@@ -84,7 +84,9 @@ export default class Player extends Phaser.GameObjects.Container {
         }else{
             this.sprite = this.scene.add.sprite(0, 0, 'playericon4');
             this.sprite.setInteractive();
-            this.sprite.setScale(3);
+            this.sprite.setScale(3
+                
+            );
         }
         
        
