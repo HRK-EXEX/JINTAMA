@@ -29,7 +29,9 @@ export class GameBoard {
         this.tilemapNames = [];
         this.layerNames = [];
 
-        this.coordinates = [];
+        this.iconCreated = false;
+
+        // this.coordinates = [];
 
         // GameBoardの初期化時にPlayerインスタンスを作成し、プレイヤーオブジェクトをシーンに追加
         this.playersData.forEach(player => {
@@ -425,7 +427,8 @@ export class GameBoard {
     }
 
     addCharacterIcons() {
-
+        if (this.iconCreated != false) this.iconCreated = true;
+        else return;
         //プレイヤー1
         // const startPosition = coordinates[0]; // 初期位置
         const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー
@@ -435,7 +438,7 @@ export class GameBoard {
         console.log(this.coordinates);
         // プレイヤー数分ループしてスプライトを作成
         for (let i = 0; i < playerIcons.length; i++) {
-            this.sprite = this.scene.add.sprite(this.coordinates[0].x, this.coordinates[0].y, playerIcons[i]);
+            this.sprite = this.scene.add.sprite(this.coordinates[this.playerPos[i]].x, this.coordinates[this.playerPos[i]].y, playerIcons[i]);
             this.sprite.setScale(2); // サイズ調整
             this.sprite.setOrigin(0.5); // 中心設定
             this.sprite.setDepth(0); // 表示順序を設定
