@@ -134,18 +134,18 @@ export class MainScene extends Phaser.Scene {
             if (this.isRouletteRunning) {
                 this.stopRoulette(true);
               
-            } else if(this.isDialogActive){
+            } else if(this.isDialogActive) {
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
 
-                 this.rouletteText.setText(""); //ルーレットの数字を消す
-                 this.showNextTurnButton();
+                this.rouletteText.setText(""); //ルーレットの数字を消す
+                this.showNextTurnButton();
 
                 this.rouletteText.setText(""); //ルーレットの数字を消す
                 // this.showNextTurnButton();
-                this.endTurn(true);
+                // this.endTurn(true);
 
-            }else if(this.state === 2 && !this.isRouletteRunning){
+            } else if(this.state === 2 && !this.isRouletteRunning){
                 this.startRoulette();
             }
             // }else{
@@ -195,7 +195,7 @@ export class MainScene extends Phaser.Scene {
             }
         } else {
             this.rouletteText.setText("");
-            this.endTurn(true);
+            // this.endTurn(true);
 
         }
     }
@@ -218,13 +218,10 @@ export class MainScene extends Phaser.Scene {
         this.turn=this.currentPlayer;
         this.yourTurn = (this.currentPlayer === 0);
         this.state =  1;
-        this.showNextTurnButton
-
+        // this.showNextTurnButton()
         this.yourTurn = (this.turn === this.currentPlayer);
-
       
         this.state = this.yourTurn ? 1 : 0;
-
     }
  
     update() {
@@ -238,8 +235,8 @@ export class MainScene extends Phaser.Scene {
 
  
         // 必要に応じて状態に応じた処理を追加
-         // 繰り返し呼び出さないようにする
-        this.showTurnOptions();
+        // 繰り返し呼び出さないようにする
+        // this.showTurnOptions();
    
     }
     showTurnOptions() {
@@ -257,8 +254,7 @@ export class MainScene extends Phaser.Scene {
                             // this.isDialogActive = true;
                             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
                             this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, false,() =>{
-                                
-                                this.endTurn(false);
+                                // this.endTurn(true);
                             });
                         });
 
@@ -274,6 +270,8 @@ export class MainScene extends Phaser.Scene {
                         this.state = 4;
                         this.isRouletteRunning = false;
                         this.endTurn(true);
+                        this.showTurnOptions();
+                        this.state--;
                         });
                         break;
                     case 2:
@@ -282,6 +280,7 @@ export class MainScene extends Phaser.Scene {
                         this.state = 0;
                         this.isRouletteRunning = false;
                         this.endTurn(true)
+                        this.showTurnOptions();
                         });
                         break;
                 }
@@ -289,13 +288,13 @@ export class MainScene extends Phaser.Scene {
             }
         );
     }
+
     showNextTurnButton() {
         // ボタンの背景
         const buttonBackground = this.add.rectangle(400, 300, 200, 50, 0x000000)
             .setOrigin(0.5)
             .setAlpha(0.8)
             .setInteractive();
-
 
         const buttonText = this.add.text(400, 300, '次のターンへ!', {
             fontSize: '20px',
@@ -315,9 +314,9 @@ export class MainScene extends Phaser.Scene {
         // ボタンがクリックされたら次のターンに移行
         buttonBackground.on('pointerdown', () => {
             this.endTurn(true);  // endTurnを呼び出して次のターンに進む
+            this.showTurnOptions();
             buttonBackground.destroy();  // ボタン背景の削除
             buttonText.destroy();  // ボタンテキストの削除
         });
     }
-
 }

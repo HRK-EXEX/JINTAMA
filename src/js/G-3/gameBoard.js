@@ -422,8 +422,6 @@ export class GameBoard {
         camera.centerOn(mapPixelWidth / 2, mapPixelHeight / 2);
 
         // 必要に応じてカメラのズームを調整
-
-
     }
 
     addCharacterIcons() {
@@ -449,13 +447,12 @@ export class GameBoard {
             //         y: startPosition.y
             // }});
         }
-
     }
+    
     moveMapGroup(x, y) {
         scrollLimit = 0;
         this.mapX += x;
         this.mapY += y;
-
 
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
@@ -470,14 +467,11 @@ export class GameBoard {
         else if (limitY > this.mapY) { plimity = true; this.mapY = limitY; scrollLimit |= 8; }
 
         for (const p of player) {
-
             if (p != null) {
                 if (!plimitx) p.x += x;
                 if (!plimity) p.y += y;
             }
-
         }
-
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
