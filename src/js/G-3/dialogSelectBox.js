@@ -15,21 +15,21 @@ export class DialogSelectBox extends Phaser.GameObjects.Container {
         
         // 基本のテキストスタイル
         this.textStyle = {
-            fontSize: '65px',
+            fontSize: '30px',
             fontFamily: 'Arial',
             color: '#ffffff',
-            wordWrap: { width: width - 40 }
+            // wordWrap: { width: width - 40 }
         };
         
         // 選択肢のスタイル
         this.choiceStyle = {
-            fontSize: '60px',
+            fontSize: '24px',
             fontFamily: 'Arial',
             color: '#ffffff'
         };
         
         this.selectedChoiceStyle = {
-            fontSize: '60px',
+            fontSize: '24px',
             fontFamily: 'Arial',
             color: '#ffff00'
         };
@@ -124,7 +124,7 @@ export class DialogSelectBox extends Phaser.GameObjects.Container {
         choices.forEach((choice, index) => {
             const choiceText = this.scene.add.text(
                 40,
-                this.text.height + 80 + (index * 120),
+                this.text.height + 60 + (index * 60),
                 choice,
                 this.choiceStyle
             );

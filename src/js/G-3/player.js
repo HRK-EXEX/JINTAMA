@@ -69,26 +69,18 @@ export default class Player extends Phaser.GameObjects.Container {
     setupSprite() {
         // プレイヤーの見た目（仮の円で表現）
         // this.sprite = this.scene.add.circle(0, 0, 15, this.color.random().color32);
-        if(this.y==40){
+        if(this.y==40) {
             this.sprite = this.scene.add.sprite(0, 0, 'playericon1');
-            this.sprite.setInteractive();
-            this.sprite.setScale(3);
-        }else if(this.y==140){
+        } else if(this.y==140) {
             this.sprite = this.scene.add.sprite(0, 0, 'playericon2');
-            this.sprite.setInteractive();
-            this.sprite.setScale(3);
-        }else if(this.y==240){
+        } else if(this.y==240) {
             this.sprite = this.scene.add.sprite(0, 0, 'playericon3');
-            this.sprite.setInteractive();
-            this.sprite.setScale(3);
-        }else{
+        } else {
             this.sprite = this.scene.add.sprite(0, 0, 'playericon4');
-            this.sprite.setInteractive();
-            this.sprite.setScale(3
-                
-            );
         }
         
+        this.sprite.setInteractive();
+        this.sprite.setScale(1);
        
     
         // ホバー効果
