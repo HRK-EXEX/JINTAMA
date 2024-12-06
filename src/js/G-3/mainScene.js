@@ -27,7 +27,7 @@ export class MainScene extends Phaser.Scene {
     }
  
     preload() {
-        this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
+        this.gameBoard = new GameBoard(this, 0); //マップ変更するために変える
         this.gameBoard.preloadAssets();
       
         this.utility = new Utility();
@@ -50,8 +50,7 @@ export class MainScene extends Phaser.Scene {
         let dialogW = 1000, dialogH = 500, dialogX = 500, dialogY = 1000;
         this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
         this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
-
-        // this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
+        
         this.gameBoard.createMap();
 
         this.initializeGame();
