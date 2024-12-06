@@ -4,7 +4,7 @@ import { updateFieldMap, updateLoopMap, player } from './initialize.js';
 import Player from './player.js';
 
 // マップ設定の定数と変数
-let firstX = 16.5;
+let firstX = 0;
 let firstY = 30;
 const tileSize = 16;
 const scale = 3;
@@ -38,20 +38,20 @@ export class GameBoard {
             this.scene.add.existing(player);
         });
 
-        switch (mapID) {
-            case 0:
-                firstX = 0;
-                firstY = 0;
-                break;
-            case 1:
-                firstX = 0;
-                firstY = 0;
-                break;
-            case 2:
-                firstX = 0;
-                firstY = 0;
-                break;
-        }
+        // switch (mapID) {
+        //     case 0:
+        //         firstX = 0;
+        //         firstY = 0;
+        //         break;
+        //     case 1:
+        //         firstX = 0;
+        //         firstY = 0;
+        //         break;
+        //     case 2:
+        //         firstX = 0;
+        //         firstY = 0;
+        //         break;
+        // }
 
         this.mapX = -firstX * tileSize * scale;
         this.mapY = -firstY * tileSize * scale;
@@ -448,7 +448,7 @@ export class GameBoard {
             // }});
         }
     }
-    
+
     moveMapGroup(x, y) {
         scrollLimit = 0;
         this.mapX += x;
@@ -482,15 +482,12 @@ export class GameBoard {
     update(button) {
         const sprint = ((button & 1 << 4) > 0) ? 4 : 1;
 
-        if (scrollLimit > 0) {
-
-        }
-
         if ((button & 1 << 0) > 0) this.moveMapGroup(spd * sprint, 0);
         if ((button & 1 << 1) > 0) this.moveMapGroup(-spd * sprint, 0);
         if ((button & 1 << 2) > 0) this.moveMapGroup(0, spd * sprint);
         if ((button & 1 << 3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
+    
     movechar(playernum, num) {
         console.log(`pure${playernum}`);
         const playerIndex = playernum;

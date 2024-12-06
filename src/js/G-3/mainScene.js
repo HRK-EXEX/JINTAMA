@@ -226,7 +226,8 @@ export class MainScene extends Phaser.Scene {
  
     update() {
         const button = input();
-
+        
+        // console.log("x", this.gameBoard.mapX, "y", this.gameBoard.mapY);
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
         }
