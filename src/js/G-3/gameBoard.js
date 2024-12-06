@@ -415,7 +415,7 @@ export class GameBoard {
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
-            this.loopMap.setTilePosition(-(this.mapX + tileOffsetX) / scale, -(this.mapY + tileOffsetY) / scale);
+            this.loopMap.setTilePosition(-(this.mapX + tileOffsetX), -(this.mapY + tileOffsetY));
         }
     }
 
@@ -441,6 +441,9 @@ export class GameBoard {
 
             this.playerPos[playerIndex]++;
             console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
+            if(this.playerPos[playerIndex]==14){
+                this.playerPos[playerIndex]=16;
+            }
             if (this.coordinates[this.playerPos[playerIndex] - 1].branches) {
                 const branches = this.coordinates[this.playerPos[playerIndex] - 1].branches;
                 let bunki = this.playerPos[playerIndex] - 1;
