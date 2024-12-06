@@ -25,10 +25,13 @@ export class GameBoard {
         this.playersData = [];
         this.eventLog = [];
 
-        // GameBoardの初期化時にPlayerインスタンスを作成
-        this.playersData = [];
+        // タイルマップとレイヤーを配列で初期化
+        this.tilemapNames = [];
+        this.layerNames = [];
 
-        // プレイヤーオブジェクトをシーンに追加
+        this.coordinates = [];
+
+        // GameBoardの初期化時にPlayerインスタンスを作成し、プレイヤーオブジェクトをシーンに追加
         this.playersData.forEach(player => {
             this.scene.add.existing(player);
         });
@@ -271,9 +274,9 @@ export class GameBoard {
         let tiles = [];
         let relatedTileSet;
 
-        for (let i = 0; i < this.tilemapNames.length; i++) {
+        for (let tileName of this.tilemapNames) {
             // console.log(i);
-            tiles.push(this.map.addTilesetImage(this.tilemapNames[i], this.tilemapNames[i]));
+            tiles.push(this.map.addTilesetImage(tileName, tileName));
         }
 
         relatedTileSet = tiles;
@@ -334,7 +337,7 @@ export class GameBoard {
         const mapPixelHeight = this.map.heightInPixels * scale;
 
         // カメラ設定を更新
-        this.adjustCamera(mapPixelWidth, mapPixelHeight);
+        // this.adjustCamera(mapPixelWidth, mapPixelHeight);
         this.fieldMap.setAlpha(1);
         this.addCharacterIcons();
         this.moveMapGroup(0, 0);
@@ -370,9 +373,10 @@ export class GameBoard {
         this.playerPos = [0, 0, 0, 0];//プレイヤー位置をいれておく
         if (!this.players) this.players = []; // プレイヤー配列を初期化
 
+        console.log(this.coordinates);
         // プレイヤー数分ループしてスプライトを作成
         for (let i = 0; i < playerIcons.length; i++) {
-            this.sprite = this.scene.add.sprite(this.coordinates[this.playerPos[i]].x, this.coordinates[this.playerPos[i]].y, playerIcons[i]);
+            this.sprite = this.scene.add.sprite(this.coordinates[0].x, this.coordinates[0].y, playerIcons[i]);
             this.sprite.setScale(2); // サイズ調整
             this.sprite.setOrigin(0.5); // 中心設定
             this.sprite.setDepth(0); // 表示順序を設定

@@ -35,9 +35,6 @@ export class MainScene extends Phaser.Scene {
         this.gameBoard.preloadAssets();
       
         this.utility = new Utility();
-        this.gameBoard = new GameBoard(this, 1);
-      
-        this.gameBoard.preloadAssets();
  
         // プレイヤーアイコンのロード
         const playerIcons = [
@@ -79,6 +76,7 @@ export class MainScene extends Phaser.Scene {
  
     // ゲーム初期化
     initializeGame() {
+        this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
         this.gameBoard.createMap();
  
         // ダイアログボックスの作成
