@@ -487,7 +487,7 @@ export class GameBoard {
         if ((button & 1 << 2) > 0) this.moveMapGroup(0, spd * sprint);
         if ((button & 1 << 3) > 0) this.moveMapGroup(0, -spd * sprint);
     }
-    
+
     movechar(playernum, num) {
         console.log(`pure${playernum}`);
         const playerIndex = playernum;

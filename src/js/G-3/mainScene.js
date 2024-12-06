@@ -11,11 +11,8 @@ import { playerData } from './main.js';
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
-        this.initGameState();
-    }
- 
-    // 初期ゲーム状態の設定
-    initGameState() {
+        
+        // 初期ゲーム状態の設定
         this.gameBoard = null;
         this.currentPlayer = 0;
         this.turn = 1;
@@ -30,8 +27,7 @@ export class MainScene extends Phaser.Scene {
     }
  
     preload() {
-      
-        this.gameBoard = new GameBoard(this, 0); //マップ変更するために変える
+        this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
         this.gameBoard.preloadAssets();
       
         this.utility = new Utility();
@@ -50,11 +46,13 @@ export class MainScene extends Phaser.Scene {
  
     create() {
 
-        this.gameBoard.createMap();
         // dialogY = this.game.config.height - 50 - dialogH
         let dialogW = 1000, dialogH = 500, dialogX = 500, dialogY = 1000;
         this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
         this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
+
+        // this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
+        this.gameBoard.createMap();
 
         this.initializeGame();
         this.registerInputHandlers();
@@ -75,10 +73,7 @@ export class MainScene extends Phaser.Scene {
     }
  
     // ゲーム初期化
-    initializeGame() {
-        this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
-        this.gameBoard.createMap();
- 
+    initializeGame() { 
         // ダイアログボックスの作成
         const dialogConfig = { width: 700, height: 300, x: 50, y: this.game.config.height - 350 };
         this.dialog = new DialogSelectBox(this, dialogConfig.x, dialogConfig.y, dialogConfig.width, dialogConfig.height);
@@ -227,7 +222,6 @@ export class MainScene extends Phaser.Scene {
     update() {
         const button = input();
         
-        // console.log("x", this.gameBoard.mapX, "y", this.gameBoard.mapY);
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
         }
