@@ -415,7 +415,7 @@ export class GameBoard {
 
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
-            this.loopMap.setTilePosition(-(this.mapX + tileOffsetX) / scale, -(this.mapY + tileOffsetY) / scale);
+            this.loopMap.setTilePosition(-(this.mapX + tileOffsetX), -(this.mapY + tileOffsetY));
         }
     }
 

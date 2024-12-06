@@ -30,14 +30,10 @@ export class MainScene extends Phaser.Scene {
     }
  
     preload() {
-      
-        this.gameBoard = new GameBoard(this, 0); //マップ変更するために変える
+        this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
         this.gameBoard.preloadAssets();
       
         this.utility = new Utility();
-        this.gameBoard = new GameBoard(this, 1);
-      
-        this.gameBoard.preloadAssets();
  
         // プレイヤーアイコンのロード
         const playerIcons = [
@@ -100,12 +96,9 @@ export class MainScene extends Phaser.Scene {
         // }
  
         // デバッグ情報の初期化
-        updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
-        
+        updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));        
         this.rouletteText = this.add.text(1000, 800,'',{fontSize:'60px',backgroundColor: '#333333'});
 
-
-       
         this.initializePlayers();
     }
  
