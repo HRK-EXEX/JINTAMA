@@ -457,8 +457,8 @@ export class GameBoard {
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
 
-        var plimity = false;
-        var plimitx = false;
+        let plimity = false;
+        let plimitx = false;
 
         if (0 < this.mapX) { plimitx = true; this.mapX = 0; scrollLimit |= 1; }
         else if (limitX > this.mapX) { plimitx = true; this.mapX = limitX; scrollLimit |= 2; }

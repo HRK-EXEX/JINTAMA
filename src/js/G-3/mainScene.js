@@ -34,13 +34,16 @@ export class MainScene extends Phaser.Scene {
  
         // プレイヤーアイコンのロード
         const playerIcons = [
-            '/kansho/JINTAMA/characters/melondog.png',
-            '/kansho/JINTAMA/characters/takugorira.png',
-            '/kansho/JINTAMA/characters/obake.png',
-            '/kansho/JINTAMA/characters/bakemon.png',
+            '/kansho/JINTAMA/characters/melondog',
+            '/kansho/JINTAMA/characters/takugorira',
+            '/kansho/JINTAMA/characters/obake',
+            '/kansho/JINTAMA/characters/bakemon',
         ];
         playerIcons.forEach((icon, index) => {
-            this.load.image(`playericon${index + 1}`, icon);
+            this.load.image(`playericon${index + 1}`, icon + ".png");
+            this.load.image(`playericon${index + 1}_up`, icon + "_back.png");
+            this.load.image(`playericon${index + 1}_side1`, icon + "_yoko.png");
+            this.load.image(`playericon${index + 1}_side2`, icon + "_yoko2.png");
         });
     }
  
@@ -113,6 +116,7 @@ export class MainScene extends Phaser.Scene {
                     charm: username.charm - p.stats.charm,
                     sense: username.sense - p.stats.sense,
                 });
+                p.setScrollFactor(0);
                 player.push(p);
             }
         }

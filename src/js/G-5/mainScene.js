@@ -9,10 +9,11 @@ import { ImageMover } from './animer.js';
 
 
 
-
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
+        
+        
         this.gameBoard = null;
         this.currentPlayer = 0;
         this.turn = 1;
@@ -24,6 +25,7 @@ export class MainScene extends Phaser.Scene {
         this.isRouletteRunning = false; // ルーレットが実行中かどうかを示すフラグ
         this.isDialogActive = false;
     }
+
     preload() {
         this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
         this.gameBoard.preloadAssets();
@@ -40,7 +42,7 @@ export class MainScene extends Phaser.Scene {
         this.load.image('playericon3', '/characters/obake.png');
         this.load.image('playericon3_up', '/characters/obake_back.png');
         this.load.image('playericon3_side1', '/characters/obake_yoko.png');
-        this.load.image('playericon2_side2', '/characters/obake_yoko2.png');
+        this.load.image('playericon3_side2', '/characters/obake_yoko2.png');
         this.load.image('playericon4', '/characters/bakemon.png');
         this.load.image('playericon4_up', '/characters/bakemon_back.png');
         this.load.image('playericon4_side1', '/characters/bakemon_yoko.png');
