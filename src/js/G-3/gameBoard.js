@@ -1,7 +1,6 @@
 
 import { getRandomEvent } from './event.js';
 import { updateFieldMap, updateLoopMap, player } from './initialize.js';
-import Player from './player.js';
 
 // マップ設定の定数と変数
 let firstX = 0;
