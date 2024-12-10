@@ -64,9 +64,10 @@
             </div>
             <div class="ranking">
                 ランキングへの情報送信<br>
-                <input type="radio" name="hozon" id="suru" class="radi" value="1" checked /><label
-                    for="suru">する？</label>
-                <input type="radio" name="hozon" id="sinai" class="radi" value="0" /><label for="sinai">しない？</label>
+                <div class="rank-ope">
+                    <input type="radio" name="hozon" id="suru" class="radi" value="1" checked /><label for="suru">する？</label>
+                    <input type="radio" name="hozon" id="sinai" class="radi" value="0" /><label for="sinai">しない？</label>
+                </div>
             </div>
             <input type="hidden" name="egg_id" value="1">
             <input type="hidden" name="rank_num" value="1">
