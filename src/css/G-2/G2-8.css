@@ -1,18 +1,28 @@
-body{
-    background-image:url(/kansho/JINTAMA/img/setteikuro.png);
+body {
+    background-image: url(/kansho/JINTAMA/img/setteikuro.png);
+    background-position: center center;
+    background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden; 
+    overflow: hidden;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .main{
     color:#fff;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
     text-align: center;
     width: 50vw;
     height: 60vh;
-    margin: 15vh 24vw;
+    
 }
+
 .text{
     color: #ff0000;
     display: inline-block;
@@ -42,12 +52,12 @@ button, .delete {
     border-color: #ff0000;
     color: #ff0000;
     position:relative;
-    right:7vw;
+    right: 7vw;
 }
 
 .back{
     position:relative;
-    left:7vw;
+    left: 7vw;
 }
 
 button:hover, .delete:hover {
