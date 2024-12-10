@@ -424,8 +424,7 @@ export class GameBoard {
     }
 
     addCharacterIcons() {
-        if (this.iconCreated != false) this.iconCreated = true;
-        else return;
+        if (this.iconCreated == false) this.iconCreated = true; else return;
         //プレイヤー1
         // const startPosition = coordinates[0]; // 初期位置
         const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー

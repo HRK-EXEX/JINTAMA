@@ -1,18 +1,16 @@
 import { initializeInput, input, updateDebugInfo, debugInfo, player } from './initialize.js';
 import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
-import { GameBoard } from './gameBoard.js';
+import { GameBoard, isMoving } from './gameBoard.js';
 import Player from './player.js';
 import { ImageMover } from './animer.js';
 
-
-
-
+export let relatedX = 0;
+export let relatedY = 0;
 
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
-        
         
         this.gameBoard = null;
         this.currentPlayer = 0;
@@ -74,23 +72,25 @@ create() {
     this.rouletteText = this.add.text(75, 300);
 
     this.input.keyboard.on('keydown-ENTER', () => {
-        if (this.isRouletteRunning) {
-            // ルーレットが実行中の場合は停止
-            this.stopRoulette(true);
-        } else if(this.isDialogActive){
-            this.dialog.hideDialog();
-            this.isDialogActive = false;
-             this.rouletteText.setText(""); //ルーレットの数字を消す
-             this.showNextTurnButton();
-        }else if(this.state === 2 && !this.isRouletteRunning){
-            this.startRoulette();
-        }
-        // }else{
-        //     this.startRoulette();
-        // }
-   
+            if (this.isRouletteRunning) {
+                // ルーレットが実行中の場合は停止
+                this.stopRoulette(true);
+            } else if(this.isDialogActive) {
+                this.dialog.hideDialog();
+                this.isDialogActive = false;
+                this.rouletteText.setText(""); //ルーレットの数字を消す
+                this.showNextTurnButton();
+            } else if (isMoving) {
+            } else if(this.state === 2 && !this.isRouletteRunning) {
+                this.startRoulette();
+            }
+            // }else{
+            //     this.startRoulette();
+            // }
     });
 
+    relatedX = this.gameBoard.mapX;
+    relatedY = this.gameBoard.mapY;
     // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
 }
 

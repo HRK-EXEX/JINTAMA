@@ -1,6 +1,7 @@
 import {
     updateFieldMap, updateLoopMap, player
 } from './initialize.js';
+import { relatedX, relatedY } from './mainScene.js';
  
 // マップ設定の定数と変数
 let firstX = 16.5;
@@ -13,6 +14,8 @@ let tileOffsetY = 0;
 let mapWidth = 0;
 let mapHeight = 0;
 let scrollLimit = 0;
+
+export let isMoving = false;
  
 export class GameBoard {
     constructor(scene, mapID) {
@@ -467,7 +470,10 @@ export class GameBoard {
     }
     
     movechar(playernum, num) {
-        const playerIndex = playernum ;
+        const playerIndex = playernum;
+
+        let diffMapX = relatedX - this.mapX;
+        let diffMapY = relatedY - this.mapY;
     
         // プレイヤーの現在位置を取得
         let currentPosition = this.playerPos[playerIndex];
@@ -483,14 +489,16 @@ export class GameBoard {
     
         // 非同期処理で移動を管理
         const move = async () => {
+            if (isMoving) return;
+            isMoving = true;
             for (let i = 0; i < num; i++) {
                 currentPosition++;
                 if (currentPosition >= this.coordinates.length) {
                     currentPosition = 0; // マップをループさせる場合
                 }
     
-                const targetX = this.coordinates[currentPosition].x;
-                const targetY = this.coordinates[currentPosition].y;
+                const targetX = this.coordinates[currentPosition].x - diffMapX;
+                const targetY = this.coordinates[currentPosition].y - diffMapY;
     
                 // XとYの移動量を比較して優先順位を決定
                 const diffX = Math.abs(targetX - sprite.x);
@@ -518,6 +526,7 @@ export class GameBoard {
     
             // 最終目的地に着いたら真正面を向く
             sprite.setTexture(`playericon${playernum}`);
+            isMoving = false;
         };
     
         // キューに移動を追加
