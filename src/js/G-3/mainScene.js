@@ -2,12 +2,11 @@ import { initializeInput, input, updateDebugInfo, debugInfo, player } from './in
 import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard } from './gameBoard.js';
-import Player from './player.js';
 
 import { getRandomEvent } from './event.js';
+import { UiScene } from './uiScene.js';
 import { changeForm } from './form.js';
-import { playerData } from './main.js';
- 
+
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
@@ -24,6 +23,8 @@ export class MainScene extends Phaser.Scene {
         this.rouletteText = null;
         this.isRouletteRunning = false;
         this.isDialogActive = false;
+
+        this.uiScene = null;
     }
  
     preload() {
@@ -48,8 +49,6 @@ export class MainScene extends Phaser.Scene {
     }
  
     create() {
-
-        // dialogY = this.game.config.height - 50 - dialogH
         let dialogW = 1000, dialogH = 500, dialogX = 500, dialogY = 1000;
         this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
         this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
@@ -58,20 +57,8 @@ export class MainScene extends Phaser.Scene {
 
         this.initializeGame();
         this.registerInputHandlers();
-
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     const b = document.getElementById("cheat");
-
-        //     b.addEventListener("click", event => {
-        //         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
-      
-
-        //         this.cheat();
-        //     });
-        // });
         
-        // this.cheat();
-        changeForm(player);
+        // changeForm(player); // playerを直接使用
     }
  
     // ゲーム初期化
@@ -86,43 +73,13 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
         this.showTurnOptions();
 
-        // this.scale.resize(window.innerWidth, window.innerHeight);
-
-        // player.splice(0, player.length);
-        // for (let i = 0; i < 4; i++) {
-        //     player[i] = new Player(this, 40, 40 + i * 100, 'player' + (i + 1));
-
-        // }
- 
         // デバッグ情報の初期化
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
         
         this.rouletteText = this.add.text(1000, 800,'',{fontSize:'60px',backgroundColor: '#333333'});
 
-
-       
-        this.initializePlayers();
-    }
- 
-    // プレイヤーの初期化
-    initializePlayers() {
-        for (let i = 0; i < 4; i++) {
-            const username = playerData[`User${i + 1}`];
-            if (username) {
-                const p = new Player(this, 40 + i * 120, 40, username.name);
-                p.modifyStats({
-                    score: username.score - p.stats.score,
-                    hp: username.hp - p.stats.hp,
-                    charm: username.charm - p.stats.charm,
-                    sense: username.sense - p.stats.sense,
-                });
-                p.setScrollFactor(0);
-                player.push(p);
-            }
-        }
-        // プレイヤーデータを更新
-        // console.log(player);
-        changeForm(player);
+        // UiSceneを起動
+        this.scene.launch('uiScene');
     }
  
     // 入力ハンドラの登録
@@ -180,6 +137,7 @@ export class MainScene extends Phaser.Scene {
                 const playerIndex = this.currentPlayer >= 0 && this.currentPlayer < player.length ? 
                     this.currentPlayer : 0;
                 const currentPlayer = player[playerIndex];
+                const currentPlayerUi = player[playerIndex];
                 if (!currentPlayer) {
                     console.error('Player not found:', playerIndex);
                     return;
@@ -188,6 +146,13 @@ export class MainScene extends Phaser.Scene {
                 const event = getRandomEvent();
                 const eventResult = event.action(currentPlayer);
                 let eventLog = `${currentPlayer.name}のイベント: ${event.name}\n${eventResult}`;
+
+                currentPlayerUi.modifyStats({
+                    score: currentPlayer.stats.score,
+                    hp: currentPlayer.stats.hp,
+                    charm: currentPlayer.stats.charm,
+                    sense: currentPlayer.stats.sense,
+                });
  
                 this.dialog.showDialog(eventLog, true, () => {});
             }
@@ -213,7 +178,7 @@ export class MainScene extends Phaser.Scene {
         console.log(`player.length: ${player.length}, currentPlayer: ${this.currentPlayer}`);
         console.log("=== endTurn() 終了 ===");
 
-        this.turn=this.currentPlayer;
+        this.turn = this.currentPlayer;
         this.yourTurn = (this.currentPlayer === 0);
         this.state =  1;
         // this.showNextTurnButton()
@@ -229,13 +194,11 @@ export class MainScene extends Phaser.Scene {
             this.gameBoard.update(button);
         }
       
-        debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY);
-
+        debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY)
  
         // 必要に応じて状態に応じた処理を追加
         // 繰り返し呼び出さないようにする
         // this.showTurnOptions();
-   
     }
     showTurnOptions() {
 

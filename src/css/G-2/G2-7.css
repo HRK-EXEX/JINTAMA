@@ -1,67 +1,81 @@
-body{
+body {
     background-image: url(/kansho/JINTAMA/img/setting.png);
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow:hidden;
+    overflow: hidden;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.kuro{
+.kuro {
     background-color: rgba(0, 0, 0, 0.650);
     border: solid 3px #ffffff;
-    padding: 100px 100px;
-    height: 20vw;
-    margin:  12% auto;
-    width:65vw;
+    padding: 0;
+    height: 75vh;
+    margin: 12% auto;
+    width: 85vw;
     font-weight: 400;
     font-style: normal;
-   
-    
+    color: white;
+    font-size: 3vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 
-a{
+a {
     text-decoration: none;
-    color:#ffffff;
-    margin:auto;
-    
-  }
-
-a:hover{
-    color: yellow;
-    
-    
+    color: #ffffff;
+    padding: 0 auto;
 }
 
-.mini{
-    width:45vw;
+a:hover {
+    color: yellow;
+}
+
+.mini {
+    width: 45vw;
     margin: 2vw auto;
     font-size: 3vw;
 
 }
 
 
-.start{
+.start {
     font-size: 5vw;
     margin: auto;
-    width:45vw;
-    
+    width: 45vw;
+
 }
 
-.delete{
-    color: red;
+.delete {
     font-size: 2vw;
-    position:relative;
-    left:52vw;
-    bottom: 6vw;
+    position: relative;
+    left: 32vw;
+    bottom: 12vw;
 }
 
-.delete:hover{
-    color:yellow;
+.delete-color {
+    color: red;
+    transition: 0.1s;
 }
 
-.kuro{
-    color:white;
-    font-size: 3vw;
+.delete-color:hover {
+    color: yellow;
+}
+
+.operation {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
 }
 
 button {
@@ -73,37 +87,36 @@ button {
     text-align: center;
     transition: 0.1s;
     font-size: clamp(12px, 1.5vw, 24px);
-    float:left;
+    float: left;
     position: relative;
-    left:15vw;
-    bottom: 4vw;
     width: 8vw;
-    margin:1vw 0vw 0vw 7vw;
-    height:5vw;
+    margin: 0 3vw 0 3vw;
+    height: 5vw;
     font-weight: 400;
     font-style: normal;
-        
 }
 
-button:hover ,.do:hover{
+button:hover,
+.do:hover {
     cursor: pointer;
     background-color: #00000080;
 }
 
-button:active ,.do:hover{
+button:active,
+.do:hover {
     cursor: pointer;
     background-color: #ffffff80;
     color: #000;
 }
 
-.username{
-    position:relative;
-    bottom: 5vw;
-    left:10vw;
+.username {
+    position: relative;
+    /* bottom: 5vw;
+    left: 10vw; */
 
 }
 
-.username input{
+.username input {
     padding: auto 80px;
     margin: 4px 0;
     width: 30vw;
@@ -112,28 +125,28 @@ button:active ,.do:hover{
     color: #FFF;
     border: 2px solid #FFF;
     transition: 0.5s;
-    
-}   
+}
+
 .username input:hover {
     border: 2px #8f8 solid;
     border-radius: 0%;
 }
 
-.username input:focus{
+.username input:focus {
     background-color: #00000080;
     border: 10px #4c4 solid;
     border-radius: 4px;
     outline: 0;
 }
 
-.ranking{
-    position:relative;
-    bottom: 4vw;
-    left:10vw;
+.ranking {
+    position: relative;
+    /* bottom: 4vw;
+    left: 10vw; */
 }
 
-.ranking input{
-   margin:2vw 4vw;
+.ranking input {
+    margin: 2vw 4vw;
 }
 
 /* .radi{
@@ -160,51 +173,50 @@ button:active ,.do:hover{
 .radi {
     appearance: none;
     position: absolute;
-    display:inline-block;
+    display: inline-block;
     margin-left: 20px;
-  }
+}
 
-  label {
+label {
     margin-left: 100px;
     cursor: pointer;
     padding-left: 30px;
-    position: relative;
-  }
-  
-  
-  label::before,
-  label::after {
+    /* position: relative; */
+}
+
+
+label::before,
+label::after {
     content: "";
-    display: block; 
+    display: block;
     position: absolute;
-  }
-  
-  label::before {
+}
+
+label::before {
     background-color: #000000;
     border-radius: 0%;
     border: 1px solid #ffffff;
-    width: 20px;
-    height: 20px;
-    transform: translateY(-50%);
-    top: 50%;
-    left: 5px;
-  }
-  
-  label::after {
-    border-bottom: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
+    width: 1.5vw;
+    height: 1.5vw;
+    /* transform: translateY(-50%); */
+    /* top: 50%; */
+    /* left: 5px; */
+}
+
+label::after {
+    border-bottom: 0.4vw solid #ffffff;
+    border-left: 0.4vw solid #ffffff;
     border-color: #ffffff;
+    transition: 0.1s;
     opacity: 0;
-    height: 5px;
-    width: 10px;
+    height: 0.5vw;
+    width: 1vw;
     transform: rotate(-45deg);
-    top: 30px;
-    left: 10px;
-  }
-  
-  input:checked + label::after {
+    top: 1vw;
+    left: 0.5vw;
+}
+
+input:checked+label::after {
+    transition: 0.1s;
     opacity: 1;
-  }
-
-
-
+}

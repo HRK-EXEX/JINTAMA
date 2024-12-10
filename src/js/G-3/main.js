@@ -2,6 +2,7 @@
 // console.log(username);
 
 import { MainScene } from "./mainScene.js";
+import { UiScene } from "./uiScene.js";
 // import { triggerRandomEvent } from './event.js';
  
 const DEFAULT_WIDTH = window.innerWidth
@@ -34,7 +35,7 @@ const CONFIG = {
     type: Phaser.AUTO,
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT,
-    scene: MainScene,
+    scene: [MainScene, UiScene],
     antialias: false
 }
  
