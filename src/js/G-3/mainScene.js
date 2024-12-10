@@ -148,17 +148,17 @@ export class MainScene extends Phaser.Scene {
                 let eventLog = `${currentPlayer.name}のイベント: ${event.name}\n${eventResult}`;
 
                 currentPlayerUi.modifyStats({
-                    score: currentPlayer.stats.score,
-                    hp: currentPlayer.stats.hp,
-                    charm: currentPlayer.stats.charm,
-                    sense: currentPlayer.stats.sense,
+                    score: currentPlayer.stats.score - currentPlayerUi.stats.score,
+                    hp: currentPlayer.stats.hp - currentPlayerUi.stats.hp,
+                    charm: currentPlayer.stats.charm - currentPlayerUi.stats.charm,
+                    sense: currentPlayer.stats.sense - currentPlayerUi.stats.sense,
                 });
  
                 this.dialog.showDialog(eventLog, true, () => {});
             }
         } else {
             this.rouletteText.setText("");
-            // this.endTurn(true);
+            //  this.endTurn(true);
 
         }
     }
