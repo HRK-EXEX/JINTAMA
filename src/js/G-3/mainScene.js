@@ -137,6 +137,7 @@ export class MainScene extends Phaser.Scene {
                 const playerIndex = this.currentPlayer >= 0 && this.currentPlayer < player.length ? 
                     this.currentPlayer : 0;
                 const currentPlayer = player[playerIndex];
+                const currentPlayerUi = player[playerIndex];
                 if (!currentPlayer) {
                     console.error('Player not found:', playerIndex);
                     return;
@@ -145,6 +146,13 @@ export class MainScene extends Phaser.Scene {
                 const event = getRandomEvent();
                 const eventResult = event.action(currentPlayer);
                 let eventLog = `${currentPlayer.name}のイベント: ${event.name}\n${eventResult}`;
+
+                currentPlayerUi.modifyStats({
+                    score: currentPlayer.stats.score,
+                    hp: currentPlayer.stats.hp,
+                    charm: currentPlayer.stats.charm,
+                    sense: currentPlayer.stats.sense,
+                });
  
                 this.dialog.showDialog(eventLog, true, () => {});
             }

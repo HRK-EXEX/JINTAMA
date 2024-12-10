@@ -20,8 +20,6 @@ export class UiScene extends Phaser.Scene {
                     new Player(this, 40 + i * 120, 40, username.name),
                     new Player(this, 40 + i * 120, 40, username.name)
                 ];
-
-                
                 
                 plays.forEach((p, i) => {
                     p.modifyStats({
