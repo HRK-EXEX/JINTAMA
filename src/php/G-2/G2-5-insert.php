@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
                 // 全員埋まっている場合
                 $room_full_error = "この部屋は満員です。";
                 $error_id = 1;
-                header('Location: G2-5-error.php?error_id=' . $error_id);
+                header('Location: G2-5-error.php?error_id=' . $error_id.'&room_id='.$room['room_id']);
                 exit;
             }
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
         // 部屋が見つからない場合のエラー処理
         $room_error = "指定された部屋が見つかりません。";
         $error_id = 2;
-            header('Location: G2-5-error.php?error_id=' . $error_id);
+            header('Location: G2-5-error.php?error_id=' . $error_id.'&room_id='.$room['room_id']);
             exit;
     }
 }
