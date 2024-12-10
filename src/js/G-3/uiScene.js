@@ -38,6 +38,32 @@ export class UiScene extends Phaser.Scene {
         changeForm(playerUi);
     }
 
+    get() {
+         playerUi.forEach((p, i) => {
+             p.modifyStats({
+             score: currentPlayer.stats.score - p.stats.score,
+             hp: currentPlayer.stats.hp - p.stats.hp,
+             charm: currentPlayer.stat.charm - p.stats.charm,
+             sense: currentPlayer.stats.sense - p.stats.sense,
+            });
+    });
+    this.updatePlayerStats(playerUi);
+}
+
+updatePlayerStats(playerUi){
+    playerUi.forEach((player,index) =>{
+        const uiText = document.getElementById(`player${index + 1}Stats`);
+            if (uiText) {
+                uiText.innerText = `
+                    幸福度: ${player.stats.score}
+                    体力: ${player.stats.hp}
+                    魅力: ${player.stats.charm}
+                    センス: ${player.stats.sense}
+                `;
+            }
+    });
+}
+
     // このメソッドは不要になりますが、互換性のために残すことができます
     getPlayers() {
         return player;
