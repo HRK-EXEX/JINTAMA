@@ -5,8 +5,8 @@ import { GameBoard, isMoving } from './gameBoard.js';
 import Player from './player.js';
 import { ImageMover } from './animer.js';
 
-export let relatedX = 0;
-export let relatedY = 0;
+export const relatedX = -792;
+export const relatedY = -1440;
 
 export class MainScene extends Phaser.Scene {
     constructor() {
@@ -45,9 +45,6 @@ export class MainScene extends Phaser.Scene {
         this.load.image('playericon4_up', '/characters/bakemon_back.png');
         this.load.image('playericon4_side1', '/characters/bakemon_yoko.png');
         this.load.image('playericon4_side2', '/characters/bakemon_yoko2.png');
-        
-
-
 }
 
 create() {
@@ -89,8 +86,7 @@ create() {
             // }
     });
 
-    relatedX = this.gameBoard.mapX;
-    relatedY = this.gameBoard.mapY;
+    console.log(relatedX, relatedY);
     // this.dialog.showDialog('ルーレットを回すにはエンターキーを押してください。', true);
 }
 
@@ -119,7 +115,7 @@ stopRoulette(isEnterKey) {
         this.isDialogActive = true;
         // ルーレット停止後に選ばれた数字を表示するダイアログを表示
         this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, true,() =>{
-            this.gameBoard.movechar(this.currentPlayer+1,finalNumber);
+            this.gameBoard.movechar(this.currentPlayer,finalNumber);
             // this.endTurn(false);
         });
     } else {
@@ -136,7 +132,6 @@ endTurn(forceHide) {
     console.log("=== endTurn() 開始 ===");
     console.log(`現在のプレイヤー: Player ${this.currentPlayer+1}`);
 
-    this.currentPlayer = (this.currentPlayer+1);
     this.currentPlayer = (this.currentPlayer + 1) % player.length;;
 
     console.log(`次のプレイヤー: Player ${this.currentPlayer + 1 }`);
@@ -156,7 +151,7 @@ endTurn(forceHide) {
 update() {
     const button = input();
      // 現在のターン情報を表示
-console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer +1}`);
+// console.log(`Update中 - 現在のプレイヤー: Player ${this.currentPlayer +1}`);
     if (!this.dialog.visible && !this.selectDialog.visible) {
         this.gameBoard.update(button);
         this.once = !this.once;
