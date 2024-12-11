@@ -28,7 +28,7 @@ export class GameBoard {
         switch (mapID) {
             case 0:
                 firstX = 0;
-                firstY = 0;
+                firstY = 15;
                 break;
             case 1:
                 firstX = 6;
@@ -529,7 +529,7 @@ export class GameBoard {
             }
     
             // 最終目的地に着いたら真正面を向く
-            sprite.setTexture(`playericon${playernum}`);
+            sprite.setTexture(`playericon${playernum + 1}`);
             isMoving = false;
         };
     
@@ -541,7 +541,7 @@ export class GameBoard {
     moveTo(sprite, target, playernum, direction) {
         return new Promise((resolve) => {
             const duration = 300;
-            const textureBase = `playericon${playernum}`;
+            const textureBase = `playericon${playernum + 1}`;
     
             this.scene.tweens.add({
                 targets: sprite,

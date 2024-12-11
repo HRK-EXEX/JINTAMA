@@ -28,23 +28,31 @@ export class MainScene extends Phaser.Scene {
         this.gameBoard = new GameBoard(this, 1); //マップ変更するために変える
         this.gameBoard.preloadAssets();
         this.utility = new Utility();
-        this.load.image('playericon1', '/characters/melondog.png');
-        this.load.image('playericon1_up', '/characters/melondog_back.png');
-        this.load.image('playericon1_side1', '/characters/melondog_yoko.png');
-        this.load.image('playericon1_side2', '/characters/melondog_yoko2.png');
-        this.load.image('playericon2', '/characters/takugorira.png');
-        this.load.image('playericon2_up', '/characters/takugorira_back.png');
-        this.load.image('playericon2_side1', '/characters/takugorira_yoko.png');
-        this.load.image('playericon2_side2', '/characters/takugori_yoko2.png');
-        
-        this.load.image('playericon3', '/characters/obake.png');
-        this.load.image('playericon3_up', '/characters/obake_back.png');
-        this.load.image('playericon3_side1', '/characters/obake_yoko.png');
-        this.load.image('playericon3_side2', '/characters/obake_yoko2.png');
-        this.load.image('playericon4', '/characters/bakemon.png');
-        this.load.image('playericon4_up', '/characters/bakemon_back.png');
-        this.load.image('playericon4_side1', '/characters/bakemon_yoko.png');
-        this.load.image('playericon4_side2', '/characters/bakemon_yoko2.png');
+
+        let charaTable = [
+            'bakemon',
+            'fukurou',
+            'ikari',
+            'kaba',
+            'kaeru',
+            'koara',
+            'melondog',
+            'obake',
+            'odebu',
+            'takugorira'
+        ];
+
+        let chara = new Array();
+
+        for (let i=0; i<4; i++) {
+            let rnd = Math.random() * charaTable.length;
+            chara[i] = charaTable[rnd.toFixed()];
+
+            this.load.image('playericon' + (i+1) + '', '/characters/' + chara[i] + '.png');
+            this.load.image('playericon' + (i+1) + '_up', '/characters/' + chara[i] + '_back.png');
+            this.load.image('playericon' + (i+1) + '_side1', '/characters/' + chara[i] + '_yoko.png');
+            this.load.image('playericon' + (i+1) + '_side2', '/characters/' + chara[i] + '_yoko2.png');
+        }
 }
 
 create() {
