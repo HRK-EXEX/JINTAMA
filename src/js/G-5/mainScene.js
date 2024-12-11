@@ -45,7 +45,7 @@ export class MainScene extends Phaser.Scene {
         let chara = new Array();
 
         for (let i=0; i<4; i++) {
-            let rnd = Math.random() * charaTable.length;
+            let rnd = Math.random() * (charaTable.length - 1);
             chara[i] = charaTable[rnd.toFixed()];
 
             this.load.image('playericon' + (i+1) + '', '/characters/' + chara[i] + '.png');
