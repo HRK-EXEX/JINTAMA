@@ -1,4 +1,4 @@
-import { updateFieldMap, updateLoopMap, player } from './initialize.js';
+import { updateFieldMap, updateLoopMap } from './initialize.js';
 
 // マップ設定の定数と変数
 let firstX = 0;
@@ -510,10 +510,15 @@ export class GameBoard {
             if (isMoving) return;
             isMoving = true;
             for (let i = 0; i < num; i++) {
-                this.selectbunki(this.coordinates[currentPosition].branches);
-                currentPosition++;
-                if (currentPosition >= this.coordinates.length) {
-                    currentPosition = 0; // マップをループさせる場合
+                
+                let waiting = this.selectbunki(this.coordinates[currentPosition].branches);
+                if (waiting) {
+                    await waiting.then(index => currentPosition = this.coordinates[currentPosition].branches[index]);
+                } else {
+                    currentPosition++;
+                    if (currentPosition >= this.coordinates.length) {
+                        currentPosition = 0; // マップをループさせる場合
+                    }
                 }
     
                 const targetX = this.coordinates[currentPosition].x + this.mapX;
@@ -523,6 +528,7 @@ export class GameBoard {
                 const diffX = Math.abs(targetX - sprite.x);
                 const diffY = Math.abs(targetY - sprite.y);
     
+                console.log(currentPosition, targetX, targetY);
                 if (diffY >= diffX) {
                     // Y方向を先に移動
                     await this.moveTo(sprite, { x: sprite.x, y: targetY }, playernum, 'up');
@@ -538,8 +544,6 @@ export class GameBoard {
                         await this.moveTo(sprite, { x: targetX, y: targetY }, playernum, 'up');
                     }
                 }
-
-                console.log(targetX, targetY, sprite.x, sprite.y);
     
                 // 現在位置を更新
                 this.playerPos[playerIndex] = currentPosition;
@@ -583,8 +587,8 @@ export class GameBoard {
     }
 
     selectbunki(branches) {
-        if (!branches) return; // ＊null判定にも使えるようだ。
-        return new Promise((resolve) => {
+        if (!branches) return false; // ＊null判定にも使えるようだ。
+        return new Promise(resolve => {
             // ダイアログ背景
             const dialogBackground = this.scene.add.rectangle(800, 300, 500, 300, 0x000000)
                 .setOrigin(0.5)
@@ -602,24 +606,24 @@ export class GameBoard {
                     fontSize: '20px',
                     fill: '#fff'
                 })
-                    .setInteractive()
-                    .on('pointerdown', () => {
-                        // 選択された分岐を返す
-                        resolve(index);
+                .setInteractive()
+                .on('pointerdown', () => {
+                    // 選択された分岐を返す
+                    resolve(index);
 
-                        // ダイアログ要素を削除
-                        dialogBackground.destroy();
-                        dialogText.destroy();
-                        buttons.forEach(btn => btn.destroy());
-                    })
-                    .on('pointerover', () => {
-                        // マウスオーバーで色を変更
-                        button.setStyle({ fill: '#ff0' }); // 黄色に変更
-                    })
-                    .on('pointerout', () => {
-                        // マウスが外れたら元の色に戻す
-                        button.setStyle({ fill: '#fff' }); // 白色に戻す
-                    });
+                    // ダイアログ要素を削除
+                    dialogBackground.destroy();
+                    dialogText.destroy();
+                    buttons.forEach(btn => btn.destroy());
+                })
+                .on('pointerover', () => {
+                    // マウスオーバーで色を変更
+                    button.setStyle({ fill: '#ff0' }); // 黄色に変更
+                })
+                .on('pointerout', () => {
+                    // マウスが外れたら元の色に戻す
+                    button.setStyle({ fill: '#fff' }); // 白色に戻す
+                });
                 buttons.push(button);
             });
         });
@@ -631,5 +635,4 @@ export class GameBoard {
         console.log('--- イベントログ ---');
         console.log(this.eventLog.join('\n'));
     }
-
 }
