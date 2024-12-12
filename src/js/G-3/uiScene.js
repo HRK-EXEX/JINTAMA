@@ -12,8 +12,8 @@ export class UiScene extends Phaser.Scene {
         // player配列をクリア
         playerUi.splice(0, playerUi.length);
         let playArray = [player, playerUi];
-
-        for (let i = 0; i < 4; i++) {
+        
+        for (let i = 0; i < playerData.User.room_limit; i++) {
             const username = playerData[`User${i + 1}`];
             if (username) {
                 const plays = [

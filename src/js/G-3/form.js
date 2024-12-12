@@ -1,49 +1,55 @@
-import { playerData } from './main.js';
+import { playerData, queryParams } from './main.js';
  
 export let phpSessionJson;
 let formData; // ブロック外でも使いたいのでファイル内グローバル化
- 
-document.addEventListener("DOMContentLoaded", () => {
+
+export function formSender() {   
     const form = document.getElementById("resultForm");
     phpSessionJson = playerData;
-    const sendButton = document.getElementById("send");
  
-    if (!form || !sendButton) {
-        console.error("フォームまたは送信ボタンが見つかりません");
+    if (!form) {
+        console.error("フォームが見つかりません");
         return;
     }
  
     // console.log(form);
     // console.log(phpSessionJson);
  
+    formData = new FormData(form); // FormDataを生成
+    let json = new Array(); // 空のデータをJSON変換。実質初期化。
+    
+    // console.log(phpSessionJson);
+
+    // JSON形式に変換
+    for (let index=1; index<=phpSessionJson['User']['room_limit']; index++)
+    {
+        let data = phpSessionJson["User" + index];
+        if (data !== null && data !== undefined) {
+            // console.log(data);
+            json.push(data);
+        }
+    }
+    
+    let text = JSON.stringify(json);
+    console.log("実データ:", json); // デバッグ用のログ
+    console.log("送信データ:", text); // デバッグ用のログ
+
+    // これを使うことで、PHPの$_POSTからアクセスできる
+    formData.append("userJson", text);
+
+    // フォームのデータを送信
+    sendForm(text);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sendButton = document.getElementById("send");
     // 送信ボタンにイベントリスナーを追加
     sendButton.addEventListener("click", (event) => {
         event.preventDefault(); // デフォルトのフォーム送信を防ぐ
- 
-        formData = new FormData(form); // FormDataを生成
-        let json = new Array(); // 空のデータをJSON変換。実質初期化。
-        
-        // console.log(phpSessionJson);
-
-        // JSON形式に変換
-        for (let index=1; index<=phpSessionJson['User']['room_limit']; index++)
-        {
-            let data = phpSessionJson["User" + index];
-            if (data !== null && data !== undefined) {
-                // console.log(data);
-                json.push(data);
-            }
-        }
-        
-        let text = JSON.stringify(json);
-        console.log("実データ:", json); // デバッグ用のログ
-        console.log("送信データ:", text); // デバッグ用のログ
-
-        // これを使うことで、PHPの$_POSTからアクセスできる
-        formData.append("userJson", text);
- 
-        // フォームのデータを送信
-        sendForm(text);
+        if (!sendButton) {
+            console.error("送信ボタンが見つかりません");
+            return;
+        }    
     });
 });
  
@@ -70,7 +76,8 @@ export function changeForm(players) {
  
 // フォームデータをサーバーに送信する関数
 export function sendForm(text) {
-    postJson("./G3-2.php", text);
+    let mapID = parseInt(queryParams.mapId);
+    postJson(mapID == 2 ? "./G3-2.php" : "./G3-1-maingame.php?mapId=" + ((mapID+1)), text);
     // fetch('./G3-2.php', {
     //     method: 'post', // 通信メソッド
 	// 	// headers: {

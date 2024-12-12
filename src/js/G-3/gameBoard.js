@@ -1,5 +1,5 @@
-import { changeForm } from './form.js';
 import { updateFieldMap, updateLoopMap } from './initialize.js';
+import { playerData, queryParams } from './main.js';
 
 // マップ設定の定数と変数
 let firstX = 0;
@@ -61,7 +61,7 @@ export class GameBoard {
         relatedX = this.mapX;
         relatedY = this.mapY;
 
-        console.log("x", this.mapX, "y", this.mapY);
+        // console.log("x", this.mapX, "y", this.mapY);
     }
 
     preloadAssets() {
@@ -72,7 +72,7 @@ export class GameBoard {
                 this.scene.load.image('base', '/kansho/JINTAMA/map/mapchip2/MapChip/base.png');
                 this.scene.load.image('hana', '/kansho/JINTAMA/map/mapchip2/MapChip/hana.png');
                 this.scene.load.image('koori2', '/kansho/JINTAMA/map/mapchip2/MapChip/koori2.png');
-                this.scene.load.image('kusa-tuti2', '/kansho/JINTAMA/map/mapchip2/MapChip/kusa1-kusa2.png');
+                this.scene.load.image('kusa1-tuti2', '/kansho/JINTAMA/map/mapchip2/MapChip/kusa1-tuti2.png');
                 this.scene.load.image('road', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti3.png');
                 this.scene.load.image('tuti2', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti2.png');
                 this.scene.load.image('tuti3', '/kansho/JINTAMA/map/mapchip2/MapChip/tuti3.png');
@@ -110,7 +110,7 @@ export class GameBoard {
                     'base',
                     'hana',
                     'koori2',
-                    'kusa-tuti2',
+                    'kusa1-tuti2',
                     'road',
                     'tuti2',
                     'tuti3',
@@ -437,7 +437,11 @@ export class GameBoard {
     addCharacterIcons() {
         //プレイヤー1
         // const startPosition = coordinates[0]; // 初期位置
-        const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー
+        const playerIcons = []; // 各プレイヤーの画像キー
+        for (let i=0; i<playerData.User.room_limit; i++) {
+            playerIcons.push(`playericon${i+1}`);
+        }
+
         this.playerPos = [0, 0, 0, 0];//プレイヤー位置をいれておく
         if (!this.players) this.players = []; // プレイヤー配列を初期化
         
@@ -566,6 +570,8 @@ export class GameBoard {
         return new Promise((resolve) => {
             const duration = 300;
             const textureBase = `playericon${playernum + 1}`;
+
+            let isOld = parseInt(queryParams.mapId) != 0;
     
             this.scene.tweens.add({
                 targets: sprite,
@@ -573,15 +579,17 @@ export class GameBoard {
                 y: target.y,
                 duration,
                 onUpdate: (tween) => {
-                    if (direction === 'side') {
-                        if (Math.floor(tween.progress * 2) % 2 === 0) {
-                            sprite.setTexture(`${textureBase}_side1`);
-                        } else {
-                            sprite.setTexture(`${textureBase}_side2`);
+                    if (isOld) {
+                        if (direction === 'side') {
+                            if (Math.floor(tween.progress * 2) % 2 === 0) {
+                                sprite.setTexture(`${textureBase}_side1`);
+                            } else {
+                                sprite.setTexture(`${textureBase}_side2`);
+                            }
+                            sprite.setFlipX(target.x < sprite.x);
+                        } else if (direction === 'up') {
+                            sprite.setTexture(`${textureBase}_up`);
                         }
-                        sprite.setFlipX(target.x < sprite.x);
-                    } else if (direction === 'up') {
-                        sprite.setTexture(`${textureBase}_up`);
                     }
                 },
                 onComplete: resolve

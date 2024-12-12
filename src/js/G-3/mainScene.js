@@ -5,8 +5,9 @@ import { GameBoard, isMoving } from './gameBoard.js';
 import { ImageMover } from './animer.js';
 
 import { getRandomEvent } from './event.js';
-import { changeForm } from './form.js';
-import { queryParams } from './main.js';
+import { changeForm, sendForm } from './form.js';
+import { playerData, queryParams } from './main.js';
+import { formSender } from '../G-3/form.js';
 
 let mapId = 0;
 
@@ -43,8 +44,20 @@ export class MainScene extends Phaser.Scene {
                 let rnd = Math.random() * 7;
                 chara[i] = 'egg' + (rnd + 1).toFixed();
 
-                this.load.image(chara[i], '/kansho/JINTAMA/characters/eggs/' + chara[i] + '.png');
+                this.load.image('playericon' + (i + 1) + '', '/kansho/JINTAMA/characters/eggs/' + chara[i] + '.png');
             }
+            
+            // // プレイヤーアイコンのロード
+            // console.log(playerData.User.room_limit);
+            // for (let i = 0; i < playerData.User.room_limit; i++) {
+            //     let rnd = Math.random() * (charaTable.length - 1);
+            //     chara[i] = charaTable[rnd.toFixed()];
+
+            //     this.load.image('playericon' + (i + 1) + '', basePath + chara[i] + '.png');
+            //     this.load.image('playericon' + (i + 1) + '_up', basePath + chara[i] + '_back.png');
+            //     this.load.image('playericon' + (i + 1) + '_side1', basePath + chara[i] + '_yoko.png');
+            //     this.load.image('playericon' + (i + 1) + '_side2', basePath + chara[i] + '_yoko2.png');
+            // }
         } else {
             const basePath = '/kansho/JINTAMA/characters/'
 
@@ -60,10 +73,11 @@ export class MainScene extends Phaser.Scene {
                 'odebu',
                 'takugorira'
             ];
-
+            
             let chara = new Array();
-
-            for (let i = 0; i < 4; i++) {
+            // プレイヤーアイコンのロード
+            console.log(playerData.User.room_limit);
+            for (let i = 0; i <= playerData.User.room_limit; i++) {
                 let rnd = Math.random() * (charaTable.length - 1);
                 chara[i] = charaTable[rnd.toFixed()];
 
@@ -74,19 +88,18 @@ export class MainScene extends Phaser.Scene {
             }
         }
 
-        // プレイヤーアイコンのロード
-        const playerIcons = [
-            '/kansho/JINTAMA/characters/melondog',
-            '/kansho/JINTAMA/characters/takugorira',
-            '/kansho/JINTAMA/characters/obake',
-            '/kansho/JINTAMA/characters/bakemon',
-        ];
-        playerIcons.forEach((icon, index) => {
-            this.load.image(`playericon${index + 1}`, icon + ".png");
-            this.load.image(`playericon${index + 1}_up`, icon + "_back.png");
-            this.load.image(`playericon${index + 1}_side1`, icon + "_yoko.png");
-            this.load.image(`playericon${index + 1}_side2`, icon + "_yoko2.png");
-        });
+        // const playerIcons = [
+        //     '/kansho/JINTAMA/characters/melondog',
+        //     '/kansho/JINTAMA/characters/takugorira',
+        //     '/kansho/JINTAMA/characters/obake',
+        //     '/kansho/JINTAMA/characters/bakemon',
+        // ];
+        // playerIcons.forEach((icon, index) => {
+        //     this.load.image(`playericon${index + 1}`, icon + ".png");
+        //     this.load.image(`playericon${index + 1}_up`, icon + "_back.png");
+        //     this.load.image(`playericon${index + 1}_side1`, icon + "_yoko.png");
+        //     this.load.image(`playericon${index + 1}_side2`, icon + "_yoko2.png");
+        // });
     }
 
     create() {
@@ -236,6 +249,7 @@ export class MainScene extends Phaser.Scene {
         if (!this.dialog.visible && !this.selectDialog.visible && !isMoving)
             this.gameBoard.update(button);
 
+        if ((button & 1 << 8) > 0) formSender();
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY)
 
         // 必要に応じて状態に応じた処理を追加
