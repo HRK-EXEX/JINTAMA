@@ -9,6 +9,7 @@ import { changeForm, sendForm } from './form.js';
 import { playerData, queryParams } from './main.js';
 import { formSender } from '../G-3/form.js';
 
+let debug = false;
 let mapId = 0;
 
 export class MainScene extends Phaser.Scene {
@@ -128,7 +129,7 @@ export class MainScene extends Phaser.Scene {
         this.showTurnOptions();
 
         // デバッグ情報の初期化
-        updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
+        if (debug) updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
 
         this.rouletteText = this.add.text(1000, 800, '', { fontSize: '60px', backgroundColor: '#333333' });
 
@@ -250,7 +251,7 @@ export class MainScene extends Phaser.Scene {
             this.gameBoard.update(button);
 
         if ((button & 1 << 8) > 0) formSender();
-        debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY)
+        if (debug) debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY)
 
         // 必要に応じて状態に応じた処理を追加
         // 繰り返し呼び出さないようにする
