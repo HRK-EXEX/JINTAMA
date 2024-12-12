@@ -8,10 +8,10 @@ export default class Player extends Phaser.GameObjects.Container {
         
         // 基本ステータス
         this.stats = {
-            score: 0,    // 幸福度
+            score: 0,    // 幸福度（自動計算）
             hp: 100,     // 体力
-            charm: 50,   // 魅力
-            sense: 50    // センス
+            charm: 100,   // 魅力
+            sense: 100    // センス
         };
         
         // ステータスの最大・最小値
@@ -111,6 +111,7 @@ export default class Player extends Phaser.GameObjects.Container {
     
     // ステータスの変更メソッド（安全に値を変更）
     modifyStats(statChanges) {
+        let average = 0;
         Object.entries(statChanges).forEach(([stat, change]) => {
             if (stat in this.stats) {
                 this.stats[stat] = Math.max(
@@ -120,9 +121,15 @@ export default class Player extends Phaser.GameObjects.Container {
                         this.stats[stat] + change
                     )
                 );
+
+                if (stat != 'score') {
+                    average += this.stats[stat];
+                }
             }
         });
-        
+
+        // 幸福度は自動計算
+        this.stats.score = Math.round(average / 3);
         this.updateStatusDisplay();
         
         // ステータス変更後のイベントを発火

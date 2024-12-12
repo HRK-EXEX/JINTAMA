@@ -1,11 +1,8 @@
-import { relatedX, relatedY } from './mainScene.js';
- 
-import { getRandomEvent } from './event.js';
 import { updateFieldMap, updateLoopMap, player } from './initialize.js';
 
 // マップ設定の定数と変数
 let firstX = 0;
-let firstY = 30;
+let firstY = 0;
 const tileSize = 16;
 const scale = 3;
 const spd = 10;
@@ -14,6 +11,9 @@ let tileOffsetY = 0;
 let mapWidth = 0;
 let mapHeight = 0;
 let scrollLimit = 0;
+
+let relatedX = 0;
+let relatedY = 0;
 
 export let isMoving = false;
  
@@ -32,9 +32,7 @@ export class GameBoard {
         this.tilemapNames = [];
         this.layerNames = [];
 
-        this.iconCreated = false;
-
-        // this.coordinates = [];
+        this.coordinates = [];
 
         // GameBoardの初期化時にPlayerインスタンスを作成し、プレイヤーオブジェクトをシーンに追加
         this.playersData.forEach(player => {
@@ -47,8 +45,8 @@ export class GameBoard {
                 firstY = 15;
                 break;
             case 1:
-                firstX = 6;
-                firstY = 31;
+                firstX = 8;
+                firstY = 30;
                 break;
             case 2:
                 firstX = 0;
@@ -58,6 +56,9 @@ export class GameBoard {
 
         this.mapX = -firstX * tileSize * scale;
         this.mapY = -firstY * tileSize * scale;
+
+        relatedX = this.mapX;
+        relatedY = this.mapY;
 
         console.log("x", this.mapX, "y", this.mapY);
     }
@@ -431,12 +432,16 @@ export class GameBoard {
         //プレイヤー1
         // const startPosition = coordinates[0]; // 初期位置
         const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー
-        this.playerPos =[0,0,0,0] ;//プレイヤー位置をいれておく
+        this.playerPos = [0, 0, 0, 0];//プレイヤー位置をいれておく
         if (!this.players) this.players = []; // プレイヤー配列を初期化
-       
+        
         // プレイヤー数分ループしてスプライトを作成
         for (let i = 0; i < playerIcons.length; i++) {
-          	this.sprite = this.scene.add.sprite(this.coordinates[ this.playerPos[i] ].x, this.coordinates[ this.playerPos[i] ].y, playerIcons[i]);
+          	this.sprite = this.scene.add.sprite(
+                this.mapX + this.coordinates[ this.playerPos[i] ].x,
+                this.mapY + this.coordinates[ this.playerPos[i] ].y,
+                playerIcons[i]
+            );
             this.sprite.setScale(2); // サイズ調整
             this.sprite.setOrigin(0.5); // 中心設定
             this.sprite.setDepth(0); // 表示順序を設定
@@ -454,19 +459,16 @@ export class GameBoard {
         let limitX = -mapWidth * scale + this.scene.game.config.width;
         let limitY = -mapHeight * scale + this.scene.game.config.height;
 
-        let plimity = false;
-        let plimitx = false;
+        if (0 < this.mapX) { this.mapX = 0; scrollLimit |= 1; }
+        else if (limitX > this.mapX) {  this.mapX = limitX; scrollLimit |= 2; }
 
-        if (0 < this.mapX) { plimitx = true; this.mapX = 0; scrollLimit |= 1; }
-        else if (limitX > this.mapX) { plimitx = true; this.mapX = limitX; scrollLimit |= 2; }
-
-        if (0 < this.mapY) { plimity = true; this.mapY = 0; scrollLimit |= 4; }
-        else if (limitY > this.mapY) { plimity = true; this.mapY = limitY; scrollLimit |= 8; }
+        if (0 < this.mapY) { this.mapY = 0; scrollLimit |= 4; }
+        else if (limitY > this.mapY) { this.mapY = limitY; scrollLimit |= 8; }
 
         this.players.forEach(p => {
             if (p != null) {
-                if(!plimitx)p.x += x;
-                if(!plimity)p.y += y;
+                if (!(scrollLimit&1<<0 | scrollLimit&1<<1)) p.x += x;
+                if (!(scrollLimit&1<<2 | scrollLimit&1<<3)) p.y += y;
             }
         });
         
@@ -503,18 +505,19 @@ export class GameBoard {
             this.moveQueue[playerIndex] = Promise.resolve();
         }
     
-        // 非同期処理で移動を管理
+        // 非同期処理で移動を管理（相対指定？）
         const move = async () => {
             if (isMoving) return;
             isMoving = true;
             for (let i = 0; i < num; i++) {
+                this.selectbunki(this.coordinates[currentPosition].branches);
                 currentPosition++;
                 if (currentPosition >= this.coordinates.length) {
                     currentPosition = 0; // マップをループさせる場合
                 }
     
-                const targetX = this.coordinates[currentPosition].x - diffMapX;
-                const targetY = this.coordinates[currentPosition].y - diffMapY;
+                const targetX = this.coordinates[currentPosition].x + this.mapX;
+                const targetY = this.coordinates[currentPosition].y + this.mapY;
     
                 // XとYの移動量を比較して優先順位を決定
                 const diffX = Math.abs(targetX - sprite.x);
@@ -536,7 +539,7 @@ export class GameBoard {
                     }
                 }
 
-                console.log(sprite.x, sprite.y);
+                console.log(targetX, targetY, sprite.x, sprite.y);
     
                 // 現在位置を更新
                 this.playerPos[playerIndex] = currentPosition;
@@ -580,6 +583,7 @@ export class GameBoard {
     }
 
     selectbunki(branches) {
+        if (!branches) return; // ＊null判定にも使えるようだ。
         return new Promise((resolve) => {
             // ダイアログ背景
             const dialogBackground = this.scene.add.rectangle(800, 300, 500, 300, 0x000000)

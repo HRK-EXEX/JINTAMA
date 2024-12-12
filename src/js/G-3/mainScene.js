@@ -1,4 +1,4 @@
-import { initializeInput, input, updateDebugInfo, debugInfo, player } from './initialize.js';
+import { initializeInput, input, updateDebugInfo, debugInfo, player, playerUi } from './initialize.js';
 import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
 import { GameBoard, isMoving } from './gameBoard.js';
@@ -8,9 +8,6 @@ import { ImageMover } from './animer.js';
 import { getRandomEvent } from './event.js';
 import { UiScene } from './uiScene.js';
 import { changeForm } from './form.js';
-
-export const relatedX = -792;
-export const relatedY = -1440;
 
 let mapId = 1;
 
@@ -133,7 +130,6 @@ export class MainScene extends Phaser.Scene {
         this.input.keyboard.on('keydown-ENTER', () => {
             if (this.isRouletteRunning) {
                 this.stopRoulette(true);
-
             } else if (this.isDialogActive) {
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
@@ -146,7 +142,6 @@ export class MainScene extends Phaser.Scene {
             // }else{
             //     this.startRoulette();
             // }
-			console.log(relatedX, relatedY);
 		});
     }
 
@@ -180,7 +175,7 @@ export class MainScene extends Phaser.Scene {
                 const playerIndex = this.currentPlayer >= 0 && this.currentPlayer < player.length ?
                     this.currentPlayer : 0;
                 const currentPlayer = player[playerIndex];
-                const currentPlayerUi = player[playerIndex];
+                const currentPlayerUi = playerUi[playerIndex];
                 if (!currentPlayer) {
                     console.error('Player not found:', playerIndex);
                     return;
@@ -191,7 +186,7 @@ export class MainScene extends Phaser.Scene {
                 let eventLog = `${currentPlayer.name}のイベント: ${event.name}\n${eventResult}`;
 
                 currentPlayerUi.modifyStats({
-                    score: currentPlayer.stats.score - currentPlayerUi.stats.score,
+                    // score: currentPlayer.stats.score - currentPlayerUi.stats.score,
                     hp: currentPlayer.stats.hp - currentPlayerUi.stats.hp,
                     charm: currentPlayer.stats.charm - currentPlayerUi.stats.charm,
                     sense: currentPlayer.stats.sense - currentPlayerUi.stats.sense,
@@ -238,9 +233,8 @@ export class MainScene extends Phaser.Scene {
     update() {
         const button = input();
 
-        if (!this.dialog.visible && !this.selectDialog.visible) {
+        // if (!this.dialog.visible && !this.selectDialog.visible)
             this.gameBoard.update(button);
-        }
 
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY)
 

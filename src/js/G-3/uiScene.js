@@ -17,10 +17,10 @@ export class UiScene extends Phaser.Scene {
             const username = playerData[`User${i + 1}`];
             if (username) {
                 const plays = [
-                    new Player(this, 40 + i * 120, 40, username.name),
-                    new Player(this, 40 + i * 120, 40, username.name)
+                    new Player(this, 40 + i * 180, 60, username.name),
+                    new Player(this, 40 + i * 180, 60, username.name)
                 ];
-                
+
                 plays.forEach((p, i) => {
                     p.modifyStats({
                         score: username.score - p.stats.score,
@@ -32,27 +32,29 @@ export class UiScene extends Phaser.Scene {
                     if (i == 0) p.alpha = 0;
                     playArray[i].push(p); // グローバルplayer, playerUi配列に追加
                 });
+
+                playerUi[i] = plays[1];
             }
         }
         // プレイヤーデータを更新
         changeForm(playerUi);
     }
 
-    get() {
-         playerUi.forEach((p, i) => {
-             p.modifyStats({
-             score: currentPlayer.stats.score - p.stats.score,
-             hp: currentPlayer.stats.hp - p.stats.hp,
-             charm: currentPlayer.stat.charm - p.stats.charm,
-             sense: currentPlayer.stats.sense - p.stats.sense,
+    set(currentPlayer) {
+        playerUi.forEach((p, i) => {
+            p.modifyStats({
+                score: currentPlayer.stats.score - p.stats.score,
+                hp: currentPlayer.stats.hp - p.stats.hp,
+                charm: currentPlayer.stat.charm - p.stats.charm,
+                sense: currentPlayer.stats.sense - p.stats.sense,
             });
-    });
-    this.updatePlayerStats(playerUi);
-}
+        });
+        this.updatePlayerStats(playerUi);
+    }
 
-updatePlayerStats(playerUi){
-    playerUi.forEach((player,index) =>{
-        const uiText = document.getElementById(`player${index + 1}Stats`);
+    updatePlayerStats(playerUi) {
+        playerUi.forEach((player, index) => {
+            const uiText = document.getElementById(`player${index + 1}Stats`);
             if (uiText) {
                 uiText.innerText = `
                     幸福度: ${player.stats.score}
@@ -61,8 +63,8 @@ updatePlayerStats(playerUi){
                     センス: ${player.stats.sense}
                 `;
             }
-    });
-}
+        });
+    }
 
     // このメソッドは不要になりますが、互換性のために残すことができます
     getPlayers() {
