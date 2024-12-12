@@ -87,7 +87,7 @@ $uArray = [
 // echo 'メンバー3：'.$uArray[3].'('.$uArray[3].')<br>';
 // echo 'メンバー4：'.$uArray[4].'('.$uArray[4].')<br>';
 
-header('Location: G3-1-maingame.php');
+header('Location: G3-1-maingame.php?mapId=0');
 ?>
 <!DOCTYPE html>
 <html lang="en">

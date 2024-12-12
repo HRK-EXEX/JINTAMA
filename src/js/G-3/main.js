@@ -20,8 +20,29 @@ function getSessionData() {
     }
 }
 
+function getQueryString()
+{
+    let querys = location.search.substring(1);
+    let result = {};
+
+    if (querys) {
+        let parameters = querys.split("&");
+
+        for (let param of parameters) {
+            let element = param.split('=');
+            result[element[0]] = element[1];
+        }
+    }
+
+    // console.log(querys);
+    // console.log(result);
+
+    return result;
+}
+
 export const playerData = getSessionData();
 export const playerJson = document.getElementById('session-data').textContent.trim();
+export const queryParams = getQueryString();
 
 // console.log(playerData);
 // console.log(playerJson);

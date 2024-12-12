@@ -121,12 +121,14 @@ export default class Player extends Phaser.GameObjects.Container {
                         this.stats[stat] + change
                     )
                 );
-
-                if (stat != 'score') {
-                    average += this.stats[stat];
-                }
             }
         });
+
+        for (let key in this.stats) {
+            if (key != 'score') {
+                average += this.stats[key];
+            }
+        }
 
         // 幸福度は自動計算
         this.stats.score = Math.round(average / 3);

@@ -1,3 +1,4 @@
+import { changeForm } from './form.js';
 import { updateFieldMap, updateLoopMap } from './initialize.js';
 
 // マップ設定の定数と変数
@@ -173,27 +174,32 @@ export class GameBoard {
                     { x: 1010, y: 2010 },
                     { x: 1010, y: 1830, branches: [3, 23] },
                     { x: 820, y: 1830 },
-                    { x: 820, y: 1630, branches: [6, 12] },
+                    { x: 820, y: 1630, branches: [5, 12] },
+
                     { x: 570, y: 1630 },
                     { x: 430, y: 1450 },
                     { x: 570, y: 1260 },
                     { x: 430, y: 1050 },
                     { x: 570, y: 870 },
+
                     { x: 430, y: 670 },
                     { x: 570, y: 480, branches: [13, 15] },
                     { x: 1200, y: 300 },
                     { x: 1830, y: 630 },
                     { x: 1830, y: 840 },
+
                     { x: 2070, y: 630 },
                     { x: 2070, y: 840 },
                     { x: 1950, y: 1150, branches: [18, 20] },
                     { x: 1830, y: 1460 },
                     { x: 1830, y: 1650 },
+
                     { x: 2070, y: 1460 },
                     { x: 2070, y: 1650 },
                     { x: 1580, y: 2000 },
                     { x: 1200, y: 1630 },
                     { x: 1400, y: 1630 },
+
                     { x: 1590, y: 1440 },
                     { x: 1200, y: 1440 }
                 ];
@@ -447,7 +453,7 @@ export class GameBoard {
             this.sprite.setDepth(0); // 表示順序を設定
             // プレイヤー情報（スプライトと現在位置）を保存
             this.players.push(this.sprite);
-            console.log(this.sprite.x, this.sprite.y);
+            // console.log(this.sprite.x, this.sprite.y);
         }
     }
 
@@ -489,9 +495,6 @@ export class GameBoard {
 
     movechar(playernum, num) {
         const playerIndex = playernum;
-
-        let diffMapX = relatedX - this.mapX;
-        let diffMapY = relatedY - this.mapY;
     
         // プレイヤーの現在位置を取得
         let currentPosition = this.playerPos[playerIndex];

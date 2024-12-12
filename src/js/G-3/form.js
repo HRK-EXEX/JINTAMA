@@ -23,14 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
         formData = new FormData(form); // FormDataを生成
         let json = new Array(); // 空のデータをJSON変換。実質初期化。
         
-        console.log(phpSessionJson);
+        // console.log(phpSessionJson);
 
         // JSON形式に変換
         for (let index=1; index<=phpSessionJson['User']['room_limit']; index++)
         {
             let data = phpSessionJson["User" + index];
             if (data !== null && data !== undefined) {
-                console.log(data);
+                // console.log(data);
                 json.push(data);
             }
         }
@@ -54,7 +54,7 @@ export function changeForm(players) {
     players.forEach((p, i) => {
         const userKey = "User" + (i + 1);
         updatedSessionJson[userKey] = {
-            ...updatedSessionJson[userKey],
+            ...updatedSessionJson[userKey], 
             score: p.stats.score,
             hp: p.stats.hp,
             charm: p.stats.charm,
