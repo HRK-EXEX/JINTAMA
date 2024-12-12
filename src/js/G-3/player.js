@@ -74,9 +74,9 @@ export default class Player extends Phaser.GameObjects.Container {
         } else if(this.x < 240) {
             this.sprite = this.scene.add.sprite(0, 0, 'playericon2');
         } else if(this.x < 360) {
-            this.sprite = this.scene.add.sprite(0, 0, 'playericon3');
+			this.sprite = this.scene.add.sprite(0, 0, 'playericon3');
         } else {
-            this.sprite = this.scene.add.sprite(0, 0, 'playericon4');
+        	this.sprite = this.scene.add.sprite(0, 0, 'playericon4');
         }
         
         this.sprite.setInteractive();

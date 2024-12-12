@@ -67,11 +67,9 @@
     <link rel="stylesheet"  href="/kansho/JINTAMA/src/css/base/dot_font.css" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/phaser@v3.85.2/dist/phaser.min.js"></script>
-    <script src="/kansho/JINTAMA/src/js/G-3/initialize.js" type="module"></script>
-    <script src="/kansho/JINTAMA/src/js/G-3/gameBoard.js" type="module"></script>
-    <script src="/kansho/JINTAMA/src/js/G-3/dialogSelectBox.js" type="module"></script>
+    <script src="/kansho/JINTAMA/src/js/anime-master/lib/anime.min.js"></script>
     <script src="/kansho/JINTAMA/src/js/G-3/main.js" type="module"></script>
-    <script src="/kansho/JINTAMA/src/js/G-3/form.js" type="module"></script>
+    <!-- <script src="/kansho/JINTAMA/src/js/G-3/form.js" type="module"></script> -->
     <title>メインゲーム</title>
 </head>
 <body>

@@ -1,16 +1,23 @@
 import { initializeInput, input, updateDebugInfo, debugInfo, player } from './initialize.js';
 import { DialogSelectBox } from './dialogSelectBox.js';
 import { Utility } from './utility.js';
-import { GameBoard } from './gameBoard.js';
+import { GameBoard, isMoving } from './gameBoard.js';
+import Player from './player.js';
+import { ImageMover } from './animer.js';
 
 import { getRandomEvent } from './event.js';
 import { UiScene } from './uiScene.js';
 import { changeForm } from './form.js';
 
+export const relatedX = -792;
+export const relatedY = -1440;
+
+let mapId = 1;
+
 export class MainScene extends Phaser.Scene {
     constructor() {
         super("mainScene");
-        
+
         // 初期ゲーム状態の設定
         this.gameBoard = null;
         this.currentPlayer = 0;
@@ -26,13 +33,51 @@ export class MainScene extends Phaser.Scene {
 
         this.uiScene = null;
     }
- 
+
     preload() {
-        this.gameBoard = new GameBoard(this, 0); //マップ変更するために変える
+        this.gameBoard = new GameBoard(this, mapId); //マップ変更するために変える
         this.gameBoard.preloadAssets();
-      
+
         this.utility = new Utility();
- 
+
+        if (mapId == 0) {
+            let chara = new Array();
+
+            for (let i = 0; i < 8; i++) {
+                let rnd = Math.random() * 8;
+                chara[i] = 'egg' + (rnd.toFixed() + 1);
+
+                this.load.image(chara[i], '/characters/eggs/' + chara[i] + '.png');
+            }
+        } else {
+            const basePath = '/kansho/JINTAMA/characters/'
+
+            let charaTable = [
+                'bakemon',
+                'fukurou',
+                'ikari',
+                'kaba',
+                'kaeru',
+                'koara',
+                'melondog',
+                'obake',
+                'odebu',
+                'takugorira'
+            ];
+
+            let chara = new Array();
+
+            for (let i = 0; i < 4; i++) {
+                let rnd = Math.random() * (charaTable.length - 1);
+                chara[i] = charaTable[rnd.toFixed()];
+
+                this.load.image('playericon' + (i + 1) + '', basePath + chara[i] + '.png');
+                this.load.image('playericon' + (i + 1) + '_up', basePath + chara[i] + '_back.png');
+                this.load.image('playericon' + (i + 1) + '_side1', basePath + chara[i] + '_yoko.png');
+                this.load.image('playericon' + (i + 1) + '_side2', basePath + chara[i] + '_yoko2.png');
+            }
+        }
+
         // プレイヤーアイコンのロード
         const playerIcons = [
             '/kansho/JINTAMA/characters/melondog',
@@ -47,27 +92,27 @@ export class MainScene extends Phaser.Scene {
             this.load.image(`playericon${index + 1}_side2`, icon + "_yoko2.png");
         });
     }
- 
+
     create() {
-        let dialogW = 1000, dialogH = 500, dialogX = 500, dialogY = 1000;
+        let dialogW = 700, dialogH = 300, dialogX = 50, dialogY = this.game.config.height - 50 - dialogH;
         this.dialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
         this.selectDialog = new DialogSelectBox(this, dialogX, dialogY, dialogW, dialogH);
-        
+
         this.gameBoard.createMap();
 
         this.initializeGame();
         this.registerInputHandlers();
-        
+
         // changeForm(player); // playerを直接使用
     }
- 
+
     // ゲーム初期化
-    initializeGame() { 
+    initializeGame() {
         // ダイアログボックスの作成
         const dialogConfig = { width: 700, height: 300, x: 50, y: this.game.config.height - 350 };
         this.dialog = new DialogSelectBox(this, dialogConfig.x, dialogConfig.y, dialogConfig.width, dialogConfig.height);
         this.selectDialog = new DialogSelectBox(this, dialogConfig.x, dialogConfig.y, dialogConfig.width, dialogConfig.height);
- 
+
         initializeInput(this);
         this.state = 1;
         this.once = false;
@@ -75,42 +120,37 @@ export class MainScene extends Phaser.Scene {
 
         // デバッグ情報の初期化
         updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
-        
-        this.rouletteText = this.add.text(1000, 800,'',{fontSize:'60px',backgroundColor: '#333333'});
+
+        this.rouletteText = this.add.text(1000, 800, '', { fontSize: '60px', backgroundColor: '#333333' });
 
         // UiSceneを起動
         this.scene.launch('uiScene');
     }
- 
+
     // 入力ハンドラの登録
     registerInputHandlers() {
 
         this.input.keyboard.on('keydown-ENTER', () => {
             if (this.isRouletteRunning) {
                 this.stopRoulette(true);
-              
-            } else if(this.isDialogActive) {
+
+            } else if (this.isDialogActive) {
                 this.dialog.hideDialog();
                 this.isDialogActive = false;
-
                 this.rouletteText.setText(""); //ルーレットの数字を消す
                 this.showNextTurnButton();
-
-                this.rouletteText.setText(""); //ルーレットの数字を消す
-                // this.showNextTurnButton();
-                // this.endTurn(true);
-
-            } else if(this.state === 2 && !this.isRouletteRunning){
+            } else if (isMoving) {
+            } else if (this.state === 2 && !this.isRouletteRunning) {
                 this.startRoulette();
             }
             // }else{
             //     this.startRoulette();
             // }
-        
-        });
+			console.log(relatedX, relatedY);
+		});
     }
 
- 
+
     startRoulette() {
 
         this.isRouletteRunning = true; // ルーレット実行中フラグを設定
@@ -121,20 +161,23 @@ export class MainScene extends Phaser.Scene {
             this.rouletteText.setText(randomNum);
         }, 100);
     }
- 
+
     stopRoulette(isEnterKey) {
         clearInterval(this.rouletteInterval);
         this.rouletteInterval = null;
-      
-        this.isRouletteRunning = false;
-        const finalNumber = this.rouletteText.text;
+		this.isRouletteRunning = false;  // ルーレット実行中フラグをリセット
+        const finalNumber = this.rouletteText.text;  // 最後の数字を取得
+        // this.dialog.hideDialog();
+        // console.log("最終的な数字:", finalNumber);
+        // console.log(isEnterKey);
 
+		// this.dialog.hideDialog();
         if (isEnterKey) {
 
             if (!this.isDialogActive) {
                 this.isDialogActive = true;
                 // currentPlayer が配列の範囲内かチェック
-                const playerIndex = this.currentPlayer >= 0 && this.currentPlayer < player.length ? 
+                const playerIndex = this.currentPlayer >= 0 && this.currentPlayer < player.length ?
                     this.currentPlayer : 0;
                 const currentPlayer = player[playerIndex];
                 const currentPlayerUi = player[playerIndex];
@@ -142,7 +185,7 @@ export class MainScene extends Phaser.Scene {
                     console.error('Player not found:', playerIndex);
                     return;
                 }
- 
+
                 const event = getRandomEvent();
                 const eventResult = event.action(currentPlayer);
                 let eventLog = `${currentPlayer.name}のイベント: ${event.name}\n${eventResult}`;
@@ -153,8 +196,13 @@ export class MainScene extends Phaser.Scene {
                     charm: currentPlayer.stats.charm - currentPlayerUi.stats.charm,
                     sense: currentPlayer.stats.sense - currentPlayerUi.stats.sense,
                 });
- 
-                this.dialog.showDialog(eventLog, true, () => {});
+
+                this.isDialogActive = true;
+	            // ルーレット停止後に選ばれた数字を表示するダイアログを表示
+	            this.dialog.showDialog(`選ばれた数字は: ${finalNumber}\n${eventLog}`, true, () => {
+	                this.gameBoard.movechar(this.currentPlayer, finalNumber);
+	                // this.endTurn(false);
+	            });
             }
         } else {
             this.rouletteText.setText("");
@@ -162,7 +210,7 @@ export class MainScene extends Phaser.Scene {
 
         }
     }
-    
+
 
     endTurn(forceHide) {
         if (forceHide) this.dialog.hideDialog();
@@ -180,31 +228,31 @@ export class MainScene extends Phaser.Scene {
 
         this.turn = this.currentPlayer;
         this.yourTurn = (this.currentPlayer === 0);
-        this.state =  1;
+        this.state = 1;
         // this.showNextTurnButton()
         this.yourTurn = (this.turn === this.currentPlayer);
-      
+
         this.state = this.yourTurn ? 1 : 0;
     }
- 
+
     update() {
         const button = input();
-        
+
         if (!this.dialog.visible && !this.selectDialog.visible) {
             this.gameBoard.update(button);
         }
-      
+
         debugInfo.setText(button + ", " + -this.gameBoard.mapX + ", " + -this.gameBoard.mapY)
- 
+
         // 必要に応じて状態に応じた処理を追加
         // 繰り返し呼び出さないようにする
         // this.showTurnOptions();
     }
     showTurnOptions() {
 
-        if(this.state !== 1) return;
+        if (this.state !== 1) return;
         this.selectDialog.showSelectDialog(
-            `プレイヤー${this.currentPlayer+1}のターンです。`,
+            `プレイヤー${this.currentPlayer + 1}のターンです。`,
 
             ['ルーレット', 'ステータス', 'ターンスキップ'],
 
@@ -214,7 +262,7 @@ export class MainScene extends Phaser.Scene {
                         this.dialog.showDialog('ルーレットを止めてください。', true, () => {
                             // this.isDialogActive = true;
                             // ルーレット停止後に選ばれた数字を表示するダイアログを表示
-                            this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, false,() =>{
+                            this.dialog.showDialog(`選ばれた数字は: ${finalNumber}`, false, () => {
                                 // this.endTurn(true);
                             });
                         });
@@ -227,21 +275,21 @@ export class MainScene extends Phaser.Scene {
                         break;
                     case 1:
                         this.rouletteText.setText("");
-                        this.dialog.showDialog('ステータスは以下のようになります。', true, () =>{
-                        this.state = 4;
-                        this.isRouletteRunning = false;
-                        this.endTurn(true);
-                        this.showTurnOptions();
-                        this.state--;
+                        this.dialog.showDialog('ステータスは以下のようになります。', true, () => {
+                            this.state = 4;
+                            this.isRouletteRunning = false;
+                            this.endTurn(true);
+                            this.showTurnOptions();
+                            this.state--;
                         });
                         break;
                     case 2:
                         this.rouletteText.setText("");
-                        this.dialog.showDialog('つぎの人にターンを渡します。', true, () =>{
-                        this.state = 0;
-                        this.isRouletteRunning = false;
-                        this.endTurn(true)
-                        this.showTurnOptions();
+                        this.dialog.showDialog('つぎの人にターンを渡します。', true, () => {
+                            this.state = 0;
+                            this.isRouletteRunning = false;
+                            this.endTurn(true)
+                            this.showTurnOptions();
                         });
                         break;
                 }
@@ -265,13 +313,13 @@ export class MainScene extends Phaser.Scene {
         buttonBackground.on('pointerover', () => {
             buttonText.setStyle({ fill: '#ff0' });
         });
-    
+
         buttonBackground.on('pointerout', () => {
 
-            buttonText.setStyle({ fill: '#ffffff' }); 
+            buttonText.setStyle({ fill: '#ffffff' });
 
         });
-    
+
         // ボタンがクリックされたら次のターンに移行
         buttonBackground.on('pointerdown', () => {
             this.endTurn(true);  // endTurnを呼び出して次のターンに進む

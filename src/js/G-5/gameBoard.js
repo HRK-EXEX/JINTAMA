@@ -32,7 +32,7 @@ export class GameBoard {
                 break;
             case 1:
                 firstX = 6;
-                firstY = 28;
+                firstY = 31;
                 break;
             case 2:
                 firstX = 0;
@@ -391,7 +391,7 @@ export class GameBoard {
        
         // プレイヤー数分ループしてスプライトを作成
         for (let i = 0; i < playerIcons.length; i++) {
-          this.sprite = this.scene.add.sprite(this.coordinates[ this.playerPos[i] ].x - diffMapX, this.coordinates[ this.playerPos[i] ].y - diffMapY, playerIcons[i]);
+          	this.sprite = this.scene.add.sprite(this.coordinates[ this.playerPos[i] ].x - diffMapX, this.coordinates[ this.playerPos[i] ].y - diffMapY, playerIcons[i]);
             this.sprite.setScale(2); // サイズ調整
             this.sprite.setOrigin(0.5); // 中心設定
             this.sprite.setDepth(0); // 表示順序を設定

@@ -1,4 +1,5 @@
-
+import { relatedX, relatedY } from './mainScene.js';
+ 
 import { getRandomEvent } from './event.js';
 import { updateFieldMap, updateLoopMap, player } from './initialize.js';
 
@@ -13,6 +14,9 @@ let tileOffsetY = 0;
 let mapWidth = 0;
 let mapHeight = 0;
 let scrollLimit = 0;
+
+export let isMoving = false;
+ 
 export class GameBoard {
     constructor(scene, mapID) {
         this.scene = scene;
@@ -37,20 +41,20 @@ export class GameBoard {
             this.scene.add.existing(player);
         });
 
-        // switch (mapID) {
-        //     case 0:
-        //         firstX = 0;
-        //         firstY = 0;
-        //         break;
-        //     case 1:
-        //         firstX = 0;
-        //         firstY = 0;
-        //         break;
-        //     case 2:
-        //         firstX = 0;
-        //         firstY = 0;
-        //         break;
-        // }
+        switch (mapID) {
+            case 0:
+                firstX = 0;
+                firstY = 15;
+                break;
+            case 1:
+                firstX = 6;
+                firstY = 31;
+                break;
+            case 2:
+                firstX = 0;
+                firstY = 0;
+                break;
+        }
 
         this.mapX = -firstX * tileSize * scale;
         this.mapY = -firstY * tileSize * scale;
@@ -424,26 +428,21 @@ export class GameBoard {
     }
 
     addCharacterIcons() {
-        if (this.iconCreated == false) this.iconCreated = true; else return;
         //プレイヤー1
         // const startPosition = coordinates[0]; // 初期位置
         const playerIcons = ['playericon1', 'playericon2', 'playericon3', 'playericon4']; // 各プレイヤーの画像キー
-        this.playerPos = [0, 0, 0, 0];//プレイヤー位置をいれておく
+        this.playerPos =[0,0,0,0] ;//プレイヤー位置をいれておく
         if (!this.players) this.players = []; // プレイヤー配列を初期化
-
-        console.log(this.coordinates);
+       
         // プレイヤー数分ループしてスプライトを作成
         for (let i = 0; i < playerIcons.length; i++) {
-            this.sprite = this.scene.add.sprite(this.coordinates[this.playerPos[i]].x, this.coordinates[this.playerPos[i]].y, playerIcons[i]);
+          	this.sprite = this.scene.add.sprite(this.coordinates[ this.playerPos[i] ].x, this.coordinates[ this.playerPos[i] ].y, playerIcons[i]);
             this.sprite.setScale(2); // サイズ調整
             this.sprite.setOrigin(0.5); // 中心設定
             this.sprite.setDepth(0); // 表示順序を設定
             // プレイヤー情報（スプライトと現在位置）を保存
             this.players.push(this.sprite);
-            //     this.playerPositions.push({position: {            // 現在の座標
-            //         x: startPosition.x,
-            //         y: startPosition.y
-            // }});
+            console.log(this.sprite.x, this.sprite.y);
         }
     }
 
@@ -464,16 +463,16 @@ export class GameBoard {
         if (0 < this.mapY) { plimity = true; this.mapY = 0; scrollLimit |= 4; }
         else if (limitY > this.mapY) { plimity = true; this.mapY = limitY; scrollLimit |= 8; }
 
-        for (const p of player) {
+        this.players.forEach(p => {
             if (p != null) {
-                if (!plimitx) p.x += x;
-                if (!plimity) p.y += y;
+                if(!plimitx)p.x += x;
+                if(!plimity)p.y += y;
             }
-        }
-
+        });
+        
         this.fieldMap.setXY(this.mapX, this.mapY);
         if (this.loopMap !== null) {
-            this.loopMap.setTilePosition(-(this.mapX + tileOffsetX), -(this.mapY + tileOffsetY));
+            this.loopMap.setTilePosition(-(this.mapX + tileOffsetX) / scale, -(this.mapY + tileOffsetY) / scale);
         }
     }
 
@@ -487,98 +486,97 @@ export class GameBoard {
     }
 
     movechar(playernum, num) {
-        console.log(`pure${playernum}`);
         const playerIndex = playernum;
-        let i = 0;
 
-        const movenext = async () => {
-            if (i >= num) return;
-
-            this.playerPos[playerIndex]++;
-            console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
-            if(this.playerPos[playerIndex]==14){
-                this.playerPos[playerIndex]=16;
-            }
-            if (this.coordinates[this.playerPos[playerIndex] - 1].branches) {
-                const branches = this.coordinates[this.playerPos[playerIndex] - 1].branches;
-                let bunki = this.playerPos[playerIndex] - 1;
-                console.log(`bunki${bunki}`);
-
-                if (this.players[playerIndex]) {
-                    this.players[playerIndex].destroy();
-                }
-
-                // 新しい位置にスプライトを配置
-                const sprite = this.scene.add.sprite(this.coordinates[bunki].x, this.coordinates[bunki].y, `playericon${playerIndex + 1}`);
-                sprite.setScale(2);  // サイズ調整
-                sprite.setOrigin(0.5);  // 中心設定
-                sprite.setDepth(0);  // 表示順序を設定
-                this.players[playerIndex] = sprite;
-                const event = getRandomEvent();
-                // const result = event.action(player); // Playerインスタンスで処理
-                // this.eventLog.push(`${player.name}のイベント: ${event.name} - ${result}`);
-                console.log(`${player.name}のイベント: ${event.name} - 幸福度: ${player.stats.score}`);
-                event.action(player);
-                // this.updateLog();
-
-                this.selectbunki(branches).then((choice) => {
-                    console.log(`選ばれたルート: ${choice}`);
-                    this.playerPos[playerIndex] = branches[choice];
-
-
-                    this.playerPos[playerIndex] = branches[choice];
-
-                    if (this.players[playerIndex]) {
-                        this.players[playerIndex].destroy();
-                    }
-                    const pos = this.playerPos[playerIndex]
-
-                    // 新しい位置にスプライトを配置
-                    const sprite = this.scene.add.sprite(this.coordinates[pos].x, this.coordinates[pos].y, `playericon${playerIndex + 1}`);
-                    sprite.setScale(2);  // サイズ調整
-                    sprite.setOrigin(0.5);  // 中心設定
-                    sprite.setDepth(0);  // 表示順序を設定
-                    this.players[playerIndex] = sprite;
-                    const event = getRandomEvent();
-                    // const result = event.action(player); // Playerインスタンスで処理
-                    // this.eventLog.push(`${player.name}のイベント: ${event.name} - ${result}`);
-                    console.log(`${player.name}のイベント: ${event.name} - 幸福度: ${player.stats.score}`);
-                    event.action(player);
-                    // this.updateLog();
-                    i++;
-                    console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
-                    movenext();
-                });
-
-            } else {
-                console.log(`${i}`);
-                const pos = this.playerPos[playerIndex];
-                if (this.players[playerIndex]) {
-                    this.players[playerIndex].destroy();
-                }
-
-                // 新しい位置にスプライトを配置
-                const sprite = this.scene.add.sprite(this.coordinates[pos].x, this.coordinates[pos].y, `playericon${playerIndex + 1}`
-                );
-                sprite.setScale(2); // サイズ調整
-                sprite.setOrigin(0.5); // 中心設定
-                sprite.setDepth(0); // 表示順序を設定
-
-                this.players[playerIndex] = sprite;
-                const event = getRandomEvent();
-                // const result = event.action(player); // Playerインスタンスで処理
-                // this.eventLog.push(`${player.name}のイベント: ${event.name} - ${result}`);
-                console.log(`${player.name}のイベント: ${event.name} - 幸福度: ${player.stats.score}`);
-                event.action(player);
-                // this.updateLog();
-
-                i++
-                console.log(`おるマス${this.playerPos[playerIndex]},x:${this.coordinates[this.playerPos[playerIndex]].x},y:${this.coordinates[this.playerPos[playerIndex]].y}`);
-                movenext();
-
-            }
+        let diffMapX = relatedX - this.mapX;
+        let diffMapY = relatedY - this.mapY;
+    
+        // プレイヤーの現在位置を取得
+        let currentPosition = this.playerPos[playerIndex];
+        const sprite = this.players[playerIndex];
+    
+        // 移動キューの確認または初期化
+        if (!this.moveQueue) {
+            this.moveQueue = {};
         }
-        movenext();
+        if (!this.moveQueue[playerIndex]) {
+            this.moveQueue[playerIndex] = Promise.resolve();
+        }
+    
+        // 非同期処理で移動を管理
+        const move = async () => {
+            if (isMoving) return;
+            isMoving = true;
+            for (let i = 0; i < num; i++) {
+                currentPosition++;
+                if (currentPosition >= this.coordinates.length) {
+                    currentPosition = 0; // マップをループさせる場合
+                }
+    
+                const targetX = this.coordinates[currentPosition].x - diffMapX;
+                const targetY = this.coordinates[currentPosition].y - diffMapY;
+    
+                // XとYの移動量を比較して優先順位を決定
+                const diffX = Math.abs(targetX - sprite.x);
+                const diffY = Math.abs(targetY - sprite.y);
+    
+                if (diffY >= diffX) {
+                    // Y方向を先に移動
+                    await this.moveTo(sprite, { x: sprite.x, y: targetY }, playernum, 'up');
+                    if (diffX > 0) {
+                        // 次にX方向
+                        await this.moveTo(sprite, { x: targetX, y: targetY }, playernum, 'side');
+                    }
+                } else {
+                    // X方向を先に移動
+                    await this.moveTo(sprite, { x: targetX, y: sprite.y }, playernum, 'side');
+                    if (diffY > 0) {
+                        // 次にY方向
+                        await this.moveTo(sprite, { x: targetX, y: targetY }, playernum, 'up');
+                    }
+                }
+
+                console.log(sprite.x, sprite.y);
+    
+                // 現在位置を更新
+                this.playerPos[playerIndex] = currentPosition;
+            }
+    
+            // 最終目的地に着いたら真正面を向く
+            sprite.setTexture(`playericon${playernum + 1}`);
+            isMoving = false;
+        };
+    
+        // キューに移動を追加
+        this.moveQueue[playerIndex] = this.moveQueue[playerIndex].then(move);
+    }
+    
+    // スプライトを指定の座標に移動させる関数
+    moveTo(sprite, target, playernum, direction) {
+        return new Promise((resolve) => {
+            const duration = 300;
+            const textureBase = `playericon${playernum + 1}`;
+    
+            this.scene.tweens.add({
+                targets: sprite,
+                x: target.x,
+                y: target.y,
+                duration,
+                onUpdate: (tween) => {
+                    if (direction === 'side') {
+                        if (Math.floor(tween.progress * 2) % 2 === 0) {
+                            sprite.setTexture(`${textureBase}_side1`);
+                        } else {
+                            sprite.setTexture(`${textureBase}_side2`);
+                        }
+                        sprite.setFlipX(target.x < sprite.x);
+                    } else if (direction === 'up') {
+                        sprite.setTexture(`${textureBase}_up`);
+                    }
+                },
+                onComplete: resolve
+            });
+        });
     }
 
     selectbunki(branches) {
