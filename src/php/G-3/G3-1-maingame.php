@@ -75,7 +75,10 @@
 <body>
     <!-- データ出力用の要素 -->
     <div id="session-data" type="application/json" style="display: none;">
-        <?php echo safeJsonEncode($_SESSION); ?>
+        <?php echo safeJsonEncode($_POST['userForm'] ?? $_SESSION); ?>
+    </div>
+    <div style="display: none;">
+        <?php echo isset($_POST['userForm']), ", ", isset($_SESSION); ?>
     </div>
     <form id="resultForm" action="G3-2.php" method="POST">
         <input id="userJson" type="hidden" name="userJson">

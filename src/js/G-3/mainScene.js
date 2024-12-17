@@ -5,7 +5,7 @@ import { GameBoard, isMoving } from './gameBoard.js';
 import { ImageMover } from './animer.js';
 
 import { getRandomEvent } from './event.js';
-import { changeForm, sendForm } from './form.js';
+import { changeForm } from './form.js';
 import { playerData, queryParams } from './main.js';
 import { formSender } from '../G-3/form.js';
 
@@ -49,18 +49,6 @@ export class MainScene extends Phaser.Scene {
 
                 this.load.image('playericon' + (i + 1) + '', '/kansho/JINTAMA/characters/eggs/' + chara[i] + '.png');
             }
-            
-            // // プレイヤーアイコンのロード
-            // console.log(playerData.User.room_limit);
-            // for (let i = 0; i < playerData.User.room_limit; i++) {
-            //     let rnd = Math.random() * (charaTable.length - 1);
-            //     chara[i] = charaTable[rnd.toFixed()];
-
-            //     this.load.image('playericon' + (i + 1) + '', basePath + chara[i] + '.png');
-            //     this.load.image('playericon' + (i + 1) + '_up', basePath + chara[i] + '_back.png');
-            //     this.load.image('playericon' + (i + 1) + '_side1', basePath + chara[i] + '_yoko.png');
-            //     this.load.image('playericon' + (i + 1) + '_side2', basePath + chara[i] + '_yoko2.png');
-            // }
         } else {
             const basePath = '/kansho/JINTAMA/characters/'
 
@@ -142,10 +130,9 @@ export class MainScene extends Phaser.Scene {
 
     // 入力ハンドラの登録
     registerInputHandlers() {
-
         this.input.keyboard.on('keydown-ENTER', () => {
             if (isMoving) {
-                changeForm(player);
+                return;
             } else if (this.isRouletteRunning) {
                 this.stopRoulette(true);
             } else if (this.isDialogActive) {
@@ -153,7 +140,7 @@ export class MainScene extends Phaser.Scene {
                 this.isDialogActive = false;
                 this.rouletteText.setText(""); //ルーレットの数字を消す
                 this.showNextTurnButton();
-                changeForm(player);
+                // changeForm(player);
             } else if (this.state === 2 && !this.isRouletteRunning) {
                 this.startRoulette();
             }
@@ -185,7 +172,7 @@ export class MainScene extends Phaser.Scene {
         // console.log(isEnterKey);
 
         // this.dialog.hideDialog();
-        if (isEnterKey) {
+        if (isEnterKey && !isMoving) {
 
             if (!this.isDialogActive) {
                 this.isDialogActive = true;
@@ -210,10 +197,15 @@ export class MainScene extends Phaser.Scene {
                     sense: currentPlayer.stats.sense - currentPlayerUi.stats.sense,
                 });
 
+                player[playerIndex] = currentPlayerUi;
+                playerUi[playerIndex] = currentPlayerUi;
+
                 this.isDialogActive = true;
                 // ルーレット停止後に選ばれた数字を表示するダイアログを表示
                 this.dialog.showDialog(`選ばれた数字は: ${finalNumber}\n${eventLog}`, true, () => {
                     this.gameBoard.movechar(this.currentPlayer, finalNumber);
+                    
+                    changeForm(playerUi);
                     // this.endTurn(false);
                 });
             }

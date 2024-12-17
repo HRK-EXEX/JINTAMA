@@ -3,6 +3,7 @@ session_start();
 $user_id=$_SESSION['User']['user_id'];
 $room_id=$_SESSION['User']['room_id'];
 require '../db.php';
+var_dump($_POST);
 
 $results = json_decode($_POST['userJson'], true);
 // $json = $results[];

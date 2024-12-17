@@ -5,7 +5,12 @@ let formData; // ブロック外でも使いたいのでファイル内グロー
 
 export function formSender() {   
     const form = document.getElementById("resultForm");
+    const tmp = phpSessionJson;
     phpSessionJson = playerData;
+
+    Object.keys(tmp).forEach(key => {
+        phpSessionJson[key] = tmp[key];
+    });
  
     if (!form) {
         console.error("フォームが見つかりません");
@@ -31,12 +36,13 @@ export function formSender() {
     }
     
     let text = JSON.stringify(json);
-    console.log("実データ:", json); // デバッグ用のログ
-    console.log("送信データ:", text); // デバッグ用のログ
+    // console.log("実データ:", json); // デバッグ用のログ
+    // console.log("送信データ:", text); // デバッグ用のログ
 
     // これを使うことで、PHPの$_POSTからアクセスできる
     formData.append("userJson", text);
 
+    // console.log(text);
     // フォームのデータを送信
     sendForm(text);
 }
@@ -71,7 +77,7 @@ export function changeForm(players) {
     // グローバル変数を更新
     phpSessionJson = updatedSessionJson;
  
-    // console.log("変更後のプレイヤーデータ:", phpSessionJson);
+    console.log("変更後のプレイヤーデータ:", phpSessionJson);
 }
  
 // フォームデータをサーバーに送信する関数
@@ -113,5 +119,6 @@ function postJson(path, text) {
     hiddenField.value = text;
   
     document.body.appendChild(form);
-    form.submit();
+    console.log(path, text);
+    // form.submit();
 }

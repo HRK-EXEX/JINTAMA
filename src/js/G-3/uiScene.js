@@ -41,7 +41,7 @@ export class UiScene extends Phaser.Scene {
     }
 
     set(currentPlayer) {
-        playerUi.forEach((p, i) => {
+        playerUi.forEach(p => {
             p.modifyStats({
                 score: currentPlayer.stats.score - p.stats.score,
                 hp: currentPlayer.stats.hp - p.stats.hp,

@@ -1,3 +1,4 @@
+import { changeForm } from './form.js';
 import { updateFieldMap, updateLoopMap } from './initialize.js';
 import { playerData, queryParams } from './main.js';
 
