@@ -13,6 +13,8 @@ let mapWidth = 0;
 let mapHeight = 0;
 let scrollLimit = 0;
 
+let centerMap = true;
+
 let relatedX = 0;
 let relatedY = 0;
 
@@ -40,19 +42,21 @@ export class GameBoard {
             this.scene.add.existing(player);
         });
 
-        switch (mapID) {
-            case 0:
-                firstX = 0;
-                firstY = 15;
-                break;
-            case 1:
-                firstX = 8;
-                firstY = 30;
-                break;
-            case 2:
-                firstX = 0;
-                firstY = 0;
-                break;
+        if (!centerMap) {
+            switch (mapID) {
+                case 0:
+                    firstX = 0;
+                    firstY = 15;
+                    break;
+                case 1:
+                    firstX = 8;
+                    firstY = 30;
+                    break;
+                case 2:
+                    firstX = 0;
+                    firstY = 0;
+                    break;
+            }
         }
 
         this.mapX = -firstX * tileSize * scale;
@@ -408,7 +412,7 @@ export class GameBoard {
         const mapPixelHeight = this.map.heightInPixels * scale;
 
         // カメラ設定を更新
-        // this.adjustCamera(mapPixelWidth, mapPixelHeight);
+        if (centerMap) this.adjustCamera(mapPixelWidth, mapPixelHeight);
         this.fieldMap.setAlpha(1);
         this.addCharacterIcons();
         this.moveMapGroup(0, 0);

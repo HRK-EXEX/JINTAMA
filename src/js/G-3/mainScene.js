@@ -25,6 +25,8 @@ export class MainScene extends Phaser.Scene {
         this.once = false;
 
         this.rouletteInterval = null;
+        this.rouletteSpeed = 10;
+        this.roulette = null;
         this.rouletteText = null;
         this.isRouletteRunning = false;
         this.isDialogActive = false;
@@ -131,7 +133,8 @@ export class MainScene extends Phaser.Scene {
         // デバッグ情報の初期化
         if (debug) updateDebugInfo(this.add.text(0, 0, 'Hello World', { fontFamily: 'serif' }));
 
-        this.rouletteText = this.add.text(1000, 800, '', { fontSize: '60px', backgroundColor: '#333333' });
+        // this.rouletteText = this.add.text(400, 600, '', { fontSize: '60px', backgroundColor: '#333333' });
+        this.rouletteText = this.add.text(400, 600, '', { fontSize: '60px', backgroundColor: '#333333' });
 
         // UiSceneを起動
         this.scene.launch('uiScene');
