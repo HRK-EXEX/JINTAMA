@@ -14,10 +14,7 @@ let mapWidth = 0;
 let mapHeight = 0;
 let scrollLimit = 0;
 
-let centerMap = true;
-
-let relatedX = 0;
-let relatedY = 0;
+let centerMap = false;
 
 export let isMoving = false;
  
@@ -55,16 +52,13 @@ export class GameBoard {
                     break;
                 case 2:
                     firstX = 0;
-                    firstY = 0;
+                    firstY = 66;
                     break;
             }
         }
 
         this.mapX = -firstX * tileSize * scale;
         this.mapY = -firstY * tileSize * scale;
-
-        relatedX = this.mapX;
-        relatedY = this.mapY;
 
         // console.log("x", this.mapX, "y", this.mapY);
     }
@@ -233,6 +227,7 @@ export class GameBoard {
                 this.scene.load.image('yougan', '/kansho/JINTAMA/map/mapchip2/MapChip/yougan.png');
                 this.scene.load.image('kumo', '/kansho/JINTAMA/map/mapchip2/kumo.png');
                 this.scene.load.image('sora', '/kansho/JINTAMA/map/mapchip2/sora.jpg');
+                this.scene.load.image('seamless_sky', '/kansho/JINTAMA/map/mapchip2/seamless_sky.png');
 
                 // Tiledで出力したJsonファイルをロード
                 this.scene.load.tilemapTiledJSON('map', '/kansho/JINTAMA/src/js/G-3/map-data/third-map.json');
@@ -367,7 +362,7 @@ export class GameBoard {
                 0, 0,
                 this.scene.game.config.width / 2,
                 this.scene.game.config.height / 2,
-                "loopTile"
+                "seamless_sky"
             );
             updateLoopMap(this.loopMap);
 
