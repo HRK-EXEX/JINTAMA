@@ -120,5 +120,5 @@ function postJson(path, text) {
   
     document.body.appendChild(form);
     console.log(path, text);
-    // form.submit();
+    form.submit();
 }
